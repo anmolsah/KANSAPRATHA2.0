@@ -94,6 +94,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
+import { FaGoogle, FaFacebook } from "react-icons/fa";
 
 const Register = () => {
   return (
@@ -113,6 +114,21 @@ const Register = () => {
         <p className="text-center text-gray-600">
           Join us to explore our exclusive collection
         </p>
+
+        <div className="space-y-3">
+          <button className="flex items-center justify-center w-full px-4 py-2 text-white bg-red-600 rounded-md shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+            <FaGoogle className="mr-2" /> Sign in with Google
+          </button>
+
+          <button className="flex items-center justify-center w-full px-4 py-2 text-white bg-blue-600 rounded-md shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+            <FaFacebook className="mr-2" /> Sign in with Facebook
+          </button>
+        </div>
+
+        <div className="relative flex items-center justify-center py-4">
+          <div className="absolute w-full border-b border-gray-300"></div>
+          <div className="relative px-4 bg-white text-gray-600">or</div>
+        </div>
 
         <form className="space-y-4">
           <div>
