@@ -98,16 +98,18 @@ import { FaGoogle, FaFacebook } from "react-icons/fa";
 
 const Register = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-2xl">
+        {/* Logo */}
         <div className="flex justify-center mb-6">
           <img
             src="/logo01.png"
             alt="Website Logo"
-            className="h-16 w-[500px] object-contain"
+            className="h-16 w-[400px] object-contain"
           />
         </div>
 
+        {/* Title */}
         <h2 className="text-3xl font-extrabold text-amber-700 text-center">
           Create Your Account
         </h2>
@@ -115,22 +117,9 @@ const Register = () => {
           Join us to explore our exclusive collection
         </p>
 
-        <div className="space-y-3">
-          <button className="flex items-center justify-center w-full px-4 py-2 text-white bg-red-600 rounded-md shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
-            <FaGoogle className="mr-2" /> Sign in with Google
-          </button>
-
-          <button className="flex items-center justify-center w-full px-4 py-2 text-white bg-blue-600 rounded-md shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-            <FaFacebook className="mr-2" /> Sign in with Facebook
-          </button>
-        </div>
-
-        <div className="relative flex items-center justify-center py-4">
-          <div className="absolute w-full border-b border-gray-300"></div>
-          <div className="relative px-4 bg-white text-gray-600">or</div>
-        </div>
-
+        {/* Form */}
         <form className="space-y-4">
+          {/* Name Field */}
           <div>
             <label
               htmlFor="name"
@@ -148,6 +137,7 @@ const Register = () => {
             />
           </div>
 
+          {/* Email Field */}
           <div>
             <label
               htmlFor="email"
@@ -165,6 +155,7 @@ const Register = () => {
             />
           </div>
 
+          {/* Password Field */}
           <div>
             <label
               htmlFor="password"
@@ -182,6 +173,7 @@ const Register = () => {
             />
           </div>
 
+          {/* Privacy Policy Field */}
           <div className="flex items-center">
             <input
               type="checkbox"
@@ -202,6 +194,7 @@ const Register = () => {
             </label>
           </div>
 
+          {/* Submit Button */}
           <button
             type="submit"
             className="w-full px-4 py-2 text-white bg-amber-700 rounded-md shadow-md hover:bg-amber-800 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2"
@@ -210,12 +203,23 @@ const Register = () => {
           </button>
         </form>
 
+        {/* Already Have an Account */}
         <p className="text-center text-sm text-gray-600 mt-4">
           Already have an account?{" "}
           <Link to="/login" className="text-amber-700 underline">
             Sign in
           </Link>
         </p>
+
+        {/* Social Login */}
+        <div className="flex justify-center space-x-4 mt-6">
+          <button className="flex items-center justify-center px-6 py-2 text-white bg-red-600 rounded-xl shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+            <FaGoogle className="text-xl" />
+          </button>
+          <button className="flex items-center justify-center px-6 py-2 text-white bg-blue-600 rounded-xl shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+            <FaFacebook className="text-xl" />
+          </button>
+        </div>
       </div>
     </div>
   );
