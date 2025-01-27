@@ -93,10 +93,11 @@
 // export default Register;
 
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-amber-100 to-amber-200">
+    <div className="min-h-screen flex items-center justify-center bg-white">
       <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-2xl">
         <div className="flex justify-center mb-6">
           <img
@@ -192,6 +193,13 @@ const Register = () => {
             Register
           </button>
         </form>
+
+        <p className="text-center text-sm text-gray-600 mt-4">
+          Already have an account?{" "}
+          <Link to="/login" className="text-amber-700 underline">
+            Sign in
+          </Link>
+        </p>
       </div>
     </div>
   );
