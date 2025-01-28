@@ -1,30 +1,54 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { FaGoogle, FaFacebook } from 'react-icons/fa';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const AdminLogin = () => {
+  const [state, setState] = useState({
+    email: "",
+    password: "",
+  });
+
+  const inputHandle = (e) => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const submit = (e) => {
+    e.preventDefault();
+    console.log(state);
+  };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-gray-100 to-gray-200">
       <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-2xl">
         {/* Logo */}
         <div className="flex justify-center">
           <img
-            src="/path-to-your-logo/logo.png" // Replace with the actual logo path
+            src="/logo01.png"
             alt="Logo"
-            className="h-16"
+            className="h-16 w-[300px] object-contain"
           />
         </div>
 
         {/* Title */}
-        <h2 className="text-3xl font-extrabold text-gray-800 text-center">Admin Login</h2>
-        <p className="text-center text-gray-600">Sign in to manage the platform</p>
+        <h2 className="text-3xl font-extrabold text-gray-800 text-center">
+          Admin Login
+        </h2>
+        <p className="text-center text-gray-600">
+          Sign in to manage the platform
+        </p>
 
-        {/* Form */}
-        <form className="space-y-4">
-          {/* Email Field */}
+        <form onSubmit={submit} className="space-y-4">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Email
+            </label>
             <input
+              onChange={inputHandle}
+              value={state.email}
               type="email"
               id="email"
               name="email"
@@ -36,8 +60,15 @@ const AdminLogin = () => {
 
           {/* Password Field */}
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Password
+            </label>
             <input
+              onChange={inputHandle}
+              value={state.password}
               type="password"
               id="password"
               name="password"
@@ -49,7 +80,10 @@ const AdminLogin = () => {
 
           {/* Forgot Password */}
           <div className="flex justify-end">
-            <Link to="/admin-forgot-password" className="text-sm text-gray-700 underline">
+            <Link
+              to="/admin-forgot-password"
+              className="text-sm text-gray-700 underline"
+            >
               Forgot password?
             </Link>
           </div>
@@ -62,34 +96,6 @@ const AdminLogin = () => {
             Log In
           </button>
         </form>
-
-        {/* Or Divider */}
-        <div className="relative flex justify-center items-center mt-6">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-gray-300"></div>
-          </div>
-          <div className="relative bg-white px-4 text-sm text-gray-600">Or log in with</div>
-        </div>
-
-        {/* Social Login */}
-        <div className="flex justify-center space-x-4 mt-6">
-          <button
-            className="flex items-center justify-center px-4 py-2 text-white bg-red-600 rounded-full shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
-          >
-            <FaGoogle className="text-xl" />
-          </button>
-          <button
-            className="flex items-center justify-center px-4 py-2 text-white bg-blue-600 rounded-full shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-          >
-            <FaFacebook className="text-xl" />
-          </button>
-        </div>
-
-        {/* No Account */}
-        <p className="text-center text-sm text-gray-600 mt-4">
-          Not an admin?{' '}
-          <Link to="/login" className="text-gray-700 underline">Go to User Login</Link>
-        </p>
       </div>
     </div>
   );
