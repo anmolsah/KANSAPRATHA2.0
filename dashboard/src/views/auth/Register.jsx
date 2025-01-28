@@ -92,11 +92,29 @@
 
 // export default Register;
 
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
 
 const Register = () => {
+  const [state, setState] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const inputHandle = (e) => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const submit = (e) => {
+    e.preventDefault();
+    console.log(state);
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-2xl">
@@ -115,7 +133,7 @@ const Register = () => {
           Join us to explore our exclusive collection
         </p>
 
-        <form className="space-y-4">
+        <form onSubmit={submit} className="space-y-4">
           <div>
             <label
               htmlFor="name"
@@ -124,6 +142,8 @@ const Register = () => {
               Name
             </label>
             <input
+              onChange={inputHandle}
+              value={state.name}
               type="text"
               id="name"
               name="name"
@@ -141,6 +161,8 @@ const Register = () => {
               Email
             </label>
             <input
+              onChange={inputHandle}
+              value={state.email}
               type="email"
               id="email"
               name="email"
@@ -158,6 +180,8 @@ const Register = () => {
               Password
             </label>
             <input
+              onChange={inputHandle}
+              value={state.password}
               type="password"
               id="password"
               name="password"

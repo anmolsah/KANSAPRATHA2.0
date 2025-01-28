@@ -1,21 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
 
 const Login = () => {
+  const [state, setState] = useState({
+    email: "",
+    password: "",
+  });
+
+  const inputHandle = (e) => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const submit = (e) => {
+    e.preventDefault();
+    console.log(state);
+  };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-2xl">
-        {/* Logo */}
         <div className="flex justify-center">
           <img
-            src="/logo01.png" // Replace with your actual logo path
+            src="/logo01.png"
             alt="Logo"
             className="h-16 w-[400px] object-contain"
           />
         </div>
 
-        {/* Title */}
         <h2 className="text-3xl font-extrabold text-amber-700 text-center">
           Welcome Back
         </h2>
@@ -23,9 +37,7 @@ const Login = () => {
           Log in to continue exploring our collection
         </p>
 
-        {/* Form */}
-        <form className="space-y-4">
-          {/* Email Field */}
+        <form onSubmit={submit} className="space-y-4">
           <div>
             <label
               htmlFor="email"
@@ -34,6 +46,8 @@ const Login = () => {
               Email
             </label>
             <input
+              onChange={inputHandle}
+              value={state.email}
               type="email"
               id="email"
               name="email"
@@ -43,7 +57,6 @@ const Login = () => {
             />
           </div>
 
-          {/* Password Field */}
           <div>
             <label
               htmlFor="password"
@@ -52,6 +65,8 @@ const Login = () => {
               Password
             </label>
             <input
+              onChange={inputHandle}
+              value={state.password}
               type="password"
               id="password"
               name="password"
@@ -61,7 +76,6 @@ const Login = () => {
             />
           </div>
 
-          {/* Forgot Password */}
           <div className="flex justify-end">
             <Link
               to="/forgot-password"
@@ -71,7 +85,6 @@ const Login = () => {
             </Link>
           </div>
 
-          {/* Submit Button */}
           <button
             type="submit"
             className="w-full px-4 py-2 text-white bg-amber-700 rounded-md shadow-md hover:bg-amber-800 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2"
@@ -80,7 +93,6 @@ const Login = () => {
           </button>
         </form>
 
-        {/* No Account */}
         <p className="text-center text-sm text-gray-600 mt-4">
           Don’t have an account?{" "}
           <Link to="/register" className="text-amber-700 underline">
@@ -88,7 +100,6 @@ const Login = () => {
           </Link>
         </p>
 
-        {/* Social Login */}
         <div className="flex justify-center space-x-4 mt-6">
           <button className="flex items-center justify-center px-8 py-2 text-white bg-red-600 rounded-xl shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
             <FaGoogle className="text-xl" />
