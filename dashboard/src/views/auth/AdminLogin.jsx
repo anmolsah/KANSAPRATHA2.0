@@ -21,7 +21,6 @@ const AdminLogin = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-gray-100 to-gray-200">
       <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-2xl">
-        {/* Logo */}
         <div className="flex justify-center">
           <img
             src="/logo01.png"
@@ -30,7 +29,6 @@ const AdminLogin = () => {
           />
         </div>
 
-        {/* Title */}
         <h2 className="text-3xl font-extrabold text-gray-800 text-center">
           Admin Login
         </h2>
@@ -58,7 +56,6 @@ const AdminLogin = () => {
             />
           </div>
 
-          {/* Password Field */}
           <div>
             <label
               htmlFor="password"
@@ -78,7 +75,6 @@ const AdminLogin = () => {
             />
           </div>
 
-          {/* Forgot Password */}
           <div className="flex justify-end">
             <Link
               to="/admin-forgot-password"
@@ -88,7 +84,6 @@ const AdminLogin = () => {
             </Link>
           </div>
 
-          {/* Submit Button */}
           <button
             type="submit"
             className="w-full px-4 py-2 text-white bg-gray-800 rounded-md shadow-md hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
