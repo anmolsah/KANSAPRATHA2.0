@@ -8,7 +8,9 @@ export const authReducer = createSlice({
     loader: false,
     userInfo: "",
   },
-  reducers: {},
+  reducers: {
+    
+  },
   extraReducers: () => {},
 });
 
