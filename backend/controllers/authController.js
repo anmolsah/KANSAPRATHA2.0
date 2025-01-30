@@ -8,7 +8,14 @@
 
 class AuthControllers {
   async adminLogin(req, res) {
-    console.log(req.body);
+    const { email, password } = req.body;
+
+    try {
+      
+      
+    } catch (error) {
+      
+    }
   }
 }
 
