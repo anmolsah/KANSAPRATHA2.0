@@ -1,7 +1,10 @@
 const express = require("express");
 require("dotenv").config();
 
+
 const app = express();
+
+app.use("/api/", require("./routes/authRoutes"));
 
 //const port = process.env.PORT || 9999;
 const port = 9999;
