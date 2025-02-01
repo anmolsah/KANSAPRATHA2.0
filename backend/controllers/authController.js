@@ -5,17 +5,14 @@
 // }
 
 // module.exports = new authControllers();
-
+const adminModel = require("../models/adminModel");
 class AuthControllers {
   async adminLogin(req, res) {
     const { email, password } = req.body;
 
     try {
-      
-      
-    } catch (error) {
-      
-    }
+      const admin = await adminModel.findOne({ email }).select("+password");
+    } catch (error) {}
   }
 }
 
