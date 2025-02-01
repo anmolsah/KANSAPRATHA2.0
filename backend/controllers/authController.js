@@ -8,6 +8,7 @@
 const adminModel = require("../models/adminModel");
 const { responseReturn } = require("../utilities/response");
 const bcrypt = require("bcrypt");
+const { createToken } = require("../utilities/tokenCreate");
 class AuthControllers {
   async adminLogin(req, res) {
     const { email, password } = req.body;
@@ -20,8 +21,12 @@ class AuthControllers {
         if (match) {
           const token = await createToken({
             id: admin.id,
-            role:admin.role
-          })
+            role: admin.role,
+          });
+          res.cookie("accessToken", token, {
+            expires: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000),
+          });
+          responseReturn(res, 200, token, "Admin logged in");
         } else {
           responseReturn(res, 401, "Password is incorrect");
         }
