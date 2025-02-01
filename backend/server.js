@@ -4,6 +4,7 @@ const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+const { dbConnect } = require("./utilities/db");
 
 app.use(
   cors({
@@ -19,9 +20,7 @@ app.use("/api", require("./routes/authRoutes"));
 
 //const port = process.env.PORT || 9999;
 const port = 9999;
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+dbConnect();
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
