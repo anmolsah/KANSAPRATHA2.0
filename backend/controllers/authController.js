@@ -6,6 +6,7 @@
 
 // module.exports = new authControllers();
 const adminModel = require("../models/adminModel");
+const { responseReturn } = require("../utilities/response");
 class AuthControllers {
   async adminLogin(req, res) {
     const { email, password } = req.body;
@@ -16,9 +17,12 @@ class AuthControllers {
       if(admin){
 
       }else{
-        
+        responseReturn(res, 404, "Admin not found");
+
       }
-    } catch (error) {}
+    } catch (error) {
+      responseReturn(res, 500, error);
+    }
   }
 }
 
