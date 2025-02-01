@@ -14,7 +14,7 @@ const adminSchema = new Schema({
     required: true,
   },
   image: {
-    type: Date,
+    type: String,
     required: true,
   },
   role: {
@@ -22,6 +22,5 @@ const adminSchema = new Schema({
     default: "admin",
   },
 });
-
 
 module.exports = model("admins", adminSchema);
