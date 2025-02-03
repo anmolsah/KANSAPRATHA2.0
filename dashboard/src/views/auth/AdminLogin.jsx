@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { admin_login } from "../../store/reducers/authReducer";
-import { PropagateLoader } from "react-spinners";
+import { ClipLoader } from "react-spinners";
 const AdminLogin = () => {
   const dispatch = useDispatch();
   const { loader } = useSelector((state) => state.auth);
@@ -93,7 +93,7 @@ const AdminLogin = () => {
             type="submit"
             className="w-full px-4 py-2 text-white bg-gray-800 rounded-md shadow-md hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
           >
-            {loader ? <PropagateLoader color="#ffffff" /> : "Login"}
+            {loader ? <ClipLoader color="#ffffff" /> : "Login"}
           </button>
         </form>
       </div>
