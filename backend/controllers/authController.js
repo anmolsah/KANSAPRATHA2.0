@@ -5,34 +5,34 @@ const { createToken } = require("../utilities/tokenCreate");
 class AuthControllers {
   admin_login = async (req, res) => {
     const { email, password } = req.body;
-    console.log("Received login request:", email);
+    //console.log("Received login request:", email);
 
     try {
       const admin = await adminModel.findOne({ email }).select("+password");
-      console.log("Admin found in DB:", admin);
+      //console.log("Admin found in DB:", admin);
 
       if (!admin) {
-        console.log("Email not found");
-        return responseReturn(res, 404, { error: "email not found" });
+        //console.log("Email not found");
+        responseReturn(res, 404, { error: "email not found" });
       }
 
       const match = await bcrypt.compare(password, admin.password);
-      console.log("Password match:", match);
+      //console.log("Password match:", match);
 
       if (match) {
         const token = await createToken({ id: admin.id, role: admin.role });
         res.cookie("accessToken", token, {
           expires: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000),
         });
-        console.log("Login successful, token created");
-        return responseReturn(res, 200, { token, message: "login successful" });
+        //console.log("Login successful, token created");
+        responseReturn(res, 200, { token, message: "login successful" });
       } else {
-        console.log("Incorrect password");
-        return responseReturn(res, 404, { error: "password is incorrect" });
+        //console.log("Incorrect password");
+        responseReturn(res, 404, { error: "password is incorrect" });
       }
     } catch (error) {
-      console.log("Server error:", error);
-      return responseReturn(res, 500, { error: error.message });
+      //console.log("Server error:", error);
+      responseReturn(res, 500, { error: error.message });
     }
   };
 
