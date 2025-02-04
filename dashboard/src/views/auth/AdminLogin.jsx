@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { admin_login } from "../../store/reducers/authReducer";
+import { admin_login, messageClear } from "../../store/reducers/authReducer";
 import { ClipLoader } from "react-spinners";
+import toast from "react-hot-toast";
 const AdminLogin = () => {
   const dispatch = useDispatch();
-  const { loader } = useSelector((state) => state.auth);
+  const { loader, errorMessage } = useSelector((state) => state.auth);
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -22,6 +23,14 @@ const AdminLogin = () => {
     e.preventDefault();
     dispatch(admin_login(state));
   };
+
+  useEffect(() => {
+    if (errorMessage) {
+      toast.error(errorMessage);
+      dispatch(messageClear());
+    }
+  }, [errorMessage]);
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-gray-100 to-gray-200">
       <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-2xl">
