@@ -10,6 +10,8 @@ module.exports.authMiddleware = async (req, res, next) => {
       req.role = decodeToken.role;
       req.id = decodeToken.id;
       next();
-    } catch (error) {}
+    } catch (error) {
+      return res.status(409).json({ message: "Unauthorized" });
+    }
   }
 };
