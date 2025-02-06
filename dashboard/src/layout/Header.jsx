@@ -34,10 +34,8 @@ import { FaList } from "react-icons/fa";
 
 const Header = ({ showSidebar, setShowSidebar }) => {
   return (
-    <header className="fixed top-0 left-0 w-full py-4 px-4 z-40 bg-[#E6E9F0] shadow-md lg:px-7">
+    <header className="fixed top-0 left-0 w-full py-4 px-4 z-40 bg-gray-300 shadow-md lg:px-7">
       <div className="flex justify-between items-center lg:ml-[260px]">
-        
-        {/* Sidebar Toggle (Only Visible on Mobile) */}
         <button
           onClick={() => setShowSidebar(!showSidebar)}
           className="lg:hidden p-2 text-gray-700 hover:text-gray-900 transition duration-300"
@@ -45,7 +43,6 @@ const Header = ({ showSidebar, setShowSidebar }) => {
           <FaList size={24} />
         </button>
 
-        {/* Search Bar (Visible on Large Screens) */}
         <div className="hidden lg:block flex-1 max-w-md">
           <input
             type="text"
@@ -54,11 +51,12 @@ const Header = ({ showSidebar, setShowSidebar }) => {
           />
         </div>
 
-        {/* Admin Profile */}
         <div className="flex items-center gap-3">
           <div className="text-right">
-            <h2 className="text-lg font-semibold text-gray-800">Ananth Pradhan</h2>
-            <span className="text-sm text-gray-600">Admin</span>
+            <h2 className="text-lg font-semibold text-gray-900 ">
+              Ananth Pradhan
+            </h2>
+            <span className="text-md text-gray-600">Admin</span>
           </div>
         </div>
       </div>
@@ -67,7 +65,6 @@ const Header = ({ showSidebar, setShowSidebar }) => {
 };
 
 export default Header;
-
 
 // // export default Header;
 // import React from "react";
