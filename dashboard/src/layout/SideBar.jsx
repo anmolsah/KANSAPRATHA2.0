@@ -74,7 +74,6 @@ const SideBar = ({ showSidebar, setShowSidebar }) => {
 
   return (
     <>
-      {/* Overlay (Only for Mobile) */}
       <div
         className={`fixed inset-0 z-40 transition-opacity lg:hidden ${
           showSidebar ? "bg-black bg-opacity-50 visible" : "invisible"
@@ -82,14 +81,12 @@ const SideBar = ({ showSidebar, setShowSidebar }) => {
         onClick={() => setShowSidebar(false)}
       ></div>
 
-      {/* Sidebar: Always visible on large screens, collapsible on mobile */}
       <div
         className={`fixed top-0 left-0 h-screen w-[260px] bg-gray-100 shadow-md flex flex-col p-4 z-50 transition-transform duration-300 
           ${
             showSidebar ? "translate-x-0" : "-translate-x-full"
           } lg:translate-x-0 lg:flex`}
       >
-        {/* Logo */}
         <div className="flex items-center justify-center py-4">
           <Link to="/" onClick={() => setShowSidebar(false)}>
             <img
@@ -100,7 +97,6 @@ const SideBar = ({ showSidebar, setShowSidebar }) => {
           </Link>
         </div>
 
-        {/* Navigation */}
         <nav className="flex flex-col gap-4 mt-4">
           <ul className="space-y-2">
             {allNav.map((n, i) => (
@@ -122,7 +118,6 @@ const SideBar = ({ showSidebar, setShowSidebar }) => {
           </ul>
         </nav>
 
-        {/* Logout Button */}
         <button
           className="text-gray-700 mt-auto hover:bg-gray-200 flex items-center gap-3 p-2 rounded-lg transition"
           onClick={() => setShowSidebar(false)}
