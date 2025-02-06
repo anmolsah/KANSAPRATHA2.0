@@ -4,11 +4,25 @@ import { FaList } from "react-icons/fa";
 const Header = ({ showSidebar, setShowSidebar }) => {
   return (
     <div className="fixed top-0 left-0 w-full py-5 px-2 z-40 lg:px-7">
-      <div className="ml:0 lg:ml-[260px] rounded-mdh-[65px] flex justify-between items-start bg-[#b1addf] px-5 transition-all">
+      <div className="ml:0 lg:ml-[260px] rounded-mdh-[65px] flex justify-between items-center bg-[#b1addf] px-5 transition-all">
         <div onClick={() => setShowSidebar(!showSidebar)}>
           <span>
             <FaList />
           </span>
+        </div>
+        <div className="hidden ">
+          <input type="text" placeholder="Search..." className="" />
+        </div>
+
+        <div className="">
+          <div className="">
+            <div className="">
+              <div className="">
+                <h2>Ananth Pradhan</h2>
+                <span>Admin</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -52,4 +66,4 @@ const Header = ({ showSidebar, setShowSidebar }) => {
 //   );
 // };
 
- export default Header;
+export default Header;
