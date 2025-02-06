@@ -34,7 +34,7 @@ import { FaList } from "react-icons/fa";
 
 const Header = ({ showSidebar, setShowSidebar }) => {
   return (
-    <header className="fixed top-0 left-0 w-full py-4 px-4 z-40 bg-gray-300 shadow-md lg:px-7">
+    <header className="fixed top-0 left-0 w-full py-4 px-4 z-40 bg-[#E6E9F0] shadow-md lg:px-7">
       <div className="flex justify-between items-center lg:ml-[260px]">
         <button
           onClick={() => setShowSidebar(!showSidebar)}
@@ -53,11 +53,17 @@ const Header = ({ showSidebar, setShowSidebar }) => {
 
         <div className="flex items-center gap-3">
           <div className="text-right">
-            <h2 className="text-lg font-semibold text-gray-900 ">
+            <h2 className="text-lg font-semibold text-gray-800">
               Ananth Pradhan
             </h2>
-            <span className="text-md text-gray-600">Admin</span>
+            <span className="text-sm text-gray-600">Admin</span>
           </div>
+
+          <img
+            src="/admin.png"
+            alt="Admin Profile"
+            className="w-12 h-12 rounded-full border-2 border-gray-300 shadow-sm"
+          />
         </div>
       </div>
     </header>
