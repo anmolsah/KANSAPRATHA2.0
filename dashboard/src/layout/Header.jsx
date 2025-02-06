@@ -1,33 +1,73 @@
+// import React from "react";
+// import { FaList } from "react-icons/fa";
+
+// const Header = ({ showSidebar, setShowSidebar }) => {
+//   return (
+//     <div className="fixed top-0 left-0 w-full py-5 px-2 z-40 lg:px-7">
+//       <div className="ml:0 lg:ml-[260px] rounded-mdh-[65px] flex justify-between items-center bg-[#b1addf] px-5 transition-all">
+//         <div onClick={() => setShowSidebar(!showSidebar)}>
+//           <span>
+//             <FaList />
+//           </span>
+//         </div>
+//         <div className="hidden ">
+//           <input type="text" placeholder="Search..." className="" />
+//         </div>
+
+//         <div className="">
+//           <div className="">
+//             <div className="">
+//               <div className="">
+//                 <h2>Ananth Pradhan</h2>
+//                 <span>Admin</span>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
 import React from "react";
 import { FaList } from "react-icons/fa";
 
 const Header = ({ showSidebar, setShowSidebar }) => {
   return (
-    <div className="fixed top-0 left-0 w-full py-5 px-2 z-40 lg:px-7">
-      <div className="ml:0 lg:ml-[260px] rounded-mdh-[65px] flex justify-between items-center bg-[#b1addf] px-5 transition-all">
-        <div onClick={() => setShowSidebar(!showSidebar)}>
-          <span>
-            <FaList />
-          </span>
-        </div>
-        <div className="hidden ">
-          <input type="text" placeholder="Search..." className="" />
+    <header className="fixed top-0 left-0 w-full py-4 px-4 z-40 bg-[#E6E9F0] shadow-md lg:px-7">
+      <div className="flex justify-between items-center lg:ml-[260px]">
+        
+        {/* Sidebar Toggle (Only Visible on Mobile) */}
+        <button
+          onClick={() => setShowSidebar(!showSidebar)}
+          className="lg:hidden p-2 text-gray-700 hover:text-gray-900 transition duration-300"
+        >
+          <FaList size={24} />
+        </button>
+
+        {/* Search Bar (Visible on Large Screens) */}
+        <div className="hidden lg:block flex-1 max-w-md">
+          <input
+            type="text"
+            placeholder="Search..."
+            className="w-full px-3 py-2 border border-gray-400 rounded-md shadow-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition duration-300"
+          />
         </div>
 
-        <div className="">
-          <div className="">
-            <div className="">
-              <div className="">
-                <h2>Ananth Pradhan</h2>
-                <span>Admin</span>
-              </div>
-            </div>
+        {/* Admin Profile */}
+        <div className="flex items-center gap-3">
+          <div className="text-right">
+            <h2 className="text-lg font-semibold text-gray-800">Ananth Pradhan</h2>
+            <span className="text-sm text-gray-600">Admin</span>
           </div>
         </div>
       </div>
-    </div>
+    </header>
   );
 };
+
+export default Header;
+
 
 // // export default Header;
 // import React from "react";
@@ -66,4 +106,4 @@ const Header = ({ showSidebar, setShowSidebar }) => {
 //   );
 // };
 
-export default Header;
+//export default Header;
