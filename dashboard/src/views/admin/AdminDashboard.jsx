@@ -449,7 +449,9 @@ const AdminDashboard = () => {
         <div className="w-full lg:w-5/12 lg:pl-4">
           <div className="bg-white p-4 rounded-lg shadow-lg">
             <div className="flex justify-between items-center pb-3 border-b">
-              <h2 className="font-semibold text-lg text-gray-600">Recent Seller Messages</h2>
+              <h2 className="font-semibold text-lg text-gray-600">
+                Recent Seller Messages
+              </h2>
               <Link className="text-blue-600">View All</Link>
             </div>
             <div className="pt-6">
@@ -457,14 +459,17 @@ const AdminDashboard = () => {
                 {Array(3)
                   .fill()
                   .map((_, i) => (
-                    <li key={i} className="mb-3 ml-6 flex items-start">
+                    <li
+                      key={i}
+                      className="mb-3 ml-6 flex items-start bg-slate-200 rounded-md py-2 px-1"
+                    >
                       <img
                         src="/admin.png"
                         alt="Admin"
                         className="w-12 h-12 rounded-full border-2 border-gray-300 shadow-sm mr-3"
                       />
                       <div>
-                        <div className="flex justify-between items-center">
+                        <div className="flex justify-between items-center space-x-56">
                           <Link className="text-blue-600">Admin</Link>
                           <time className="text-gray-500">2 days ago</time>
                         </div>
