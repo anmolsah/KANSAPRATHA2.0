@@ -509,7 +509,7 @@ const AdminDashboard = () => {
                     <td className="px-6 py-3">Pending</td>
                     <td className="px-6 py-3">Pending</td>
                     <td className="px-6 py-3 text-blue-600 cursor-pointer">
-                      View
+                     <Link>View</Link>
                     </td>
                   </tr>
                 ))}
