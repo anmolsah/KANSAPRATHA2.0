@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { TfiArrowCircleDown } from "react-icons/tfi";
+import { Link } from "react-router-dom";
 
 const Orders = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -39,11 +40,13 @@ const Orders = () => {
 
             <div className="">
               <div className="flex justify-between items-center">
-                <div className="">Order ID</div>
-                <div className="">Price</div>
-                <div className="">Payment Status</div>
-                <div className="">Order Status</div>
-                <div className="">Actions</div>
+                <div className="">#34343</div>
+                <div className="">$453</div>
+                <div className="">Pending</div>
+                <div className="">Pending </div>
+                <div className="">
+                  <Link>View</Link>
+                </div>
                 <div className="">
                   <TfiArrowCircleDown />
                 </div>
