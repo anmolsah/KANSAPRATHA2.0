@@ -23,7 +23,7 @@ const Orders = () => {
           <input type="text" placeholder="Search..." className="" />
         </div>
 
-        <div className="relative overfloe-x-auto">
+        <div className="relative overflow-x-auto">
           <div className="w-full text-sm text-left bg-[give some color]">
             <div className="">
               <div className="flex justify-between items-center">
