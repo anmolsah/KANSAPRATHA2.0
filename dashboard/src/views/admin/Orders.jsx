@@ -125,19 +125,21 @@ const Orders = () => {
 
         <div className="relative overflow-x-auto">
           <div className="w-full text-sm text-gray-600">
-            <div className="bg-gray-100 p-3 rounded-t-lg font-semibold flex justify-between items-center">
-              <div>Order ID</div>
-              <div>Price</div>
-              <div>Payment Status</div>
-              <div>Order Status</div>
-              <div>Actions</div>
-              <div>
+            {/* Table Headings */}
+            <div className="grid grid-cols-6 gap-4 bg-gray-100 p-3 rounded-t-lg font-semibold">
+              <div className="text-left pl-2">Order ID</div>
+              <div className="text-left">Price</div>
+              <div className="text-left">Payment Status</div>
+              <div className="text-left">Order Status</div>
+              <div className="text-left">Actions</div>
+              <div className="text-center">
                 <TfiArrowCircleDown className="cursor-pointer text-lg text-gray-500 hover:text-gray-800" />
               </div>
             </div>
 
-            <div className="border-t border-gray-300 p-3 bg-white flex justify-between items-center hover:bg-gray-50 transition">
-              <div>#34343</div>
+            {/* Order Data Row */}
+            <div className="grid grid-cols-6 gap-4 border-t border-gray-300 p-3 bg-white hover:bg-gray-50 transition">
+              <div className="pl-2">#34343</div>
               <div className="font-bold text-blue-600">$453</div>
               <div className="text-yellow-500 font-medium">Pending</div>
               <div className="text-red-500 font-medium">Pending</div>
@@ -146,21 +148,19 @@ const Orders = () => {
                   View
                 </Link>
               </div>
-              <div onClick={() => setShow(!show)} className="cursor-pointer">
+              <div onClick={() => setShow(!show)} className="cursor-pointer text-center">
                 <TfiArrowCircleDown
                   className={show ? "text-blue-600" : "text-gray-500"}
                 />
               </div>
             </div>
 
+            {/* Hidden Expanded Data */}
             {show && (
               <div className="border-t bg-gray-50 p-4 animate-fadeIn">
                 {[...Array(4)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="flex justify-between items-center py-2"
-                  >
-                    <div>#34343</div>
+                  <div key={i} className="grid grid-cols-6 gap-4 py-2">
+                    <div className="pl-2">#34343</div>
                     <div className="text-blue-600 font-bold">$3</div>
                     <div className="text-yellow-500 font-medium">Pending</div>
                     <div className="text-red-500 font-medium">Pending</div>
