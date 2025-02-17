@@ -174,7 +174,13 @@ const Orders = () => {
             )}
           </div>
         </div>
-        <Pagination pageNumber={currentPage} setPageNumber={setCurrentPage} />
+        <Pagination
+          pageNumber={currentPage}
+          setPageNumber={setCurrentPage}
+          totalItem={50}
+          perPage={perPage}
+          showItem={3}
+        />
       </div>
     </div>
   );
