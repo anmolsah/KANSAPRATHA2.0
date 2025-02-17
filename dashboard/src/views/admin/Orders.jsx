@@ -96,6 +96,7 @@
 import React, { useState } from "react";
 import { TfiArrowCircleDown } from "react-icons/tfi";
 import { Link } from "react-router-dom";
+import Pagination from "../Pagination";
 
 const Orders = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -148,7 +149,10 @@ const Orders = () => {
                   View
                 </Link>
               </div>
-              <div onClick={() => setShow(!show)} className="cursor-pointer text-center">
+              <div
+                onClick={() => setShow(!show)}
+                className="cursor-pointer text-center"
+              >
                 <TfiArrowCircleDown
                   className={show ? "text-blue-600" : "text-gray-500"}
                 />
@@ -170,6 +174,7 @@ const Orders = () => {
             )}
           </div>
         </div>
+        <Pagination pageNumber={currentPage} setPageNumber={setCurrentPage} />
       </div>
     </div>
   );
