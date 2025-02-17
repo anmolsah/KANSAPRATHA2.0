@@ -173,7 +173,7 @@ const Orders = () => {
                     {[...Array(4)].map((_, i) => (
                       <div key={i} className="grid grid-cols-6 gap-4 py-2">
                         <div className="pl-2">#34343</div>
-                        <div className="text-blue-600 font-bold">$3</div>
+                        <div className="text-blue-600 font-bold">$345</div>
                         <div className="text-yellow-500 font-medium">
                           Pending
                         </div>
