@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Pagination from "../Pagination";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { BsImage } from "react-icons/bs";
 
 const Category = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -82,19 +83,52 @@ const Category = () => {
             show ? "right-0" : "-right-[340px]"
           } z-20 top-0 transition-all duration-500`}
         >
-          <div className="w-full bg-white pl-5 rounded-lg shadow-lg">
-            <div className="bg-[add some background cvolor] h-screen lg:h-auto px-3 py-2 lg:rounded-md text-[add somecolor]">
-              <h1 className="add some good styling">Add Category</h1>
-              <form>
-                <div className="flex flex-col w-full gap-1 mb-4">
-                  <label htmlFor="name">Ctaegory Name</label>
+          <div className="w-full bg-white rounded-lg shadow-xl border border-gray-200">
+            <div className="bg-white h-screen lg:h-auto px-6 py-6 lg:rounded-md text-gray-800">
+              <h1 className="text-2xl font-semibold text-center mb-4 text-gray-900">
+                ➕ Add Category
+              </h1>
+              <form className="space-y-5">
+                {/* Category Name Input */}
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="name" className="font-medium text-gray-700">
+                    Category Name
+                  </label>
                   <input
-                    className="give some styling"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400"
                     type="text"
                     id="name"
                     name="category_name"
-                    placeholder="Category Name.."
+                    placeholder="Enter category name..."
                   />
+                </div>
+
+                {/* Image Upload Section */}
+                <div>
+                  <label
+                    htmlFor="image"
+                    className="flex flex-col items-center justify-center h-[220px] cursor-pointer border border-gray-300 border-dashed hover:border-gray-400 w-full bg-gray-50 rounded-md text-gray-600"
+                  >
+                    <span className="text-3xl text-gray-500">
+                      <BsImage />
+                    </span>
+                    <span className="mt-2 text-lg font-medium">
+                      Select Image
+                    </span>
+                  </label>
+                  <input
+                    type="file"
+                    name="image"
+                    id="image"
+                    className="hidden"
+                  />
+                </div>
+
+                {/* Submit Button */}
+                <div>
+                  <button className="w-full bg-gray-900 text-white font-semibold py-2 rounded-md hover:bg-gray-700 transition-all">
+                    Add Category
+                  </button>
                 </div>
               </form>
             </div>
