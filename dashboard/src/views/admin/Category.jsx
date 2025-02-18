@@ -50,10 +50,10 @@ const Category = () => {
                       <td className="px-6 py-3">Frock</td>
                       <td className="px-6 py-3 text-blue-600 cursor-pointer">
                         <div className="flex justify-start items-center gap-3">
-                          <Link className="px-3  hover:shadow-lg ">
+                          <Link className="px-3 hover:shadow-lg text-blue-500 hover:text-blue-700 transition-all">
                             <FaEdit />
                           </Link>
-                          <Link className="px-3  hover:shadow-lg ">
+                          <Link className="px-3 hover:shadow-lg text-red-500 hover:text-red-700 transition-all">
                             <FaTrash />
                           </Link>
                         </div>
