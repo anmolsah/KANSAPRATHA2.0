@@ -79,9 +79,9 @@ const Category = () => {
           </div>
         </div>
         <div
-          className={`w-[320px] lg:w-5/12 translate-x-100 lg:relative lg:right-0 fixed ${
+          className={`w-[350px] lg:w-5/12 translate-x-100 lg:relative lg:right-0 fixed ${
             show ? "right-0" : "-right-[340px]"
-          } z-20 top-0 px-2 transition-all duration-500`}
+          } z-20  top-0 px-2 transition-all duration-500`}
         >
           <div className="w-full bg-white rounded-lg shadow-xl border border-gray-200">
             <div className="bg-white h-screen lg:h-auto px-6 py-6 lg:rounded-md text-gray-800">
