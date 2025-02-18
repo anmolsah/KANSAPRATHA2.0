@@ -4,7 +4,10 @@ import Pagination from "../Pagination";
 import { FaEdit, FaTrash } from "react-icons/fa";
 
 const Category = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchValue, setSearchValue] = useState("");
   const [perPage, setPerPage] = useState(5);
+  const [show, setShow] = useState(false);
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
       <div className="flex flex-wrap w-full">
@@ -63,9 +66,40 @@ const Category = () => {
                 </tbody>
               </table>
             </div>
+            <div className="w-full flex justify-end mt-4 bottom-4 right-4">
+              <Pagination
+                pageNumber={currentPage}
+                setPageNumber={setCurrentPage}
+                totalItem={50}
+                perPage={perPage}
+                showItem={3}
+              />
+            </div>
           </div>
         </div>
-        <div className="w-full lg:w-5/12"></div>
+        <div
+          className={`w-[320px] lg:w-5/12 translate-x-100 lg:relative lg:right-0 fixed ${
+            show ? "right-0" : "-right-[340px]"
+          } z-20 top-0 transition-all duration-500`}
+        >
+          <div className="w-full bg-white pl-5 rounded-lg shadow-lg">
+            <div className="bg-[add some background cvolor] h-screen lg:h-auto px-3 py-2 lg:rounded-md text-[add somecolor]">
+              <h1 className="add some good styling">Add Category</h1>
+              <form>
+                <div className="flex flex-col w-full gap-1 mb-4">
+                  <label htmlFor="name">Ctaegory Name</label>
+                  <input
+                    className="give some styling"
+                    type="text"
+                    id="name"
+                    name="category_name"
+                    placeholder="Category Name.."
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
