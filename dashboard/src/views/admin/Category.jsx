@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Pagination from "../Pagination";
+import { FaEdit, FaTrash } from "react-icons/fa";
 
 const Category = () => {
   const [perPage, setPerPage] = useState(5);
@@ -36,19 +37,29 @@ const Category = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {Array(3)
-                    .fill()
-                    .map((_, i) => (
-                      <tr key={i} className="border-b hover:bg-gray-50">
-                        <td className="px-6 py-3">#343434</td>
-                        <td className="px-6 py-3">$456</td>
-                        <td className="px-6 py-3">Pending</td>
-
-                        <td className="px-6 py-3 text-blue-600 cursor-pointer">
-                          <Link>View</Link>
-                        </td>
-                      </tr>
-                    ))}
+                  {[1, 2, 3, 4, 5].map((d, i) => (
+                    <tr key={i} className="border-b hover:bg-gray-50">
+                      <td className="px-6 py-3">{d}</td>
+                      <td className="px-6 py-3">
+                        <img
+                          className="w-[45px]"
+                          src="http://localhost:9000/images/03.jpg"
+                          alt="items"
+                        />
+                      </td>
+                      <td className="px-6 py-3">Frock</td>
+                      <td className="px-6 py-3 text-blue-600 cursor-pointer">
+                        <div className="flex justify-start items-center gap-3">
+                          <Link className="px-3  hover:shadow-lg ">
+                            <FaEdit />
+                          </Link>
+                          <Link className="px-3  hover:shadow-lg ">
+                            <FaTrash />
+                          </Link>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
