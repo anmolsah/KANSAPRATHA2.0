@@ -46,7 +46,7 @@ const Category = () => {
                       <td className="px-6 py-3">{d}</td>
                       <td className="px-6 py-3">
                         <img
-                          className="w-[45px]"
+                          className="w-[45px] h-[50px]"
                           src="http://localhost:9000/images/03.jpg"
                           alt="items"
                         />
@@ -81,7 +81,7 @@ const Category = () => {
         <div
           className={`w-[320px] lg:w-5/12 translate-x-100 lg:relative lg:right-0 fixed ${
             show ? "right-0" : "-right-[340px]"
-          } z-20 top-0 transition-all duration-500`}
+          } z-20 top-0 px-2 transition-all duration-500`}
         >
           <div className="w-full bg-white rounded-lg shadow-xl border border-gray-200">
             <div className="bg-white h-screen lg:h-auto px-6 py-6 lg:rounded-md text-gray-800">
@@ -89,7 +89,6 @@ const Category = () => {
                 ➕ Add Category
               </h1>
               <form className="space-y-5">
-                {/* Category Name Input */}
                 <div className="flex flex-col gap-2">
                   <label htmlFor="name" className="font-medium text-gray-700">
                     Category Name
@@ -103,7 +102,6 @@ const Category = () => {
                   />
                 </div>
 
-                {/* Image Upload Section */}
                 <div>
                   <label
                     htmlFor="image"
@@ -124,7 +122,6 @@ const Category = () => {
                   />
                 </div>
 
-                {/* Submit Button */}
                 <div>
                   <button className="w-full bg-gray-900 text-white font-semibold py-2 rounded-md hover:bg-gray-700 transition-all">
                     Add Category
