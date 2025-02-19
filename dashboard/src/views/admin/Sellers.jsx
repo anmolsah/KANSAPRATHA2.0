@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Pagination from "../Pagination";
-import { FaEdit, FaTrash } from "react-icons/fa";
+import { FaEye  } from "react-icons/fa";
 
 const Sellers = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -53,14 +53,16 @@ const Sellers = () => {
                       alt="items"
                     />
                   </td>
-                  <td className="px-6 py-3">Frock</td>
+                  <td className="px-6 py-3">Anmol Sah</td>
+                  <td className="px-6 py-3">Big Basket</td>
+                  <td className="px-6 py-3"><span>Pending</span></td>
+                  <td className="px-6 py-3">123Anni@gmail.com</td>
+                  <td className="px-6 py-3">Kolkata</td>
+                  <td className="px-6 py-3">Sonarpur</td>
                   <td className="px-6 py-3 text-blue-600 cursor-pointer">
                     <div className="flex justify-start items-center gap-3">
-                      <Link className="px-3 hover:shadow-lg text-blue-500 hover:text-blue-700 transition-all">
-                        <FaEdit />
-                      </Link>
-                      <Link className="px-3 hover:shadow-lg text-red-500 hover:text-red-700 transition-all">
-                        <FaTrash />
+                      <Link className="px-3 hover:shadow-lg text-green-600 hover:text-green-800 transition-all">
+                        <FaEye />
                       </Link>
                     </div>
                   </td>
