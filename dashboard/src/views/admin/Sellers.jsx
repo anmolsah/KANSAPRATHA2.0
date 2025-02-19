@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Pagination from "../Pagination";
-import { FaEye  } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
 
 const Sellers = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -55,7 +55,9 @@ const Sellers = () => {
                   </td>
                   <td className="px-6 py-3">Anmol Sah</td>
                   <td className="px-6 py-3">Big Basket</td>
-                  <td className="px-6 py-3"><span>Pending</span></td>
+                  <td className="px-6 py-3">
+                    <span>Pending</span>
+                  </td>
                   <td className="px-6 py-3">123Anni@gmail.com</td>
                   <td className="px-6 py-3">Kolkata</td>
                   <td className="px-6 py-3">Sonarpur</td>
