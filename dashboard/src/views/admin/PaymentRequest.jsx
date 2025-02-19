@@ -13,26 +13,30 @@ const PaymentRequest = () => {
     return (
       <div style={style} className="flex text-sm">
         <div className="w-[25%] p-2 whitespace-normal">{index + 1}</div>
+        <div className="w-[25%] p-2 whitespace-normal">{index + 1}</div>
+        <div className="w-[25%] p-2 whitespace-normal">{index + 1}</div>
+        <div className="w-[25%] p-2 whitespace-normal">{index + 1}</div>
+        <div className="w-[25%] p-2 whitespace-normal">{index + 1}</div>
       </div>
     );
   };
 
   return (
-    <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
-      <div className="w-full p-4 rounded-md bg-[add some color]">
-        <h2 className="text-xl font-medium pb-5 text-[add some color]">
-          Withdrawl Request
+    <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[230px] transition-all">
+      <div className="w-full p-6 rounded-lg bg-white shadow-md border border-gray-200">
+        <h2 className="text-2xl font-semibold pb-5 text-gray-800">
+          💰 Withdrawal Request
         </h2>
-        <div className="w-full ">
+        <div className="w-full">
           <div className="w-full overflow-x-auto">
-            <div className="flex bg-[add some color] uppercase text-xs min-w-[340px] font-bold rounded-md">
-              <div className="w-[25%] p-2">No</div>
-              <div className="w-[25%] p-2">Amount</div>
-              <div className="w-[25%] p-2">Status</div>
-              <div className="w-[25%] p-2">Date</div>
-              <div className="w-[25%] p-2">Action</div>
+            <div className="flex bg-gray-200 uppercase text-sm min-w-[340px] font-semibold rounded-lg text-gray-700">
+              <div className="w-[20%] p-3">No</div>
+              <div className="w-[20%] p-3">Amount</div>
+              <div className="w-[20%] p-3">Status</div>
+              <div className="w-[20%] p-3">Date</div>
+              <div className="w-[20%] p-3">Action</div>
             </div>
-            {}
+            {/* Data rows go here */}
           </div>
         </div>
       </div>
