@@ -4,11 +4,12 @@ import { FixedSizeList as List } from "react-window";
 function handleOnWheel({ deltaY }) {
   console.log("handleOnWheel", deltaY);
 }
-const outerElementType = forwardRef((props, ref) => {
-  <div ref={ref} onWheel={handleOnWheel} {...props} />;
-});
+const outerElementType = forwardRef((props, ref) => (
+  <div ref={ref} onWheel={handleOnWheel} {...props} />
+));
 
 const PaymentRequest = () => {
+  const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const Row = ({ index, style }) => {
     return (
       <div style={style} className="flex text-sm">
@@ -19,7 +20,7 @@ const PaymentRequest = () => {
         </div>
         <div className="w-[25%] p-2 whitespace-normal">25 Dec 2024</div>
         <div className="w-[25%] p-2 whitespace-normal">
-          <button className="bg-indigo-500 shadow-lg hover:shadow-indigo-600/50 px-3 cursor-pointer text-white rounded-sm text-sm">
+          <button className="bg-indigo-500 shadow-lg hover:shadow-indigo-600/50 px-3 py-[2px] cursor-pointer text-white rounded-sm text-sm">
             Confirm
           </button>
         </div>
@@ -42,7 +43,18 @@ const PaymentRequest = () => {
               <div className="w-[20%] p-3">Date</div>
               <div className="w-[20%] p-3">Action</div>
             </div>
-            {/* Data rows go here */}
+            {
+              <List
+                style={{ minWidth: "340px" }}
+                className="List"
+                height={350}
+                itemCount={10}
+                itemSize={35}
+                outerElementType={outerElementType}
+              >
+                {Row}
+              </List>
+            }
           </div>
         </div>
       </div>
