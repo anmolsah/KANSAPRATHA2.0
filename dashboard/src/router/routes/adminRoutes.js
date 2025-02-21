@@ -1,4 +1,6 @@
 import { lazy } from "react";
+const SellerRequest = lazy(() => import("../../views/admin/SellerRequest"));
+
 const DeactivateSeller = lazy(() =>
   import("../../views/admin/DeactivateSeller")
 );
@@ -37,6 +39,11 @@ export const adminRoutes = [
   {
     path: "admin/dashboard/deactive-seller",
     element: <DeactivateSeller />,
+    role: "admin",
+  },
+  {
+    path: "admin/dashboard/seller-request",
+    element: <SellerRequest />,
     role: "admin",
   },
 ];
