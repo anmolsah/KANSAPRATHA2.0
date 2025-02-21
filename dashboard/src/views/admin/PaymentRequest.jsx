@@ -13,10 +13,16 @@ const PaymentRequest = () => {
     return (
       <div style={style} className="flex text-sm">
         <div className="w-[25%] p-2 whitespace-normal">{index + 1}</div>
-        <div className="w-[25%] p-2 whitespace-normal">{index + 1}</div>
-        <div className="w-[25%] p-2 whitespace-normal">{index + 1}</div>
-        <div className="w-[25%] p-2 whitespace-normal">{index + 1}</div>
-        <div className="w-[25%] p-2 whitespace-normal">{index + 1}</div>
+        <div className="w-[25%] p-2 whitespace-normal">$3586</div>
+        <div className="w-[25%] p-2 whitespace-normal">
+          <span className="py-1 px-2 text-sm">Pending</span>
+        </div>
+        <div className="w-[25%] p-2 whitespace-normal">25 Dec 2024</div>
+        <div className="w-[25%] p-2 whitespace-normal">
+          <button className="bg-indigo-500 shadow-lg hover:shadow-indigo-600/50 px-3 cursor-pointer text-white rounded-sm text-sm">
+            Confirm
+          </button>
+        </div>
       </div>
     );
   };
