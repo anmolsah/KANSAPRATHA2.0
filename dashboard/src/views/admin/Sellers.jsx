@@ -10,6 +10,7 @@ const Sellers = () => {
   const [show, setShow] = useState(false);
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
+      <h1 className="text-xl font-semibold mb-2 text-gray-600">Seller</h1>
       <div className="w-full p-4 bg-[give some color] rounded-md">
         <div className="flex justify-between items-center mb-4">
           <select

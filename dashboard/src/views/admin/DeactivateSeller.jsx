@@ -10,6 +10,10 @@ const DeactivateSeller = () => {
   const [show, setShow] = useState(false);
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
+      <h1 className="text-xl font-semibold mb-2 text-gray-600">
+        Deactivate Seller
+      </h1>
+
       <div className="w-full p-4 bg-[give some color] rounded-md">
         <div className="flex justify-between items-center mb-4">
           <select
@@ -34,11 +38,9 @@ const DeactivateSeller = () => {
                 <th className="px-6 py-3">NO</th>
                 <th className="px-6 py-3">Image</th>
                 <th className="px-6 py-3">Name</th>
-                <th className="px-6 py-3">Shop Name</th>
-                <th className="px-6 py-3">Payment Status</th>
                 <th className="px-6 py-3">Email</th>
-                <th className="px-6 py-3">Division</th>
-                <th className="px-6 py-3">District</th>
+                <th className="px-6 py-3">Payment Status</th>
+                <th className="px-6 py-3">Status</th>
                 <th className="px-6 py-3">Action</th>
               </tr>
             </thead>
@@ -54,13 +56,16 @@ const DeactivateSeller = () => {
                     />
                   </td>
                   <td className="px-6 py-3">Anmol Sah</td>
-                  <td className="px-6 py-3">Big Basket</td>
+                  <td className="px-6 py-3">123Anni@gmail.com</td>
                   <td className="px-6 py-3">
                     <span>Pending</span>
                   </td>
-                  <td className="px-6 py-3">123Anni@gmail.com</td>
+                  <td className="px-6 py-3">
+                    <span>Deactive</span>
+                  </td>
+                  {/* <td className="px-6 py-3">123Anni@gmail.com</td>
                   <td className="px-6 py-3">Kolkata</td>
-                  <td className="px-6 py-3">Sonarpur</td>
+                  <td className="px-6 py-3">Sonarpur</td> */}
                   <td className="px-6 py-3 text-blue-600 cursor-pointer">
                     <div className="flex justify-start items-center gap-3">
                       <Link className="px-3 hover:shadow-lg text-green-600 hover:text-green-800 transition-all">
