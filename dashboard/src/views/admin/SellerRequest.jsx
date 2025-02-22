@@ -11,7 +11,7 @@ const SellerRequest = () => {
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
       <h1 className="text-xl font-semibold mb-2 text-gray-600">
-         Seller Request
+        Seller Request
       </h1>
 
       <div className="w-full p-4 bg-[give some color] rounded-md">
@@ -36,7 +36,6 @@ const SellerRequest = () => {
             <thead>
               <tr className="bg-gray-100">
                 <th className="px-6 py-3">NO</th>
-                <th className="px-6 py-3">Image</th>
                 <th className="px-6 py-3">Name</th>
                 <th className="px-6 py-3">Email</th>
                 <th className="px-6 py-3">Payment Status</th>
@@ -48,20 +47,14 @@ const SellerRequest = () => {
               {[1, 2, 3, 4, 5].map((d, i) => (
                 <tr key={i} className="border-b hover:bg-gray-50">
                   <td className="px-6 py-3">{d}</td>
-                  <td className="px-6 py-3">
-                    <img
-                      className="w-[45px] h-[50px]"
-                      src="http://localhost:9000/images/03.jpg"
-                      alt="items"
-                    />
-                  </td>
+
                   <td className="px-6 py-3">Anmol Sah</td>
                   <td className="px-6 py-3">123Anni@gmail.com</td>
                   <td className="px-6 py-3">
-                    <span>Pending</span>
+                    <span>Inactive</span>
                   </td>
                   <td className="px-6 py-3">
-                    <span>Deactive</span>
+                    <span>Pending</span>
                   </td>
                   <td className="px-6 py-3 text-blue-600 cursor-pointer">
                     <div className="flex justify-start items-center gap-3">
@@ -90,4 +83,3 @@ const SellerRequest = () => {
 };
 
 export default SellerRequest;
-
