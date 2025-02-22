@@ -63,9 +63,6 @@ const DeactivateSeller = () => {
                   <td className="px-6 py-3">
                     <span>Deactive</span>
                   </td>
-                  {/* <td className="px-6 py-3">123Anni@gmail.com</td>
-                  <td className="px-6 py-3">Kolkata</td>
-                  <td className="px-6 py-3">Sonarpur</td> */}
                   <td className="px-6 py-3 text-blue-600 cursor-pointer">
                     <div className="flex justify-start items-center gap-3">
                       <Link className="px-3 hover:shadow-lg text-green-600 hover:text-green-800 transition-all">
