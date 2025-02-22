@@ -40,6 +40,50 @@ const SellerDetails = () => {
               </div>
             </div>
           </div>
+
+          <div className="w-4/12">
+            <div className="px-0 md:px-4 py-2">
+              <div className="py-2 text-lg">
+                <h2 className="">Address</h2>
+              </div>
+              <div className="flex justify-between text-sm flex-col gap-2 p-4 bg-[add some color] rounded-md">
+                <div className="flex gap-2 font-semibold text-[add some color]">
+                  <span>Shop Name : </span>
+                  <span>KhansaPratha</span>
+                </div>
+                <div className="flex gap-2 font-semibold text-[add some color]">
+                  <span>Division : </span>
+                  <span>Kolkata</span>
+                </div>
+                <div className="flex gap-2 font-semibold text-[add some color]">
+                  <span>District : </span>
+                  <span>Sonarpur</span>
+                </div>
+                <div className="flex gap-2 font-semibold text-[add some color]">
+                  <span>State : </span>
+                  <span>West Bengal</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <form>
+            <div className="flex gap-4">
+              <select
+                className="p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-300"
+                name=""
+                id=""
+              >
+                <option value="">--Select Status--</option>
+                <option value="active">Active</option>
+                <option value="deactive">Deactive</option>
+              </select>
+              <button className="w-full bg-gray-900 text-white font-semibold py-2 rounded-md hover:bg-gray-700 transition-all">
+                Submit
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
