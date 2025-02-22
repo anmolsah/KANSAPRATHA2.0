@@ -58,7 +58,7 @@ const SellerRequest = () => {
                   </td>
                   <td className="px-6 py-3 text-blue-600 cursor-pointer">
                     <div className="flex justify-start items-center gap-3">
-                      <Link className="px-3 hover:shadow-lg text-green-600 hover:text-green-800 transition-all">
+                      <Link to='/admin/dashboard/seller/details/2' className="px-3 hover:shadow-lg text-green-600 hover:text-green-800 transition-all">
                         <FaEye />
                       </Link>
                     </div>
