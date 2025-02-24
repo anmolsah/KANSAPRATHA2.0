@@ -149,7 +149,10 @@ const Orders = () => {
                   <div className="text-yellow-500 font-medium">Pending</div>
                   <div className="text-red-500 font-medium">Pending</div>
                   <div>
-                    <Link to="#" className="text-blue-500 hover:underline">
+                    <Link
+                      to="/admin/dashboard/order/details/3"
+                      className="text-blue-500 hover:underline"
+                    >
                       View
                     </Link>
                   </div>
