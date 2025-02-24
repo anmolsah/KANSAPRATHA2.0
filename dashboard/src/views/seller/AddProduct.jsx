@@ -165,6 +165,7 @@ const AddProduct = () => {
                     <div className="flex justify-start items-center flex-col h-[200px] overflow-x-scroll">
                       {allCategory.map((c, i) => (
                         <span
+                        className={``}
                           onClick={() => {
                             setCateShow(false);
                             setCategory(c.name);
