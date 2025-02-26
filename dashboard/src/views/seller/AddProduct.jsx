@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { BsImage } from "react-icons/bs";
+import { IoMdClose } from "react-icons/io";
 
 const AddProduct = () => {
   const categorys = [
@@ -114,18 +115,24 @@ const AddProduct = () => {
     }
   };
 
-  const changeImage = (img,index)=>{
-    if(img){
+  const changeImage = (img, index) => {
+    if (img) {
       let tempUrl = imageShow;
       let tempImages = images;
 
       tempImages[index] = img;
-      tempUrl[index] = {url:URL.createObjectURL(img)};
+      tempUrl[index] = { url: URL.createObjectURL(img) };
       setImageShow([...tempUrl]);
       setImages([...tempImages]);
-      
     }
-  }
+  };
+
+  const removeImage = (i) => {
+    const filterImage = images.filter((img, index) => index !== i);
+    const filterImageUrl = imageShow.filter((img, index) => index !== i);
+    setImages(filterImage);
+    setImageShow(filterImageUrl);
+  };
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
       <div className="w-full p-4 ng-[add some color] rounded-md">
@@ -267,9 +274,24 @@ const AddProduct = () => {
               {imageShow.map((img, i) => (
                 <div className="h-[180px] relative">
                   <label htmlFor={i}>
-                    <img className="w-full h-full rounded-sm" src={img.url} alt="" />
+                    <img
+                      className="w-full h-full rounded-sm"
+                      src={img.url}
+                      alt=""
+                    />
                   </label>
-                  <input onChange={(e)=>changeImage(e.target.files[0],i)} type="file" id={i} className="hidden" />
+                  <input
+                    onChange={(e) => changeImage(e.target.files[0], i)}
+                    type="file"
+                    id={i}
+                    className="hidden"
+                  />
+                  <span
+                    onClick={() => removeImage(i)}
+                    className="p-2 z-10 cursor-pointer bg-[add some color] text-[adds ome color] absolute top-1 right-1 rounded-full"
+                  >
+                    <IoMdClose />
+                  </span>
                 </div>
               ))}
               <label
@@ -289,6 +311,11 @@ const AddProduct = () => {
                 className="hidden"
               />
             </div>
+            <div className="flex">
+                  <button className="px-2 bg-gray-900 text-white font-semibold py-2 rounded-md hover:bg-gray-700 transition-all">
+                    Add Product
+                  </button>
+                </div>
           </form>
         </div>
       </div>
