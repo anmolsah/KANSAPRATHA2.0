@@ -144,7 +144,7 @@ const AddProduct = () => {
                   value={category}
                   type="text"
                   id="category"
-                  placeholder="Category .."
+                  placeholder="--Select Category--"
                   className=""
                 />
                 <div
@@ -165,7 +165,7 @@ const AddProduct = () => {
                     <div className="flex justify-start items-center flex-col h-[200px] overflow-x-scroll">
                       {allCategory.map((c, i) => (
                         <span
-                        className={``}
+                          className={``}
                           onClick={() => {
                             setCateShow(false);
                             setCategory(c.name);
@@ -192,6 +192,47 @@ const AddProduct = () => {
                   className=""
                 />
               </div>
+            </div>
+            <div className="flex flex-col mb-3 md:flex-row gap-4 w-full text-[add some color]">
+              <div className="flex flex-col w-full gap-1">
+                <label htmlFor="price">Price</label>
+                <input
+                  onChange={inputHandle}
+                  value={state.price}
+                  type="number"
+                  name="price"
+                  id="price"
+                  placeholder="price...."
+                  className=""
+                />
+              </div>
+              <div className="flex flex-col w-full gap-1">
+                <label htmlFor="discount">Discount</label>
+                <input
+                  onChange={inputHandle}
+                  value={state.discount}
+                  type="number"
+                  name="discount"
+                  id="discount"
+                  placeholder="discount by percentage...."
+                  className=""
+                />
+              </div>
+            </div>
+            <div className="flex flex-col w-full gap-1">
+              <label htmlFor="description" className="">
+                Description
+              </label>
+              <textarea
+                onChange={inputHandle}
+                value={state.description}
+                name="description"
+                id="description"
+                placeholder="description...."
+                className=""
+                cols="10"
+                rows="4"
+              ></textarea>
             </div>
           </form>
         </div>
