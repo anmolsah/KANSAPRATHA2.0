@@ -425,7 +425,7 @@ const AddProduct = () => {
         <div className="flex justify-between items-center pb-4 border-b border-gray-200">
           <h1 className="text-2xl font-semibold text-gray-800">Add Product</h1>
           <Link
-            to="/products"
+            to="/seller/dashboard/products"
             className="bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg py-2 px-4 transition-all"
           >
             All Products
