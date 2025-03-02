@@ -1,4 +1,7 @@
 import { lazy } from "react";
+const DiscountProducts = lazy(() =>
+  import("../../views/seller/DiscountProducts")
+);
 const Products = lazy(() => import("../../views/seller/Products"));
 const AddProduct = lazy(() => import("../../views/seller/AddProduct"));
 const SellerDashboard = lazy(() =>
@@ -25,6 +28,11 @@ export const sellerRoutes = [
   {
     path: "/seller/dashboard/products",
     element: <Products />,
+    ability: ["seller"],
+  },
+  {
+    path: "/seller/dashboard/discount-product",
+    element: <DiscountProducts />,
     ability: ["seller"],
   },
 ];
