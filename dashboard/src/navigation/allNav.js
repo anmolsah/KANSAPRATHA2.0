@@ -2,7 +2,6 @@ import {
   FiDollarSign,
   FiGrid,
   FiHome,
-  FiLogOut,
   FiMessageCircle,
   FiShoppingCart,
   FiUser,
