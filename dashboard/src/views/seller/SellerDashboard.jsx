@@ -80,7 +80,6 @@ const SellerDashboard = () => {
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
       <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {/* Dashboard Cards */}
         {[
           {
             value: "$3436",
@@ -97,7 +96,7 @@ const SellerDashboard = () => {
           {
             value: "100",
             label: "Orders",
-            icon:  <FaShoppingCart />,
+            icon: <FaShoppingCart />,
             color: "from-yellow-500 to-yellow-700",
           },
           {
