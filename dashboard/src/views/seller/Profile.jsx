@@ -4,7 +4,7 @@ import { FadeLoader } from "react-spinners";
 
 const Profile = () => {
   const image = true;
-  const loader = false;
+  const loader = true;
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
       <div className="w-full flex flex-wrap">
@@ -12,7 +12,19 @@ const Profile = () => {
           <div className="w-full p-4 bg-[add some color] rounded-md">
             <div className="flex justify-center items-center py-3">
               {image ? (
-                <label htmlFor=""></label>
+                <label
+                  htmlFor="img"
+                  className="h-[150px] w-[200px] relative p-3 cursor-pointer overflow-hidden"
+                >
+                  <img src="/admin.png" alt="profile" />
+                  {!loader && (
+                    <div className="bg-[adds some color] absolute top-0 left-0 h-full w-full opcacity-70 flex justify-center items-center z-20">
+                      <span>
+                        <FadeLoader />
+                      </span>
+                    </div>
+                  )}
+                </label>
               ) : (
                 <label
                   className="flex justify-center items-center flex-col h-[150px] w-[200px] cursor-pointer border border-dashed relative"
@@ -31,6 +43,7 @@ const Profile = () => {
                   )}
                 </label>
               )}
+              <input type="file" className="hidden" id="img" />
             </div>
           </div>
         </div>
