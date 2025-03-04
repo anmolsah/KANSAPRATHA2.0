@@ -183,7 +183,6 @@ const Payments = () => {
           </div>
         </div>
 
-        {/* Success Withdrawal Section */}
         <div className="bg-white shadow-lg rounded-lg p-6">
           <h2 className="text-xl font-semibold text-gray-800 mb-4">
             Success Withdrawals
