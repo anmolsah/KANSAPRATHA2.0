@@ -189,7 +189,7 @@ const SellerToCustomer = () => {
           >
             <div className="w-full h-[calc(100vh-170px)] bg-gray-100 overflow-y-auto">
               <div className="flex text-xl font-semibold justify-between items-center p-4 bg-blue-600 text-white">
-                <h2 className="">Sellers</h2>
+                <h2 className="">Customers</h2>
                 <span
                   onClick={() => setShow(!show)}
                   className="block cursor-pointer md:hidden"
