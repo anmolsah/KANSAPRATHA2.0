@@ -15,6 +15,7 @@ import {
   FiMessageSquare,
   FiHeadphones,
 } from "react-icons/fi";
+import { BsPerson } from "react-icons/bs";
 
 export const allNav = [
   {
@@ -129,4 +130,11 @@ export const allNav = [
     role: "seller",
     path: "/seller/dashboard/chat-support",
   },
+  {
+    id: 17,
+    title: "Profile",
+    icon: <BsPerson />,
+    role: "seller",
+    path: "/seller/dashboard/profile",
+  }
 ];
