@@ -224,7 +224,8 @@ const SellerToCustomer = () => {
                     />
                     <div className="w-[10px] h-[10px] bg-green-500 rounded-full absolute bottom-0 right-0"></div>
                   </div>
-                  <span className="text-lg font-semibold">Chat</span>
+
+                  <span className="text-lg font-semibold">Ananta</span>
                 </div>
               )}
               <div
