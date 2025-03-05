@@ -136,5 +136,5 @@ export const allNav = [
     icon: <BsPerson />,
     role: "seller",
     path: "/seller/dashboard/profile",
-  }
+  },
 ];
