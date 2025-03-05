@@ -46,11 +46,19 @@
 
 // export default Pagination;
 
-
 import React from "react";
-import { MdOutlineKeyboardDoubleArrowLeft, MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
+import {
+  MdOutlineKeyboardDoubleArrowLeft,
+  MdOutlineKeyboardDoubleArrowRight,
+} from "react-icons/md";
 
-const Pagination = ({ pageNumber, setPageNumber, totalItem, perPage, showItem }) => {
+const Pagination = ({
+  pageNumber,
+  setPageNumber,
+  totalItem,
+  perPage,
+  showItem,
+}) => {
   let totalPage = Math.ceil(totalItem / perPage);
   let startPage = pageNumber;
   let diff = totalPage - pageNumber;
@@ -73,7 +81,9 @@ const Pagination = ({ pageNumber, setPageNumber, totalItem, perPage, showItem })
           key={i}
           onClick={() => setPageNumber(i)}
           className={`w-10 h-10 rounded-full flex justify-center items-center cursor-pointer transition-all ${
-            pageNumber === i ? "bg-blue-600 text-white font-bold" : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+            pageNumber === i
+              ? "bg-blue-600 text-white font-bold"
+              : "bg-gray-200 text-gray-700 hover:bg-gray-300"
           }`}
         >
           {i}
