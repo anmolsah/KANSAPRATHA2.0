@@ -130,7 +130,6 @@ const Orders = () => {
 
         <div className="relative overflow-x-auto">
           <div className="w-full text-sm text-gray-600">
-            {/* Table Headings */}
             <div className="grid grid-cols-6 gap-4 bg-gray-100 p-3 rounded-t-lg font-semibold">
               <div className="text-left pl-2">Order ID</div>
               <div className="text-left">Price</div>
@@ -140,7 +139,6 @@ const Orders = () => {
               <div className="text-center">Expand</div>
             </div>
 
-            {/* Order Data Rows */}
             {[1, 2].map((order, index) => (
               <React.Fragment key={index}>
                 <div className="grid grid-cols-6 gap-4 border-t border-gray-300 p-3 bg-white hover:bg-gray-50 transition">
@@ -170,7 +168,6 @@ const Orders = () => {
                   </div>
                 </div>
 
-                {/* Hidden Expanded Data */}
                 {expandedRow === index && (
                   <div className="border-t bg-gray-50 p-4 animate-fadeIn">
                     {[...Array(4)].map((_, i) => (
