@@ -87,7 +87,7 @@ const Profile = () => {
             </div>
 
             <div className="px-0 md:px-5 py-2">
-              {!userInfo && (
+              {!userInfo ? (
                 <form>
                   <div className="flex flex-col w-full gap-2 mb-2">
                     <label
@@ -153,6 +153,28 @@ const Profile = () => {
                     Save Changes
                   </button>
                 </form>
+              ) : (
+                <div className="flex justify-between text-sm flex-col gap-2 p-4 bg-[add some color] rounded-md relative">
+                  <span className="p-[6px] bg-[add some color] rounded-md absolute right-2 top-2 cursor-pointer">
+                    <FaEdit />
+                  </span>
+                  <div className="flex gap-2">
+                    <span>Shop Name: </span>
+                    <span>Kansapratha</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <span>Division: </span>
+                    <span>Kolkata</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <span>District: </span>
+                    <span>Sonarpur </span>
+                  </div>
+                  <div className="flex gap-2">
+                    <span>Sub District: </span>
+                    <span> Rubi</span>
+                  </div>
+                </div>
               )}
             </div>
           </div>
