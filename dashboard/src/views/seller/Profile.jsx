@@ -3,6 +3,7 @@ import { FaEdit, FaImages } from "react-icons/fa";
 import { FadeLoader } from "react-spinners";
 
 const Profile = () => {
+  const status = "active";
   const image = true;
   const loader = true;
   return (
@@ -69,7 +70,17 @@ const Profile = () => {
                 </div>
                 <div className="flex gap-2">
                   <span>Payment Account: </span>
-                  <span>Pending </span>
+                  <p>
+                    {status === "active" ? (
+                      <span className="bg-[add some color] text-xs cursor-pointer font-normal ml-2 px-2 py-0.5 rounded">
+                        Pending
+                      </span>
+                    ) : (
+                      <span className="bg-[add some color] text-xs cursor-pointer font-normal ml-2 px-2 py-0.5 rounded">
+                        Active
+                      </span>
+                    )}
+                  </p>
                 </div>
               </div>
             </div>
