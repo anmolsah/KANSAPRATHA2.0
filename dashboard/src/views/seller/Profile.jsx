@@ -6,6 +6,7 @@ const Profile = () => {
   const status = "active";
   const image = true;
   const loader = true;
+  const userInfo = true;
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
       <div className="w-full flex flex-wrap">
@@ -83,6 +84,76 @@ const Profile = () => {
                   </p>
                 </div>
               </div>
+            </div>
+
+            <div className="px-0 md:px-5 py-2">
+              {!userInfo && (
+                <form>
+                  <div className="flex flex-col w-full gap-2 mb-2">
+                    <label
+                      htmlFor="Shop"
+                      className="text-sm font-medium text-gray-700"
+                    >
+                      Shop Name
+                    </label>
+                    <input
+                      type="text"
+                      name="shopName"
+                      id="Shop"
+                      placeholder="Shop name..."
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
+                  <div className="flex flex-col w-full gap-2">
+                    <label
+                      htmlFor="division"
+                      className="text-sm font-medium text-gray-700"
+                    >
+                      Division Name
+                    </label>
+                    <input
+                      type="text"
+                      name="division"
+                      id="division"
+                      placeholder="Division name..."
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
+                  <div className="flex flex-col w-full gap-2">
+                    <label
+                      htmlFor="district"
+                      className="text-sm font-medium text-gray-700"
+                    >
+                      District Name
+                    </label>
+                    <input
+                      type="text"
+                      name="district"
+                      id="district"
+                      placeholder="District name..."
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
+                  <div className="flex flex-col w-full gap-2">
+                    <label
+                      htmlFor="subdis"
+                      className="text-sm font-medium text-gray-700"
+                    >
+                      Sub District
+                    </label>
+                    <input
+                      type="text"
+                      name="subdis"
+                      id="subdis"
+                      placeholder="Sub District name..."
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
+                  <button className="px-6 bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition-all">
+                    Save Changes
+                  </button>
+                </form>
+              )}
             </div>
           </div>
         </div>
