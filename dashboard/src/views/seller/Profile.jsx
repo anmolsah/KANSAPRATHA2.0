@@ -179,7 +179,64 @@ const Profile = () => {
             </div>
           </div>
         </div>
-        <div className="w-full md:w-6/12 "></div>
+        <div className="w-full md:w-6/12 ">
+          <div className="w-full pl-0 md:pl-7 mt-6 md:mt-0">
+            <div className=" bg-[add some color] rounded-md p-4">
+              <h1 className="text-lg mb-3 font-semibold">Change Password</h1>
+              <form>
+                <div className="flex flex-col w-full gap-2 mb-2">
+                  <label
+                    htmlFor="email"
+                    className="text-sm font-medium text-gray-700"
+                  >
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="Email"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                <div className="flex flex-col w-full gap-2">
+                  <label
+                    htmlFor="o_password"
+                    className="text-sm font-medium text-gray-700"
+                  >
+                    Old Password
+                  </label>
+                  <input
+                    type="password"
+                    name="old_password"
+                    id="o_password"
+                    placeholder="Old Password"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                <div className="flex flex-col w-full gap-2">
+                  <label
+                    htmlFor="n_passowrd"
+                    className="text-sm font-medium text-gray-700"
+                  >
+                    New Password
+                  </label>
+                  <input
+                    type="password"
+                    name="new_passowrd"
+                    id="n_passowrd"
+                    placeholder="New Password"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+
+                <button className="px-6 bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition-all">
+                  Save Changes
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
