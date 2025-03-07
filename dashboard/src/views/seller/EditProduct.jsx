@@ -4,22 +4,40 @@ import { BsImage } from "react-icons/bs";
 import { IoMdClose } from "react-icons/io";
 
 const EditProduct = () => {
+  // const categorys = [
+  //   { id: 1, name: "sports" },
+  //   { id: 2, name: "Electronics" },
+  //   { id: 3, name: "Clothing" },
+  //   { id: 4, name: "Home & Kitchen" },
+  //   { id: 5, name: "Beauty & Personal Care" },
+  //   { id: 6, name: "Health & Household" },
+  //   { id: 7, name: "Pet Products" },
+  //   { id: 8, name: "Sports & Outdoors" },
+  //   { id: 9, name: "Baby Products" },
+  //   { id: 10, name: "Arts, Crafts & Sewing" },
+  //   { id: 11, name: "Automotive" },
+  //   { id: 12, name: "Industrial & Scientific" },
+  //   { id: 13, name: "Musical Instruments" },
+  //   { id: 14, name: "Office Products" },
+  //   { id: 15, name: "Toys & Games" },
+  // ];
+
   const categorys = [
-    { id: 1, name: "sports" },
-    { id: 2, name: "Electronics" },
-    { id: 3, name: "Clothing" },
-    { id: 4, name: "Home & Kitchen" },
-    { id: 5, name: "Beauty & Personal Care" },
-    { id: 6, name: "Health & Household" },
-    { id: 7, name: "Pet Products" },
-    { id: 8, name: "Sports & Outdoors" },
-    { id: 9, name: "Baby Products" },
-    { id: 10, name: "Arts, Crafts & Sewing" },
-    { id: 11, name: "Automotive" },
-    { id: 12, name: "Industrial & Scientific" },
-    { id: 13, name: "Musical Instruments" },
-    { id: 14, name: "Office Products" },
-    { id: 15, name: "Toys & Games" },
+    { id: 1, name: "Brass Thaalis & Plates" },
+    { id: 2, name: "Copper Bottles & Jugs" },
+    { id: 3, name: "Handcrafted Kadai & Cookware" },
+    { id: 4, name: "Traditional Brass Utensils" },
+    { id: 5, name: "Decorative Pooja Items" },
+    { id: 6, name: "Copper Glasses & Tumblers" },
+    { id: 7, name: "Brass Lamps & Diyas" },
+    { id: 8, name: "Handmade Cutlery & Ladles" },
+    { id: 9, name: "Kitchen Storage Containers" },
+    { id: 10, name: "Serving Bowls & Dishes" },
+    { id: 11, name: "Masala Box & Spice Holders" },
+    { id: 12, name: "Brass & Copper Home Décor" },
+    { id: 13, name: "Tea Sets & Kettles" },
+    { id: 14, name: "Hand-Hammered Cookware" },
+    { id: 15, name: "Traditional Cooking Tools" },
   ];
 
   const [state, setState] = useState({
@@ -100,6 +118,8 @@ const EditProduct = () => {
       brand: "KhansaPratha",
       stock: 20,
     });
+    setCategory("Brass Thaalis & Plates");
+    setImageShow(["/images/thaali.webp", "/images/06.jpg"]);
   }, []);
 
   return (
@@ -282,7 +302,7 @@ const EditProduct = () => {
                   <label htmlFor={i}>
                     <img
                       className="w-full h-full rounded-lg object-cover"
-                      src={img.url}
+                      src={img}
                       alt=""
                     />
                   </label>
