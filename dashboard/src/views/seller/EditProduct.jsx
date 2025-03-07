@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BsImage } from "react-icons/bs";
 import { IoMdClose } from "react-icons/io";
@@ -90,11 +90,23 @@ const EditProduct = () => {
     setImageShow(filterImageUrl);
   };
 
+  useEffect(() => {
+    setState({
+      name: "Brass Thaali",
+      description:
+        "A brass thaali is a classic Indian dining plate, widely used in Kolkata for serving meals in a traditional setting. It is crafted from high-quality brass, often featuring intricate engravings and a polished golden finish. ",
+      discount: 10,
+      price: 2000,
+      brand: "KhansaPratha",
+      stock: 20,
+    });
+  }, []);
+
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
       <div className="w-full p-6 bg-white rounded-lg shadow-md">
         <div className="flex justify-between items-center pb-4 border-b border-gray-200">
-          <h1 className="text-2xl font-semibold text-gray-800">Add Product</h1>
+          <h1 className="text-2xl font-semibold text-gray-800">Edit Product</h1>
           <Link
             to="/seller/dashboard/products"
             className="bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg py-2 px-4 transition-all"
@@ -307,7 +319,7 @@ const EditProduct = () => {
             </div>
             <div className="flex">
               <button className="px-6 bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition-all">
-                Add Product
+                Save Changes
               </button>
             </div>
           </form>
