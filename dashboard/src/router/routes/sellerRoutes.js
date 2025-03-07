@@ -1,4 +1,5 @@
 import { lazy } from "react";
+const EditProduct = lazy(() => import("../../views/seller/EditProduct"));
 const Profile = lazy(() => import("../../views/seller/Profile"));
 const SellerToAdmin = lazy(() => import("../../views/seller/SellerToAdmin"));
 const SellerToCustomer = lazy(() =>
@@ -31,6 +32,12 @@ export const sellerRoutes = [
   {
     path: "/seller/dashboard/add-product",
     element: <AddProduct />,
+    role: "seller",
+    status: "active",
+  },
+  {
+    path: "/seller/dashboard/edit-product/:productId",
+    element: <EditProduct />,
     role: "seller",
     status: "active",
   },
