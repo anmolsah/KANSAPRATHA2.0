@@ -76,37 +76,16 @@ const EditProduct = () => {
     }
   };
 
-  const imageHandle = (e) => {
-    const files = e.target.files;
-    const length = files.length;
-    if (length > 0) {
-      setImages([...images, ...files]);
-      let imageUrl = [];
-      for (let i = 0; i < length; i++) {
-        imageUrl.push({ url: URL.createObjectURL(files[i]) });
-      }
-      setImageShow([...imageShow, ...imageUrl]);
+ 
+
+  const changeImage = (img, files) => {
+    if(files.length>0){
+      console.log(files[0]);
+      console.log(img);
     }
   };
 
-  const changeImage = (img, index) => {
-    if (img) {
-      let tempUrl = imageShow;
-      let tempImages = images;
 
-      tempImages[index] = img;
-      tempUrl[index] = { url: URL.createObjectURL(img) };
-      setImageShow([...tempUrl]);
-      setImages([...tempImages]);
-    }
-  };
-
-  const removeImage = (i) => {
-    const filterImage = images.filter((img, index) => index !== i);
-    const filterImageUrl = imageShow.filter((img, index) => index !== i);
-    setImages(filterImage);
-    setImageShow(filterImageUrl);
-  };
 
   useEffect(() => {
     setState({
@@ -297,45 +276,14 @@ const EditProduct = () => {
               ></textarea>
             </div>
             <div className="grid lg:grid-cols-4 grid-cols-1 md:grid-cols-3 sm:grid-cols-2 sm:gap-4 md:gap-4 gap-3 w-full mb-6">
-              {imageShow.map((img, i) => (
-                <div key={i} className="h-[180px] relative">
+              {
+                imageShow.map((img,i)=><div>
                   <label htmlFor={i}>
-                    <img
-                      className="w-full h-full rounded-lg object-cover"
-                      src={img}
-                      alt=""
-                    />
+                    <img src={img} alt="" />
                   </label>
-                  <input
-                    onChange={(e) => changeImage(e.target.files[0], i)}
-                    type="file"
-                    id={i}
-                    className="hidden"
-                  />
-                  <span
-                    onClick={() => removeImage(i)}
-                    className="p-2 z-10 cursor-pointer bg-red-500 text-white absolute top-1 right-1 rounded-full hover:bg-red-600"
-                  >
-                    <IoMdClose />
-                  </span>
-                </div>
-              ))}
-              <label
-                htmlFor="image"
-                className="flex justify-center items-center flex-col h-[180px] cursor-pointer border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-500 transition-all"
-              >
-                <span className="text-gray-500">
-                  <BsImage className="text-3xl" />
-                </span>
-                <span className="text-gray-500 mt-2">Select Image</span>
-              </label>
-              <input
-                onChange={imageHandle}
-                type="file"
-                id="image"
-                multiple
-                className="hidden"
-              />
+                  <input onChange={(e)=>changeImage(img,e.target.files)} type="file" id={i} className="hidden" />
+                </div>)
+              }
             </div>
             <div className="flex">
               <button className="px-6 bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition-all">
