@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import api from "../../api/api";
+
 export const admin_login = createAsyncThunk(
   "auth/admin_login",
   async (info, { rejectWithValue, fulfillWithValue }) => {
@@ -10,6 +11,25 @@ export const admin_login = createAsyncThunk(
       });
       localStorage.setItem("accessToken", data.token);
       //console.log(data);
+      return fulfillWithValue(data);
+    } catch (error) {
+      //console.log(error.response.data);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+
+export const seller_register = createAsyncThunk(
+  "auth/seller-register",
+  async (info, { rejectWithValue, fulfillWithValue }) => {
+    
+    try {
+      const { data } = await api.post("/seller-register", info, {
+        withCredentials: true,
+      });
+      // localStorage.setItem("accessToken", data.token);
+      console.log(data);
       return fulfillWithValue(data);
     } catch (error) {
       //console.log(error.response.data);

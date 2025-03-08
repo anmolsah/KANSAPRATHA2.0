@@ -95,8 +95,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { ClipLoader } from "react-spinners";
+import { seller_register } from "../../store/reducers/authReducer";
 
 const Register = () => {
+  const dispatch = useDispatch();
+
+  const { loader } = useSelector((state) => state.auth);
   const [state, setState] = useState({
     name: "",
     email: "",
@@ -112,7 +118,7 @@ const Register = () => {
 
   const submit = (e) => {
     e.preventDefault();
-    console.log(state);
+    dispatch(seller_register(state));
   };
 
   return (
@@ -211,11 +217,18 @@ const Register = () => {
             </label>
           </div>
 
-          <button
+          {/* <button
             type="submit"
             className="w-full px-4 py-2 text-white bg-amber-700 rounded-md shadow-md hover:bg-amber-800 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2"
           >
             Register
+          </button> */}
+          <button
+            disabled={loader ? true : false}
+            type="submit"
+            className="w-full px-4 py-2 text-white bg-amber-700 rounded-md shadow-md hover:bg-amber-800 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2"
+          >
+            {loader ? <ClipLoader color="#ffffff" /> : "Sign Up"}
           </button>
         </form>
 

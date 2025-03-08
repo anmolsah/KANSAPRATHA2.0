@@ -59,7 +59,7 @@ const EditProduct = () => {
   const [category, setCategory] = useState("");
   const [allCategory, setAllCategory] = useState(categorys);
   const [searchValue, setSearchValue] = useState("");
-  const [images, setImages] = useState([]);
+  //const [images, setImages] = useState([]);
   const [imageShow, setImageShow] = useState([]);
 
   const categorySearch = (e) => {
