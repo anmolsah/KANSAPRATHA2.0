@@ -92,17 +92,20 @@
 
 // export default Register;
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { ClipLoader } from "react-spinners";
-import { seller_register } from "../../store/reducers/authReducer";
+import { seller_register,messageClear } from "../../store/reducers/authReducer";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const dispatch = useDispatch();
 
-  const { loader } = useSelector((state) => state.auth);
+  const { loader, successMessage, errorMessage } = useSelector(
+    (state) => state.auth
+  );
   const [state, setState] = useState({
     name: "",
     email: "",
@@ -120,6 +123,18 @@ const Register = () => {
     e.preventDefault();
     dispatch(seller_register(state));
   };
+
+  useEffect(() => {
+    if (successMessage) {
+      toast.success(successMessage);
+      dispatch(messageClear());
+      
+    }
+    if (errorMessage) {
+      toast.error(errorMessage);
+      dispatch(messageClear());
+    }
+  }, [successMessage, errorMessage]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
