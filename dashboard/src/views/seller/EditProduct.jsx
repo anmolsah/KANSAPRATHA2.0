@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { BsImage } from "react-icons/bs";
-import { IoMdClose } from "react-icons/io";
+
 
 const EditProduct = () => {
   // const categorys = [

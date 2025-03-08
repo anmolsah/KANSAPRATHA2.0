@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Search from "../components/Search";
 import { Link } from "react-router-dom";
 import Pagination from "../Pagination";
-import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
 
 const Orders = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -38,7 +38,10 @@ const Orders = () => {
                   <td className="px-6 py-3">Pending</td>
                   <td className="px-6 py-3 text-blue-600 cursor-pointer">
                     <div className="flex justify-start items-center gap-3">
-                      <Link className="px-3 hover:shadow-lg text-green-500 hover:text-green-700 transition-all">
+                      <Link
+                        to={`/seller/dashboard/order-details/34`}
+                        className="px-3 hover:shadow-lg text-green-500 hover:text-green-700 transition-all"
+                      >
                         <FaEye />
                       </Link>
                     </div>
