@@ -75,6 +75,31 @@ class AuthControllers {
     }
   };
 
+  seller_login = async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+      const seller = await sellerModel.findOne({ email }).select("+password");
+
+      if (!seller) {
+        responseReturn(res, 404, { error: "email not found" });
+      }
+      const match = await bcrypt.compare(password, seller.password);
+
+      if (match) {
+        const token = await createToken({ id: seller.id, role: seller.role });
+        res.cookie("accessToken", token, {
+          expires: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000),
+        });
+        responseReturn(res, 200, { token, message: "login successful" });
+      } else {
+        responseReturn(res, 404, { error: "password is incorrect" });
+      }
+    } catch (error) {
+      responseReturn(res, 500, { error: error.message });
+    }
+  };
+
   getUser = async (req, res) => {
     const { id, role } = req;
 
