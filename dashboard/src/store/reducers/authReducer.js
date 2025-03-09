@@ -19,7 +19,6 @@ export const admin_login = createAsyncThunk(
   }
 );
 
-
 export const seller_login = createAsyncThunk(
   "auth/seller_login",
   async (info, { rejectWithValue, fulfillWithValue }) => {
@@ -78,6 +77,18 @@ export const authReducer = createSlice({
         state.errorMessage = payload.error;
       })
       .addCase(admin_login.fulfilled, (state, { payload }) => {
+        state.loader = false;
+        state.successMessage = payload.message;
+      })
+
+      .addCase(seller_login.pending, (state, { payload }) => {
+        state.loader = true;
+      })
+      .addCase(seller_login.rejected, (state, { payload }) => {
+        state.loader = false;
+        state.errorMessage = payload.error;
+      })
+      .addCase(seller_login.fulfilled, (state, { payload }) => {
         state.loader = false;
         state.successMessage = payload.message;
       })

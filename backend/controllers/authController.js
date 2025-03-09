@@ -13,25 +13,25 @@ class AuthControllers {
       const admin = await adminModel.findOne({ email }).select("+password");
       //console.log("Admin found in DB:", admin);
 
-      if (!admin) {
+      if (admin) {
         //console.log("Email not found");
-        responseReturn(res, 404, { error: "email not found" });
-      }
-
-      const match = await bcrypt.compare(password, admin.password);
-      //console.log("Password match:", match);
-
-      if (match) {
-        const token = await createToken({ id: admin.id, role: admin.role });
-        res.cookie("accessToken", token, {
-          expires: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000),
-        });
-        //console.log("Login successful, token created");
-        responseReturn(res, 200, { token, message: "login successful" });
+        const match = await bcrypt.compare(password, admin.password);
+        if (match) {
+          const token = await createToken({ id: admin.id, role: admin.role });
+          res.cookie("accessToken", token, {
+            expires: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000),
+          });
+          //console.log("Login successful, token created");
+          responseReturn(res, 200, { token, message: "login successful" });
+        } else {
+          //console.log("Incorrect password");
+          responseReturn(res, 404, { error: "password is incorrect" });
+        }
       } else {
-        //console.log("Incorrect password");
-        responseReturn(res, 404, { error: "password is incorrect" });
+        responseReturn(res, 404, { error: "Email not found" });
       }
+
+      //console.log("Password match:", match);
     } catch (error) {
       //console.log("Server error:", error);
       responseReturn(res, 500, { error: error.message });
@@ -81,19 +81,19 @@ class AuthControllers {
     try {
       const seller = await sellerModel.findOne({ email }).select("+password");
 
-      if (!seller) {
-        responseReturn(res, 404, { error: "email not found" });
-      }
-      const match = await bcrypt.compare(password, seller.password);
-
-      if (match) {
-        const token = await createToken({ id: seller.id, role: seller.role });
-        res.cookie("accessToken", token, {
-          expires: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000),
-        });
-        responseReturn(res, 200, { token, message: "login successful" });
+      if (seller) {
+        const match = await bcrypt.compare(password, seller.password);
+        if (match) {
+          const token = await createToken({ id: seller.id, role: seller.role });
+          res.cookie("accessToken", token, {
+            expires: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000),
+          });
+          responseReturn(res, 200, { token, message: "login successful" });
+        } else {
+          responseReturn(res, 404, { error: "password is incorrect" });
+        }
       } else {
-        responseReturn(res, 404, { error: "password is incorrect" });
+        responseReturn(res, 404, { error: "Email not found" });
       }
     } catch (error) {
       responseReturn(res, 500, { error: error.message });
