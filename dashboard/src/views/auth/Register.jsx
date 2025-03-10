@@ -93,7 +93,7 @@
 // export default Register;
 
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { ClipLoader } from "react-spinners";
@@ -101,6 +101,8 @@ import { seller_register,messageClear } from "../../store/reducers/authReducer";
 import toast from "react-hot-toast";
 
 const Register = () => {
+
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { loader, successMessage, errorMessage } = useSelector(
@@ -128,6 +130,7 @@ const Register = () => {
     if (successMessage) {
       toast.success(successMessage);
       dispatch(messageClear());
+      navigate("/")
       
     }
     if (errorMessage) {
