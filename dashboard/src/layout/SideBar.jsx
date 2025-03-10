@@ -62,15 +62,19 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { getNav } from "../navigation";
 import { FiLogOut } from "react-icons/fi";
+import { useDispatch, useSelector } from "react-redux";
 
 const SideBar = ({ showSidebar, setShowSidebar }) => {
+  const dispatch = useDispatch();
+  const { role } = useSelector((state) => state.auth);
+
   const { pathname } = useLocation();
   const [allNav, setAllNav] = useState([]);
 
   useEffect(() => {
-    const navs = getNav("seller");
+    const navs = getNav(role);
     setAllNav(navs);
-  }, []);
+  }, [role]);
 
   return (
     <>
