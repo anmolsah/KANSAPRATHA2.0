@@ -54,13 +54,13 @@ export const sellerRoutes = [
     path: "/seller/dashboard/orders",
     element: <Orders />,
     role: "seller",
-    ability: ["active", "deactive"],
+    visibility: ["active", "deactive"],
   },
   {
     path: "/seller/dashboard/order-details/:orderId",
     element: <OrderDetails />,
     role: "seller",
-    ability: ["active", "deactive"],
+    visibility: ["active", "deactive"],
   },
   {
     path: "/seller/dashboard/payments",
@@ -77,7 +77,8 @@ export const sellerRoutes = [
   {
     path: "/seller/dashboard/chat-support",
     element: <SellerToAdmin />,
-    ability: ["active", "deactive", "Pending"],
+    role: "seller",
+    visibility: ["active", "deactive", "Pending"],
   },
   {
     path: "/seller/dashboard/chat-customer",
