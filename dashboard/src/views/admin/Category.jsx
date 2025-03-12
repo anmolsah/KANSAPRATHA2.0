@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Pagination from "../Pagination";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { BsImage } from "react-icons/bs";
+import { ClipLoader } from "react-spinners";
 
 const Category = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -26,6 +27,8 @@ const Category = () => {
       });
     }
   };
+
+  const loader = false;
 
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
@@ -152,8 +155,12 @@ const Category = () => {
                 </div>
 
                 <div>
-                  <button className="w-full bg-gray-900 text-white font-semibold py-2 rounded-md hover:bg-gray-700 transition-all">
-                    Add Category
+                  <button
+                    disabled={loader ? true : false}
+                    type="submit"
+                    className="w-full bg-gray-900 text-white font-semibold py-2 rounded-md hover:bg-gray-700 transition-all"
+                  >
+                    {loader ? <ClipLoader color="#ffffff" /> : "Add Category"}
                   </button>
                 </div>
               </form>
