@@ -20,7 +20,7 @@ const Category = () => {
     let files = e.target.files;
     if (files.length > 0) {
       setImage(URL.createObjectURL(files[0]));
-      setImage({
+      setState({
         ...state,
         image: files[0],
       });
@@ -130,7 +130,7 @@ const Category = () => {
                     className="flex flex-col items-center justify-center h-[220px] cursor-pointer border border-gray-300 border-dashed hover:border-gray-400 w-full bg-gray-50 rounded-md text-gray-600"
                   >
                     {imageShow ? (
-                      <img src={imageShow} alt="" />
+                      <img className="h-full w-full" src={imageShow} alt="" />
                     ) : (
                       <>
                         <span className="text-3xl text-gray-500">
