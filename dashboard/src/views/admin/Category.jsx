@@ -28,6 +28,10 @@ const Category = () => {
     }
   };
 
+  const add_category = (e)=>{
+    e.preventDefault();
+  }
+
   const loader = false;
 
   return (
@@ -109,7 +113,7 @@ const Category = () => {
               <h1 className="text-2xl font-semibold text-center mb-4 text-gray-900">
                 ➕ Add Category
               </h1>
-              <form className="space-y-5">
+              <form onSubmit={add_category} className="space-y-5">
                 <div className="flex flex-col gap-2">
                   <label htmlFor="name" className="font-medium text-gray-700">
                     Category Name
@@ -133,7 +137,7 @@ const Category = () => {
                     className="flex flex-col items-center justify-center h-[220px] cursor-pointer border border-gray-300 border-dashed hover:border-gray-400 w-full bg-gray-50 rounded-md text-gray-600"
                   >
                     {imageShow ? (
-                      <img className="h-full w-full" src={imageShow} alt="" />
+                      <img className="w-full h-full object-contain" src={imageShow} alt="" />
                     ) : (
                       <>
                         <span className="text-3xl text-gray-500">
