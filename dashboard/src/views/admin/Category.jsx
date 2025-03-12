@@ -9,6 +9,24 @@ const Category = () => {
   const [searchValue, setSearchValue] = useState("");
   const [perPage, setPerPage] = useState(5);
   const [show, setShow] = useState(false);
+  const [imageShow, setImage] = useState("");
+
+  const [state, setState] = useState({
+    name: "",
+    image: "",
+  });
+
+  const imageHandle = (e) => {
+    let files = e.target.files;
+    if (files.length > 0) {
+      setImage(URL.createObjectURL(files[0]));
+      setImage({
+        ...state,
+        image: files[0],
+      });
+    }
+  };
+
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
       <div className="flex flex-wrap w-full">
@@ -99,6 +117,10 @@ const Category = () => {
                     id="name"
                     name="category_name"
                     placeholder="Enter category name..."
+                    value={state.name}
+                    onChange={(e) =>
+                      setState({ ...state, name: e.target.value })
+                    }
                   />
                 </div>
 
@@ -107,18 +129,25 @@ const Category = () => {
                     htmlFor="image"
                     className="flex flex-col items-center justify-center h-[220px] cursor-pointer border border-gray-300 border-dashed hover:border-gray-400 w-full bg-gray-50 rounded-md text-gray-600"
                   >
-                    <span className="text-3xl text-gray-500">
-                      <BsImage />
-                    </span>
-                    <span className="mt-2 text-lg font-medium">
-                      Select Image
-                    </span>
+                    {imageShow ? (
+                      <img src={imageShow} alt="" />
+                    ) : (
+                      <>
+                        <span className="text-3xl text-gray-500">
+                          <BsImage />
+                        </span>
+                        <span className="mt-2 text-lg font-medium">
+                          Select Image
+                        </span>
+                      </>
+                    )}
                   </label>
                   <input
                     type="file"
                     name="image"
                     id="image"
                     className="hidden"
+                    onChange={imageHandle}
                   />
                 </div>
 
