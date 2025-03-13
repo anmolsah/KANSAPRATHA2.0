@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 const Category = () => {
 
   const dispatch = useDispatch();
-  const {loader} = useSelector(state => state.category)
+  const {loader} = useSelector(state => state.category);
 
 
 
@@ -41,7 +41,6 @@ const Category = () => {
     e.preventDefault();
   }
 
-  const loader = false;
 
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
