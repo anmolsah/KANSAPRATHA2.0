@@ -4,8 +4,17 @@ import Pagination from "../Pagination";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { BsImage } from "react-icons/bs";
 import { ClipLoader } from "react-spinners";
+import {categoryAdd} from "../../store/reducers/categoryReducer"; 
+import { useDispatch, useSelector } from 'react-redux';
+
 
 const Category = () => {
+
+  const dispatch = useDispatch();
+  const {loader} = useSelector(state => state.category)
+
+
+
   const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
   const [perPage, setPerPage] = useState(5);

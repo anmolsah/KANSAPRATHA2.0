@@ -10,7 +10,7 @@ export const categoryAdd = createAsyncThunk(
       formData.append("name", name);
       formData.append("image", image);
 
-      const { data } = await api.post("/categoryAdd", formData, {
+      const { data } = await api.post("/category-add", formData, {
         withCredentials: true,
       });
 
