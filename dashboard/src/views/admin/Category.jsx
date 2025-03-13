@@ -39,6 +39,7 @@ const Category = () => {
 
   const add_category = (e)=>{
     e.preventDefault();
+    dispatch(categoryAdd(state));
   }
 
 
