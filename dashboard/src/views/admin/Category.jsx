@@ -4,16 +4,12 @@ import Pagination from "../Pagination";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { BsImage } from "react-icons/bs";
 import { ClipLoader } from "react-spinners";
-import {categoryAdd} from "../../store/reducers/categoryReducer"; 
-import { useDispatch, useSelector } from 'react-redux';
-
+import { categoryAdd } from "../../store/reducers/categoryReducer";
+import { useDispatch, useSelector } from "react-redux";
 
 const Category = () => {
-
   const dispatch = useDispatch();
-  const {loader} = useSelector(state => state.category);
-
-
+  const { loader } = useSelector((state) => state.category);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
@@ -37,11 +33,10 @@ const Category = () => {
     }
   };
 
-  const add_category = (e)=>{
+  const add_category = (e) => {
     e.preventDefault();
     dispatch(categoryAdd(state));
-  }
-
+  };
 
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
@@ -146,7 +141,11 @@ const Category = () => {
                     className="flex flex-col items-center justify-center h-[220px] cursor-pointer border border-gray-300 border-dashed hover:border-gray-400 w-full bg-gray-50 rounded-md text-gray-600"
                   >
                     {imageShow ? (
-                      <img className="w-full h-full object-contain" src={imageShow} alt="" />
+                      <img
+                        className="w-full h-full object-contain"
+                        src={imageShow}
+                        alt=""
+                      />
                     ) : (
                       <>
                         <span className="text-3xl text-gray-500">
