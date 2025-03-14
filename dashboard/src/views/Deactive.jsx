@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const Deactive = () => {
-  return (
-    <div>Deactive</div>
-  )
-}
+  return <div>Deactive</div>;
+};
 
-export default Deactive
+export default Deactive;
