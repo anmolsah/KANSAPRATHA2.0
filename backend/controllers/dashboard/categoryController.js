@@ -22,9 +22,26 @@ class categoryController {
           secure: true,
         });
 
-        const result = await cloudinary.uploader.upload(image.filepath, {
-          folder: "categorys",
-        });
+        try {
+          const result = await cloudinary.uploader.upload(image.filepath, {
+            folder: "categorys",
+          });
+          if (result) {
+            const category = await categoryModel.create({
+              name,
+              slug,
+              image: result.url,
+            });
+            responseReturn(res, 201, {
+              category,
+              message: "category created successfully",
+            });
+          } else {
+            responseReturn(res, 404, { error: "image upload failed" });
+          }
+        } catch (error) {
+          responseReturn(res, 500, { error: "Internal Server error" });
+        }
       }
     });
   };
