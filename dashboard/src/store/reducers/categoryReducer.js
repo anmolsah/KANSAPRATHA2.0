@@ -14,7 +14,7 @@ export const categoryAdd = createAsyncThunk(
         withCredentials: true,
       });
 
-      console.log(data);
+      //console.log(data);
       return fulfillWithValue(data);
     } catch (error) {
       //console.log(error.response.data);
@@ -44,13 +44,12 @@ export const categoryReducer = createSlice({
       .addCase(categoryAdd.rejected, (state, { payload }) => {
         state.loader = false;
         state.errorMessage = payload.error;
+      })
+      .addCase(categoryAdd.fulfilled, (state, { payload }) => {
+        state.loader = false;
+        state.successMessage = payload.message;
+        state.categorys = [...state.categorys, payload.category];
       });
-    //   .addCase(admin_login.fulfilled, (state, { payload }) => {
-    //     state.loader = false;
-    //     state.successMessage = payload.message;
-    //     state.token = payload.token;
-    //     state.role = returnRole(payload.token);
-    //   });
   },
 });
 

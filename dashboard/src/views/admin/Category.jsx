@@ -1,15 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Pagination from "../Pagination";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { BsImage } from "react-icons/bs";
 import { ClipLoader } from "react-spinners";
-import { categoryAdd } from "../../store/reducers/categoryReducer";
+import {
+  categoryAdd,
+  messageClear,
+} from "../../store/reducers/categoryReducer";
 import { useDispatch, useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
 const Category = () => {
   const dispatch = useDispatch();
-  const { loader } = useSelector((state) => state.category);
+  const { loader, successMessage, errorMessage } = useSelector(
+    (state) => state.category
+  );
 
   const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
@@ -37,6 +43,23 @@ const Category = () => {
     e.preventDefault();
     dispatch(categoryAdd(state));
   };
+
+  useEffect(() => {
+    if (errorMessage) {
+      toast.error(errorMessage);
+      dispatch(messageClear());
+      setState({
+        name: "",
+        image: "",
+      });
+      setImage('');
+    }
+    if (successMessage) {
+      toast.success(successMessage);
+      dispatch(messageClear());
+      //navigate("/");
+    }
+  }, [errorMessage, successMessage]);
 
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
