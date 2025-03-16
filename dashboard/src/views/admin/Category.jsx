@@ -7,7 +7,7 @@ import { ClipLoader } from "react-spinners";
 import {
   categoryAdd,
   messageClear,
-  get_category
+  get_category,
 } from "../../store/reducers/categoryReducer";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
@@ -15,7 +15,7 @@ import Search from "./../components/Search";
 
 const Category = () => {
   const dispatch = useDispatch();
-  const { loader, successMessage, errorMessage } = useSelector(
+  const { loader, successMessage, errorMessage, categorys } = useSelector(
     (state) => state.category
   );
 
@@ -62,14 +62,14 @@ const Category = () => {
     }
   }, [successMessage, errorMessage]);
 
-  useEffect(()=>{
+  useEffect(() => {
     const obj = {
-      perPage:parseInt(perPage),
-      page:parseInt(currentPage),
-      searchValue
-    }
-    dispatch(get_category(obj))
-  },[searchValue,currentPage,perPage])
+      perPage: parseInt(perPage),
+      page: parseInt(currentPage),
+      searchValue,
+    };
+    dispatch(get_category(obj));
+  }, [searchValue, currentPage, perPage]);
 
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
@@ -93,17 +93,17 @@ const Category = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {[1, 2, 3, 4, 5].map((d, i) => (
+                  {categorys.map((d, i) => (
                     <tr key={i} className="border-b hover:bg-gray-50">
-                      <td className="px-6 py-3">{d}</td>
+                      <td className="px-6 py-3">{i + 1}</td>
                       <td className="px-6 py-3">
                         <img
                           className="w-[45px] h-[50px]"
-                          src="http://localhost:9000/images/03.jpg"
+                          src={d.image}
                           alt="items"
                         />
                       </td>
-                      <td className="px-6 py-3">Frock</td>
+                      <td className="px-6 py-3">{d.name}</td>
                       <td className="px-6 py-3 text-blue-600 cursor-pointer">
                         <div className="flex justify-start items-center gap-3">
                           <Link className="px-3 hover:shadow-lg text-blue-500 hover:text-blue-700 transition-all">
