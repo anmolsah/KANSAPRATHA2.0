@@ -45,21 +45,20 @@ const Category = () => {
   };
 
   useEffect(() => {
-    if (errorMessage) {
-      toast.error(errorMessage);
+    if (successMessage) {
+      toast.success(successMessage);
       dispatch(messageClear());
       setState({
         name: "",
         image: "",
       });
-      setImage('');
+      setImage("");
     }
-    if (successMessage) {
-      toast.success(successMessage);
+    if (errorMessage) {
+      toast.error(errorMessage);
       dispatch(messageClear());
-      //navigate("/");
     }
-  }, [errorMessage, successMessage]);
+  }, [successMessage, errorMessage]);
 
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
