@@ -7,9 +7,11 @@ import { ClipLoader } from "react-spinners";
 import {
   categoryAdd,
   messageClear,
+  get_category
 } from "../../store/reducers/categoryReducer";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
+import Search from "./../components/Search";
 
 const Category = () => {
   const dispatch = useDispatch();
@@ -60,27 +62,26 @@ const Category = () => {
     }
   }, [successMessage, errorMessage]);
 
+  useEffect(()=>{
+    const obj = {
+      perPage:parseInt(perPage),
+      page:parseInt(currentPage),
+      searchValue
+    }
+    dispatch(get_category(obj))
+  },[searchValue,currentPage,perPage])
+
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
       <div className="flex flex-wrap w-full">
         <div className="w-full lg:w-7/12">
           <div className="w-full bg-white shadow-lg rounded-lg p-6">
-            <div className="flex justify-between items-center mb-4">
-              <select
-                onChange={(e) => setPerPage(parseInt(e.target.value))}
-                className="p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-300"
-              >
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="15">15</option>
-                <option value="20">20</option>
-              </select>
-              <input
-                type="text"
-                placeholder="Search..."
-                className="p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-300"
-              />
-            </div>
+            <Search
+              setPerPage={setPerPage}
+              setSearchValue={setSearchValue}
+              searchValue={searchValue}
+            />
+
             <div className="relative overflow-x-auto mt-4">
               <table className="w-full text-left border-collapse">
                 <thead>
