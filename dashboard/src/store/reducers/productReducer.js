@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import api from "../../api/api";
 
-export const categoryAdd = createAsyncThunk(
-  "category/categoryAdd",
+export const add_product = createAsyncThunk(
+  "product/add_produc",
   async ({ name, image }, { rejectWithValue, fulfillWithValue }) => {
     //console.log(info);
     try {
@@ -23,8 +23,8 @@ export const categoryAdd = createAsyncThunk(
   }
 );
 
-export const get_category = createAsyncThunk(
-  "category/get_category ",
+export const get_product = createAsyncThunk(
+  "category/get_product ",
   async (
     { perPage, page, searchValue },
     { rejectWithValue, fulfillWithValue }
@@ -47,14 +47,14 @@ export const get_category = createAsyncThunk(
   }
 );
 
-export const categoryReducer = createSlice({
-  name: "category",
+export const productReducer = createSlice({
+  name: "product",
   initialState: {
     successMessage: "",
     errorMessage: "",
     loader: false,
-    categorys: [],
-    totalCategory: 0,
+    products: [],
+    totalProduct: 0,
   },
   reducers: {
     messageClear: (state, _) => {
@@ -63,24 +63,25 @@ export const categoryReducer = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(categoryAdd.pending, (state, { payload }) => {
+      .addCase(add_product.pending, (state, { payload }) => {
         state.loader = true;
       })
-      .addCase(categoryAdd.rejected, (state, { payload }) => {
+      .addCase(add_product.rejected, (state, { payload }) => {
         state.loader = false;
         state.errorMessage = payload.error;
       })
-      .addCase(categoryAdd.fulfilled, (state, { payload }) => {
+      .addCase(add_product.fulfilled, (state, { payload }) => {
         state.loader = false;
         state.successMessage = payload.message;
-        state.categorys = [...state.categorys, payload.category];
+        state.products = [...state.products, payload.category];
       })
-      .addCase(get_category.fulfilled, (state, { payload }) => {
-        state.totalCategory = payload.totalCategory;
-        state.categorys = payload.categorys;
+      .addCase(get_product.fulfilled, (state, { payload }) => {
+        state.totalProduct = payload.totalProduct;
+        state.products = payload.products;
       });
   },
 });
 
-export const { messageClear } = categoryReducer.actions;
-export default categoryReducer.reducer;
+export const { messageClear } = productReducer.actions;
+export default productReducer.reducer;
+                            

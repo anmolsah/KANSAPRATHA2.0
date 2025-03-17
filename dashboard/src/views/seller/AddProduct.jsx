@@ -333,23 +333,21 @@ import { BsImage } from "react-icons/bs";
 import { IoMdClose } from "react-icons/io";
 
 const AddProduct = () => {
+
   const categorys = [
-    { id: 1, name: "sports" },
-    { id: 2, name: "Electronics" },
-    { id: 3, name: "Clothing" },
-    { id: 4, name: "Home & Kitchen" },
-    { id: 5, name: "Beauty & Personal Care" },
-    { id: 6, name: "Health & Household" },
-    { id: 7, name: "Pet Products" },
-    { id: 8, name: "Sports & Outdoors" },
-    { id: 9, name: "Baby Products" },
-    { id: 10, name: "Arts, Crafts & Sewing" },
-    { id: 11, name: "Automotive" },
-    { id: 12, name: "Industrial & Scientific" },
-    { id: 13, name: "Musical Instruments" },
-    { id: 14, name: "Office Products" },
-    { id: 15, name: "Toys & Games" },
+    { id: 1, name: "Cookware & Kitchenware" },
+    { id: 2, name: "Drinkware" },
+    { id: 3, name: "Tableware & Dinnerware" },
+    { id: 4, name: "Home Decor" },
+    { id: 5, name: "Gifting" },
+    { id: 6, name: "Brass Products" },
+    { id: 7, name: "Copper Products" },
+    { id: 8, name: "Kansa (Bronze) Products" },
+    { id: 9, name: "Best Sellers" },
+    { id: 10, name: "New Arrivals" },
+    { id: 11, name: "Sets and Combos" }
   ];
+  
 
   const [state, setState] = useState({
     name: "",
