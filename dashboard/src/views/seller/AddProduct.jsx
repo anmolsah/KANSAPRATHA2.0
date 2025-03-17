@@ -364,7 +364,7 @@ const AddProduct = () => {
 
   const [cateShow, setCateShow] = useState(false);
   const [category, setCategory] = useState("");
-  const [allCategory, setAllCategory] = useState(categorys);
+  const [allCategory, setAllCategory] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [images, setImages] = useState([]);
   const [imageShow, setImageShow] = useState([]);
@@ -417,6 +417,10 @@ const AddProduct = () => {
   const add = (e) => {
     e.preventDefault();
   };
+
+  useEffect(() => {
+    setAllCategory(categorys);
+  }, [categorys]);
 
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
