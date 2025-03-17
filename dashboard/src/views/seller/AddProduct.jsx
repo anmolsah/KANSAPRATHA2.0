@@ -325,29 +325,26 @@
 
 // export default AddProduct;
 
-
-
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BsImage } from "react-icons/bs";
 import { IoMdClose } from "react-icons/io";
+import { useDispatch, useSelector } from "react-redux";
+import { get_category } from "../../store/reducers/categoryReducer";
 
 const AddProduct = () => {
+  const dispatch = useDispatch();
+  const { categorys } = useSelector((state) => state.category);
 
-  const categorys = [
-    { id: 1, name: "Cookware & Kitchenware" },
-    { id: 2, name: "Drinkware" },
-    { id: 3, name: "Tableware & Dinnerware" },
-    { id: 4, name: "Home Decor" },
-    { id: 5, name: "Gifting" },
-    { id: 6, name: "Brass Products" },
-    { id: 7, name: "Copper Products" },
-    { id: 8, name: "Kansa (Bronze) Products" },
-    { id: 9, name: "Best Sellers" },
-    { id: 10, name: "New Arrivals" },
-    { id: 11, name: "Sets and Combos" }
-  ];
-  
+  useEffect(() => {
+    dispatch(
+      get_category({
+        searchValue: "",
+        perPage: "",
+        page: "",
+      })
+    );
+  }, []);
 
   const [state, setState] = useState({
     name: "",
@@ -417,6 +414,10 @@ const AddProduct = () => {
     setImageShow(filterImageUrl);
   };
 
+  const add = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
       <div className="w-full p-6 bg-white rounded-lg shadow-md">
@@ -430,10 +431,13 @@ const AddProduct = () => {
           </Link>
         </div>
         <div className="mt-6">
-          <form>
+          <form onSubmit={add}>
             <div className="flex flex-col mb-6 md:flex-row gap-6 w-full">
               <div className="flex flex-col w-full gap-2">
-                <label htmlFor="name" className="text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="name"
+                  className="text-sm font-medium text-gray-700"
+                >
                   Product Name
                 </label>
                 <input
@@ -447,7 +451,10 @@ const AddProduct = () => {
                 />
               </div>
               <div className="flex flex-col w-full gap-2">
-                <label htmlFor="brand" className="text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="brand"
+                  className="text-sm font-medium text-gray-700"
+                >
                   Product Brand
                 </label>
                 <input
@@ -463,7 +470,10 @@ const AddProduct = () => {
             </div>
             <div className="flex flex-col mb-6 md:flex-row gap-6 w-full">
               <div className="flex flex-col w-full gap-2 relative">
-                <label htmlFor="category" className="text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="category"
+                  className="text-sm font-medium text-gray-700"
+                >
                   Category
                 </label>
                 <input
@@ -511,7 +521,10 @@ const AddProduct = () => {
                 </div>
               </div>
               <div className="flex flex-col w-full gap-2">
-                <label htmlFor="stock" className="text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="stock"
+                  className="text-sm font-medium text-gray-700"
+                >
                   Product Stock
                 </label>
                 <input
@@ -527,7 +540,10 @@ const AddProduct = () => {
             </div>
             <div className="flex flex-col mb-6 md:flex-row gap-6 w-full">
               <div className="flex flex-col w-full gap-2">
-                <label htmlFor="price" className="text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="price"
+                  className="text-sm font-medium text-gray-700"
+                >
                   Price
                 </label>
                 <input
@@ -541,7 +557,10 @@ const AddProduct = () => {
                 />
               </div>
               <div className="flex flex-col w-full gap-2">
-                <label htmlFor="discount" className="text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="discount"
+                  className="text-sm font-medium text-gray-700"
+                >
                   Discount
                 </label>
                 <input
@@ -556,7 +575,10 @@ const AddProduct = () => {
               </div>
             </div>
             <div className="flex flex-col w-full gap-2 mb-6">
-              <label htmlFor="description" className="text-sm font-medium text-gray-700">
+              <label
+                htmlFor="description"
+                className="text-sm font-medium text-gray-700"
+              >
                 Description
               </label>
               <textarea

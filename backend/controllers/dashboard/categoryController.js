@@ -49,9 +49,12 @@ class categoryController {
 
   get_category = async (req, res) => {
     const { page, searchValue, perPage } = req.query;
-    const skipPage = parseInt(perPage) * parseInt(page - 1);
 
     try {
+      let skipPage = "";
+      if (perPage && page) {
+         skipPage = parseInt(perPage) * (parseInt(page) - 1);
+      }
       if (searchValue && page && perPage) {
         const categorys = await categoryModel
           .find({
