@@ -331,6 +331,7 @@ import { BsImage } from "react-icons/bs";
 import { IoMdClose } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { get_category } from "../../store/reducers/categoryReducer";
+import { add_product } from "../../store/reducers/productReducer";
 
 const AddProduct = () => {
   const dispatch = useDispatch();
@@ -416,6 +417,20 @@ const AddProduct = () => {
 
   const add = (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append("name", state.name);
+    formData.append("description", state.description);
+    formData.append("discount", state.discount);
+    formData.append("price", state.price);
+    formData.append("brand", state.brand);
+    formData.append("stock", state.stock);
+    formData.append("shopName", "KansaPratha");
+    //formData.append("name",state.name);
+    formData.append("category", category);
+    for (let i = 0; i < images.length; i++) {
+      formData.append("images", images[i]);
+    }
+    dispatch(add_product(formData));
   };
 
   useEffect(() => {

@@ -3,18 +3,14 @@ import api from "../../api/api";
 
 export const add_product = createAsyncThunk(
   "product/add_produc",
-  async ({ name, image }, { rejectWithValue, fulfillWithValue }) => {
+  async (product, { rejectWithValue, fulfillWithValue }) => {
     //console.log(info);
     try {
-      const formData = new FormData();
-      formData.append("name", name);
-      formData.append("image", image);
-
-      const { data } = await api.post("/category-add", formData, {
+      const { data } = await api.post("/product-add", product, {
         withCredentials: true,
       });
 
-      //console.log(data);
+      console.log(data);
       return fulfillWithValue(data);
     } catch (error) {
       //console.log(error.response.data);
@@ -84,4 +80,3 @@ export const productReducer = createSlice({
 
 export const { messageClear } = productReducer.actions;
 export default productReducer.reducer;
-                            
