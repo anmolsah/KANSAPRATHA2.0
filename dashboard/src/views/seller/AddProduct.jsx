@@ -329,13 +329,18 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BsImage } from "react-icons/bs";
 import { IoMdClose } from "react-icons/io";
+import { ClipLoader } from "react-spinners";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { get_category } from "../../store/reducers/categoryReducer";
-import { add_product } from "../../store/reducers/productReducer";
+import { add_product, messageClear } from "../../store/reducers/productReducer";
 
 const AddProduct = () => {
   const dispatch = useDispatch();
   const { categorys } = useSelector((state) => state.category);
+  const { loader, successMessage, errorMessage } = useSelector(
+    (state) => state.product
+  );
 
   useEffect(() => {
     dispatch(
@@ -395,6 +400,28 @@ const AddProduct = () => {
       setImageShow([...imageShow, ...imageUrl]);
     }
   };
+
+  useEffect(() => {
+    if (successMessage) {
+      toast.success(successMessage);
+      dispatch(messageClear());
+      setState({
+        name: "",
+        description: "",
+        discount: "",
+        price: "",
+        brand: "",
+        stock: "",
+      });
+      setImageShow([]);
+      setImages([]);
+      setCategory("");
+    }
+    if (errorMessage) {
+      toast.error(errorMessage);
+      dispatch(messageClear());
+    }
+  }, [successMessage, errorMessage]);
 
   const changeImage = (img, index) => {
     if (img) {
@@ -653,8 +680,12 @@ const AddProduct = () => {
               />
             </div>
             <div className="flex">
-              <button className="px-6 bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition-all">
-                Add Product
+              <button
+                disabled={loader ? true : false}
+                type="submit"
+                className="px-6 bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition-all"
+              >
+                {loader ? <ClipLoader color="#ffffff" /> : "Add Product"}
               </button>
             </div>
           </form>
