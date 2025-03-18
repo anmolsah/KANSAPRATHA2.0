@@ -425,12 +425,11 @@ const AddProduct = () => {
     formData.append("brand", state.brand);
     formData.append("stock", state.stock);
     formData.append("shopName", "KansaPratha");
-    //formData.append("name",state.name);
     formData.append("category", category);
     for (let i = 0; i < images.length; i++) {
       formData.append("images", images[i]);
     }
-    console.log(state);
+    //console.log(state);
     dispatch(add_product(formData));
   };
 

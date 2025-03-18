@@ -10,7 +10,7 @@ export const add_product = createAsyncThunk(
         withCredentials: true,
       });
 
-      console.log(data);
+      //console.log(data);
       return fulfillWithValue(data);
     } catch (error) {
       //console.log(error.response.data);
