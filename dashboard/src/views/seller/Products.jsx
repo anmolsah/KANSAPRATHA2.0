@@ -15,13 +15,13 @@ const Products = () => {
   const [perPage, setPerPage] = useState(5);
 
   useEffect(() => {
-      const obj = {
-        perPage: parseInt(perPage),
-        page: parseInt(currentPage),
-        searchValue,
-      };
-      dispatch(get_products(obj));
-    }, [searchValue, currentPage, perPage]);
+    const obj = {
+      perPage: parseInt(perPage),
+      page: parseInt(currentPage),
+      searchValue,
+    };
+    dispatch(get_products(obj));
+  }, [searchValue, currentPage, perPage]);
 
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
@@ -49,22 +49,28 @@ const Products = () => {
               </tr>
             </thead>
             <tbody>
-              {[1, 2, 3, 4, 5].map((d, i) => (
+              {products.map((d, i) => (
                 <tr key={i} className="border-b hover:bg-gray-50">
-                  <td className="px-6 py-3">{d}</td>
+                  <td className="px-6 py-3">{i + 1}</td>
                   <td className="px-6 py-3">
                     <img
                       className="w-[45px] h-[50px]"
-                      src="http://localhost:9000/images/07.png"
+                      src={d.images[0]}
                       alt="items"
                     />
                   </td>
-                  <td className="px-6 py-3">Brass Parat</td>
-                  <td className="px-6 py-3">Brass</td>
-                  <td className="px-6 py-3">Pital</td>
-                  <td className="px-6 py-3">₹3000</td>
-                  <td className="px-6 py-3">10%</td>
-                  <td className="px-6 py-3">20</td>
+                  <td className="px-6 py-3">{d?.name?.slice(0, 15)}...</td>
+                  <td className="px-6 py-3">{d.category}</td>
+                  <td className="px-6 py-3">{d.brand}</td>
+                  <td className="px-6 py-3">₹{d.price}</td>
+                  <td className="px-6 py-3">
+                    {d.discount === 0 ? (
+                      <span>No Discount</span>
+                    ) : (
+                      <span>{d.discount}%</span>
+                    )}
+                  </td>
+                  <td className="px-6 py-3">{d.stock}</td>
                   <td className="px-6 py-3 text-blue-600 cursor-pointer">
                     <div className="flex justify-start items-center gap-3">
                       <Link
@@ -86,15 +92,19 @@ const Products = () => {
             </tbody>
           </table>
         </div>
-        <div className="w-full flex justify-end mt-4 bottom-4 right-4">
-          <Pagination
-            pageNumber={currentPage}
-            setPageNumber={setCurrentPage}
-            totalItem={50}
-            perPage={perPage}
-            showItem={3}
-          />
-        </div>
+        {totalProduct <= perPage ? (
+          ""
+        ) : (
+          <div className="w-full flex justify-end mt-4 bottom-4 right-4">
+            <Pagination
+              pageNumber={currentPage}
+              setPageNumber={setCurrentPage}
+              totalItem={50}
+              perPage={perPage}
+              showItem={3}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
