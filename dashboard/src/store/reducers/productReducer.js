@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import api from "../../api/api";
 
 export const add_product = createAsyncThunk(
-  "product/add_produc",
+  "product/add_product",
   async (product, { rejectWithValue, fulfillWithValue }) => {
     //console.log(info);
     try {
@@ -19,8 +19,8 @@ export const add_product = createAsyncThunk(
   }
 );
 
-export const get_product = createAsyncThunk(
-  "category/get_product ",
+export const get_products = createAsyncThunk(
+  "product/get_products ",
   async (
     { perPage, page, searchValue },
     { rejectWithValue, fulfillWithValue }
@@ -28,13 +28,13 @@ export const get_product = createAsyncThunk(
     //console.log(info);
     try {
       const { data } = await api.get(
-        `/category-get?page=${page}&&searchValue=${searchValue}&&perPage=${perPage}`,
+        `/products-get?page=${page}&&searchValue=${searchValue}&&perPage=${perPage}`,
         {
           withCredentials: true,
         }
       );
 
-      //console.log(data);
+      console.log(data);
       return fulfillWithValue(data);
     } catch (error) {
       //console.log(error.response.data);
@@ -71,7 +71,7 @@ export const productReducer = createSlice({
         state.successMessage = payload.message;
         state.products = [...state.products, payload.category];
       })
-      .addCase(get_product.fulfilled, (state, { payload }) => {
+      .addCase(get_products.fulfilled, (state, { payload }) => {
         state.totalProduct = payload.totalProduct;
         state.products = payload.products;
       });

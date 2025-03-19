@@ -1,13 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Search from "../components/Search";
 import { Link } from "react-router-dom";
 import Pagination from "../Pagination";
 import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { get_products } from "../../store/reducers/productReducer";
 
 const Products = () => {
+  const dispatch = useDispatch();
+  const { products, totalProduct } = useSelector((state) => state.product);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
   const [perPage, setPerPage] = useState(5);
+
+  useEffect(() => {
+      const obj = {
+        perPage: parseInt(perPage),
+        page: parseInt(currentPage),
+        searchValue,
+      };
+      dispatch(get_products(obj));
+    }, [searchValue, currentPage, perPage]);
+
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
       <h1 className="text-lg font-semibold mb-3">All Products</h1>
@@ -52,7 +67,10 @@ const Products = () => {
                   <td className="px-6 py-3">20</td>
                   <td className="px-6 py-3 text-blue-600 cursor-pointer">
                     <div className="flex justify-start items-center gap-3">
-                      <Link to={`/seller/dashboard/edit-product/32`} className="px-3 hover:shadow-lg text-blue-500 hover:text-blue-700 transition-all">
+                      <Link
+                        to={`/seller/dashboard/edit-product/32`}
+                        className="px-3 hover:shadow-lg text-blue-500 hover:text-blue-700 transition-all"
+                      >
                         <FaEdit />
                       </Link>
                       <Link className="px-3 hover:shadow-lg text-green-500 hover:text-green-700 transition-all">
