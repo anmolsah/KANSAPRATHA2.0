@@ -1,43 +1,47 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-
+import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { get_category } from "../../store/reducers/categoryReducer";
+import { get_product } from "../../store/reducers/productReducer";
 
 const EditProduct = () => {
-  // const categorys = [
-  //   { id: 1, name: "sports" },
-  //   { id: 2, name: "Electronics" },
-  //   { id: 3, name: "Clothing" },
-  //   { id: 4, name: "Home & Kitchen" },
-  //   { id: 5, name: "Beauty & Personal Care" },
-  //   { id: 6, name: "Health & Household" },
-  //   { id: 7, name: "Pet Products" },
-  //   { id: 8, name: "Sports & Outdoors" },
-  //   { id: 9, name: "Baby Products" },
-  //   { id: 10, name: "Arts, Crafts & Sewing" },
-  //   { id: 11, name: "Automotive" },
-  //   { id: 12, name: "Industrial & Scientific" },
-  //   { id: 13, name: "Musical Instruments" },
-  //   { id: 14, name: "Office Products" },
-  //   { id: 15, name: "Toys & Games" },
-  // ];
+  const { productId } = useParams();
+  const dispatch = useDispatch();
+  const { categorys } = useSelector((state) => state.category);
 
-  const categorys = [
-    { id: 1, name: "Brass Thaalis & Plates" },
-    { id: 2, name: "Copper Bottles & Jugs" },
-    { id: 3, name: "Handcrafted Kadai & Cookware" },
-    { id: 4, name: "Traditional Brass Utensils" },
-    { id: 5, name: "Decorative Pooja Items" },
-    { id: 6, name: "Copper Glasses & Tumblers" },
-    { id: 7, name: "Brass Lamps & Diyas" },
-    { id: 8, name: "Handmade Cutlery & Ladles" },
-    { id: 9, name: "Kitchen Storage Containers" },
-    { id: 10, name: "Serving Bowls & Dishes" },
-    { id: 11, name: "Masala Box & Spice Holders" },
-    { id: 12, name: "Brass & Copper Home Décor" },
-    { id: 13, name: "Tea Sets & Kettles" },
-    { id: 14, name: "Hand-Hammered Cookware" },
-    { id: 15, name: "Traditional Cooking Tools" },
-  ];
+  useEffect(() => {
+    dispatch(
+      get_category({
+        searchValue: "",
+        perPage: "",
+        page: "",
+      })
+    );
+  }, []);
+
+  useEffect(() => {
+    dispatch(
+      get_product(productId)
+    );
+  }, [productId]);
+
+  // const categorys = [
+  //   { id: 1, name: "Brass Thaalis & Plates" },
+  //   { id: 2, name: "Copper Bottles & Jugs" },
+  //   { id: 3, name: "Handcrafted Kadai & Cookware" },
+  //   { id: 4, name: "Traditional Brass Utensils" },
+  //   { id: 5, name: "Decorative Pooja Items" },
+  //   { id: 6, name: "Copper Glasses & Tumblers" },
+  //   { id: 7, name: "Brass Lamps & Diyas" },
+  //   { id: 8, name: "Handmade Cutlery & Ladles" },
+  //   { id: 9, name: "Kitchen Storage Containers" },
+  //   { id: 10, name: "Serving Bowls & Dishes" },
+  //   { id: 11, name: "Masala Box & Spice Holders" },
+  //   { id: 12, name: "Brass & Copper Home Décor" },
+  //   { id: 13, name: "Tea Sets & Kettles" },
+  //   { id: 14, name: "Hand-Hammered Cookware" },
+  //   { id: 15, name: "Traditional Cooking Tools" },
+  // ];
 
   const [state, setState] = useState({
     name: "",
@@ -75,16 +79,12 @@ const EditProduct = () => {
     }
   };
 
- 
-
   const changeImage = (img, files) => {
-    if(files.length>0){
+    if (files.length > 0) {
       console.log(files[0]);
       console.log(img);
     }
   };
-
-
 
   useEffect(() => {
     setState({
@@ -275,14 +275,19 @@ const EditProduct = () => {
               ></textarea>
             </div>
             <div className="grid lg:grid-cols-4 grid-cols-1 md:grid-cols-3 sm:grid-cols-2 sm:gap-4 md:gap-4 gap-3 w-full mb-6">
-              {
-                imageShow.map((img,i)=><div>
+              {imageShow.map((img, i) => (
+                <div>
                   <label htmlFor={i}>
                     <img src={img} alt="" />
                   </label>
-                  <input onChange={(e)=>changeImage(img,e.target.files)} type="file" id={i} className="hidden" />
-                </div>)
-              }
+                  <input
+                    onChange={(e) => changeImage(img, e.target.files)}
+                    type="file"
+                    id={i}
+                    className="hidden"
+                  />
+                </div>
+              ))}
             </div>
             <div className="flex">
               <button className="px-6 bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition-all">

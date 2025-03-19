@@ -43,6 +43,24 @@ export const get_products = createAsyncThunk(
   }
 );
 
+export const get_product = createAsyncThunk(
+  "product/get_product ",
+  async ({ productId }, { rejectWithValue, fulfillWithValue }) => {
+    //console.log(info);
+    try {
+      const { data } = await api.get(`/product-get/${productId}`, {
+        withCredentials: true,
+      });
+
+      console.log(data);
+      return fulfillWithValue(data);
+    } catch (error) {
+      //console.log(error.response.data);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 export const productReducer = createSlice({
   name: "product",
   initialState: {
