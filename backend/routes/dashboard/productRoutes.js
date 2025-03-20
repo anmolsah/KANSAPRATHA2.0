@@ -10,5 +10,6 @@ router.get(
   authMiddleware,
   productController.product_get
 );
+router.post("/product-update", authMiddleware, productController.product_update);
 
 module.exports = router;

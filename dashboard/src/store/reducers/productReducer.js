@@ -61,14 +61,12 @@ export const get_product = createAsyncThunk(
   }
 );
 
-
-
 export const update_product = createAsyncThunk(
   "product/update_product ",
   async (product, { rejectWithValue, fulfillWithValue }) => {
     //console.log(info);
     try {
-      const { data } = await api.post(`/product-update`,product ,{
+      const { data } = await api.post(`/product-update`, product, {
         withCredentials: true,
       });
 
@@ -80,7 +78,6 @@ export const update_product = createAsyncThunk(
     }
   }
 );
-
 
 export const productReducer = createSlice({
   name: "product",
@@ -116,6 +113,18 @@ export const productReducer = createSlice({
       })
       .addCase(get_product.fulfilled, (state, { payload }) => {
         state.product = payload.product;
+      })
+      .addCase(update_product.pending, (state, { payload }) => {
+        state.loader = true;
+      })
+      .addCase(update_product.rejected, (state, { payload }) => {
+        state.loader = false;
+        state.errorMessage = payload.error;
+      })
+      .addCase(update_product.fulfilled, (state, { payload }) => {
+        state.loader = false;
+        state.product = payload.product;
+        state.successMessage = payload.message;
       });
   },
 });

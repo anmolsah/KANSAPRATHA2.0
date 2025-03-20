@@ -4,7 +4,11 @@ import { ClipLoader } from "react-spinners";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { get_category } from "../../store/reducers/categoryReducer";
-import { get_product,update_product } from "../../store/reducers/productReducer";
+import {
+  get_product,
+  update_product,
+  messageClear,
+} from "../../store/reducers/productReducer";
 
 const EditProduct = () => {
   const { productId } = useParams();
@@ -46,7 +50,7 @@ const EditProduct = () => {
 
   const [cateShow, setCateShow] = useState(false);
   const [category, setCategory] = useState("");
-  const [allCategory, setAllCategory] = useState(categorys);
+  const [allCategory, setAllCategory] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   //const [images, setImages] = useState([]);
   const [imageShow, setImageShow] = useState([]);
@@ -85,19 +89,15 @@ const EditProduct = () => {
   }, [product]);
 
   useEffect(() => {
+    if (categorys.length > 0) {
+      setAllCategory(categorys);
+    }
+  });
+
+  useEffect(() => {
     if (successMessage) {
       toast.success(successMessage);
       dispatch(messageClear());
-      setState({
-        name: "",
-        description: "",
-        discount: "",
-        price: "",
-        brand: "",
-        stock: "",
-      });
-
-      setCategory("");
     }
     if (errorMessage) {
       toast.error(errorMessage);
@@ -116,7 +116,7 @@ const EditProduct = () => {
       stock: state.stock,
       productId: productId,
     };
-    dispatch(update_product(obj))
+    dispatch(update_product(obj));
   };
 
   return (
@@ -203,20 +203,21 @@ const EditProduct = () => {
                   </div>
                   <div className="pt-2">
                     <div className="flex flex-col h-[200px] overflow-y-auto">
-                      {allCategory.map((c, i) => (
-                        <span
-                          key={i}
-                          className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                          onClick={() => {
-                            setCateShow(false);
-                            setCategory(c.name);
-                            setSearchValue("");
-                            setAllCategory(categorys);
-                          }}
-                        >
-                          {c.name}
-                        </span>
-                      ))}
+                      {allCategory.length > 0 &&
+                        allCategory.map((c, i) => (
+                          <span
+                            key={i}
+                            className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                            onClick={() => {
+                              setCateShow(false);
+                              setCategory(c.name);
+                              setSearchValue("");
+                              setAllCategory(categorys);
+                            }}
+                          >
+                            {c.name}
+                          </span>
+                        ))}
                     </div>
                   </div>
                 </div>
@@ -294,19 +295,21 @@ const EditProduct = () => {
               ></textarea>
             </div>
             <div className="grid lg:grid-cols-4 grid-cols-1 md:grid-cols-3 sm:grid-cols-2 sm:gap-4 md:gap-4 gap-3 w-full mb-6">
-              {imageShow.map((img, i) => (
-                <div>
-                  <label htmlFor={i}>
-                    <img src={img} alt="" />
-                  </label>
-                  <input
-                    onChange={(e) => changeImage(img, e.target.files)}
-                    type="file"
-                    id={i}
-                    className="hidden"
-                  />
-                </div>
-              ))}
+              {imageShow &&
+                imageShow.length > 0 &&
+                imageShow.map((img, i) => (
+                  <div>
+                    <label htmlFor={i}>
+                      <img src={img} alt="" />
+                    </label>
+                    <input
+                      onChange={(e) => changeImage(img, e.target.files)}
+                      type="file"
+                      id={i}
+                      className="hidden"
+                    />
+                  </div>
+                ))}
             </div>
             <div className="flex">
               <button

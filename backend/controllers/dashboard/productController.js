@@ -120,6 +120,33 @@ class productController {
       responseReturn(res, 500, { error: "Internal Server error" });
     }
   };
+
+  product_update = async (req, res) => {
+    let { name, description, discount, price, brand, stock, productId } =
+      req.body;
+    name = name.trim();
+    const slug = name.split(" ").join("-");
+
+    try {
+      await productModel.findByIdAndUpdate(productId, {
+        name,
+        slug,
+        description,
+        discount,
+        price,
+        brand,
+        stock,
+        productId,
+      });
+      const product = await productModel.findById(productId);
+      responseReturn(res, 200, {
+        product,
+        message: "Product updated successfully",
+      });
+    } catch (error) {
+      responseReturn(res, 500, { error: "Internal Server error" });
+    }
+  };
 }
 
 module.exports = new productController();
