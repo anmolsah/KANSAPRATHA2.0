@@ -45,7 +45,7 @@ export const get_products = createAsyncThunk(
 
 export const get_product = createAsyncThunk(
   "product/get_product ",
-  async ({ productId }, { rejectWithValue, fulfillWithValue }) => {
+  async (productId, { rejectWithValue, fulfillWithValue }) => {
     //console.log(info);
     try {
       const { data } = await api.get(`/product-get/${productId}`, {

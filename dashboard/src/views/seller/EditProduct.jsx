@@ -8,6 +8,7 @@ const EditProduct = () => {
   const { productId } = useParams();
   const dispatch = useDispatch();
   const { categorys } = useSelector((state) => state.category);
+  const { product } = useSelector((state) => state.product);
 
   useEffect(() => {
     dispatch(
@@ -20,28 +21,8 @@ const EditProduct = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(
-      get_product(productId)
-    );
+    dispatch(get_product(productId));
   }, [productId]);
-
-  // const categorys = [
-  //   { id: 1, name: "Brass Thaalis & Plates" },
-  //   { id: 2, name: "Copper Bottles & Jugs" },
-  //   { id: 3, name: "Handcrafted Kadai & Cookware" },
-  //   { id: 4, name: "Traditional Brass Utensils" },
-  //   { id: 5, name: "Decorative Pooja Items" },
-  //   { id: 6, name: "Copper Glasses & Tumblers" },
-  //   { id: 7, name: "Brass Lamps & Diyas" },
-  //   { id: 8, name: "Handmade Cutlery & Ladles" },
-  //   { id: 9, name: "Kitchen Storage Containers" },
-  //   { id: 10, name: "Serving Bowls & Dishes" },
-  //   { id: 11, name: "Masala Box & Spice Holders" },
-  //   { id: 12, name: "Brass & Copper Home Décor" },
-  //   { id: 13, name: "Tea Sets & Kettles" },
-  //   { id: 14, name: "Hand-Hammered Cookware" },
-  //   { id: 15, name: "Traditional Cooking Tools" },
-  // ];
 
   const [state, setState] = useState({
     name: "",
@@ -88,17 +69,16 @@ const EditProduct = () => {
 
   useEffect(() => {
     setState({
-      name: "Brass Thaali",
-      description:
-        "A brass thaali is a classic Indian dining plate, widely used in Kolkata for serving meals in a traditional setting. It is crafted from high-quality brass, often featuring intricate engravings and a polished golden finish. ",
-      discount: 10,
-      price: 2000,
-      brand: "KhansaPratha",
-      stock: 20,
+      name: product.name,
+      description: product.description,
+      discount: product.discount,
+      price: product.price,
+      brand: product.brand,
+      stock: product.stock,
     });
-    setCategory("Brass Thaalis & Plates");
-    setImageShow(["/images/thaali.webp", "/images/06.jpg"]);
-  }, []);
+    setCategory(product.category);
+    setImageShow(product.images);
+  }, [product]);
 
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
