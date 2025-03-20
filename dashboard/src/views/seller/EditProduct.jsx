@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { get_category } from "../../store/reducers/categoryReducer";
-import { get_product } from "../../store/reducers/productReducer";
+import { get_product,update_product } from "../../store/reducers/productReducer";
 
 const EditProduct = () => {
   const { productId } = useParams();
   const dispatch = useDispatch();
   const { categorys } = useSelector((state) => state.category);
-  const { product } = useSelector((state) => state.product);
+  const { product, loader, successMessage, errorMessage } = useSelector(
+    (state) => state.product
+  );
 
   useEffect(() => {
     dispatch(
@@ -80,6 +84,41 @@ const EditProduct = () => {
     setImageShow(product.images);
   }, [product]);
 
+  useEffect(() => {
+    if (successMessage) {
+      toast.success(successMessage);
+      dispatch(messageClear());
+      setState({
+        name: "",
+        description: "",
+        discount: "",
+        price: "",
+        brand: "",
+        stock: "",
+      });
+
+      setCategory("");
+    }
+    if (errorMessage) {
+      toast.error(errorMessage);
+      dispatch(messageClear());
+    }
+  }, [successMessage, errorMessage]);
+
+  const update = (e) => {
+    e.preventDefault();
+    const obj = {
+      name: state.name,
+      description: state.description,
+      discount: state.discount,
+      price: state.price,
+      brand: state.brand,
+      stock: state.stock,
+      productId: productId,
+    };
+    dispatch(update_product(obj))
+  };
+
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
       <div className="w-full p-6 bg-white rounded-lg shadow-md">
@@ -93,7 +132,7 @@ const EditProduct = () => {
           </Link>
         </div>
         <div className="mt-6">
-          <form>
+          <form onSubmit={update}>
             <div className="flex flex-col mb-6 md:flex-row gap-6 w-full">
               <div className="flex flex-col w-full gap-2">
                 <label
@@ -270,8 +309,12 @@ const EditProduct = () => {
               ))}
             </div>
             <div className="flex">
-              <button className="px-6 bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition-all">
-                Save Changes
+              <button
+                disabled={loader ? true : false}
+                type="submit"
+                className="px-6 bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition-all"
+              >
+                {loader ? <ClipLoader color="#ffffff" /> : "Save Changes"}
               </button>
             </div>
           </form>

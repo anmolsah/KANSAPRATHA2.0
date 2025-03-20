@@ -61,6 +61,27 @@ export const get_product = createAsyncThunk(
   }
 );
 
+
+
+export const update_product = createAsyncThunk(
+  "product/update_product ",
+  async (product, { rejectWithValue, fulfillWithValue }) => {
+    //console.log(info);
+    try {
+      const { data } = await api.post(`/product-update`,product ,{
+        withCredentials: true,
+      });
+
+      console.log(data);
+      return fulfillWithValue(data);
+    } catch (error) {
+      //console.log(error.response.data);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+
 export const productReducer = createSlice({
   name: "product",
   initialState: {
