@@ -8,6 +8,7 @@ import {
   get_product,
   update_product,
   messageClear,
+  product_image_update
 } from "../../store/reducers/productReducer";
 
 const EditProduct = () => {
@@ -70,8 +71,13 @@ const EditProduct = () => {
 
   const changeImage = (img, files) => {
     if (files.length > 0) {
-      console.log(files[0]);
-      console.log(img);
+      dispatch(
+        product_image_update({
+          oldImage: img,
+          newImage: files[0],
+          productId,
+        })
+      );
     }
   };
 
@@ -92,7 +98,7 @@ const EditProduct = () => {
     if (categorys.length > 0) {
       setAllCategory(categorys);
     }
-  });
+  }, [categorys]);
 
   useEffect(() => {
     if (successMessage) {
