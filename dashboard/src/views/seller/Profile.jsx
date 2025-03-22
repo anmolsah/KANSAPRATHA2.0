@@ -247,12 +247,22 @@
 import React from "react";
 import { FaEdit, FaImages } from "react-icons/fa";
 import { FadeLoader } from "react-spinners";
+import { useDispatch, useSelector } from "react-redux";
 
 const Profile = () => {
+  const dispatch = useDispatch();
+  const { userInfo } = useSelector((state) => state.auth);
+
   const status = "active";
   const image = true;
   const loader = true;
-  const userInfo = true;
+
+  const add_image = (e) => {
+    if (e.target.files.length > 0) {
+      console.log(e.target.files[0]);
+    }
+  };
+
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-50 min-h-screen lg:ml-[235px] transition-all">
       <div className="w-full flex flex-wrap gap-6">
@@ -261,7 +271,7 @@ const Profile = () => {
           <div className="w-full p-6 bg-white rounded-xl shadow-sm border border-gray-100">
             {/* Profile Image Section */}
             <div className="flex justify-center items-center py-3 mb-6">
-              {image ? (
+              {image?.image ? (
                 <label
                   htmlFor="img"
                   className="h-40 w-40 relative cursor-pointer group rounded-full overflow-hidden border-4 border-blue-50 hover:border-blue-100 transition-colors"
@@ -299,7 +309,12 @@ const Profile = () => {
                   )}
                 </label>
               )}
-              <input type="file" className="hidden" id="img" />
+              <input
+                onChange={add_image}
+                type="file"
+                className="hidden"
+                id="img"
+              />
             </div>
 
             {/* User Info Section */}
@@ -311,25 +326,27 @@ const Profile = () => {
                 <div className="space-y-3 text-gray-600">
                   <div className="flex justify-between">
                     <span className="font-medium">Name:</span>
-                    <span className="text-gray-700">Anmol Sah</span>
+                    <span className="text-gray-700">{userInfo.name}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="font-medium">Email:</span>
-                    <span className="text-gray-700">xyz@gmail.com</span>
+                    <span className="text-gray-700">{userInfo.email}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="font-medium">Role:</span>
-                    <span className="text-gray-700">Seller</span>
+                    <span className="text-gray-700">{userInfo.role}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="font-medium">Status:</span>
-                    <span className="text-green-600 font-semibold">Active</span>
+                    <span className="text-green-600 font-semibold">
+                      {userInfo.status}
+                    </span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="font-medium">Payment Account:</span>
                     {status === "active" ? (
                       <span className="bg-yellow-100 text-yellow-700 text-xs font-medium px-3 py-1 rounded-full">
-                        Pending
+                        {userInfo.payment}
                       </span>
                     ) : (
                       <span className="bg-green-100 text-green-700 text-xs font-medium px-3 py-1 rounded-full">
@@ -341,7 +358,7 @@ const Profile = () => {
               </div>
 
               {/* Shop Info Section */}
-              {!userInfo ? (
+              {!userInfo?.shopInfo ? (
                 <form className="space-y-4">
                   <div className="flex flex-col w-full gap-2">
                     <label
