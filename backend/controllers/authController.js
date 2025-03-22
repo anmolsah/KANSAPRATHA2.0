@@ -4,6 +4,9 @@ const sellerCustomerModal = require("../models/chat/sellerCustomerModel");
 const { responseReturn } = require("../utilities/response");
 const bcrypt = require("bcrypt");
 const { createToken } = require("../utilities/tokenCreate");
+const formidable = require("formidable");
+const cloudinary = require("cloudinary").v2;
+
 class AuthControllers {
   admin_login = async (req, res) => {
     const { email, password } = req.body;
@@ -114,6 +117,27 @@ class AuthControllers {
     } catch (error) {
       responseReturn(res, 500, { error: "internal server error" });
     }
+  };
+
+  profile_image_upload = async (req, res) => {
+    const { id } = req;
+    const form = formidable({ multiples: true });
+    form.parse(req, async (err, _, files) => {
+      cloudinary.config({
+        cloud_name: process.env.CLOUDINARY_NAME,
+        api_key: process.env.CLOUDINARY_API_KEY,
+        api_secret: process.env.CLOUDINARY_API_SECRET,
+        secure: true,
+      });
+      const {image} = files;
+
+
+      try {
+        
+      } catch (error) {
+        
+      }
+    });
   };
 }
 
