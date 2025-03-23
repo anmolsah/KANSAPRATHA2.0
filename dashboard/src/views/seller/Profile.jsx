@@ -244,19 +244,30 @@
 
 // export default Profile;
 
-import React from "react";
+import React, { useEffect } from "react";
 import { FaEdit, FaImages } from "react-icons/fa";
 import { FadeLoader } from "react-spinners";
 import { useDispatch, useSelector } from "react-redux";
-import { profile_image_upload } from "../../store/reducers/authReducer.js";
+import {
+  profile_image_upload,
+  messageClear,
+} from "../../store/reducers/authReducer.js";
+import toast from "react-hot-toast";
 
 const Profile = () => {
   const dispatch = useDispatch();
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo, loader, successMessage } = useSelector(
+    (state) => state.auth
+  );
 
   const status = "active";
-  const image = true;
-  const loader = true;
+
+  useEffect(() => {
+    if (successMessage) {
+      toast.success(successMessage);
+      messageClear();
+    }
+  }, [successMessage]);
 
   const add_image = (e) => {
     if (e.target.files.length > 0) {
@@ -274,17 +285,17 @@ const Profile = () => {
           <div className="w-full p-6 bg-white rounded-xl shadow-sm border border-gray-100">
             {/* Profile Image Section */}
             <div className="flex justify-center items-center py-3 mb-6">
-              {image?.image ? (
+              {userInfo?.image ? (
                 <label
                   htmlFor="img"
                   className="h-40 w-40 relative cursor-pointer group rounded-full overflow-hidden border-4 border-blue-50 hover:border-blue-100 transition-colors"
                 >
                   <img
-                    src="/admin.png"
+                    src={userInfo.image}
                     alt="profile"
                     className="w-full h-full object-cover"
                   />
-                  {!loader && (
+                  {loader && (
                     <div className="bg-black/50 absolute inset-0 flex justify-center items-center z-20 transition-opacity opacity-0 group-hover:opacity-100">
                       <span className="text-white">
                         <FadeLoader color="#fff" />
