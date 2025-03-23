@@ -129,13 +129,27 @@ class AuthControllers {
         api_secret: process.env.CLOUDINARY_API_SECRET,
         secure: true,
       });
-      const {image} = files;
-
+      const { image } = files;
 
       try {
-        
+        const result = await cloudinary.uploader.upload(image.filepath, {
+          folder: "profile",
+        });
+
+        if (result) {
+          await sellerModel.findByIdAndUpdate(id, {
+            image: result.url,
+          });
+          const userInfo = await sellerModel.findById(id);
+          responseReturn(res, 201, {
+            message: "Profile image updated successfully",
+            userInfo,
+          });
+        } else {
+          responseReturn(res, 404, { error: "Failed to upload image" });
+        }
       } catch (error) {
-        
+        responseReturn(res, 500, { error: error.message });
       }
     });
   };
