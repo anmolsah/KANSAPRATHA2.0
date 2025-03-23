@@ -244,17 +244,26 @@
 
 // export default Profile;
 
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { FaEdit, FaImages } from "react-icons/fa";
 import { FadeLoader } from "react-spinners";
 import { useDispatch, useSelector } from "react-redux";
+import { ClipLoader } from "react-spinners";
 import {
   profile_image_upload,
   messageClear,
+  profile_info_add
 } from "../../store/reducers/authReducer.js";
 import toast from "react-hot-toast";
 
 const Profile = () => {
+  const [state, setState] = useState({
+    division: "",
+    district: "",
+    shopName: "",
+    sub_district: "",
+  });
+
   const dispatch = useDispatch();
   const { userInfo, loader, successMessage } = useSelector(
     (state) => state.auth
@@ -275,6 +284,15 @@ const Profile = () => {
       formData.append("image", e.target.files[0]);
       dispatch(profile_image_upload(formData));
     }
+  };
+
+  const inputHandle = (e) => {
+    setState({ ...state, [e.target.name]: e.target.value });
+  };
+
+  const add = (e) => {
+    e.preventDefault();
+    dispatch(profile_info_add(state))
   };
 
   return (
@@ -373,7 +391,7 @@ const Profile = () => {
 
               {/* Shop Info Section */}
               {!userInfo?.shopInfo ? (
-                <form className="space-y-4">
+                <form onSubmit={add} className="space-y-4">
                   <div className="flex flex-col w-full gap-2">
                     <label
                       htmlFor="Shop"
@@ -382,7 +400,10 @@ const Profile = () => {
                       Shop Name
                     </label>
                     <input
+                      value={state.shopName}
+                      onChange={inputHandle}
                       type="text"
+                      name="shopName"
                       id="Shop"
                       placeholder="Shop name..."
                       className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-300 focus:border-blue-500 transition-all outline-none"
@@ -396,7 +417,10 @@ const Profile = () => {
                       Division Name
                     </label>
                     <input
+                      value={state.division}
+                      onChange={inputHandle}
                       type="text"
+                      name="division"
                       id="division"
                       placeholder="Division name..."
                       className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-300 focus:border-blue-500 transition-all outline-none"
@@ -410,28 +434,39 @@ const Profile = () => {
                       District Name
                     </label>
                     <input
+                      value={state.district}
+                      onChange={inputHandle}
                       type="text"
                       id="district"
+                      name="district"
                       placeholder="District name..."
                       className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-300 focus:border-blue-500 transition-all outline-none"
                     />
                   </div>
                   <div className="flex flex-col w-full gap-2">
                     <label
-                      htmlFor="subdis"
+                      htmlFor="sub"
                       className="text-sm font-medium text-gray-600"
                     >
                       Sub District
                     </label>
                     <input
+                      value={state.sub_district}
+                      onChange={inputHandle}
                       type="text"
-                      id="subdis"
+                      id="sub"
+                      name="sub_district"
                       placeholder="Sub District name..."
                       className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-300 focus:border-blue-500 transition-all outline-none"
                     />
                   </div>
-                  <button className="w-full px-6 bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition-all shadow-sm hover:shadow-md">
-                    Save Changes
+
+                  <button
+                    disabled={loader ? true : false}
+                    type="submit"
+                    className="w-full px-6 bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition-all shadow-sm hover:shadow-md"
+                  >
+                    {loader ? <ClipLoader color="#ffffff" /> : "Save Changes"}
                   </button>
                 </form>
               ) : (
@@ -442,19 +477,27 @@ const Profile = () => {
                   <div className="space-y-3 text-gray-600">
                     <div className="flex justify-between">
                       <span className="font-medium">Shop Name:</span>
-                      <span className="text-gray-700">Kansapratha</span>
+                      <span className="text-gray-700">
+                        {userInfo.shopInfo?.shopName}
+                      </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="font-medium">Division:</span>
-                      <span className="text-gray-700">Kolkata</span>
+                      <span className="text-gray-700">
+                        {userInfo.shopInfo?.division}
+                      </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="font-medium">District:</span>
-                      <span className="text-gray-700">Sonarpur</span>
+                      <span className="text-gray-700">
+                        {userInfo.shopInfo?.district}
+                      </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="font-medium">Sub District:</span>
-                      <span className="text-gray-700">Rubi</span>
+                      <span className="text-gray-700">
+                        {userInfo.shopInfo?.sub_district}
+                      </span>
                     </div>
                   </div>
                 </div>
