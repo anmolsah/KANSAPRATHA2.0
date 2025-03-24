@@ -102,9 +102,7 @@ const SellerDetails = () => {
   const { sellerId } = useParams();
 
   useEffect(() => {
-    dispatch(
-      get_seller(sellerId)
-    );
+    dispatch(get_seller(sellerId));
   }, [sellerId]);
 
   return (
@@ -114,11 +112,17 @@ const SellerDetails = () => {
         <div className="w-full flex flex-wrap text-gray-800">
           <div className="w-3/12 flex justify-center items-center">
             <div>
-              <img
-                className="w-full h-[230px] object-cover rounded-md border border-gray-300"
-                src="/admin.png"
-                alt="Seller"
-              />
+              {seller?.image ? (
+                <img
+                  className="w-full h-[230px] object-cover rounded-md border border-gray-300"
+                  src="/admin.png"
+                  alt="Seller"
+                />
+              ) : (
+                <span className="text-gray-600 text-center">
+                  Image Not Uploaded
+                </span>
+              )}
             </div>
           </div>
           <div className="w-4/12">
@@ -129,23 +133,23 @@ const SellerDetails = () => {
               <div className="flex flex-col gap-3 p-5 bg-gray-50 rounded-md shadow-sm border border-gray-200">
                 <div className="flex gap-2 font-medium text-gray-700">
                   <span className="font-semibold">Name:</span>
-                  <span className="text-gray-900">Anmol Sah</span>
+                  <span className="text-gray-900">{seller?.name}</span>
                 </div>
                 <div className="flex gap-2 font-medium text-gray-700">
                   <span className="font-semibold">Email:</span>
-                  <span className="text-gray-900">xyz@gmail.com</span>
+                  <span className="text-gray-900">{seller?.email}</span>
                 </div>
                 <div className="flex gap-2 font-medium text-gray-700">
                   <span className="font-semibold">Role:</span>
-                  <span className="text-gray-900">Seller</span>
+                  <span className="text-gray-900">{seller?.role}</span>
                 </div>
                 <div className="flex gap-2 font-medium text-gray-700">
                   <span className="font-semibold">Status:</span>
-                  <span className="text-gray-900">Active</span>
+                  <span className="text-gray-900">{seller?.status}</span>
                 </div>
                 <div className="flex gap-2 font-medium text-gray-700">
                   <span className="font-semibold">Payment Status:</span>
-                  <span className="text-gray-900">Active</span>
+                  <span className="text-gray-900">{seller?.payment}</span>
                 </div>
               </div>
             </div>
@@ -159,19 +163,19 @@ const SellerDetails = () => {
               <div className="flex flex-col gap-3 p-5 bg-gray-50 rounded-md shadow-sm border border-gray-200">
                 <div className="flex gap-2 font-medium text-gray-700">
                   <span className="font-semibold">Shop Name:</span>
-                  <span className="text-gray-900">KhansaPratha</span>
+                  <span className="text-gray-900">{seller?.shopInfo?.shopName}</span>
                 </div>
                 <div className="flex gap-2 font-medium text-gray-700">
                   <span className="font-semibold">Division:</span>
-                  <span className="text-gray-900">Kolkata</span>
+                  <span className="text-gray-900">{seller?.shopInfo?.division}</span>
                 </div>
                 <div className="flex gap-2 font-medium text-gray-700">
                   <span className="font-semibold">District:</span>
-                  <span className="text-gray-900">Sonarpur</span>
+                  <span className="text-gray-900">{seller?.shopInfo?.district}</span>
                 </div>
                 <div className="flex gap-2 font-medium text-gray-700">
                   <span className="font-semibold">State:</span>
-                  <span className="text-gray-900">West Bengal</span>
+                  <span className="text-gray-900">{seller?.shopInfo?.sub_district}</span>
                 </div>
               </div>
             </div>
