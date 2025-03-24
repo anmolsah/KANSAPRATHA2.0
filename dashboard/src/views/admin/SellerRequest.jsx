@@ -4,7 +4,7 @@ import Pagination from "../Pagination";
 import { FaEye } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import Search from "./../components/Search";
-import { get_seller_request } from "../../store/reducers/sellerReducer";
+import { get_seller_request,seller_status_update } from "../../store/reducers/sellerReducer";
 
 const SellerRequest = () => {
   const dispatch = useDispatch();

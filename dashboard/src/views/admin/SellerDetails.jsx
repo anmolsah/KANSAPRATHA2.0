@@ -105,6 +105,17 @@ const SellerDetails = () => {
     dispatch(get_seller(sellerId));
   }, [sellerId]);
 
+  const [status, setStatus] = useState("");
+  const submit = (e) => {
+    e.preventDefault();
+    dispatch(
+      seller_status_update({
+        sellerId,
+        status,
+      })
+    );
+  };
+
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
       <h1 className="text-2xl font-bold text-gray-800 mb-6">Seller Details</h1>
@@ -163,30 +174,42 @@ const SellerDetails = () => {
               <div className="flex flex-col gap-3 p-5 bg-gray-50 rounded-md shadow-sm border border-gray-200">
                 <div className="flex gap-2 font-medium text-gray-700">
                   <span className="font-semibold">Shop Name:</span>
-                  <span className="text-gray-900">{seller?.shopInfo?.shopName}</span>
+                  <span className="text-gray-900">
+                    {seller?.shopInfo?.shopName}
+                  </span>
                 </div>
                 <div className="flex gap-2 font-medium text-gray-700">
                   <span className="font-semibold">Division:</span>
-                  <span className="text-gray-900">{seller?.shopInfo?.division}</span>
+                  <span className="text-gray-900">
+                    {seller?.shopInfo?.division}
+                  </span>
                 </div>
                 <div className="flex gap-2 font-medium text-gray-700">
                   <span className="font-semibold">District:</span>
-                  <span className="text-gray-900">{seller?.shopInfo?.district}</span>
+                  <span className="text-gray-900">
+                    {seller?.shopInfo?.district}
+                  </span>
                 </div>
                 <div className="flex gap-2 font-medium text-gray-700">
                   <span className="font-semibold">State:</span>
-                  <span className="text-gray-900">{seller?.shopInfo?.sub_district}</span>
+                  <span className="text-gray-900">
+                    {seller?.shopInfo?.sub_district}
+                  </span>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div className="mt-6">
-          <form>
+          <form onSubmit={submit}>
             <div className="flex gap-4">
               <select
                 className="p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none bg-white"
-                name="status"
+                name=""
+                id=""
+                required
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
               >
                 <option value="">--Select Status--</option>
                 <option value="active">Active</option>
