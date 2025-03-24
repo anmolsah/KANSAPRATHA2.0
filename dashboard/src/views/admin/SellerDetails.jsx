@@ -92,9 +92,21 @@
 
 // export default SellerDetails;
 
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { get_seller } from "../../store/reducers/sellerReducer";
 const SellerDetails = () => {
+  const dispatch = useDispatch();
+  const { seller } = useSelector((state) => state.seller);
+  const { sellerId } = useParams();
+
+  useEffect(() => {
+    dispatch(
+      get_seller(sellerId)
+    );
+  }, [sellerId]);
+
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
       <h1 className="text-2xl font-bold text-gray-800 mb-6">Seller Details</h1>
