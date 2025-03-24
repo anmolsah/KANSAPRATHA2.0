@@ -15,7 +15,7 @@ export const get_seller_request = createAsyncThunk(
         }
       );
 
-      //console.log(data);
+      console.log(data);
       return fulfillWithValue(data);
     } catch (error) {
       //console.log(error.response.data);
@@ -39,11 +39,11 @@ export const sellerReducer = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // builder
-    //   .addCase(get_category.fulfilled, (state, { payload }) => {
-    //     state.totalCategory = payload.totalCategory;
-    //     state.categorys = payload.categorys;
-    //   });
+    builder
+      .addCase(get_seller_request.fulfilled, (state, { payload }) => {
+        state.sellers = payload.sellers;
+        state.totalSeller = payload.totalSeller;
+      });
   },
 });
 

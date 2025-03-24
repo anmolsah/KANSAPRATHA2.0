@@ -49,22 +49,22 @@ const SellerRequest = () => {
               </tr>
             </thead>
             <tbody>
-              {[1, 2, 3, 4, 5].map((d, i) => (
+              {sellers.map((d, i) => (
                 <tr key={i} className="border-b hover:bg-gray-50">
-                  <td className="px-6 py-3">{d}</td>
+                  <td className="px-6 py-3">{i + 1}</td>
 
-                  <td className="px-6 py-3">Anmol Sah</td>
-                  <td className="px-6 py-3">123Anni@gmail.com</td>
+                  <td className="px-6 py-3">{d.name}</td>
+                  <td className="px-6 py-3">{d.email}</td>
                   <td className="px-6 py-3">
-                    <span>Inactive</span>
+                    <span>{d.payment}</span>
                   </td>
                   <td className="px-6 py-3">
-                    <span>Pending</span>
+                    <span>{d.status}</span>
                   </td>
                   <td className="px-6 py-3 text-blue-600 cursor-pointer">
                     <div className="flex justify-start items-center gap-3">
                       <Link
-                        to="/admin/dashboard/seller/details/2"
+                        to={`/admin/dashboard/seller/details/${d._id}`}
                         className="px-3 hover:shadow-lg text-green-600 hover:text-green-800 transition-all"
                       >
                         <FaEye />
