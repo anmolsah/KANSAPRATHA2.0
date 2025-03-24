@@ -1,13 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Pagination from "../Pagination";
 import { FaEye } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import Search from "./../components/Search";
+import { get_seller_request } from "../../store/reducers/sellerReducer";
 
 const SellerRequest = () => {
+  const dispatch = useDispatch();
+  const { totalSeller, sellers } = useSelector((state) => state.seller);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
   const [perPage, setPerPage] = useState(5);
   const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    dispatch(
+      get_seller_request({
+        perPage,
+        searchValue,
+        page: currentPage,
+      })
+    );
+  }, [perPage, searchValue, currentPage]);
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
       <h1 className="text-xl font-semibold mb-2 text-gray-600">
@@ -15,22 +31,11 @@ const SellerRequest = () => {
       </h1>
 
       <div className="w-full p-4 bg-[give some color] rounded-md">
-        <div className="flex justify-between items-center mb-4">
-          <select
-            onChange={(e) => setPerPage(parseInt(e.target.value))}
-            className="p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-300"
-          >
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
-            <option value="20">20</option>
-          </select>
-          <input
-            type="text"
-            placeholder="Search..."
-            className="p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-300"
-          />
-        </div>
+        <Search
+          setPerPage={setPerPage}
+          setSearchValue={setSearchValue}
+          searchValue={searchValue}
+        />
         <div className="relative overflow-x-auto mt-4">
           <table className="w-full text-left border-collapse">
             <thead>
