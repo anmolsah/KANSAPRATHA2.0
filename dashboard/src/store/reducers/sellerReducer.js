@@ -32,7 +32,7 @@ export const get_seller = createAsyncThunk(
         withCredentials: true,
       });
 
-      //console.log(data);
+      console.log(data);
       return fulfillWithValue(data);
     } catch (error) {
       //console.log(error.response.data);
@@ -57,10 +57,15 @@ export const sellerReducer = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(get_seller_request.fulfilled, (state, { payload }) => {
+    builder
+    .addCase(get_seller_request.fulfilled, (state, { payload }) => {
       state.sellers = payload.sellers;
       state.totalSeller = payload.totalSeller;
-    });
+    })
+    .addCase(get_seller.fulfilled, (state, { payload }) => {
+        state.seller = payload.seller;
+        
+      });
   },
 });
 

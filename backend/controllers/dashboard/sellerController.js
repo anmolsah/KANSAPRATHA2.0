@@ -28,6 +28,17 @@ class sellerController {
       responseReturn(res, 500, { error: "Internal Server Error" });
     }
   };
+
+  get_seller = async (req, res) => {
+    const { sellerId } = req.params;
+
+    try {
+      const seller = await sellerModel.findById(sellerId);
+      responseReturn(res, 200, { seller });
+    } catch (error) {
+      responseReturn(res, 500, { error: "Internal Server Error" });
+    }
+  };
 }
 
 module.exports = new sellerController();
