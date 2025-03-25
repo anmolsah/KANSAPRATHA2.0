@@ -1,9 +1,19 @@
 import React from "react";
 import { MdEmail } from "react-icons/md";
 import { IoMdArrowDropdown, IoMdPhonePortrait } from "react-icons/io";
-import { FaFacebook, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import {
+  FaFacebook,
+  FaGithub,
+  FaLinkedin,
+  FaLock,
+  FaTwitter,
+  FaUser,
+} from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Header = () => {
+  const user = true;
+
   return (
     <div className="w-full bg-[add]">
       <div className="header-top bg-[add] md-lg:hidden">
@@ -43,7 +53,7 @@ const Header = () => {
 
                 <div className="flex group cursor-pointer text-slate-800 text-sm justify-center items-center gap-1 relative after:h-[18px] after:w-[1px] after:bg-[#afafaf] after:-right-[16px] after:absolute before:absolute before:h-[18px] before:bg-[#afafaf] before:w-[1px] before:-left-[20px]">
                   <img
-                    className="w-4 h-4"
+                    className="w-6 h-4"
                     src="images/india.png"
                     alt="language"
                   />
@@ -58,6 +68,28 @@ const Header = () => {
                     <li>German</li>
                   </ul>
                 </div>
+
+                {user ? (
+                  <Link
+                    className="flex justify-center items-center gap-4 text-black cursor-pointer"
+                    to="/dashboard"
+                  >
+                    <span>
+                      <FaUser />
+                    </span>
+                    <span>Anni Khana</span>
+                  </Link>
+                ) : (
+                  <Link
+                    className="flex justify-center items-center gap-4 text-black cursor-pointer"
+                    to="/login"
+                  >
+                    <span>
+                      <FaLock />
+                    </span>
+                    <span>Login</span>
+                  </Link>
+                )}
               </div>
             </div>
           </div>
