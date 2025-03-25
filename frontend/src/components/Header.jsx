@@ -1,6 +1,7 @@
 import React from "react";
 import { MdEmail } from "react-icons/md";
-import { IoMdPhonePortrait } from "react-icons/io";
+import { IoMdArrowDropdown, IoMdPhonePortrait } from "react-icons/io";
+import { FaFacebook, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 const Header = () => {
   return (
@@ -22,6 +23,43 @@ const Header = () => {
                 <span>+(91) 8250676762</span>
               </li>
             </ul>
+
+            <div>
+              <div className="flex justify-center items-center gap-10">
+                <div className="flex justify-center items-center gap-4 text-black">
+                  <a href="#">
+                    <FaFacebook />
+                  </a>
+                  <a href="#">
+                    <FaTwitter />
+                  </a>
+                  <a href="#">
+                    <FaLinkedin />
+                  </a>
+                  <a href="#">
+                    <FaGithub />
+                  </a>
+                </div>
+
+                <div className="flex group cursor-pointer text-slate-800 text-sm justify-center items-center gap-1 relative after:h-[18px] after:w-[1px] after:bg-[#afafaf] after:-right-[16px] after:absolute before:absolute before:h-[18px] before:bg-[#afafaf] before:w-[1px] before:-left-[20px]">
+                  <img
+                    className="w-4 h-4"
+                    src="images/india.png"
+                    alt="language"
+                  />
+                  <span>
+                    <IoMdArrowDropdown />
+                  </span>
+                  <ul className="absolute invisible transition-all top-12 rounded-sm duration-200 text-white p-2 w-[100ox] flex flex-col gap-3 group-hover:visible group-hover:top-6 group-hover:bg-black z-10">
+                    <li>English</li>
+                    <li>Hindi</li>
+                    <li>Spanish</li>
+                    <li>French</li>
+                    <li>German</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
