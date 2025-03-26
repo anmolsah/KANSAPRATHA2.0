@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { MdEmail } from "react-icons/md";
 import { IoMdArrowDropdown, IoMdPhonePortrait } from "react-icons/io";
 import {
   FaFacebook,
   FaGithub,
   FaLinkedin,
+  FaList,
   FaLock,
   FaTwitter,
   FaUser,
@@ -12,6 +13,7 @@ import {
 import { Link } from "react-router-dom";
 
 const Header = () => {
+  const [showSideBar,setShowSideBar] = useState(true);
   const user = true;
 
   return (
@@ -108,8 +110,13 @@ const Header = () => {
         <div className="w-[85%] lg:w-[90%] mx-auto">
           <div className="h-[80px] md-lg:h-[100px] flex justify-between items-center flex-wrap">
             <Link to="/">
-            <img src="/logo01.png" alt="" />
+              <img src="/logo01.png" alt="" />
             </Link>
+            <div className="justify-center items-center w-[30px] h-[30px] bg-white text-slate-600 border border-slate-600 rounded-md cursor-pointer md-lg:flex xl:hidden lg:hidden hidden" onClick={()=>setShowSideBar(false)}>
+              <span>
+                <FaList />
+              </span>
+            </div>
           </div>
         </div>
       </div>
