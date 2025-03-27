@@ -211,6 +211,123 @@ const Header = () => {
           </div>
         </div>
       </div>
+
+      <div className="hidden md-lg:block">
+        <div
+          onClick={() => setShowSideBar(true)}
+          className={`fixed duration-200 transition-all ${
+            showSideBar ? "invisible" : "visible"
+          } hidden md-lg:block w-screen h-screen bg-[rgba(0,0,0,0.5)] top-0 left-0 z-20`}
+        ></div>
+        <div
+          className={`w-[300px] z-[9999] transition-all duration-200 fixed ${
+            showSideBar ? "-left-[300px]" : "left-0 top-0"
+          } overflow-y-auto bg-white h-screen py-6 px-8`}
+        >
+          <div className="flex justify-center flex-col gap-6">
+            <Link to="/">
+              <img src="/logo01.png" alt="" />
+            </Link>
+            <div className="flex justify-end items-center gap-10">
+              <div className="flex group cursor-pointer text-sm justify-center items-center gap-1 relative">
+                <div className="flex items-center gap-2 bg-yellow-400 px-3 py-1 rounded-full hover:bg-yellow-500 transition-colors duration-300 shadow-lg">
+                  <img
+                    className="w-5 h-4 rounded-sm"
+                    src="images/india.png"
+                    alt="language"
+                  />
+                  <span className="text-gray-900">
+                    <IoMdArrowDropdown />
+                  </span>
+                </div>
+                <ul className="absolute invisible group-hover:visible transition-all duration-300 top-full mt-2 rounded-md shadow-xl bg-gray-800 text-white w-[120px] py-2 z-50 border border-yellow-400">
+                  {["English", "Hindi", "Spanish", "French", "German"].map(
+                    (lang, i) => (
+                      <li
+                        key={i}
+                        className="px-3 py-1 hover:bg-yellow-500 hover:text-gray-900 cursor-pointer"
+                      >
+                        {lang}
+                      </li>
+                    )
+                  )}
+                </ul>
+              </div>
+              {user ? (
+                <Link
+                  className="flex justify-center items-center gap-2 bg-yellow-400 hover:bg-yellow-500 px-4 py-2 rounded-full transition-all duration-300 shadow-md text-gray-900 font-bold"
+                  to="/dashboard"
+                >
+                  <span className="bg-white p-1 rounded-full shadow-md">
+                    <FaUser className="text-sm text-yellow-400" />
+                  </span>
+                  <span>Anni Khana</span>
+                </Link>
+              ) : (
+                <Link
+                  className="flex justify-center items-center gap-2 bg-yellow-400 hover:bg-yellow-500 px-4 py-2 rounded-full transition-all duration-300 shadow-md text-gray-900 font-bold"
+                  to="/login"
+                >
+                  <span className="bg-white p-1 rounded-full shadow-md">
+                    <FaLock className="text-sm text-yellow-400" />
+                  </span>
+                  <span>Login</span>
+                </Link>
+              )}
+            </div>
+
+            <ul className="flex flex-col justify-start items-start gap-1 text-sm font-bold uppercase">
+              <li>
+                <Link
+                  className={`py-2 block ${
+                    pathname === "/" ? "text-yellow-500" : "text-slate-600"
+                  }`}
+                >
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className={`py-2 block ${
+                    pathname === "/shop" ? "text-yellow-500" : "text-slate-600"
+                  }`}
+                >
+                  Shop
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className={`py-2 block ${
+                    pathname === "/blog" ? "text-yellow-500" : "text-slate-600"
+                  }`}
+                >
+                  Blog
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className={`py-2 block ${
+                    pathname === "/about" ? "text-yellow-500" : "text-slate-600"
+                  }`}
+                >
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className={`py-2 block ${
+                    pathname === "/contact"
+                      ? "text-yellow-500"
+                      : "text-slate-600"
+                  }`}
+                >
+                  Contact Us
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
