@@ -10,9 +10,10 @@ import {
   FaTwitter,
   FaUser,
 } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
+  const { pathname } = useLocation();
   const [showSideBar, setShowSideBar] = useState(true);
   const user = true;
 
@@ -109,16 +110,79 @@ const Header = () => {
       <div className="w-white">
         <div className="w-[85%] lg:w-[90%] mx-auto">
           <div className="h-[80px] md-lg:h-[100px] flex justify-between items-center flex-wrap">
-            <Link to="/">
-              <img src="/logo01.png" alt="" />
-            </Link>
-            <div
-              className="justify-center items-center w-[30px] h-[30px] bg-white text-slate-600 border border-slate-600 rounded-md cursor-pointer md-lg:flex xl:hidden lg:hidden hidden"
-              onClick={() => setShowSideBar(false)}
-            >
-              <span>
-                <FaList />
-              </span>
+            <div className="md-lg:w-full w-[3/12] md-lg:pt-4">
+              <div className="flex justify-center items-cente">
+                <Link to="/">
+                  <img src="/logo01.png" alt="" />
+                </Link>
+                <div
+                  className="justify-center items-center w-[30px] h-[30px] bg-white text-slate-600 border border-slate-600 rounded-md cursor-pointer md-lg:flex xl:hidden lg:hidden hidden"
+                  onClick={() => setShowSideBar(false)}
+                >
+                  <span>
+                    <FaList />
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className="md:lg:w-full w-9/12">
+              <div className="flex justify-end items-center md-lg:justify-center flex-wrap pk-8">
+                <ul className="flex justify-start items-start gap-8 text-sm font-bold uppercase md-lg:hidden">
+                  <li>
+                    <Link
+                      className={`p-2 block ${
+                        pathname === "/" ? "text-yellow-500" : "text-slate-600"
+                      }`}
+                    >
+                      Home
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className={`p-2 block ${
+                        pathname === "/shop"
+                          ? "text-yellow-500"
+                          : "text-slate-600"
+                      }`}
+                    >
+                      Shop
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className={`p-2 block ${
+                        pathname === "/blog"
+                          ? "text-yellow-500"
+                          : "text-slate-600"
+                      }`}
+                    >
+                      Blog
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className={`p-2 block ${
+                        pathname === "/about"
+                          ? "text-yellow-500"
+                          : "text-slate-600"
+                      }`}
+                    >
+                      About Us
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className={`p-2 block ${
+                        pathname === "/contact"
+                          ? "text-yellow-500"
+                          : "text-slate-600"
+                      }`}
+                    >
+                      Contact Us
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
