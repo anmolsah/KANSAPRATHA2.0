@@ -13,7 +13,7 @@ import {
 import { Link } from "react-router-dom";
 
 const Header = () => {
-  const [showSideBar,setShowSideBar] = useState(true);
+  const [showSideBar, setShowSideBar] = useState(true);
   const user = true;
 
   return (
@@ -112,7 +112,10 @@ const Header = () => {
             <Link to="/">
               <img src="/logo01.png" alt="" />
             </Link>
-            <div className="justify-center items-center w-[30px] h-[30px] bg-white text-slate-600 border border-slate-600 rounded-md cursor-pointer md-lg:flex xl:hidden lg:hidden hidden" onClick={()=>setShowSideBar(false)}>
+            <div
+              className="justify-center items-center w-[30px] h-[30px] bg-white text-slate-600 border border-slate-600 rounded-md cursor-pointer md-lg:flex xl:hidden lg:hidden hidden"
+              onClick={() => setShowSideBar(false)}
+            >
               <span>
                 <FaList />
               </span>
