@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { MdEmail } from "react-icons/md";
 import { IoMdArrowDropdown, IoMdPhonePortrait } from "react-icons/io";
 import {
+  FaCartPlus,
   FaFacebook,
   FaGithub,
+  FaHeart,
   FaLinkedin,
   FaList,
   FaLock,
@@ -16,6 +18,7 @@ const Header = () => {
   const { pathname } = useLocation();
   const [showSideBar, setShowSideBar] = useState(true);
   const user = true;
+  const wishlist_count = 4;
 
   return (
     <div className="w-full ">
@@ -182,6 +185,27 @@ const Header = () => {
                     </Link>
                   </li>
                 </ul>
+
+                <div className="flex md-lg:hidden justify-center items-center gap-5">
+                  <div className="flex justify-center gap-5">
+                    <div className="relative flex justify-center items-center cursor-pointer w-[35px] h-[35px] rounded-full bg-[add the color]">
+                      <span className="text-xl text-pink-500">
+                        <FaHeart />
+                      </span>
+                      <div className="w-[20px] h-[20px] absolute bg-red-500 rounded-full text-white flex justify-center items-center -top-[3px] -right-[5px]">
+                        {wishlist_count}
+                      </div>
+                    </div>
+                    <div className="relative flex justify-center items-center cursor-pointer w-[35px] h-[35px] rounded-full bg-[add the color]">
+                      <span className="text-xl text-pink-500">
+                        <FaCartPlus />
+                      </span>
+                      <div className="w-[20px] h-[20px] absolute bg-red-500 rounded-full text-white flex justify-center items-center -top-[3px] -right-[5px]">
+                        {wishlist_count}
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
