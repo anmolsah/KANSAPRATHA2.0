@@ -9,6 +9,7 @@ import {
   FaLinkedin,
   FaList,
   FaLock,
+  FaPhoneAlt,
   FaTwitter,
   FaUser,
 } from "react-icons/fa";
@@ -46,17 +47,22 @@ const Header = () => {
 
             <div className="flex justify-center items-center gap-8">
               <div className="flex justify-center items-center gap-4">
-                {[FaFacebook, FaTwitter, FaLinkedin, FaGithub].map(
-                  (Icon, index) => (
-                    <a
-                      key={index}
-                      href="#"
-                      className="text-white hover:text-yellow-400 hover:scale-110 transition-all duration-300 text-lg"
-                    >
-                      <Icon />
-                    </a>
-                  )
-                )}
+                {[
+                  { Icon: FaFacebook, link: "https://www.facebook.com" },
+                  { Icon: FaTwitter, link: "https://www.twitter.com" },
+                  { Icon: FaLinkedin, link: "https://www.linkedin.com" },
+                  { Icon: FaGithub, link: "https://www.github.com" },
+                ].map(({ Icon, link }, index) => (
+                  <a
+                    key={index}
+                    href={link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white hover:text-yellow-400 hover:scale-110 transition-all duration-300 text-lg"
+                  >
+                    <Icon />
+                  </a>
+                ))}
               </div>
 
               <div className="flex group cursor-pointer text-sm justify-center items-center gap-1 relative">
@@ -323,6 +329,50 @@ const Header = () => {
                 >
                   Contact Us
                 </Link>
+              </li>
+            </ul>
+            <div className="flex justify-start items-center gap-4 text-black">
+              {[
+                { Icon: FaFacebook, link: "https://www.facebook.com" },
+                { Icon: FaTwitter, link: "https://www.twitter.com" },
+                { Icon: FaLinkedin, link: "https://www.linkedin.com" },
+                { Icon: FaGithub, link: "https://www.github.com" },
+              ].map(({ Icon, link }, index) => (
+                <a
+                  key={index}
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-yellow-400 hover:scale-110 transition-all duration-300 text-lg"
+                >
+                  <Icon />
+                </a>
+              ))}
+            </div>
+
+            <div className="w-full flex justify-end md-lg:justify-start gap-3 items-center">
+              <div className="w-[48px] h-[48px] rounded-full flex bg-[#f5f5f5] justify-center">
+                <span>
+                  <FaPhoneAlt />
+                </span>
+              </div>
+
+              <div classNamr="flex justify-end flex-col gap-1">
+                <h2 className="text-sm font-medium text-slate-700">
+                  (+91) 8250676762
+                </h2>
+                <span className="text-x">support 24/7</span>
+              </div>
+            </div>
+
+            <ul className="flex flex-col justify-start items-start gap-3 text-pink-600">
+              <li className="flex justify-start items-center gap-2 text-sm">
+                <span className="text-yellow-400 text-black p-1 rounded-full shadow-md">
+                  <MdEmail className="text-gray-900" />
+                </span>
+                <span className="hover:text-yellow-400 transition-colors duration-300 cursor-pointer">
+                  kpsupport@gmail.com
+                </span>
               </li>
             </ul>
           </div>
