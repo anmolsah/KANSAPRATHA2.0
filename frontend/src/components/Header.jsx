@@ -654,7 +654,7 @@ const Header = () => {
                   <div classNmae="relative after:absolute after:h-[25px] after:w-[1px] after:bg-yellow-400 after:right-[-16px]">
                     <select
                       onChange={(e) => setCategory(e.target.value)}
-                      value={category()}
+                      value={categorys}
                       className="w-[150px] text-slate-600 font-semibold bg-transparent px-2 h-full outline-0 border-none"
                       name=""
                       id=""
@@ -676,6 +676,26 @@ const Header = () => {
                     id=""
                     placeholder="Search Product"
                   />
+                  <button className="bg-pink-600 absolute right-0 px-8 h-full font-semibold text-white">
+                    Search
+                  </button>
+                </div>
+              </div>
+
+              <div className="w-4/12 block md-lg:hidden pl-2 md-lg:w-full md-lg:pl-0">
+                <div className="w-full flex justify-end md-lg:justify-start gap-3 items-center">
+                  <div className="w-[48px] h-[48px] rounded-full flex bg-gray-800 justify-center items-center">
+                    <span className="text-yellow-400">
+                      <FaPhoneAlt />
+                    </span>
+                  </div>
+
+                  <div className="flex justify-end flex-col gap-1">
+                    <h2 className="text-md font-medium text-black">
+                      (+91) 8250676762
+                    </h2>
+                    <span className="text-sm text-gray-700">support 24/7</span>
+                  </div>
                 </div>
               </div>
             </div>
