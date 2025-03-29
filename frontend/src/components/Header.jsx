@@ -551,7 +551,11 @@ function App() {
 
               <div className="relative group">
                 <button className="flex items-center space-x-2 bg-emerald-500 text-white px-3 py-1 rounded-full hover:bg-emerald-600 transition-all duration-300 group-hover:ring-2 group-hover:ring-emerald-300">
-                  <img src="images/" alt="English" className="w-4 h-3" />
+                  <img
+                    src="images/india.png"
+                    alt="English"
+                    className="w-4 h-3"
+                  />
                   <ChevronDown
                     size={16}
                     className="group-hover:rotate-180 transition-transform duration-300"
@@ -588,7 +592,11 @@ function App() {
                 href="/"
                 className="text-2xl font-bold text-white tracking-tight"
               >
-                TechStore
+                <img
+                  src="/logo01.png"
+                  alt="KhansaPratha Logo"
+                  className=" h-10"
+                />
               </a>
               <button
                 onClick={() => setShowSideBar(true)}
