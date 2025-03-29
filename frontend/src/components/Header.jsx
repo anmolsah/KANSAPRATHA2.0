@@ -475,7 +475,7 @@ function App() {
   const [categoryShow, setCategoryShow] = useState(true);
   const [searchValue, setSearchValue] = useState("");
   const [category, setCategory] = useState("");
-  const pathname = "/"; // Simulated for demo
+  const pathname = "/";
   const user = true;
   const wishlist_count = 4;
 
