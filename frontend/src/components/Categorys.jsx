@@ -12,7 +12,6 @@ const Categorys = () => {
     "Gifting",
     "Brass Products",
     "Copper Products",
-    "Kansa (Bronze) Products",
     "Best Sellers",
     "New Arrivals",
   ];
@@ -39,40 +38,33 @@ const Categorys = () => {
     },
     smmobile: {
       breakpoint: { max: 640, min: 0 },
-      items: 3,
+      items: 2,
     },
     xsmobile: {
       breakpoint: { max: 440, min: 0 },
-      items: 2,
+      items: 1,
     },
   };
   return (
-    <div className="w-full ">
-      <div className="w-[85%] lg:w-[90%] mx-auto">
-        <div className="w-full flex flex-wrap">
-          <div className="w-full">
-            <div className="my-8">
-              <Carousel
-                autoPlay={true}
-                infinite={true}
-                arrows={true}
-                showDots={true}
-                responsive={responsive}
-              >
-                {[1, 2, 3].map((img, i) => (
-                  <Link key={i} to="#">
-                    <img
-                      className="w-full h-[600px] "
-                      src={`/images/banners/${img}.png`}
-                      alt="banners"
-                    />
-                  </Link>
-                ))}
-              </Carousel>
+    <div className="w-[87%] mx-auto relative ">
+      <Carousel
+        autoPlay={true}
+        infinite={true}
+        arrows={true}
+        transitionDuration={500}
+        responsive={responsive}
+      >
+        {categories.map((c, i) => (
+          <Link className="h-[185px] border block" key={i} to="#">
+            <div className="w-ful h-full relative p-3">
+              <img src={`/images/products/${i + 1}.jpg`} alt="" />
+              <div className="absolute bottom-6 w-full mx-auto left-0 flex items-center justify-center">
+              <span className="py-[2px] px-6 bg-[#33303305d] text-white">{c}</span>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
+          </Link>
+        ))}
+      </Carousel>
     </div>
   );
 };
