@@ -480,18 +480,16 @@ function App() {
   const wishlist_count = 4;
 
   const categories = [
-    "Laptops",
-    "Mobiles",
-    "Tablets",
-    "Accessories",
-    "Wearables",
-    "Audio",
-    "Gaming",
-    "Cameras",
-    "Smart Home",
-    "Office",
-    "Components",
-    "Storage",
+    "Cookware & Kitchenware",
+    "Drinkware",
+    "Tableware & Dinnerware",
+    "Home Decor",
+    "Gifting",
+    "Brass Products",
+    "Copper Products",
+    "Kansa (Bronze) Products",
+    "Best Sellers",
+    "New Arrivals",
   ];
 
   const navLinks = [
