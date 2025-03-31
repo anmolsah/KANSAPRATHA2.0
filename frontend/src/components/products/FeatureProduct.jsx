@@ -1,6 +1,6 @@
 import React from "react";
-import { FaRegHeart,FaEye } from "react-icons/fa";
-import {RiShoppingCartLine} from "react-icons/ri";
+import { FaRegHeart, FaEye } from "react-icons/fa";
+import { RiShoppingCartLine } from "react-icons/ri";
 
 const FeatureProduct = () => {
   return (
@@ -38,6 +38,13 @@ const FeatureProduct = () => {
                   <RiShoppingCartLine />
                 </li>
               </ul>
+            </div>
+
+            <div className="py-3 text-slate-600 px-2 ">
+              <h2 className="font-bold">Product Name</h2>
+              <div className="flex justify-start items-center gap-3">
+                <span classNmae="text-md font-semibold">₹2543</span>
+              </div>
             </div>
           </div>
         ))}
