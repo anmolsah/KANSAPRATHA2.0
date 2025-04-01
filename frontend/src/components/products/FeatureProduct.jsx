@@ -44,7 +44,7 @@ const FeatureProduct = () => {
             <div className="py-3 text-slate-600 px-2 ">
               <h2 className="font-bold">Product Name</h2>
               <div className="flex justify-start items-center gap-3">
-                <span classNmae="text-md font-semibold">₹2543</span>
+                <span className="text-md font-semibold">₹2543</span>
                 <div className="flex">
                   <Ratings ratings={4} />
                 </div>
