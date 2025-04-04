@@ -28,9 +28,7 @@ const Products = () => {
     },
   };
 
-  const ButtonGroup = () =>{
-    
-  }
+  // const ButtonGroup = () => {};
 
   return (
     <div className="flex gap-8">
@@ -41,19 +39,23 @@ const Products = () => {
         responsive={responsive}
         transitionDuration={500}
         renderButtonGroupOutside={true}
-        customButtonGroup={<ButtonGroup />}
+        // customButtonGroup={<ButtonGroup />}
       >
-        <div className="flex flex-col justify-start gap-2">
-          <Link to="#">
-            <img
-              src=""
-              alt=""
-              className="px-3 flex justify-start items-startgap-1 flex-col text-slate-600"
-            />
-            <h2>Product Name</h2>
-            <span>₹2564</span>
-          </Link>
-        </div>
+        {products.map((p, i) => {
+          return (
+            <div className="flex flex-col justify-start gap-2">
+              {p.map((pl, j) => (
+                <Link to="#">
+                  <img src={`images/products/${pl}.jpg`} alt="" />
+                  <div className="px-3 flex justify-start items-start gap-1 flex-col text-slate-600">
+                    <h2>Product Name</h2>
+                    <span>₹2564</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          );
+        })}
       </Carousel>
     </div>
   );
