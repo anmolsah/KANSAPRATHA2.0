@@ -1,6 +1,7 @@
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { Link } from "react-router-dom";
 
 const Products = () => {
   const products = [
@@ -26,16 +27,33 @@ const Products = () => {
       items: 1,
     },
   };
+
+  const ButtonGroup = () =>{
+    
+  }
+
   return (
     <div className="flex gap-8">
       <Carousel
-        autoPlay={true}
-        infinite={true}
-        arrows={true}
-        showDots={true}
+        autoPlay={false}
+        infinite={false}
+        arrows={false}
         responsive={responsive}
+        transitionDuration={500}
+        renderButtonGroupOutside={true}
+        customButtonGroup={<ButtonGroup />}
       >
-        <div className="flex flex-col justify-start gap-2"></div>
+        <div className="flex flex-col justify-start gap-2">
+          <Link to="#">
+            <img
+              src=""
+              alt=""
+              className="px-3 flex justify-start items-startgap-1 flex-col text-slate-600"
+            />
+            <h2>Product Name</h2>
+            <span>₹2564</span>
+          </Link>
+        </div>
       </Carousel>
     </div>
   );
