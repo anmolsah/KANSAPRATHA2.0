@@ -69,8 +69,9 @@ import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Link } from "react-router-dom";
+import { FaCircleChevronLeft, FaCircleChevronRight } from "react-icons/fa6";
 
-const Products = ({title}) => {
+const Products = ({ title }) => {
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -99,11 +100,23 @@ const Products = ({title}) => {
     return (
       <div className="flex justify-between items-center">
         <div className="text-xl font-bold text-slate-600">{title}</div>
+        <div className="flex justify-center items-center gap-3 text-slate-600">
+          <button
+            onClick={() => previous()}
+            className="w-[30px] h-[30px] flex justify-center items-center bg-slate-300 border border-slate-200"
+          >
+            <FaCircleChevronLeft />
+          </button>
+          <button
+            onClick={() => next()}
+            className="w-[30px] h-[30px] flex justify-center items-center bg-slate-300 border border-slate-200"
+          >
+            <FaCircleChevronRight />
+          </button>
+        </div>
       </div>
     );
-  }; 
-
-  
+  };
 
   return (
     <div className="flex gap-8 w-full">
@@ -116,7 +129,7 @@ const Products = ({title}) => {
         responsive={responsive}
         transitionDuration={500}
         renderButtonGroupOutside={true}
-         containerClass="w-full"
+        containerClass="w-full"
         customButtonGroup={<ButtonGroup />}
       >
         {products.map((p, i) => (
