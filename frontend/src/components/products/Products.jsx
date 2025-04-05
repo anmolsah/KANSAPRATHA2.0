@@ -2,13 +2,7 @@ import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Link } from "react-router-dom";
-
 const Products = () => {
-  const products = [
-    [1, 2, 3],
-    [4, 5, 6],
-  ];
-
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -28,34 +22,35 @@ const Products = () => {
     },
   };
 
-  // const ButtonGroup = () => {};
+  const products = [
+    [1, 2, 3],
+    [4, 5, 6],
+  ];
 
+  const ButtonGroup = () =>{
+
+  }
   return (
     <div className="flex gap-8">
       <Carousel
         autoPlay={false}
         infinite={false}
         arrows={false}
+        
         responsive={responsive}
         transitionDuration={500}
         renderButtonGroupOutside={true}
-        // customButtonGroup={<ButtonGroup />}
+        customButtonGroup={<ButtonGroup />}
       >
-        {products.map((p, i) => {
-          return (
-            <div className="flex flex-col justify-start gap-2">
-              {p.map((pl, j) => (
-                <Link to="#">
-                  <img src={`images/products/${pl}.jpg`} alt="" />
-                  <div className="px-3 flex justify-start items-start gap-1 flex-col text-slate-600">
-                    <h2>Product Name</h2>
-                    <span>₹2564</span>
-                  </div>
-                </Link>
-              ))}
+        <div className="flex flex-col justify-start gap-2">
+          <Link to="#">
+            <img className="w-full h-[300px] " src={``} alt="products" />
+            <div className="px-3 flex justify-start items-start gap-1 flex-col text-slate-600">
+              <h2>Product Name</h2>
+              <span>$256</span>
             </div>
-          );
-        })}
+          </Link>
+        </div>
       </Carousel>
     </div>
   );
