@@ -65,13 +65,12 @@
 
 // export default Products;
 
-
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Link } from "react-router-dom";
 
-const Products = () => {
+const Products = ({title}) => {
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -96,10 +95,20 @@ const Products = () => {
     [4, 5, 6],
   ];
 
-  const ButtonGroup = () => null; // Ensure it returns valid JSX
+  const ButtonGroup = ({ next, previous }) => {
+    return (
+      <div className="flex justify-between items-center">
+        <div className="text-xl font-bold text-slate-600">{title}</div>
+      </div>
+    );
+  }; 
+
+  
 
   return (
-    <div className="flex gap-8 w-full"> {/* Added w-full */}
+    <div className="flex gap-8 w-full">
+      {" "}
+      {/* Added w-full */}
       <Carousel
         autoPlay={false}
         infinite={false}
@@ -107,11 +116,13 @@ const Products = () => {
         responsive={responsive}
         transitionDuration={500}
         renderButtonGroupOutside={true}
+         containerClass="w-full"
         customButtonGroup={<ButtonGroup />}
-        
       >
         {products.map((p, i) => (
-          <div key={i} className="flex flex-col gap-2 p-4 w-full"> {/* Added padding and key */}
+          <div key={i} className="flex flex-col gap-2 p-4 w-full">
+            {" "}
+            {/* Added padding and key */}
             {p.map((pl, j) => (
               <Link
                 key={j}
@@ -119,18 +130,22 @@ const Products = () => {
                 //className="block w-full" // Added block display
                 className="flex justify-start items-start"
               >
-                <div className="w-[110px] h-[110px] bg-gray-100"> {/* Added bg for debugging */}
+                <div className="w-[110px] h-[110px] bg-gray-100">
+                  {" "}
+                  {/* Added bg for debugging */}
                   <img
                     className="w-full h-full object-cover" // Ensure image fills container
                     src={`/images/products/${pl}.jpg`}
                     alt={`Product ${pl}`}
                   />
                 </div>
-                <div className="px-3 py-2"> {/* Added padding */}
+                <div className="px-3 py-2">
+                  {" "}
+                  {/* Added padding */}
                   <h2 className="text-lg font-semibold text-slate-600">
                     Product Name
                   </h2>
-                  <span className="text-slate-600">$256</span>
+                  <span className="text-lg font-bold">$256</span>
                 </div>
               </Link>
             ))}

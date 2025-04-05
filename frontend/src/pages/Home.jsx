@@ -18,13 +18,13 @@ const Home = () => {
         <div className="w-[85%] mx-auto flex flex-wrap">
           <div className="grid w-full grid-cols-3  gap-7">
             <div className="overflow-hidden">
-              <Products />
+              <Products title="Latest Product" />
             </div>
             <div className="overflow-hidden">
-              <Products />
+              <Products title="Top Rated Product" />
             </div>
             <div className="overflow-hidden">
-              <Products />
+              <Products title="Discount Product" />
             </div>
           </div>
         </div>
