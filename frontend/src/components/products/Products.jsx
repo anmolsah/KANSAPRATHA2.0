@@ -119,7 +119,7 @@ const Products = ({ title }) => {
   };
 
   return (
-    <div className="flex gap-8 w-full">
+    <div className="flex gap-8 flex-col-reverse w-full">
       {" "}
       {/* Added w-full */}
       <Carousel
