@@ -1,4 +1,5 @@
 import React from "react";
+import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -73,12 +74,32 @@ const Footer = () => {
               Get Email updates about our latest shop and special offer
             </span>
             <div classsName="h-[50px] w-full bg-white border relative">
-                <input className="h-full bg-transparent w-full px-3 outline-0" 
+              <input
+                className="h-full bg-transparent w-full px-3 outline-0"
                 type="text"
                 placeholder="Enter your email"
-                />
-                <button className="h-full absolute right-0 uppercase px-4 font-bold text-sm text-black bg-red-600">Subscribe</button>
+              />
+              <button className="h-full absolute right-0 uppercase px-4 font-bold text-sm text-black bg-red-600">
+                Subscribe
+              </button>
             </div>
+            <ul className="flex justify-start items-center gap-3">
+              <li>
+                <a href="">
+                  <FaFacebookF />
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <FaTwitter />
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <FaInstagram />
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
