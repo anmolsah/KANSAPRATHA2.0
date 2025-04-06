@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -17,7 +18,56 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-        <div classNmae="w-5/12 lg:w-8/12 "></div>
+        <div classNmae="w-5/12 lg:w-8/12 sm:w-full">
+        <div className="flex justify-center sm:justify-start sm:mt-6 w-full">
+            <div className="">
+                <h2 className="font-bold text-lg">UseFull Links</h2>
+                <div className="flex justify-between gap-[80px] lg:gap-[40px]">
+                    <ul className="flex flex-col gap-2 text-slate-600 text-sm font-semibold">
+                        <li>
+                            <Link>About Us</Link>
+                        </li>
+                        <li>
+                            <Link>About Our Shop</Link>
+                        </li>
+                        <li>
+                            <Link>Delivery Information</Link>
+                        </li>
+                        <li>
+                            <Link>Privacy Policy</Link>
+                        </li>
+                        <li>
+                            <Link>About Us</Link>
+                        </li>
+                        <li>
+                            <Link>Blogs</Link>
+                        </li>
+                    </ul>
+
+                    <ul className="flex flex-col gap-2 text-slate-600 text-sm font-semibold">
+                        <li>
+                            <Link>Our Service</Link>
+                        </li>
+                        <li>
+                            <Link>Company Profile</Link>
+                        </li>
+                        <li>
+                            <Link>Delivery Information</Link>
+                        </li>
+                        <li>
+                            <Link>Privacy Policy</Link>
+                        </li>
+                        <li>
+                            <Link>About Us</Link>
+                        </li>
+                        <li>
+                            <Link>Blogs</Link>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        </div>
       </div>
     </footer>
   );
