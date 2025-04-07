@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./../components/Header";
 import Footer from "./../components/Footer";
 import img1 from "../assets/img1.jpg";
@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 
 const Shops = () => {
+  const [filter, setFilter] = useState(true);
   return (
     <div>
       <Header />
@@ -28,6 +29,19 @@ const Shops = () => {
                 <span>Shop</span>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16">
+        <div className="w-[85%] h-full mx-auto">
+          <div className={`md:block hidden ${!filter ? "mb-6" : "mb-0"}`}>
+            <button
+              onClick={() => setFilter(!filter)}
+              className="text-center w-full py-2 px-3 bg-indigo-500 text-white"
+            >
+              Filter Product
+            </button>
           </div>
         </div>
       </section>
