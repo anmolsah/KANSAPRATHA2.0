@@ -494,7 +494,7 @@ function App() {
 
   const navLinks = [
     { path: "/", label: "Home" },
-    { path: "/shop", label: "Shop" },
+    { path: "/shops", label: "Shop" },
     { path: "/blog", label: "Blog" },
     { path: "/about", label: "About" },
     { path: "/contact", label: "Contact" },
