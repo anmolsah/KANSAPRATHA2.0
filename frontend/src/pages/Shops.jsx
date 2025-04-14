@@ -327,7 +327,6 @@
 
 // export default Shops;
 
-
 import React, { useState } from "react";
 import Header from "./../components/Header";
 import Footer from "./../components/Footer";
@@ -341,11 +340,14 @@ import Products from "../components/products/Products";
 import { BsFillGridFill } from "react-icons/bs";
 import { FaThList } from "react-icons/fa";
 import ShopProducts from "../components/products/ShopProducts";
+import Pagination from "../components/Pagination";
 
 const Shops = () => {
   const [filter, setFilter] = useState(true);
   const [rating, setRating] = useState("");
   const [styles, setStyles] = useState("grid");
+  const [perPage, setPerPage] = useState(1);
+  const [pageNumber, setPageNumber] = useState(1);
   const [state, setState] = useState({
     values: [50, 5000],
   });
@@ -372,9 +374,14 @@ const Shops = () => {
         <div className="absolute inset-0 bg-indigo-950/80">
           <div className="max-w-7xl mx-auto h-full px-4">
             <div className="flex flex-col justify-center items-center h-full text-center">
-              <h2 className="text-4xl font-bold text-gray-50 mb-2">Shop Page</h2>
+              <h2 className="text-4xl font-bold text-gray-50 mb-2">
+                Shop Page
+              </h2>
               <div className="flex items-center text-gray-200">
-                <Link to="/" className="hover:text-emerald-400 transition-colors">
+                <Link
+                  to="/"
+                  className="hover:text-emerald-400 transition-colors"
+                >
                   Home
                 </Link>
                 <IoIosArrowForward className="mx-2" />
@@ -404,7 +411,9 @@ const Shops = () => {
               } transition-all duration-300`}
             >
               <div className="bg-white rounded-lg p-6 shadow-md">
-                <h2 className="text-2xl font-bold mb-4 text-gray-800">Category</h2>
+                <h2 className="text-2xl font-bold mb-4 text-gray-800">
+                  Category
+                </h2>
                 <div className="space-y-2">
                   {categorys.map((c, i) => (
                     <div className="flex items-center gap-2 py-1" key={i}>
@@ -424,7 +433,9 @@ const Shops = () => {
                 </div>
 
                 <div className="my-8">
-                  <h2 className="text-2xl font-bold mb-4 text-gray-800">Price</h2>
+                  <h2 className="text-2xl font-bold mb-4 text-gray-800">
+                    Price
+                  </h2>
                   <div className="space-y-4">
                     <Range
                       step={5}
@@ -448,13 +459,16 @@ const Shops = () => {
                       )}
                     />
                     <div className="text-gray-800 font-medium">
-                      ${Math.floor(state.values[0])} - ${Math.floor(state.values[1])}
+                      ${Math.floor(state.values[0])} - $
+                      {Math.floor(state.values[1])}
                     </div>
                   </div>
                 </div>
 
                 <div className="my-8">
-                  <h2 className="text-2xl font-bold mb-4 text-gray-800">Rating</h2>
+                  <h2 className="text-2xl font-bold mb-4 text-gray-800">
+                    Rating
+                  </h2>
                   <div className="space-y-2">
                     {[5, 4, 3, 2, 1].map((stars) => (
                       <div
@@ -490,9 +504,7 @@ const Shops = () => {
                     14 Products
                   </h2>
                   <div className="flex items-center gap-4">
-                    <select
-                      className="bg-gray-50 border border-gray-300 text-gray-600 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-400"
-                    >
+                    <select className="bg-gray-50 border border-gray-300 text-gray-600 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-400">
                       <option value="">Sort By</option>
                       <option value="low-to-high">Low to High Price</option>
                       <option value="high-to-low">High to Low Price</option>
@@ -523,6 +535,15 @@ const Shops = () => {
                 </div>
 
                 <ShopProducts styles={styles} />
+                <div>
+                  <Pagination
+                    pageNumber={pageNumber}
+                    setPageNumber={setPageNumber}
+                    totalItem={10}
+                    perPage={perPage}
+                    showItem={Math.floor(10 / 3)}
+                  />
+                </div>
               </div>
             </div>
           </div>
