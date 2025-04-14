@@ -447,8 +447,29 @@ const Shops = () => {
                         <div
                           {...props}
                           className="h-2 bg-gray-100 rounded-full"
+                          style={{
+                            ...props.style,
+                            display: "flex",
+                            alignItems: "center",
+                            height: "20px", 
+                          }}
                         >
-                          <div className="h-2 bg-emerald-400 rounded-full" />
+                          <div
+                            style={{
+                              position: "absolute",
+                              height: "2px",
+                              background: "#10b981",
+                              top: "50%",
+                              transform: "translateY(-50%)",
+                              left: `${
+                                props.ref?.current?.getBoundingClientRect
+                                  ? props.ref.current.getBoundingClientRect()
+                                      .left
+                                  : 0
+                              }px`,
+                            }}
+                          />
+                          {children}
                         </div>
                       )}
                       renderThumb={({ props }) => (
@@ -458,6 +479,7 @@ const Shops = () => {
                         />
                       )}
                     />
+
                     <div className="text-gray-800 font-medium">
                       ${Math.floor(state.values[0])} - $
                       {Math.floor(state.values[1])}
