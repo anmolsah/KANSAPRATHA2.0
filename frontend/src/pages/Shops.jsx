@@ -20,7 +20,6 @@ const Shops = () => {
     "Brass Products",
     "Copper Products",
     "Best Sellers",
-    "New Arrivals",
   ];
   return (
     <div>
