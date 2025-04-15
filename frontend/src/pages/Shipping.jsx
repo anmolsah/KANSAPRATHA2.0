@@ -71,6 +71,58 @@ const Shipping = () => {
                         />
                       </div>
                     </div>
+                    <div className="flex w-full gap-5 text-slate-600">
+                      <div className="flex flex-col gap-1 mb-2 w-full">
+                        <label htmlFor="phone" className="text-slate-600">
+                          Phone
+                        </label>
+                        <input
+                          type="text"
+                          name="phone"
+                          id="phone"
+                          className="w-full px-3 py-2 border border-slate-200 outline-none focus:border-green-500 rounded-md"
+                          placeholder="Enter Your Phone Number"
+                        />
+                      </div>
+                      <div className="flex flex-col gap-1 mb-2 w-full">
+                        <label htmlFor="post" className="text-slate-600">
+                          Post
+                        </label>
+                        <input
+                          type="text"
+                          name="post"
+                          id="post"
+                          className="w-full px-3 py-2 border border-slate-200 outline-none focus:border-green-500 rounded-md"
+                          placeholder="Enter Your Post"
+                        />
+                      </div>
+                    </div>
+                    <div className="flex w-full gap-5 text-slate-600">
+                      <div className="flex flex-col gap-1 mb-2 w-full">
+                        <label htmlFor="province" className="text-slate-600">
+                          Province
+                        </label>
+                        <input
+                          type="text"
+                          name="province"
+                          id="province"
+                          className="w-full px-3 py-2 border border-slate-200 outline-none focus:border-green-500 rounded-md"
+                          placeholder="Enter Your Province"
+                        />
+                      </div>
+                      <div className="flex flex-col gap-1 mb-2 w-full">
+                        <label htmlFor="city" className="text-slate-600">
+                          City
+                        </label>
+                        <input
+                          type="text"
+                          name="city"
+                          id="city"
+                          className="w-full px-3 py-2 border border-slate-200 outline-none focus:border-green-500 rounded-md"
+                          placeholder="Enter Your City"
+                        />
+                      </div>
+                    </div>
                   </form>
                 </div>
               </div>
