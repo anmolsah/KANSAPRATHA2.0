@@ -208,12 +208,23 @@ import React from "react";
 import Header from "./../components/Header";
 import Footer from "./../components/Footer";
 import { IoIosArrowForward } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import img1 from "../assets/img1.jpg";
 
 const Card = () => {
+  const navigate = useNavigate();
   const card_products = [1, 2];
   const outOfStockProducts = [1, 2];
+  const redirect = () =>{
+    navigate("/shipping",{
+      state:{
+        products:[],
+        price:500,
+        shipping_fee:40,
+        items:2
+      }
+    });
+  }
   return (
     <div className="bg-gradient-to-r from-indigo-600 to-purple-600 min-h-screen">
       <Header />
@@ -364,7 +375,7 @@ const Card = () => {
                       <span>Total</span>
                       <span>₹2660</span>
                     </div>
-                    <button className="w-full py-3 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors">
+                    <button onClick={redirect} className="w-full py-3 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors">
                       Proceed to Checkout
                     </button>
                   </div>
