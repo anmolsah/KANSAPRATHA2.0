@@ -153,6 +153,36 @@ const Card = () => {
                   </div>
                 </div>
               </div>
+
+              <div className="w-[33%]">
+                <div className="pl-3">
+                  {
+                    card_products.length > 0 && <div className="bg-white p-3 text-slate-600 flex flex-col gap-3">
+                      <h2 className="text-xl font-bold">Order Summary</h2>
+                      <div className="flex justify-between items-center">
+                        <span>2 Items</span>
+                        <span>₹2560</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span>Shipping Fee</span>
+                        <span>₹100</span>
+                      </div>
+
+                      <div className="flex gap-2">
+                        <input type="text" className="w-full px-3 py-2 border border-slate-200 outline-0 focus:border-green-500 rounded-sm" placeholder="Discount Coupan" />
+                        <button className="px-5 py-[1px] bg-green-500 text-white rounded-sm text-sm">Apply</button>
+                      </div>
+
+                      <div className="flex justify-between items-center">
+                        <span>Total</span>
+                        <span className="font-bold">₹2660</span>
+                      </div>
+
+                      <button className="px-5 py-[6px] rounded-sm bg-red-500 text-white text-sm">Procced to checkout</button>
+                    </div>
+                  }
+                </div>
+              </div>
             </div>
           ) : (
             <div>
