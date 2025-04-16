@@ -2,6 +2,7 @@ import React from "react";
 import { FaRegHeart, FaEye } from "react-icons/fa";
 import { RiShoppingCartLine } from "react-icons/ri";
 import Ratings from "../Ratings";
+import { Link } from "react-router-dom";
 
 const FeatureProduct = () => {
   return (
@@ -32,9 +33,12 @@ const FeatureProduct = () => {
                 <li className="w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-pink-400 hover:text-white hover:rotate-[720deg] transition-all">
                   <FaRegHeart />
                 </li>
-                <li className="w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-pink-400 hover:text-white hover:rotate-[720deg] transition-all">
+                <Link
+                  to="/product/details/new"
+                  className="w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-pink-400 hover:text-white hover:rotate-[720deg] transition-all"
+                >
                   <FaEye />
-                </li>
+                </Link>
                 <li className="w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-pink-400 hover:text-white hover:rotate-[720deg] transition-all">
                   <RiShoppingCartLine />
                 </li>
