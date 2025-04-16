@@ -1,3 +1,60 @@
+// import React from "react";
+// import Carousel from "react-multi-carousel";
+// import "react-multi-carousel/lib/styles.css";
+// import { Link } from "react-router-dom";
+
+// const Banner = () => {
+//   const responsive = {
+//     superLargeDesktop: {
+//       breakpoint: { max: 4000, min: 3000 },
+//       items: 1,
+//     },
+//     desktop: {
+//       breakpoint: { max: 3000, min: 1024 },
+//       items: 1,
+//     },
+//     tablet: {
+//       breakpoint: { max: 1024, min: 464 },
+//       items: 1,
+//     },
+//     mobile: {
+//       breakpoint: { max: 464, min: 0 },
+//       items: 1,
+//     },
+//   };
+//   return (
+//     <div className="w-full ">
+//       <div className="w-[85%] lg:w-[90%] mx-auto">
+//         <div className="w-full flex flex-wrap">
+//           <div className="w-full">
+//             <div className="my-8">
+//               <Carousel
+//                 autoPlay={true}
+//                 infinite={true}
+//                 arrows={true}
+//                 showDots={true}
+//                 responsive={responsive}
+//               >
+//                 {[1, 2, 3].map((img, i) => (
+//                   <Link key={i} to="#">
+//                     <img
+//                       className="w-full h-[600px] "
+//                       src={`/images/banners/${img}.png`}
+//                       alt="banners"
+//                     />
+//                   </Link>
+//                 ))}
+//               </Carousel>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Banner;
+
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -6,15 +63,15 @@ import { Link } from "react-router-dom";
 const Banner = () => {
   const responsive = {
     superLargeDesktop: {
-      breakpoint: { max: 4000, min: 3000 },
+      breakpoint: { max: 4000, min: 1024 },
       items: 1,
     },
     desktop: {
-      breakpoint: { max: 3000, min: 1024 },
+      breakpoint: { max: 1024, min: 768 },
       items: 1,
     },
     tablet: {
-      breakpoint: { max: 1024, min: 464 },
+      breakpoint: { max: 768, min: 464 },
       items: 1,
     },
     mobile: {
@@ -22,33 +79,63 @@ const Banner = () => {
       items: 1,
     },
   };
+
   return (
-    <div className="w-full ">
-      <div className="w-[85%] lg:w-[90%] mx-auto">
-        <div className="w-full flex flex-wrap">
-          <div className="w-full">
-            <div className="my-8">
-              <Carousel
-                autoPlay={true}
-                infinite={true}
-                arrows={true}
-                showDots={true}
-                responsive={responsive}
-              >
-                {[1, 2, 3].map((img, i) => (
-                  <Link key={i} to="#">
-                    <img
-                      className="w-full h-[600px] "
-                      src={`/images/banners/${img}.png`}
-                      alt="banners"
-                    />
-                  </Link>
-                ))}
-              </Carousel>
-            </div>
-          </div>
-        </div>
+    <div className="w-full  py-8">
+      <div className="max-w-7xl mx-auto px-4">
+        <Carousel
+          autoPlay={true}
+          infinite={true}
+          arrows={true}
+          showDots={true}
+          responsive={responsive}
+          containerClass="rounded-xl overflow-hidden shadow-xl"
+          itemClass="carousel-item"
+          dotListClass="custom-dot-list"
+          arrowButtonClass="custom-arrow"
+          renderDotsOutside={true}
+        >
+          {[1, 2, 3].map((img, i) => (
+            <Link key={i} to="#" className="block group">
+              <img
+                className="w-full h-[300px] md:h-[400px] lg:h-[600px] object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                src={`/images/banners/${img}.png`}
+                alt="banner"
+              />
+            </Link>
+          ))}
+        </Carousel>
       </div>
+
+      {/* Custom Styles */}
+      <style>
+        {`
+          .custom-arrow {
+            background-color: #34d399 !important;
+            padding: 12px !important;
+            border-radius: 50% !important;
+            transition: all 0.3s !important;
+          }
+          
+          .custom-arrow:hover {
+            background-color: #059669 !important;
+          }
+          
+          .custom-arrow::before {
+            color: white !important;
+            font-size: 1.2rem !important;
+          }
+          
+          .custom-dot-list li button {
+            border: 2px solid #34d399 !important;
+            background: transparent !important;
+          }
+          
+          .custom-dot-list li.react-multi-carousel-dot--active button {
+            background: #34d399 !important;
+          }
+        `}
+      </style>
     </div>
   );
 };
