@@ -258,9 +258,9 @@ const Card = () => {
         <div className="max-w-7xl mx-auto px-4">
           {card_products.length > 0 || outOfStockProducts.length > 0 ? (
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {/* Cart Items */}
+             
               <div className="lg:col-span-2 space-y-6">
-                {/* In Stock Products */}
+                
                 <div className="bg-white rounded-xl shadow-md p-6">
                   <h2 className="text-lg font-semibold text-emerald-500 mb-4">
                     Stock Products ({card_products.length})

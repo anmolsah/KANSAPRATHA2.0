@@ -196,7 +196,10 @@ const Shipping = () => {
                         <span className="bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-2 py-1 rounded">
                           Home
                         </span>
-                        <span>Address , Province , City </span>
+                        <span>
+                          {state.phone} {state.address} {state.province}{" "}
+                          {state.city} {state.area}
+                        </span>
                         <span
                           onClick={() => setRes(false)}
                           className="text-indigo-500 cursor-pointer"
@@ -209,6 +212,99 @@ const Shipping = () => {
                       </p>
                     </div>
                   )}
+                </div>
+
+                {[1, 2].map((p, i) => (
+                  <div key={i} className="space-y-4">
+                    <div className="bg-gray-50 rounded-lg p-4">
+                      <h3 className="font-semibold text-gray-800 mb-2">
+                        KhansaPratha
+                      </h3>
+                      {[1, 2].map((item, idx) => (
+                        <div
+                          key={idx}
+                          className="py-4 border-t border-gray-200"
+                        >
+                          <div className="flex flex-col md:flex-row justify-between items-start gap-4">
+                            <div className="flex items-center gap-4">
+                              <img
+                                className="w-20 h-20 object-cover rounded-lg"
+                                src={`/images/products/${idx + 1}.jpg`}
+                                alt="Product"
+                              />
+                              <div>
+                                <h4 className="font-medium text-gray-800">
+                                  Product Name
+                                </h4>
+                                <p className="text-sm text-gray-600">
+                                  Brand: XYZ
+                                </p>
+                              </div>
+                            </div>
+                            <div className="flex flex-col md:items-end gap-4 w-full md:w-auto">
+                              <div className="text-emerald-500 font-bold text-lg">
+                                ₹2560
+                                <span className="text-gray-400 line-through ml-2">
+                                  ₹5642
+                                </span>
+                                <span className="text-emerald-400 text-sm ml-2">
+                                  (-15%)
+                                </span>
+                              </div>
+                              <div className="flex items-center gap-4">
+                                <div className="flex bg-gray-100 rounded-lg">
+                                  <button className="px-3 py-1 hover:bg-emerald-500 hover:text-white rounded-l-lg transition-colors">
+                                    -
+                                  </button>
+                                  <span className="px-3 py-1">2</span>
+                                  <button className="px-3 py-1 hover:bg-emerald-500 hover:text-white rounded-r-lg transition-colors">
+                                    +
+                                  </button>
+                                </div>
+                                <button className="px-4 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">
+                                  Delete
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="w-[33%]">
+              <div className="pl-3">
+                <div className="bg-white p-3 text-slate-600 flex flex-col gap-3">
+                  <h2 className="text-xl font-bold">Order Summary</h2>
+                  <div className="flex justify-between items-center">
+                    <span>Total Items (5)</span>
+                    <span>₹2560</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span>Delivery Fee</span>
+                    <span>₹100</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span>Total Payment</span>
+                    <span>₹100</span>
+                  </div>
+
+                  <div className="flex justify-between items-center">
+                    <span>Total</span>
+                    <span className="font-bold">₹2660</span>
+                  </div>
+
+                  <button
+                    disabled={res ? false : true}
+                    className={`px-5 py-[6px] rounded-sm ${
+                      res ? "bg-red-500" : "bg-red-300"
+                    }  text-white text-sm`}
+                  >
+                    Place Order
+                  </button>
                 </div>
               </div>
             </div>
