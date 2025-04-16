@@ -2,10 +2,12 @@ import React from "react";
 import Header from "./../components/Header";
 import Footer from "./../components/Footer";
 import { IoIosArrowForward } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import img1 from "../assets/img1.jpg";
 
 const Shipping = () => {
+  const { state } = useLocation();
+  console.log(state);
   return (
     <div>
       <Header />
@@ -123,7 +125,37 @@ const Shipping = () => {
                         />
                       </div>
                     </div>
+                    <div className="flex w-full gap-5 text-slate-600">
+                      <div className="flex flex-col gap-1 mb-2 w-full">
+                        <label htmlFor="area" className="text-slate-600">
+                          Area
+                        </label>
+                        <input
+                          type="text"
+                          name="area"
+                          id="area"
+                          className="w-full px-3 py-2 border border-slate-200 outline-none focus:border-green-500 rounded-md"
+                          placeholder="Enter Your Area"
+                        />
+                      </div>
+                      <div className="flex flex-col gap-1 mb-2 mt-5 w-full">
+                        <button className="px-3 py-[6px] rounded-sm hover:shadow-green-500/50 hover:shadow-lg bg-green-500 text-white">
+                          Save Change
+                        </button>
+                      </div>
+                    </div>
                   </form>
+
+                  <div className="flex flex-col gap-1">
+                    <h2 className="text-slate-600 font-bold pb-3">Deliver To</h2>
+                    <p>
+                      <span className="bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-2 py-1 rounded">Home</span>
+                      <span>Address , Province , City </span>
+                      <span className="text-indigo-500 cursor-pointer">Change</span>
+
+                    </p>
+                    <p className="text-slate-600 text-sm">Email to xyz@gmail.com</p>
+                  </div>
                 </div>
               </div>
             </div>
