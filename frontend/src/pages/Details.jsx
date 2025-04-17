@@ -7,6 +7,7 @@ import img1 from "../assets/img1.jpg";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Ratings from "./../components/Ratings";
+import { FaHeart } from "react-icons/fa";
 
 const Details = () => {
   const images = [1, 2, 3, 4, 5, 6];
@@ -142,12 +143,55 @@ const Details = () => {
               </div>
 
               <div className="text-2xl text-red-500 font-bold flex gap-3">
-                {
-                  discount !== 0 ? <>Price :
-                  <h2 className="line-through">₹2536</h2>
-                  <h2>₹{2536 - Math.floor((2536*discount)/100)}(-{discount}%)</h2>
-                  </>:<h2>Price : ₹2000</h2>
-                }
+                {discount !== 0 ? (
+                  <>
+                    Price :<h2 className="line-through">₹2536</h2>
+                    <h2>
+                      ₹{2536 - Math.floor((2536 * discount) / 100)}(-{discount}
+                      %)
+                    </h2>
+                  </>
+                ) : (
+                  <h2>Price : ₹2000</h2>
+                )}
+              </div>
+
+              <div className="text-slate-600">
+                <p>
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500s, when an unknown
+                  printer took a galley of type and scrambled it to make a type
+                  specimen book. It has survived not only five centuries, but
+                  also the leap into electronic typesetting, remaining
+                  essentially unchanged.
+                </p>
+              </div>
+
+              <div className="flex gap-3 pb-10 border-b">
+                {stock ? (
+                  <>
+                    <div className="flex bg-slate-200 h-[50px] justify-center items-center text-xl">
+                      <div className="px-6 cursor-pointer">-</div>
+                      <div className="px-6 cursor-pointer">2</div>
+                      <div className="px-6 cursor-pointer">+</div>
+                    </div>
+
+                    <div>
+                      <button className="px-8 py-3 h-[50px] cursor-pointer hover:shadow-lg bg-green-400 text-white">
+                        Add To Cart
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  ""
+                )}
+
+                <div className="">
+                  <div className="h-[50px] w-[50px] flex justify-center items-center cursor-pointerhover:shadow-lg bg-green-400 text-white">
+                    <FaHeart />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
