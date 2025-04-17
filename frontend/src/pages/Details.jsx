@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./../components/Header";
 import Footer from "./../components/Footer";
 import { Link } from "react-router-dom";
@@ -6,9 +6,13 @@ import { IoIosArrowForward } from "react-icons/io";
 import img1 from "../assets/img1.jpg";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import Ratings from "./../components/Ratings";
 
 const Details = () => {
   const images = [1, 2, 3, 4, 5, 6];
+  const [image, setImage] = useState("");
+  const discount = 5;
+  const stock = 3;
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -90,32 +94,61 @@ const Details = () => {
         <div className="w-[85%] h-full mx-auto">
           <div className="grid grid-cols-2 gap-8">
             <div>
-            <div className="p-5 border">
-              <img
-                className="h-[400px] w-full"
-                src="/images/products/1.jpg"
-                alt=""
-              />
+              <div className="p-5 border">
+                <img
+                  className="h-[400px] w-full"
+                  src={
+                    image
+                      ? `/images/products/${image}.jpg`
+                      : `/images/products/${images[2]}.jpg`
+                  }
+                  alt=""
+                />
+              </div>
+
+              <div className="py-3">
+                {images && (
+                  <Carousel
+                    autoPlay={true}
+                    infinite={true}
+                    transitionDuration={500}
+                    responsive={responsive}
+                  >
+                    {images.map((img, i) => {
+                      return (
+                        <div key={i} onClick={() => setImage(img)}>
+                          <img
+                            className="h-[120px] cursor-pointer"
+                            src={`/images/products/${i + 1}.jpg`}
+                            alt=""
+                          />
+                        </div>
+                      );
+                    })}
+                  </Carousel>
+                )}
+              </div>
             </div>
 
-            <div className="py-3">
-              {images && (
-                <Carousel
-                  autoPlay={true}
-                  infinite={true}
-                  transitionDuration={500}
-                  responsive={responsive}
-                >
-                  {images.map((img, i) => {
-                    return (
-                      <div>
-                        <img className="h-[120px]" src={`/images/products/${i + 1}.jpg`} alt="" />
-                      </div>
-                    );
-                  })}
-                </Carousel>
-              )}
-            </div>
+            <div className="flex flex-col gap-5">
+              <div className="text-3xl text-slate-600 font-bold">
+                <h2>Product Name</h2>
+              </div>
+              <div className="flex justify-start items-center gap-4">
+                <div className="flex text-xl">
+                  <Ratings ratings={4} />
+                </div>
+                <span className="text-green-500">(24 reviews)</span>
+              </div>
+
+              <div className="text-2xl text-red-500 font-bold flex gap-3">
+                {
+                  discount !== 0 ? <>Price :
+                  <h2 className="line-through">₹2536</h2>
+                  <h2>₹{2536 - Math.floor((2536*discount)/100)}(-{discount}%)</h2>
+                  </>:<h2>Price : ₹2000</h2>
+                }
+              </div>
             </div>
           </div>
         </div>
