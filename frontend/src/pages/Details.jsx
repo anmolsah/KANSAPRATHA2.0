@@ -309,6 +309,45 @@ const Details = () => {
                 </div>
               </div>
             </div>
+
+            <div className="w-[28%]">
+              <div className="pl-4">
+                <div className="px-3 py-2 text-slate-600 bg-slate-200">
+                  <h2 className="font-bold">From Khansapratha</h2>
+                </div>
+
+                <div className="flex flex-col gap-5 mt-3 border p-3">
+                  {[1, 2, 3].map((p, i) => {
+                    return (
+                      <Link className="block">
+                        <div className="relative h-[270px]">
+                          <img
+                            className="w-full h-full"
+                            src={`/images/products/${p}.jpg`}
+                            alt=""
+                          />
+                          {discount !== 0 && (
+                            <div className="flex justify-center items-center absolute text-white w-[30px] h-[38px] rounded-full bg-red-500 font-semibold text-xs left-2 top-2">
+                              {discount}%
+                            </div>
+                          )}
+                        </div>
+
+                        <h2 className="text-slate-600 py-1 font-bold">
+                          Product Name
+                        </h2>
+                        <div className="flex gap-2">
+                          <h2 className="text-slate-600 text-lg font-bold">₹2563</h2>
+                          <div className="flex items-center gap-2">
+                            <Ratings ratings={4} />
+                          </div>
+                        </div>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
