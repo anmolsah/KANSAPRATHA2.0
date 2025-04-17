@@ -8,6 +8,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Ratings from "./../components/Ratings";
 import { FaHeart } from "react-icons/fa";
+import { Facebook, Twitter, Github, Linkedin } from "lucide-react";
 
 const Details = () => {
   const images = [1, 2, 3, 4, 5, 6];
@@ -192,6 +193,69 @@ const Details = () => {
                     <FaHeart />
                   </div>
                 </div>
+              </div>
+
+              <div className="flex py-5 gap-5">
+                <div className="w-[150px] text-black font-bold text-xl flex flex-col gap-5">
+                  <span>Availability</span>
+                  <span>Share On</span>
+                </div>
+
+                <div className="flex flex-col gap-5">
+                  <span className={`text-${stock ? "green" : "red"}-500`}>
+                    {stock ? `In Stock(${stock}})` : "Out of Stock"}
+                  </span>
+                  <ul className="flex justify-start items-center gap-3">
+                    <li>
+                      <a
+                        className="w-[38px] h-[38px] hover:bg-[#059473] hover:text-white flex justify-center items-center bg-indigo-500 rounded-full text-white"
+                        href="#"
+                      >
+                        <Facebook size={20} />
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="w-[38px] h-[38px] hover:bg-[#059473] hover:text-white flex justify-center items-center bg-indigo-500 rounded-full text-white"
+                        href="#"
+                      >
+                        <Github size={20} />
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="w-[38px] h-[38px] hover:bg-[#059473] hover:text-white flex justify-center items-center bg-indigo-500 rounded-full text-white"
+                        href="#"
+                      >
+                        <Twitter size={20} />
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="w-[38px] h-[38px] hover:bg-[#059473] hover:text-white flex justify-center items-center bg-indigo-500 rounded-full text-white"
+                        href="#"
+                      >
+                        <Linkedin size={20} />
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="flex gap-3">
+                {stock ? (
+                  <button className="px-8 py-3 h-[50px] cursor-pointer hover:shadow-lg bg-green-400 text-white">
+                    Buy Now
+                  </button>
+                ) : (
+                  ""
+                )}
+                <Link
+                  to="#"
+                  className="px-8 py-3 h-[50px] cursor-pointer hover:shadow-lg bg-red-400 text-white"
+                >
+                  Chat Seller
+                </Link>
               </div>
             </div>
           </div>
