@@ -10,6 +10,10 @@ import Ratings from "./../components/Ratings";
 import { FaHeart } from "react-icons/fa";
 import { Facebook, Twitter, Github, Linkedin } from "lucide-react";
 import Reviews from "../components/Reviews";
+import { Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 const Details = () => {
   const images = [1, 2, 3, 4, 5, 6];
@@ -337,7 +341,9 @@ const Details = () => {
                           Product Name
                         </h2>
                         <div className="flex gap-2">
-                          <h2 className="text-slate-600 text-lg font-bold">₹2563</h2>
+                          <h2 className="text-slate-600 text-lg font-bold">
+                            ₹2563
+                          </h2>
                           <div className="flex items-center gap-2">
                             <Ratings ratings={4} />
                           </div>
@@ -348,6 +354,48 @@ const Details = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div className="w-[85%] h-full mx-auto">
+          <h2 className="text-2xl py-8 text-slate-600">Related Products</h2>
+          <div>
+            <Swiper
+              slidesPerView="auto"
+              breakpoint={{
+                1280: {
+                  slidesPerView: 3,
+                },
+                565: {
+                  slidesPerView: 2,
+                },
+              }}
+              spaceBetween={25}
+              loop={true}
+              pagination={{
+                clickable: true,
+                el: ".custom_bullet",
+              }}
+              modules={[Pagination]}
+              className="mySwiper"
+            >
+              {[1, 2, 3, 4, 5, 6].map((p, i) => {
+                return (
+                  <SwiperSlide key={i}>
+                    <Link className="block">
+                      <div className="relative h-[270px]">
+                        <div className="w-full h-full">
+                          <img src={`/images/products/${p}.jpg`} alt="" />
+                          <div className="absolute h-full w-full top-0 bg-black opacity-25 hover:opacity-50 transition-all duration-500"></div>
+                        </div>
+                      </div>
+                    </Link>
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
           </div>
         </div>
       </section>
