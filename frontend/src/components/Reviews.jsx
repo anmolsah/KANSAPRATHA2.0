@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Ratings from "./Ratings";
 import RatingTemp from "./RatingTemp";
+import Pagination from "./Pagination";
 
 const Reviews = () => {
+  const [perPage, setPerPage] = useState(1);
+  const [pageNumber, setPageNumber] = useState(10);
   return (
     <div className="mt-8">
       <div className="flex gap-10">
@@ -84,6 +87,41 @@ const Reviews = () => {
             </div>
             <p className="text-sm text-slate-600 w-[0%]">0</p>
           </div>
+        </div>
+      </div>
+
+      <h2 className="text-slate-600 text-xl font-bold py-5">
+        Product Reviews 10
+      </h2>
+      <div className="flex flex-col gap-8 pb-10 pt-4">
+        {[1, 2, 3, 4, 5].map((r, i) => (
+          <div key={i} className="flex flex-col gap-1">
+            <div className="flex justify-between items-center">
+              <div className="flex gap-1 text-xl">
+                <RatingTemp rating={4} />
+              </div>
+              <span className="text-slate-600">22 Apr 2025</span>
+            </div>
+            <span className="text-slate-600 text-md">Anmol Sah</span>
+            <p className="text-slate-600 text-sm">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel
+              libero vitae felis tincidunt luctus. Nam tincidunt, nunc at
+              fermentum tincidunt, leo risus gravida justo, non dignissim ligula
+              odio eu nunc.
+            </p>
+          </div>
+        ))}
+
+        <div className="flex justify-end">
+          {
+            <Pagination
+              pageNumber={pageNumber}
+              setPageNumber={setPageNumber}
+              totalItem={10}
+              perPage={perPage}
+              showItem={Math.floor(10 / 3)}
+            />
+          }
         </div>
       </div>
     </div>
