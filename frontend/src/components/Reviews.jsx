@@ -19,8 +19,70 @@ const Reviews = () => {
         </div>
 
         <div className="flex gap-2 flex-col py-4">
-          <div className="text-md flex gap-1 w-[93px]">
-            <RatingTemp rating={5} />
+          <div className="flex justify-start items-center gap-5">
+            <div className="text-md flex gap-1 w-[93px]">
+              <RatingTemp rating={5} />
+            </div>
+
+            <div className="w-[200px] h-[14px] bg-slate-200 relative">
+              <div className="h-full bg-yellow-400 w-[60%]"></div>
+            </div>
+            <p className="text-sm text-slate-600 w-[0%]">10</p>
+          </div>
+
+          <div className="flex justify-start items-center gap-5">
+            <div className="text-md flex gap-1 w-[93px]">
+              <RatingTemp rating={4} />
+            </div>
+
+            <div className="w-[200px] h-[14px] bg-slate-200 relative">
+              <div className="h-full bg-yellow-400 w-[80%]"></div>
+            </div>
+            <p className="text-sm text-slate-600 w-[0%]">20</p>
+          </div>
+
+          <div className="flex justify-start items-center gap-5">
+            <div className="text-md flex gap-1 w-[93px]">
+              <RatingTemp rating={3} />
+            </div>
+
+            <div className="w-[200px] h-[14px] bg-slate-200 relative">
+              <div className="h-full bg-yellow-400 w-[40%]"></div>
+            </div>
+            <p className="text-sm text-slate-600 w-[0%]">9</p>
+          </div>
+
+          <div className="flex justify-start items-center gap-5">
+            <div className="text-md flex gap-1 w-[93px]">
+              <RatingTemp rating={2} />
+            </div>
+
+            <div className="w-[200px] h-[14px] bg-slate-200 relative">
+              <div className="h-full bg-yellow-400 w-[20%]"></div>
+            </div>
+            <p className="text-sm text-slate-600 w-[0%]">5</p>
+          </div>
+
+          <div className="flex justify-start items-center gap-5">
+            <div className="text-md flex gap-1 w-[93px]">
+              <RatingTemp rating={1} />
+            </div>
+
+            <div className="w-[200px] h-[14px] bg-slate-200 relative">
+              <div className="h-full bg-yellow-400 w-[10%]"></div>
+            </div>
+            <p className="text-sm text-slate-600 w-[0%]">3</p>
+          </div>
+
+          <div className="flex justify-start items-center gap-5">
+            <div className="text-md flex gap-1 w-[93px]">
+              <RatingTemp rating={0} />
+            </div>
+
+            <div className="w-[200px] h-[14px] bg-slate-200 relative">
+              <div className="h-full bg-yellow-400 w-[0%]"></div>
+            </div>
+            <p className="text-sm text-slate-600 w-[0%]">0</p>
           </div>
         </div>
       </div>
