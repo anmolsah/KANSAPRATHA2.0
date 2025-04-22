@@ -2,10 +2,17 @@ import React, { useState } from "react";
 import Ratings from "./Ratings";
 import RatingTemp from "./RatingTemp";
 import Pagination from "./Pagination";
+import { Link } from "react-router-dom";
+import RatingReact from "react-rating";
+import { FaStar, FaStarHalfAlt } from "react-icons/fa";
+import { CiStar } from "react-icons/ci";
 
 const Reviews = () => {
   const [perPage, setPerPage] = useState(1);
   const [pageNumber, setPageNumber] = useState(10);
+  const userInfo = {};
+  const [rate, setRate] = useState("");
+  const [rev, setRev] = useState("");
   return (
     <div className="mt-8">
       <div className="flex gap-10">
@@ -123,6 +130,53 @@ const Reviews = () => {
             />
           }
         </div>
+      </div>
+
+      <div className="">
+        {userInfo ? (
+          <div className="flex flex-col gap-3">
+            <div className="flex gap-1">
+              <RatingReact
+                onChange={(e) => setRate(e)}
+                initialRating={rate}
+                emptySymbol={
+                  <span className="text-yellow-400 text-4xl">
+                    <CiStar />
+                  </span>
+                }
+                fullSymbol={
+                  <span className="text-yellow-400 text-4xl">
+                    <FaStar />
+                  </span>
+                }
+              />
+            </div>
+            <form>
+              <textarea
+                className="border outline-0 p-3 w-full rounded-md"
+                name=""
+                id=""
+                cols="30"
+                rows="5"
+                required
+              ></textarea>
+              <div className="mt-2">
+                <button className="py-1 px-5 bg-green-600 text-white rounded-sm">
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        ) : (
+          <div>
+            <Link
+              to="/login"
+              className="py-1 px-5 bg-green-500 text-white rounded-sm"
+            >
+              Login First
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );
