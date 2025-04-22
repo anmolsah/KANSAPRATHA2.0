@@ -18,7 +18,7 @@
     "react-multi-carousel": "^2.8.5",
     "react-range": "^1.10.0",
     "react-rating": "^2.0.5",
-    "react-redux": "^9.2.0",
+    "react-redux": "^9.0.1",
     "react-router-dom": "^6.20.1",
     "react-scripts": "5.0.1",
     "react-spinners": "^0.15.0",

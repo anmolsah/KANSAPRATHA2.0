@@ -470,7 +470,7 @@ import {
   X,
 } from "lucide-react";
 
-function App() {
+function Header({categorys}) {
   const [showSideBar, setShowSideBar] = useState(false);
   const [categoryShow, setCategoryShow] = useState(true);
   const [searchValue, setSearchValue] = useState("");
@@ -479,18 +479,7 @@ function App() {
   const user = true;
   const wishlist_count = 4;
 
-  const categories = [
-    "Cookware & Kitchenware",
-    "Drinkware",
-    "Tableware & Dinnerware",
-    "Home Decor",
-    "Gifting",
-    "Brass Products",
-    "Copper Products",
-    "Kansa (Bronze) Products",
-    "Best Sellers",
-    "New Arrivals",
-  ];
+  
 
   const navLinks = [
     { path: "/", label: "Home" },
@@ -663,9 +652,9 @@ function App() {
                     onChange={(e) => setCategory(e.target.value)}
                   >
                     <option value="">All Categories</option>
-                    {categories.map((cat) => (
-                      <option key={cat} value={cat}>
-                        {cat}
+                    {categorys.map((c,i) => (
+                      <option key={i} value={c}>
+                        {c.name}
                       </option>
                     ))}
                   </select>
@@ -765,4 +754,4 @@ function App() {
   );
 }
 
-export default App;
+export default Header;
