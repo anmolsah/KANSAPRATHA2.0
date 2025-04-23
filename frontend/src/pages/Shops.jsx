@@ -407,6 +407,20 @@ const Shops = () => {
     pageNumber,
   ]);
 
+  const resetRating = () => {
+    setRating("");
+    dispatch(
+      query_products({
+        low: state.values[0],
+        high: state.values[1],
+        category,
+        rating: "",
+        sortPrice,
+        pageNumber,
+      })
+    );
+  };
+
   return (
     <div className="bg-gradient-to-br from-indigo-50 to-purple-50 min-h-screen">
       <Header />
@@ -557,6 +571,9 @@ const Shops = () => {
                         ))}
                       </div>
                     ))}
+                 <button className="px-4 py-2 bg-emerald-500 text-white rounded-md shadow hover:bg-emerald-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-emerald-400" onClick={resetRating}>
+                      Reset
+                    </button>
                   </div>
                 </div>
 
@@ -571,7 +588,7 @@ const Shops = () => {
               <div className="bg-white rounded-lg p-6 shadow-md">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
                   <h2 className="text-xl font-medium text-gray-800 mb-4 md:mb-0">
-                   {totalProduct} Products
+                    {totalProduct} Products
                   </h2>
                   <div className="flex items-center gap-4">
                     <select
