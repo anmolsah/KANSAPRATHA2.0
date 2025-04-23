@@ -571,7 +571,7 @@ const Shops = () => {
               <div className="bg-white rounded-lg p-6 shadow-md">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
                   <h2 className="text-xl font-medium text-gray-800 mb-4 md:mb-0">
-                    14 Products
+                   {totalProduct} Products
                   </h2>
                   <div className="flex items-center gap-4">
                     <select

@@ -60,13 +60,12 @@
 
 // export default ShopProducts;
 
-
 import React from "react";
 import { FaRegHeart, FaEye } from "react-icons/fa";
 import { RiShoppingCartLine } from "react-icons/ri";
 import Ratings from "./../Ratings";
 
-const ShopProducts = ({ styles }) => {
+const ShopProducts = ({ styles, products }) => {
   return (
     <div
       className={`w-full grid ${
@@ -75,13 +74,11 @@ const ShopProducts = ({ styles }) => {
           : "grid-cols-1"
       } gap-6`}
     >
-      {[1, 2, 3, 4, 5, 6].map((p, i) => (
+      {products.map((p, i) => (
         <div
           key={i}
           className={`group flex ${
-            styles === "grid"
-              ? "flex-col"
-              : "flex-col md:flex-row items-center"
+            styles === "grid" ? "flex-col" : "flex-col md:flex-row items-center"
           } bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden`}
         >
           <div
@@ -93,7 +90,7 @@ const ShopProducts = ({ styles }) => {
           >
             <img
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              src={`/images/products/${i + 1}.jpg`}
+              src={p.images[0]}
               alt="Product"
             />
             <div className="absolute bottom-0 left-0 right-0 flex justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pb-4">
@@ -113,19 +110,19 @@ const ShopProducts = ({ styles }) => {
               styles !== "grid" && "md:pl-6"
             } flex flex-col gap-2`}
           >
-            <h2 className="text-lg font-semibold text-gray-800">Product Name</h2>
+            <h2 className="text-lg font-semibold text-gray-800">{p.name}</h2>
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
-              <span className="text-emerald-500 font-bold text-lg">₹2543</span>
+              <span className="text-emerald-500 font-bold text-lg">
+                ₹{p.price}
+              </span>
               <div className="flex items-center gap-2">
-                <Ratings ratings={4} />
+                <Ratings ratings={p.rating} />
                 {/* <span className="text-gray-500 text-sm">(24 reviews)</span> */}
               </div>
             </div>
             {styles === "list" && (
               <p className="text-gray-600 text-sm mt-2 line-clamp-3">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                Quisquam voluptates voluptatum, quibusdam, quia, voluptate 
-                quod voluptas quos doloribus quas quae.
+                {p.description}
               </p>
             )}
           </div>
