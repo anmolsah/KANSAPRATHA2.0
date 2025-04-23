@@ -342,12 +342,20 @@ import { FaThList } from "react-icons/fa";
 import ShopProducts from "../components/products/ShopProducts";
 import Pagination from "../components/Pagination";
 import { useDispatch, useSelector } from "react-redux";
-import { price_range_product,query_products } from "../store/reducers/homeReducer";
+import {
+  price_range_product,
+  query_products,
+} from "../store/reducers/homeReducer";
 const Shops = () => {
   const dispatch = useDispatch();
-  const { products, categorys, priceRange, latest_product } = useSelector(
-    (state) => state.home
-  );
+  const {
+    products,
+    categorys,
+    priceRange,
+    latest_product,
+    totalProduct,
+    perPage,
+  } = useSelector((state) => state.home);
 
   useEffect(() => {
     dispatch(price_range_product());
@@ -362,7 +370,7 @@ const Shops = () => {
   const [filter, setFilter] = useState(true);
   const [rating, setRating] = useState("");
   const [styles, setStyles] = useState("grid");
-  const [perPage, setPerPage] = useState(1);
+
   const [pageNumber, setPageNumber] = useState(1);
   const [state, setState] = useState({
     values: [priceRange.low, priceRange.high],
@@ -390,7 +398,14 @@ const Shops = () => {
         pageNumber,
       })
     );
-  }, [state.values[0], state.values[1], category, rating, sortPrice, pageNumber]);
+  }, [
+    state.values[0],
+    state.values[1],
+    category,
+    rating,
+    sortPrice,
+    pageNumber,
+  ]);
 
   return (
     <div className="bg-gradient-to-br from-indigo-50 to-purple-50 min-h-screen">
@@ -592,15 +607,17 @@ const Shops = () => {
                   </div>
                 </div>
 
-                <ShopProducts styles={styles} />
+                <ShopProducts products={products} styles={styles} />
                 <div>
-                  <Pagination
-                    pageNumber={pageNumber}
-                    setPageNumber={setPageNumber}
-                    totalItem={10}
-                    perPage={perPage}
-                    showItem={Math.floor(10 / 3)}
-                  />
+                  {totalProduct > perPage && (
+                    <Pagination
+                      pageNumber={pageNumber}
+                      setPageNumber={setPageNumber}
+                      totalItem={totalProduct}
+                      perPage={perPage}
+                      showItem={Math.floor(totalProduct / 3)}
+                    />
+                  )}
                 </div>
               </div>
             </div>

@@ -101,12 +101,27 @@ class homeController {
     req.query.perPage = perPage;
     try {
       const products = await productModel.find({}).sort({ createdAt: -1 });
-      const totalProduct = new this.queryProducts
-      
+      const totalProduct = new queryProducts(products, req.query)
+        .categoryQuery()
+        .ratingQuery()
+        .priceQuery()
+        .sortByPrice()
+        .countProducts();
+      const result = new queryProducts(products, req.query)
+        .categoryQuery()
+        .ratingQuery()
+        .priceQuery()
+        .sortByPrice()
+        .limit()
+        .skip()
+        .getProducts();
+
+      responseReturn(res, 200, { products: result, totalProduct, perPage });
     } catch (error) {
-      
+      console.log(error.message);
+      responseReturn(res, 500, { error: "Internal Server error" });
     }
-  }
+  };
 }
 
 module.exports = new homeController();
