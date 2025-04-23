@@ -1,5 +1,6 @@
 const categoryModel = require("../../models/categoryModel");
 const { responseReturn } = require("../../utilities/response");
+const productModel = require("../../models/productModel");
 
 class homeController {
   get_categorys = async (req, res) => {
@@ -7,6 +8,40 @@ class homeController {
       const categorys = await categoryModel.find({});
       responseReturn(res, 200, {
         categorys,
+      });
+    } catch (error) {
+      console.log(error.message);
+      responseReturn(res, 500, { error: "Internal Server error" });
+    }
+  };
+
+  get_products = async (req, res) => {
+    try {
+      const products = await productModel
+        .find({})
+        .limit(12)
+        .sort({ createdAt: -1 });
+      const allProduct1 = await productModel
+        .find({})
+        .limit(9)
+        .sort({ createdAt: -1 });
+      const latest_product = this.formateProduct(allProduct1);
+      const allProduct2 = await productModel
+        .find({})
+        .limit(9)
+        .sort({ rating: -1 });
+      const topRated_product = this.formateProduct(allProduct2);
+      const allProduct3 = await productModel
+        .find({})
+        .limit(9)
+        .sort({ discount: -1 });
+      const discount_product = this.formateProduct(allProduct3);
+
+      responseReturn(res, 200, {
+        products,
+        latest_product,
+        topRated_product,
+        discount_product,
       });
     } catch (error) {
       console.log(error.message);
