@@ -342,7 +342,7 @@ import { FaThList } from "react-icons/fa";
 import ShopProducts from "../components/products/ShopProducts";
 import Pagination from "../components/Pagination";
 import { useDispatch, useSelector } from "react-redux";
-import { price_range_product } from "../store/reducers/homeReducer";
+import { price_range_product,query_products } from "../store/reducers/homeReducer";
 const Shops = () => {
   const dispatch = useDispatch();
   const { products, categorys, priceRange, latest_product } = useSelector(
@@ -370,7 +370,7 @@ const Shops = () => {
 
   const [category, setCategory] = useState("");
   const [sortPrice, setSortPrice] = useState("");
-  
+
   const queryCategory = (e, val) => {
     if (e.target.checked) {
       setCategory(val);
@@ -378,6 +378,19 @@ const Shops = () => {
       setCategory("");
     }
   };
+
+  useEffect(() => {
+    dispatch(
+      query_products({
+        low: state.values[0],
+        high: state.values[1],
+        category,
+        rating,
+        sortPrice,
+        pageNumber,
+      })
+    );
+  }, [state.values[0], state.values[1], category, rating, sortPrice, pageNumber]);
 
   return (
     <div className="bg-gradient-to-br from-indigo-50 to-purple-50 min-h-screen">
@@ -546,7 +559,10 @@ const Shops = () => {
                     14 Products
                   </h2>
                   <div className="flex items-center gap-4">
-                    <select onChange={(e)=>setSortPrice(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-600 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-400">
+                    <select
+                      onChange={(e) => setSortPrice(e.target.value)}
+                      className="bg-gray-50 border border-gray-300 text-gray-600 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-400"
+                    >
                       <option value="">Sort By</option>
                       <option value="low-to-high">Low to High Price</option>
                       <option value="high-to-low">High to Low Price</option>
