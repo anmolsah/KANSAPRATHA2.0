@@ -29,6 +29,21 @@ export const get_products = createAsyncThunk(
   }
 );
 
+
+export const price_range_product = createAsyncThunk(
+  "product/price_range_product",
+  async (_, { fulfillWithValue }) => {
+    try {
+      const { data } = await api.get("/home/price-range-latest-product");
+      console.log(data);
+      return fulfillWithValue(data);
+    } catch (error) {
+      console.log(error.response);
+      //return fulfillWithValue(error.response.data);
+    }
+  }
+);
+
 export const homeReducer = createSlice({
   name: "home",
   initialState: {

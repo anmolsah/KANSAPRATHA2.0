@@ -66,6 +66,14 @@ class homeController {
       responseReturn(res, 500, { error: "Internal Server error" });
     }
   };
+
+  price_range_product = async (req, res) => {
+    try {
+      
+    } catch (error) {
+      
+    }
+  }
 }
 
 module.exports = new homeController();

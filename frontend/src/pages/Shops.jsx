@@ -327,7 +327,7 @@
 
 // export default Shops;
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./../components/Header";
 import Footer from "./../components/Footer";
 import img1 from "../assets/img1.jpg";
@@ -341,8 +341,16 @@ import { BsFillGridFill } from "react-icons/bs";
 import { FaThList } from "react-icons/fa";
 import ShopProducts from "../components/products/ShopProducts";
 import Pagination from "../components/Pagination";
-
+import { useDispatch, useSelector } from "react-redux";
+import { price_range_product } from "../store/reducers/homeReducer";
 const Shops = () => {
+  const dispatch = useDispatch();
+  const { categorys } = useSelector((state) => state.home);
+
+  useEffect(() => {
+    dispatch(price_range_product());
+  }, []);
+
   const [filter, setFilter] = useState(true);
   const [rating, setRating] = useState("");
   const [styles, setStyles] = useState("grid");
@@ -351,16 +359,7 @@ const Shops = () => {
   const [state, setState] = useState({
     values: [50, 5000],
   });
-  const categorys = [
-    "Cookware & Kitchenware",
-    "Drinkware",
-    "Tableware & Dinnerware",
-    "Home Decor",
-    "Gifting",
-    "Brass Products",
-    "Copper Products",
-    "Best Sellers",
-  ];
+
   return (
     <div className="bg-gradient-to-br from-indigo-50 to-purple-50 min-h-screen">
       <Header />
@@ -419,14 +418,14 @@ const Shops = () => {
                     <div className="flex items-center gap-2 py-1" key={i}>
                       <input
                         type="checkbox"
-                        id={c}
+                        id={c.name}
                         className="text-emerald-500 border-gray-300 rounded focus:ring-emerald-400"
                       />
                       <label
-                        htmlFor={c}
+                        htmlFor={c.name}
                         className="text-gray-600 hover:text-emerald-500 cursor-pointer transition-colors"
                       >
-                        {c}
+                        {c.name}
                       </label>
                     </div>
                   ))}
@@ -451,7 +450,7 @@ const Shops = () => {
                             ...props.style,
                             display: "flex",
                             alignItems: "center",
-                            height: "20px", 
+                            height: "20px",
                           }}
                         >
                           <div
