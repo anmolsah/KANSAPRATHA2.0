@@ -345,11 +345,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { price_range_product } from "../store/reducers/homeReducer";
 const Shops = () => {
   const dispatch = useDispatch();
-  const { categorys } = useSelector((state) => state.home);
+  const {products, categorys,priceRange,latest_product } = useSelector((state) => state.home);
 
   useEffect(() => {
     dispatch(price_range_product());
   }, []);
+
+  useEffect(() => {
+   setState({
+    values:[priceRange.low,priceRange.high]
+   })
+  }, [priceRange]);
 
   const [filter, setFilter] = useState(true);
   const [rating, setRating] = useState("");
@@ -357,7 +363,7 @@ const Shops = () => {
   const [perPage, setPerPage] = useState(1);
   const [pageNumber, setPageNumber] = useState(1);
   const [state, setState] = useState({
-    values: [50, 5000],
+    values: [priceRange.low,priceRange.high],
   });
 
   return (
@@ -438,8 +444,8 @@ const Shops = () => {
                   <div className="space-y-4">
                     <Range
                       step={5}
-                      min={50}
-                      max={5000}
+                      min={priceRange.low}
+                      max={priceRange.high}
                       values={state.values}
                       onChange={(values) => setState({ values })}
                       renderTrack={({ props, children }) => (
@@ -480,7 +486,7 @@ const Shops = () => {
                     />
 
                     <div className="text-gray-800 font-medium">
-                      ${Math.floor(state.values[0])} - $
+                    ₹{Math.floor(state.values[0])} - ₹
                       {Math.floor(state.values[1])}
                     </div>
                   </div>
@@ -512,7 +518,7 @@ const Shops = () => {
                 </div>
 
                 <div className="pt-4">
-                  {/* <Products title="Latest Products" /> */}
+                  <Products title="Latest Products" products={latest_product} />
                 </div>
               </div>
             </div>
