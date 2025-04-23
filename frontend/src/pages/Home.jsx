@@ -6,16 +6,22 @@ import FeatureProduct from "../components/products/FeatureProduct";
 import Products from "../components/products/Products";
 import Footer from "../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
-import { get_category,get_products } from "../store/reducers/homeReducer";
+import { get_category, get_products } from "../store/reducers/homeReducer";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { categorys } = useSelector((state) => state.home);
+  const {
+    categorys,
+    products,
+    latest_product,
+    topRated_product,
+    discount_product,
+  } = useSelector((state) => state.home);
 
   useEffect(() => {
     dispatch(get_category());
     dispatch(get_products());
-  },[]);
+  }, []);
 
   return (
     <div className="w-full">
@@ -23,19 +29,19 @@ const Home = () => {
       <Banner />
       <Categorys categorys={categorys} />
       <div className="py-[45px]">
-        <FeatureProduct />
+        <FeatureProduct products={products} />
       </div>
       <div className="py-10">
         <div className="w-[85%] mx-auto flex flex-wrap">
           <div className="grid w-full grid-cols-3  gap-7">
             <div className="overflow-hidden">
-              <Products title="Latest Product" />
+              <Products title="Latest Product" products={latest_product} />
             </div>
             <div className="overflow-hidden">
-              <Products title="Top Rated Product" />
+              <Products title="Top Rated Product" products={topRated_product} />
             </div>
             <div className="overflow-hidden">
-              <Products title="Discount Product" />
+              <Products title="Discount Product" products={discount_product} />
             </div>
           </div>
         </div>

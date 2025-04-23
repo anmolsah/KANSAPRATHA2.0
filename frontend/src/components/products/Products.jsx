@@ -71,7 +71,7 @@ import "react-multi-carousel/lib/styles.css";
 import { Link } from "react-router-dom";
 import { FaCircleChevronLeft, FaCircleChevronRight } from "react-icons/fa6";
 
-const Products = ({ title }) => {
+const Products = ({ title, products }) => {
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -91,10 +91,10 @@ const Products = ({ title }) => {
     },
   };
 
-  const products = [
-    [1, 2, 3],
-    [4, 5, 6],
-  ];
+  // const products = [
+  //   [1, 2, 3],
+  //   [4, 5, 6],
+  // ];
 
   const ButtonGroup = ({ next, previous }) => {
     return (
@@ -148,7 +148,7 @@ const Products = ({ title }) => {
                   {/* Added bg for debugging */}
                   <img
                     className="w-full h-full object-cover" // Ensure image fills container
-                    src={`/images/products/${pl}.jpg`}
+                    src={pl.images[0]}
                     alt={`Product ${pl}`}
                   />
                 </div>
@@ -156,9 +156,9 @@ const Products = ({ title }) => {
                   {" "}
                   {/* Added padding */}
                   <h2 className="text-lg font-semibold text-slate-600">
-                    Product Name
+                    {pl.name}
                   </h2>
-                  <span className="text-lg font-bold">$256</span>
+                  <span className="text-lg font-bold">₹{pl.price}</span>
                 </div>
               </Link>
             ))}

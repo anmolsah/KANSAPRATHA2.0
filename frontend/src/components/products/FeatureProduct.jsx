@@ -4,7 +4,7 @@ import { RiShoppingCartLine } from "react-icons/ri";
 import Ratings from "../Ratings";
 import { Link } from "react-router-dom";
 
-const FeatureProduct = () => {
+const FeatureProduct = ({ products }) => {
   return (
     <div className="w-[85%] fles flex-wrap mx-auto">
       <div className="w-full">
@@ -15,18 +15,22 @@ const FeatureProduct = () => {
       </div>
 
       <div className="w-full grid grid-cols-4 gap-6">
-        {[1, 2, 3, 4, 5, 6, 7, 8].map((p, i) => (
+        {products.map((p, i) => (
           <div
             key={i}
             className="border group transition-all duration-500 hover:shadow-md hover:-mt-5"
           >
             <div className="relative overflow-hidden">
-              <div className="flex justify-center items-center absolute text-white w-[30px] h-[38px] rounded-full bg-red-500 font-semibold text-xs left-2 top-2">
-                8%
-              </div>
+              {p.discount ? (
+                <div className="flex justify-center items-center absolute text-white w-[30px] h-[38px] rounded-full bg-red-500 font-semibold text-xs left-2 top-2">
+                  {p.discount}%
+                </div>
+              ) : (
+                ""
+              )}
               <img
                 className="sm:w-full w-full h-[240px]"
-                src={`/images/products/${i + 1}.jpg`}
+                src={p.images[0]}
                 alt=""
               />
               <ul className=" flex transition-all duration-700 -bottom-10 justify-center items-center gap-2 absolute w-full group-hover:bottom-3">
@@ -46,11 +50,11 @@ const FeatureProduct = () => {
             </div>
 
             <div className="py-3 text-slate-600 px-2 ">
-              <h2 className="font-bold">Product Name</h2>
+              <h2 className="font-bold">{p.name}</h2>
               <div className="flex justify-start items-center gap-3">
-                <span className="text-md font-semibold">₹2543</span>
+                <span className="text-md font-semibold">₹{p.price}</span>
                 <div className="flex">
-                  <Ratings ratings={4} />
+                  <Ratings ratings={p.rating} />
                 </div>
               </div>
             </div>
