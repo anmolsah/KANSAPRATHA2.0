@@ -345,16 +345,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { price_range_product } from "../store/reducers/homeReducer";
 const Shops = () => {
   const dispatch = useDispatch();
-  const {products, categorys,priceRange,latest_product } = useSelector((state) => state.home);
+  const { products, categorys, priceRange, latest_product } = useSelector(
+    (state) => state.home
+  );
 
   useEffect(() => {
     dispatch(price_range_product());
   }, []);
 
   useEffect(() => {
-   setState({
-    values:[priceRange.low,priceRange.high]
-   })
+    setState({
+      values: [priceRange.low, priceRange.high],
+    });
   }, [priceRange]);
 
   const [filter, setFilter] = useState(true);
@@ -363,8 +365,19 @@ const Shops = () => {
   const [perPage, setPerPage] = useState(1);
   const [pageNumber, setPageNumber] = useState(1);
   const [state, setState] = useState({
-    values: [priceRange.low,priceRange.high],
+    values: [priceRange.low, priceRange.high],
   });
+
+  const [category, setCategory] = useState("");
+  const [sortPrice, setSortPrice] = useState("");
+  
+  const queryCategory = (e, val) => {
+    if (e.target.checked) {
+      setCategory(val);
+    } else {
+      setCategory("");
+    }
+  };
 
   return (
     <div className="bg-gradient-to-br from-indigo-50 to-purple-50 min-h-screen">
@@ -423,6 +436,8 @@ const Shops = () => {
                   {categorys.map((c, i) => (
                     <div className="flex items-center gap-2 py-1" key={i}>
                       <input
+                        checked={category === c.name ? true : false}
+                        onChange={(e) => queryCategory(e, c.name)}
                         type="checkbox"
                         id={c.name}
                         className="text-emerald-500 border-gray-300 rounded focus:ring-emerald-400"
@@ -486,7 +501,7 @@ const Shops = () => {
                     />
 
                     <div className="text-gray-800 font-medium">
-                    ₹{Math.floor(state.values[0])} - ₹
+                      ₹{Math.floor(state.values[0])} - ₹
                       {Math.floor(state.values[1])}
                     </div>
                   </div>
@@ -497,7 +512,7 @@ const Shops = () => {
                     Rating
                   </h2>
                   <div className="space-y-2">
-                    {[5, 4, 3, 2, 1].map((stars) => (
+                    {[5, 4, 3, 2, 1, 0].map((stars) => (
                       <div
                         key={stars}
                         onClick={() => setRating(stars)}
@@ -531,7 +546,7 @@ const Shops = () => {
                     14 Products
                   </h2>
                   <div className="flex items-center gap-4">
-                    <select className="bg-gray-50 border border-gray-300 text-gray-600 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-400">
+                    <select onChange={(e)=>setSortPrice(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-600 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-400">
                       <option value="">Sort By</option>
                       <option value="low-to-high">Low to High Price</option>
                       <option value="high-to-low">High to Low Price</option>
