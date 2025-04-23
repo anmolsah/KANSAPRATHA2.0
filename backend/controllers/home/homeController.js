@@ -1,6 +1,7 @@
 const categoryModel = require("../../models/categoryModel");
 const { responseReturn } = require("../../utilities/response");
 const productModel = require("../../models/productModel");
+const queryProducts = require("../../utilities/queryProducts");
 
 class homeController {
   formateProduct = (products) => {
@@ -96,7 +97,11 @@ class homeController {
   };
 
   query_products = async (req, res) => {
+    const perPage = 12;
+    req.query.perPage = perPage;
     try {
+      const products = await productModel.find({}).sort({ createdAt: -1 });
+      const totalProduct = new this.queryProducts
       
     } catch (error) {
       
