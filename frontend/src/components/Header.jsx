@@ -469,8 +469,11 @@ import {
   Search,
   X,
 } from "lucide-react";
+import { useSelector } from "react-redux";
 
-function Header({categorys}) {
+function Header() {
+  const { categorys } = useSelector((state) => state.home);
+
   const [showSideBar, setShowSideBar] = useState(false);
   const [categoryShow, setCategoryShow] = useState(true);
   const [searchValue, setSearchValue] = useState("");
@@ -478,8 +481,6 @@ function Header({categorys}) {
   const pathname = "/";
   const user = true;
   const wishlist_count = 4;
-
-  
 
   const navLinks = [
     { path: "/", label: "Home" },
@@ -652,7 +653,7 @@ function Header({categorys}) {
                     onChange={(e) => setCategory(e.target.value)}
                   >
                     <option value="">All Categories</option>
-                    {categorys.map((c,i) => (
+                    {categorys.map((c, i) => (
                       <option key={i} value={c}>
                         {c.name}
                       </option>
