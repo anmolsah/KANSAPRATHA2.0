@@ -15,8 +15,6 @@ export const get_category = createAsyncThunk(
   }
 );
 
-
-
 export const get_products = createAsyncThunk(
   "product/get_products",
   async (_, { fulfillWithValue }) => {
@@ -35,13 +33,24 @@ export const homeReducer = createSlice({
   name: "home",
   initialState: {
     categorys: [],
+    products: [],
+    latest_product: [],
+    topRated_product: [],
+    discount_product: [],
   },
 
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(get_category.fulfilled, (state, { payload }) => {
-      state.categorys = payload.categorys;
-    });
+    builder
+      .addCase(get_category.fulfilled, (state, { payload }) => {
+        state.categorys = payload.categorys;
+      })
+      .addCase(get_products.fulfilled, (state, { payload }) => {
+        state.products = payload.products;
+        state.latest_product = payload.latest_product;
+        state.topRated_product = payload.topRated_product;
+        state.discount_product = payload.discount_product;
+      });
   },
 });
 
