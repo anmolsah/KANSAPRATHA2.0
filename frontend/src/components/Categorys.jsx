@@ -64,7 +64,7 @@ const Categorys = () => {
         responsive={responsive}
       >
         {categorys.map((c, i) => (
-          <Link className="h-[185px] border block" key={i} to="#">
+          <Link className="h-[185px] border block" key={i} to={`/products?category=${c.name}`}>
             <div className="w-ful h-full relative p-3">
               <img src={c.image} alt="" />
               <div className="absolute bottom-6 w-full mx-auto left-0 flex items-center justify-center">

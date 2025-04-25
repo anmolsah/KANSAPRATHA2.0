@@ -470,8 +470,10 @@ import {
   X,
 } from "lucide-react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
+  const navigate = useNavigate();
   const { categorys } = useSelector((state) => state.home);
 
   const [showSideBar, setShowSideBar] = useState(false);
@@ -489,6 +491,10 @@ function Header() {
     { path: "/about", label: "About" },
     { path: "/contact", label: "Contact" },
   ];
+
+  const search = ()=>{
+    navigate(`/products/search?category=${category}&&value=${searchValue}`)
+  }
 
   return (
     <div className="w-full">
@@ -654,7 +660,7 @@ function Header() {
                   >
                     <option value="">All Categories</option>
                     {categorys.map((c, i) => (
-                      <option key={i} value={c}>
+                      <option key={i} value={c.name}>
                         {c.name}
                       </option>
                     ))}
@@ -666,7 +672,7 @@ function Header() {
                     value={searchValue}
                     onChange={(e) => setSearchValue(e.target.value)}
                   />
-                  <button className="px-6 bg-emerald-500 text-white font-medium hover:bg-emerald-600 transition-all duration-300 flex items-center hover:shadow-lg">
+                  <button onClick={search} className="px-6 bg-emerald-500 text-white font-medium hover:bg-emerald-600 transition-all duration-300 flex items-center hover:shadow-lg">
                     <Search size={20} className="mr-2" />
                     <span className="hidden sm:inline">Search</span>
                   </button>
