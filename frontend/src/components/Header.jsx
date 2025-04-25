@@ -470,7 +470,7 @@ import {
   X,
 } from "lucide-react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Header() {
   const navigate = useNavigate();
@@ -481,7 +481,7 @@ function Header() {
   const [searchValue, setSearchValue] = useState("");
   const [category, setCategory] = useState("");
   const pathname = "/";
-  const user = true;
+  const user = false;
   const wishlist_count = 4;
 
   const navLinks = [
@@ -635,15 +635,15 @@ function Header() {
               </div>
 
               {user ? (
-                <button className="flex items-center space-x-2 bg-emerald-500 text-white px-4 py-2 rounded-full hover:bg-emerald-600 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                <Link className="flex items-center space-x-2 bg-emerald-500 text-white px-4 py-2 rounded-full hover:bg-emerald-600 transition-all duration-300 hover:scale-105 hover:shadow-lg">
                   <User size={18} />
-                  <span className="font-medium hidden sm:inline">Account</span>
-                </button>
+                  <span className="font-medium hidden sm:inline">Anmol Sah</span>
+                </Link>
               ) : (
-                <button className="flex items-center space-x-2 bg-emerald-500 text-white px-4 py-2 rounded-full hover:bg-emerald-600 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                <Link to="/login" className="flex items-center space-x-2 bg-emerald-500 text-white px-4 py-2 rounded-full hover:bg-emerald-600 transition-all duration-300 hover:scale-105 hover:shadow-lg">
                   <Lock size={18} />
                   <span className="font-medium hidden sm:inline">Login</span>
-                </button>
+                </Link>
               )}
             </div>
           </div>
