@@ -1,11 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import Header from "./../components/Header";
 import { FaFacebookF } from "react-icons/fa6";
 import { FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { customer_login, messageClear } from "../store/reducers/authReducer";
+import { useDispatch, useSelector } from "react-redux";
+import toast from "react-hot-toast";
+import { FadeLoader } from "react-spinners";
 
 const Login = () => {
+  const { loader, errorMessage, successMessage } = useSelector(
+    (state) => state.auth
+  );
+  const dispatch = useDispatch();
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -20,11 +28,27 @@ const Login = () => {
 
   const login = (e) => {
     e.preventDefault();
-    console.log(state);
+    dispatch(customer_login(state));
   };
+
+  useEffect(() => {
+    if (successMessage) {
+      toast.success(successMessage);
+      dispatch(messageClear());
+    }
+    if (errorMessage) {
+      toast.error(errorMessage);
+      dispatch(messageClear());
+    }
+  }, [successMessage, errorMessage]);
 
   return (
     <div className="min-h-screen flex flex-col">
+      {loader && (
+              <div className="w-screen h-screen flex justify-center items-center bg-[rgba(0,0,0,0.7)] fixed top-0 left-0 z-[999]">
+                <FadeLoader />
+              </div>
+            )}
       <Header />
       <div className="flex-1 bg-gradient-to-br from-indigo-50 to-purple-50 py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">

@@ -41,6 +41,10 @@ class customerAuthController {
       res.status(500).json({ message: "Internal server error" });
     }
   };
+
+  customer_login = async (req, res) => {
+    console.log(req.body);
+  };
 }
 
 module.exports = new customerAuthController();
