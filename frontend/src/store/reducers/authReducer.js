@@ -16,7 +16,6 @@ export const customer_register = createAsyncThunk(
   }
 );
 
-
 export const customer_login = createAsyncThunk(
   "auth/customer_login",
   async (info, { rejectWithValue, fulfillWithValue }) => {
@@ -50,13 +49,24 @@ export const authReducer = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(customer_register.pending, (state, { payload }) => {
-        state.loader =true;
+        state.loader = true;
       })
       .addCase(customer_register.rejected, (state, { payload }) => {
         state.errorMessage = payload.error;
         state.loader = false;
       })
       .addCase(customer_register.fulfilled, (state, { payload }) => {
+        state.successMessage = payload.message;
+        state.loader = false;
+      })
+      .addCase(customer_login.pending, (state, { payload }) => {
+        state.loader = true;
+      })
+      .addCase(customer_login.rejected, (state, { payload }) => {
+        state.errorMessage = payload.error;
+        state.loader = false;
+      })
+      .addCase(customer_login.fulfilled, (state, { payload }) => {
         state.successMessage = payload.message;
         state.loader = false;
       });
