@@ -475,6 +475,7 @@ import { Link, useNavigate } from "react-router-dom";
 function Header() {
   const navigate = useNavigate();
   const { categorys } = useSelector((state) => state.home);
+  const { userInfo } = useSelector((state) => state.auth);
 
   const [showSideBar, setShowSideBar] = useState(false);
   const [categoryShow, setCategoryShow] = useState(true);
@@ -634,10 +635,10 @@ function Header() {
                 </button>
               </div>
 
-              {user ? (
+              {userInfo ? (
                 <Link className="flex items-center space-x-2 bg-emerald-500 text-white px-4 py-2 rounded-full hover:bg-emerald-600 transition-all duration-300 hover:scale-105 hover:shadow-lg">
                   <User size={18} />
-                  <span className="font-medium hidden sm:inline">Anmol Sah</span>
+                  <span className="font-medium hidden sm:inline">{userInfo.name}</span>
                 </Link>
               ) : (
                 <Link to="/login" className="flex items-center space-x-2 bg-emerald-500 text-white px-4 py-2 rounded-full hover:bg-emerald-600 transition-all duration-300 hover:scale-105 hover:shadow-lg">

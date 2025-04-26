@@ -3,14 +3,15 @@ import Footer from "../components/Footer";
 import Header from "./../components/Header";
 import { FaFacebookF } from "react-icons/fa6";
 import { FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { customer_login, messageClear } from "../store/reducers/authReducer";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { FadeLoader } from "react-spinners";
 
 const Login = () => {
-  const { loader, errorMessage, successMessage } = useSelector(
+  const navigate = useNavigate()
+  const { loader, errorMessage, successMessage,userInfo } = useSelector(
     (state) => state.auth
   );
   const dispatch = useDispatch();
@@ -39,6 +40,9 @@ const Login = () => {
     if (errorMessage) {
       toast.error(errorMessage);
       dispatch(messageClear());
+    }
+    if(userInfo) {
+      navigate("/");
     }
   }, [successMessage, errorMessage]);
 
