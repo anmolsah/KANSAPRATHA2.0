@@ -226,7 +226,7 @@ const Card = () => {
     });
   }
   return (
-    <div className="bg-gradient-to-r from-indigo-600 to-purple-600 min-h-screen">
+    <div className="bg-gradient-to-br from-indigo-50 to-purple-50min-h-screen">
       <Header />
       <section
         className="h-64 bg-cover bg-no-repeat relative"

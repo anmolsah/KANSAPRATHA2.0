@@ -476,6 +476,7 @@ function Header() {
   const navigate = useNavigate();
   const { categorys } = useSelector((state) => state.home);
   const { userInfo } = useSelector((state) => state.auth);
+  const { cart_product_count } = useSelector((state) => state.cart);
 
   const [showSideBar, setShowSideBar] = useState(false);
   const [categoryShow, setCategoryShow] = useState(true);
@@ -495,6 +496,14 @@ function Header() {
 
   const search = ()=>{
     navigate(`/products/search?category=${category}&&value=${searchValue}`)
+  }
+
+  const redirect_cart_page = ()=>{
+    if(userInfo){
+      navigate("/card")
+    }else{
+      navigate("/login")
+    }
   }
 
   return (
@@ -627,11 +636,15 @@ function Header() {
                     {wishlist_count}
                   </span>
                 </button>
-                <button className="relative p-2 text-white hover:text-emerald-400 transition-all duration-300 hover:scale-110">
+                <button onClick={redirect_cart_page} className="relative p-2 text-white hover:text-emerald-400 transition-all duration-300 hover:scale-110">
                   <ShoppingCart size={24} />
-                  <span className="absolute -top-1 -right-1 bg-emerald-400 text-white w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold">
-                    {wishlist_count}
-                  </span>
+                  
+                    {
+                      cart_product_count !== 0 && <span className="absolute -top-1 -right-1 bg-emerald-400 text-white w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold">
+                        {cart_product_count}
+                        </span>
+                    }
+                  
                 </button>
               </div>
 
