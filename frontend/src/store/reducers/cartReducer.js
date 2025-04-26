@@ -6,7 +6,7 @@ export const add_to_cart = createAsyncThunk(
   async (info, { rejectWithValue, fulfillWithValue }) => {
     try {
       const { data } = await api.post("/home/product/add-to-cart", info);
-     
+
       console.log(data);
       return fulfillWithValue(data);
     } catch (error) {
@@ -36,7 +36,17 @@ export const cartReducer = createSlice({
       state.successMessage = "";
     },
   },
-  extraReducers: (builder) => {},
+  extraReducers: (builder) => {
+    builder
+
+      .addCase(add_to_cart.rejected, (state, { payload }) => {
+        state.errorMessage = payload.error;
+      })
+      .addCase(add_to_cart.fulfilled, (state, { payload }) => {
+        state.successMessage = payload.message;
+        state.cart_product_count = state.cart_product_count + 1;
+      });
+  },
 });
 
 export const { messageClear } = cartReducer.actions;
