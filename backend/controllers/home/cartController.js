@@ -55,7 +55,24 @@ class cartController {
             },
           },
         },
+
+        {
+          $lookup:{
+            from: "products",
+            localField: "productId",
+            foreignField: "_id",
+            as: "products",
+          }
+        }
       ]);
+
+      let buy_product_item = 0;
+      let calculatePrice = 0;
+      let cart_product_count = 0;
+      const outOfStock =cart_products.filter((p)=>p.products[0].stock < p.quantity);
+      for(let i = 0; i < outOfStock.length; i++){
+        cart_product_count = cart_product_count + outOfStock[i].quantity;
+      }
       //console.log(cart_products);
     } catch (error) {
       console.log(error);
