@@ -16,6 +16,21 @@ export const add_to_cart = createAsyncThunk(
   }
 );
 
+export const get_cart_product = createAsyncThunk(
+  "cart/get_cart_product",
+  async (userId, { rejectWithValue, fulfillWithValue }) => {
+    try {
+      const { data } = await api.get(`/home/product/get-cart-product/${userId}`);
+
+      console.log(data);
+      return fulfillWithValue(data);
+    } catch (error) {
+      console.log(error.response);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 export const cartReducer = createSlice({
   name: "cart",
   initialState: {

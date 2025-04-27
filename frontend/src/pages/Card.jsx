@@ -201,30 +201,35 @@
 
 // export default Card;
 
-
-
-
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "./../components/Header";
 import Footer from "./../components/Footer";
 import { IoIosArrowForward } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 import img1 from "../assets/img1.jpg";
+import { useDispatch, useSelector } from "react-redux";
+import { get_cart_product } from "../store/reducers/cartReducer";
 
 const Card = () => {
+  const dispatch = useDispatch();
+  const { userInfo } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const card_products = [1, 2];
   const outOfStockProducts = [1, 2];
-  const redirect = () =>{
-    navigate("/shipping",{
-      state:{
-        products:[],
-        price:500,
-        shipping_fee:40,
-        items:2
-      }
+
+  useEffect(() => {
+    dispatch(get_cart_product(userInfo.id));
+  }, []);
+  const redirect = () => {
+    navigate("/shipping", {
+      state: {
+        products: [],
+        price: 500,
+        shipping_fee: 40,
+        items: 2,
+      },
     });
-  }
+  };
   return (
     <div className="bg-gradient-to-br from-indigo-50 to-purple-50min-h-screen">
       <Header />
@@ -258,9 +263,7 @@ const Card = () => {
         <div className="max-w-7xl mx-auto px-4">
           {card_products.length > 0 || outOfStockProducts.length > 0 ? (
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-             
               <div className="lg:col-span-2 space-y-6">
-                
                 <div className="bg-white rounded-xl shadow-md p-6">
                   <h2 className="text-lg font-semibold text-emerald-500 mb-4">
                     Stock Products ({card_products.length})
@@ -272,7 +275,10 @@ const Card = () => {
                           KhansaPratha
                         </h3>
                         {[1, 2].map((item, idx) => (
-                          <div key={idx} className="py-4 border-t border-gray-200">
+                          <div
+                            key={idx}
+                            className="py-4 border-t border-gray-200"
+                          >
                             <div className="flex flex-col md:flex-row justify-between items-start gap-4">
                               <div className="flex items-center gap-4">
                                 <img
@@ -281,15 +287,23 @@ const Card = () => {
                                   alt="Product"
                                 />
                                 <div>
-                                  <h4 className="font-medium text-gray-800">Product Name</h4>
-                                  <p className="text-sm text-gray-600">Brand: XYZ</p>
+                                  <h4 className="font-medium text-gray-800">
+                                    Product Name
+                                  </h4>
+                                  <p className="text-sm text-gray-600">
+                                    Brand: XYZ
+                                  </p>
                                 </div>
                               </div>
                               <div className="flex flex-col md:items-end gap-4 w-full md:w-auto">
                                 <div className="text-emerald-500 font-bold text-lg">
                                   ₹2560
-                                  <span className="text-gray-400 line-through ml-2">₹5642</span>
-                                  <span className="text-emerald-400 text-sm ml-2">(-15%)</span>
+                                  <span className="text-gray-400 line-through ml-2">
+                                    ₹5642
+                                  </span>
+                                  <span className="text-emerald-400 text-sm ml-2">
+                                    (-15%)
+                                  </span>
                                 </div>
                                 <div className="flex items-center gap-4">
                                   <div className="flex bg-gray-100 rounded-lg">
@@ -331,14 +345,22 @@ const Card = () => {
                                 alt="Product"
                               />
                               <div>
-                                <h4 className="font-medium text-gray-800">Product Name</h4>
-                                <p className="text-sm text-gray-600">Brand: XYZ</p>
+                                <h4 className="font-medium text-gray-800">
+                                  Product Name
+                                </h4>
+                                <p className="text-sm text-gray-600">
+                                  Brand: XYZ
+                                </p>
                               </div>
                             </div>
                             <div className="text-emerald-500 font-bold text-lg">
                               ₹2560
-                              <span className="text-gray-400 line-through ml-2">₹5642</span>
-                              <span className="text-emerald-400 text-sm ml-2">(-15%)</span>
+                              <span className="text-gray-400 line-through ml-2">
+                                ₹5642
+                              </span>
+                              <span className="text-emerald-400 text-sm ml-2">
+                                (-15%)
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -351,7 +373,9 @@ const Card = () => {
               {/* Order Summary */}
               <div className="lg:col-span-1">
                 <div className="bg-white rounded-xl shadow-md p-6 h-fit sticky top-6">
-                  <h2 className="text-xl font-bold text-gray-800 mb-6">Order Summary</h2>
+                  <h2 className="text-xl font-bold text-gray-800 mb-6">
+                    Order Summary
+                  </h2>
                   <div className="space-y-4">
                     <div className="flex justify-between text-gray-600">
                       <span>2 Items</span>
@@ -375,7 +399,10 @@ const Card = () => {
                       <span>Total</span>
                       <span>₹2660</span>
                     </div>
-                    <button onClick={redirect} className="w-full py-3 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors">
+                    <button
+                      onClick={redirect}
+                      className="w-full py-3 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors"
+                    >
                       Proceed to Checkout
                     </button>
                   </div>
