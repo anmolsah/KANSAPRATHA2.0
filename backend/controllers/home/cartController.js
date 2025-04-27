@@ -57,21 +57,39 @@ class cartController {
         },
 
         {
-          $lookup:{
+          $lookup: {
             from: "products",
             localField: "productId",
             foreignField: "_id",
             as: "products",
-          }
-        }
+          },
+        },
       ]);
 
       let buy_product_item = 0;
       let calculatePrice = 0;
       let cart_product_count = 0;
-      const outOfStock =cart_products.filter((p)=>p.products[0].stock < p.quantity);
-      for(let i = 0; i < outOfStock.length; i++){
+      const outOfStock = cart_products.filter(
+        (p) => p.products[0].stock < p.quantity
+      );
+      for (let i = 0; i < outOfStock.length; i++) {
         cart_product_count = cart_product_count + outOfStock[i].quantity;
+      }
+      const stockProduct = cart_products.filter(
+        (p) => p.products[0].stock >= p.quantity
+      );
+      for (let i = 0; i < stockProduct.length; i++) {
+        const { quantity } = stockProduct[i];
+        cart_product_count = buy_product_item + quantity;
+        buy_product_item = buy_product_item + quantity;
+        const { price, discount } = stockProduct[i].products[0];
+        if (discount !== 0) {
+          calculatePrice =
+            calculatePrice +
+            quantity * (price - Math.floor((price * discount) / 100));
+        } else {
+          calculatePrice = calculatePrice + quantity * price;
+        }
       }
       //console.log(cart_products);
     } catch (error) {
