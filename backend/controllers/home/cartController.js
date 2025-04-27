@@ -1,5 +1,8 @@
 const cartModel = require("../../models/cartModel");
 const { responseReturn } = require("../../utilities/response");
+const {
+  mongo: { ObjectId },
+} = require("mongoose");
 
 class cartController {
   add_to_cart = async (req, res) => {
@@ -35,8 +38,28 @@ class cartController {
         });
       }
     } catch (error) {
-        console.log(error);
-        responseReturn(res, 500, { error: "Internal server error" });
+      console.log(error);
+      responseReturn(res, 500, { error: "Internal server error" });
+    }
+  };
+
+  get_cart_products = async (req, res) => {
+    const { userId } = req.params;
+
+    try {
+      const cart_products = await cartModel.aggregate([
+        {
+          $match: {
+            userId: {
+              $eq: new ObjectId(userId),
+            },
+          },
+        },
+      ]);
+      //console.log(cart_products);
+    } catch (error) {
+      console.log(error);
+      responseReturn(res, 500, { error: "Internal server error" });
     }
   };
 }
