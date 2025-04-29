@@ -20,7 +20,9 @@ export const get_cart_product = createAsyncThunk(
   "cart/get_cart_product",
   async (userId, { rejectWithValue, fulfillWithValue }) => {
     try {
-      const { data } = await api.get(`/home/product/get-cart-product/${userId}`);
+      const { data } = await api.get(
+        `/home/product/get-cart-product/${userId}`
+      );
 
       console.log(data);
       return fulfillWithValue(data);
@@ -60,6 +62,14 @@ export const cartReducer = createSlice({
       .addCase(add_to_cart.fulfilled, (state, { payload }) => {
         state.successMessage = payload.message;
         state.cart_product_count = state.cart_product_count + 1;
+      })
+      .addCase(get_cart_product.fulfilled, (state, { payload }) => {
+        state.cart_products = payload.cart_products;
+        state.price = payload.price;
+        state.cart_product_count = payload.cart_product_count;
+        state.shipping_fee = payload.shipping_fee;
+        state.outofstock_products = payload.outOfStock;
+        state.buy_product_item = payload.buy_product_item;
       });
   },
 });
