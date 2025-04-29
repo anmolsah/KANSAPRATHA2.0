@@ -106,7 +106,10 @@ export const cartReducer = createSlice({
       })
       .addCase(delete_cart_product.fulfilled, (state, { payload }) => {
         state.successMessage = payload.message;
-      });
+      })
+      .addCase(quantity_inc.fulfilled, (state, { payload }) => {
+        state.successMessage = payload.message;
+      })
   },
 });
 
