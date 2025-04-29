@@ -213,9 +213,17 @@ import { get_cart_product } from "../store/reducers/cartReducer";
 const Card = () => {
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.auth);
+  const {
+    cart_products,
+    successMessage,
+    price,
+    buy_product_item,
+    shipping_fee,
+    outofstock_products,
+  } = useSelector((state) => state.cart);
   const navigate = useNavigate();
-  const card_products = [1, 2];
-  const outOfStockProducts = [1, 2];
+  // const card_products = [1, 2];
+  // const outOfStockProducts = [1, 2];
 
   useEffect(() => {
     dispatch(get_cart_product(userInfo.id));
@@ -261,20 +269,20 @@ const Card = () => {
 
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4">
-          {card_products.length > 0 || outOfStockProducts.length > 0 ? (
+          {cart_products.length > 0 || outofstock_products.length > 0 ? (
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               <div className="lg:col-span-2 space-y-6">
                 <div className="bg-white rounded-xl shadow-md p-6">
                   <h2 className="text-lg font-semibold text-emerald-500 mb-4">
-                    Stock Products ({card_products.length})
+                    Stock Products ({cart_products.length})
                   </h2>
-                  {card_products.map((p, i) => (
+                  {cart_products.map((p, i) => (
                     <div key={i} className="space-y-4">
                       <div className="bg-gray-50 rounded-lg p-4">
                         <h3 className="font-semibold text-gray-800 mb-2">
-                          KhansaPratha
+                          {p.shopName}
                         </h3>
-                        {[1, 2].map((item, idx) => (
+                        {p.products.map((item, idx) => (
                           <div
                             key={idx}
                             className="py-4 border-t border-gray-200"
@@ -283,26 +291,26 @@ const Card = () => {
                               <div className="flex items-center gap-4">
                                 <img
                                   className="w-20 h-20 object-cover rounded-lg"
-                                  src={`/images/products/${idx + 1}.jpg`}
+                                  src={item.productInfo.images[0]}
                                   alt="Product"
                                 />
                                 <div>
                                   <h4 className="font-medium text-gray-800">
-                                    Product Name
+                                   {item.productInfo.name}
                                   </h4>
                                   <p className="text-sm text-gray-600">
-                                    Brand: XYZ
+                                    Brand: {item.productInfo.brand}
                                   </p>
                                 </div>
                               </div>
                               <div className="flex flex-col md:items-end gap-4 w-full md:w-auto">
                                 <div className="text-emerald-500 font-bold text-lg">
-                                  ₹2560
+                                  ₹{item.productInfo.price - Math.floor((item.productInfo.price * item.productInfo.discount) / 100)}
                                   <span className="text-gray-400 line-through ml-2">
-                                    ₹5642
+                                    ₹{item.productInfo.price}
                                   </span>
                                   <span className="text-emerald-400 text-sm ml-2">
-                                    (-15%)
+                                    -{item.productInfo.discount}%
                                   </span>
                                 </div>
                                 <div className="flex items-center gap-4">
@@ -310,7 +318,7 @@ const Card = () => {
                                     <button className="px-3 py-1 hover:bg-emerald-500 hover:text-white rounded-l-lg transition-colors">
                                       -
                                     </button>
-                                    <span className="px-3 py-1">2</span>
+                                    <span className="px-3 py-1">{item.quantity}</span>
                                     <button className="px-3 py-1 hover:bg-emerald-500 hover:text-white rounded-r-lg transition-colors">
                                       +
                                     </button>
@@ -329,37 +337,37 @@ const Card = () => {
                 </div>
 
                 {/* Out of Stock Products */}
-                {outOfStockProducts.length > 0 && (
+                {outofstock_products.length > 0 && (
                   <div className="bg-white rounded-xl shadow-md p-6">
                     <h2 className="text-lg font-semibold text-emerald-500 mb-4">
-                      Out Of Stock ({outOfStockProducts.length})
+                      Out Of Stock ({outofstock_products.length})
                     </h2>
                     <div className="bg-gray-50 rounded-lg p-4">
-                      {[1].map((item, idx) => (
+                      {outofstock_products.map((item, idx) => (
                         <div key={idx} className="py-4">
                           <div className="flex flex-col md:flex-row justify-between items-start gap-4">
                             <div className="flex items-center gap-4">
                               <img
                                 className="w-20 h-20 object-cover rounded-lg"
-                                src={`/images/products/${idx + 1}.jpg`}
+                                src={item.products[0].images[0]}
                                 alt="Product"
                               />
                               <div>
                                 <h4 className="font-medium text-gray-800">
-                                  Product Name
+                               {item.products[0].name}
                                 </h4>
                                 <p className="text-sm text-gray-600">
-                                  Brand: XYZ
+                                  Brand: {item.products[0].brand}
                                 </p>
                               </div>
                             </div>
                             <div className="text-emerald-500 font-bold text-lg">
-                              ₹2560
+                              ₹{item.products[0].price - Math.floor((item.products[0].price * item.products[0].discount) / 100)}
                               <span className="text-gray-400 line-through ml-2">
-                                ₹5642
+                                ₹{item.products[0].price}
                               </span>
                               <span className="text-emerald-400 text-sm ml-2">
-                                (-15%)
+                                -{item.products[0].discount}%
                               </span>
                             </div>
                           </div>

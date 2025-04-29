@@ -45,6 +45,7 @@ export const cartReducer = createSlice({
     successMessage: "",
     shipping_fee: 0,
     outofstock_products: [],
+    buy_product_item:0
   },
 
   reducers: {
