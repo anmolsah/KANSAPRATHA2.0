@@ -318,15 +318,17 @@
 
 // export default Shipping;
 
-
 import React, { useState } from "react";
 import Header from "./../components/Header";
 import Footer from "./../components/Footer";
 import { IoIosArrowForward } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import img1 from "../assets/img1.jpg";
 
 const Shipping = () => {
+  const {
+    state: { products, price, shipping_fee, items },
+  } = useLocation();
   const [res, setRes] = useState(false);
   const [state, setState] = useState({
     name: "",
@@ -350,7 +352,7 @@ const Shipping = () => {
     }
   };
   return (
-    <div className="bg-gradient-to-r from-indigo-600 to-purple-600 min-h-screen">
+    <div className="bg-gradient-to-br from-indigo-50 to-purple-50 min-h-screen">
       <Header />
       <section
         className="h-64 bg-cover bg-no-repeat relative"
@@ -391,7 +393,9 @@ const Shipping = () => {
                   <form onSubmit={save} className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="space-y-1">
-                        <label htmlFor="name" className="text-gray-600 text-sm">Name</label>
+                        <label htmlFor="name" className="text-gray-600 text-sm">
+                          Name
+                        </label>
                         <input
                           onChange={inputHandle}
                           type="text"
@@ -403,7 +407,12 @@ const Shipping = () => {
                         />
                       </div>
                       <div className="space-y-1">
-                        <label htmlFor="address" className="text-gray-600 text-sm">Address</label>
+                        <label
+                          htmlFor="address"
+                          className="text-gray-600 text-sm"
+                        >
+                          Address
+                        </label>
                         <input
                           onChange={inputHandle}
                           type="text"
@@ -415,7 +424,12 @@ const Shipping = () => {
                         />
                       </div>
                       <div className="space-y-1">
-                        <label htmlFor="phone" className="text-gray-600 text-sm">Phone</label>
+                        <label
+                          htmlFor="phone"
+                          className="text-gray-600 text-sm"
+                        >
+                          Phone
+                        </label>
                         <input
                           type="text"
                           name="phone"
@@ -439,7 +453,12 @@ const Shipping = () => {
                         />
                       </div>
                       <div className="space-y-1">
-                        <label htmlFor="province" className="text-gray-600 text-sm">Province</label>
+                        <label
+                          htmlFor="province"
+                          className="text-gray-600 text-sm"
+                        >
+                          Province
+                        </label>
                         <input
                           onChange={inputHandle}
                           type="text"
@@ -451,7 +470,9 @@ const Shipping = () => {
                         />
                       </div>
                       <div className="space-y-1">
-                        <label htmlFor="city" className="text-gray-600 text-sm">City</label>
+                        <label htmlFor="city" className="text-gray-600 text-sm">
+                          City
+                        </label>
                         <input
                           onChange={inputHandle}
                           type="text"
@@ -463,7 +484,9 @@ const Shipping = () => {
                         />
                       </div>
                       <div className="space-y-1">
-                        <label htmlFor="area" className="text-gray-600 text-sm">Area</label>
+                        <label htmlFor="area" className="text-gray-600 text-sm">
+                          Area
+                        </label>
                         <input
                           onChange={inputHandle}
                           type="text"
@@ -492,7 +515,8 @@ const Shipping = () => {
                         Home
                       </span>
                       <span className="text-gray-600">
-                        {state.phone} | {state.address}, {state.city}, {state.province}
+                        {state.phone} | {state.address}, {state.city},{" "}
+                        {state.province}
                       </span>
                       <button
                         onClick={() => setRes(false)}
@@ -510,49 +534,46 @@ const Shipping = () => {
 
               {/* Cart Items */}
               <div className="space-y-6">
-                {[1, 2].map((p, i) => (
+                {products.map((p, i) => (
                   <div key={i} className="bg-white rounded-xl shadow-md p-6">
                     <h3 className="text-lg font-semibold text-gray-800 mb-4">
-                      KhansaPratha
+                      {p.shopName}
                     </h3>
-                    {[1, 2].map((item, idx) => (
+                    {p.products.map((item, idx) => (
                       <div key={idx} className="py-4 border-t border-gray-200">
                         <div className="flex flex-col md:flex-row justify-between items-start gap-4">
                           <div className="flex items-center gap-4">
                             <img
                               className="w-20 h-20 object-cover rounded-lg"
-                              src={`/images/products/${idx + 1}.jpg`}
+                              src={item.productInfo.images[0]}
                               alt="Product"
                             />
                             <div>
-                              <h4 className="font-medium text-gray-800">Product Name</h4>
-                              <p className="text-sm text-gray-600">Brand: XYZ</p>
+                              <h4 className="font-medium text-gray-800">
+                                {item.productInfo.name}
+                              </h4>
+                              <p className="text-sm text-gray-600">
+                                Brand: {item.productInfo.brand}
+                              </p>
                             </div>
                           </div>
                           <div className="flex flex-col md:items-end gap-4 w-full md:w-auto">
                             <div className="text-emerald-500 font-bold text-lg">
-                              ₹2560
+                              ₹
+                              {item.productInfo.price -
+                                Math.floor(
+                                  (item.productInfo.price *
+                                    item.productInfo.discount) /
+                                    100
+                                )}
                               <span className="text-gray-400 line-through ml-2">
-                                ₹5642
+                                ₹{item.productInfo.price}
                               </span>
                               <span className="text-emerald-400 text-sm ml-2">
-                                (-15%)
+                                -{item.productInfo.discount}%
                               </span>
                             </div>
-                            <div className="flex items-center gap-4">
-                              <div className="flex bg-gray-100 rounded-lg">
-                                <button className="px-3 py-1 hover:bg-emerald-500 hover:text-white rounded-l-lg transition-colors">
-                                  -
-                                </button>
-                                <span className="px-3 py-1">2</span>
-                                <button className="px-3 py-1 hover:bg-emerald-500 hover:text-white rounded-r-lg transition-colors">
-                                  +
-                                </button>
-                              </div>
-                              <button className="px-4 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">
-                                Delete
-                              </button>
-                            </div>
+                            
                           </div>
                         </div>
                       </div>
@@ -565,19 +586,21 @@ const Shipping = () => {
             {/* Order Summary */}
             <div className="lg:col-span-1">
               <div className="bg-white rounded-xl shadow-md p-6 h-fit sticky top-6">
-                <h2 className="text-xl font-bold text-gray-800 mb-6">Order Summary</h2>
+                <h2 className="text-xl font-bold text-gray-800 mb-6">
+                  Order Summary
+                </h2>
                 <div className="space-y-4">
                   <div className="flex justify-between text-gray-600">
-                    <span>Total Items (5)</span>
-                    <span>₹2560</span>
+                    <span>Total Items ({items})</span>
+                    <span>₹{price}</span>
                   </div>
                   <div className="flex justify-between text-gray-600">
                     <span>Delivery Fee</span>
-                    <span>₹100</span>
+                    <span>₹{shipping_fee}</span>
                   </div>
                   <div className="flex justify-between font-bold text-gray-800 pt-4">
                     <span>Total Payment</span>
-                    <span>₹2660</span>
+                    <span>₹{price + shipping_fee}</span>
                   </div>
                   <button
                     disabled={!res}

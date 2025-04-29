@@ -213,7 +213,7 @@ import {
   delete_cart_product,
   messageClear,
   quantity_inc,
-  quantity_dec
+  quantity_dec,
 } from "../store/reducers/cartReducer";
 import toast from "react-hot-toast";
 
@@ -238,10 +238,10 @@ const Card = () => {
   const redirect = () => {
     navigate("/shipping", {
       state: {
-        products: [],
-        price: 500,
-        shipping_fee: 40,
-        items: 2,
+        products: cart_products,
+        price: price,
+        shipping_fee: shipping_fee,
+        items: buy_product_item,
       },
     });
   };
@@ -351,14 +351,15 @@ const Card = () => {
                                 <div className="flex items-center gap-4">
                                   <div className="flex bg-gray-100 rounded-lg">
                                     <button
-                                    onClick={() =>
-                                      dec(
-                                        item.quantity,
-                          
-                                        item._id
-                                      )
-                                    }
-                                    className="px-3 py-1 hover:bg-emerald-500 hover:text-white rounded-l-lg transition-colors">
+                                      onClick={() =>
+                                        dec(
+                                          item.quantity,
+
+                                          item._id
+                                        )
+                                      }
+                                      className="px-3 py-1 hover:bg-emerald-500 hover:text-white rounded-l-lg transition-colors"
+                                    >
                                       -
                                     </button>
                                     <span className="px-3 py-1">
