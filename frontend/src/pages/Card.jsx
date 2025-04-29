@@ -213,6 +213,7 @@ import {
   delete_cart_product,
   messageClear,
   quantity_inc,
+  quantity_dec
 } from "../store/reducers/cartReducer";
 import toast from "react-hot-toast";
 
@@ -257,6 +258,13 @@ const Card = () => {
     const temp = quantity + 1;
     if (temp <= stock) {
       dispatch(quantity_inc(cart_id));
+    }
+  };
+
+  const dec = (quantity, cart_id) => {
+    const temp = quantity - 1;
+    if (temp !== 0) {
+      dispatch(quantity_dec(cart_id));
     }
   };
   return (
@@ -342,7 +350,15 @@ const Card = () => {
                                 </div>
                                 <div className="flex items-center gap-4">
                                   <div className="flex bg-gray-100 rounded-lg">
-                                    <button className="px-3 py-1 hover:bg-emerald-500 hover:text-white rounded-l-lg transition-colors">
+                                    <button
+                                    onClick={() =>
+                                      dec(
+                                        item.quantity,
+                          
+                                        item._id
+                                      )
+                                    }
+                                    className="px-3 py-1 hover:bg-emerald-500 hover:text-white rounded-l-lg transition-colors">
                                       -
                                     </button>
                                     <span className="px-3 py-1">
