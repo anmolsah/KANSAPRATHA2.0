@@ -5,6 +5,29 @@ const cartModel = require("../../models/cartModel");
 const { responseReturn } = require("../../utilities/response");
 
 class orderController {
+  paymentCheck = async (id) => {
+    try {
+      const order = await customerOrder.findById(id);
+      if (order.payment_status === "unpaid") {
+        await customerOrder.findByIdAndUpdate(id, {
+          delivery_status: "cancelled",
+        });
+        await authorOrderModel.updateMany(
+          {
+            orderId: id,
+          },
+          {
+            delivery_status: "cancelled",
+          }
+        );
+      }
+      return true;
+    } catch (error) {
+      console.log(error);
+      //return false;
+    }
+  };
+
   place_order = async (req, res) => {
     const { price, products, shipping_fee, shippingInfo, userId } = req.body;
     let authorOrderData = [];
@@ -30,8 +53,8 @@ class orderController {
         shippingInfo,
         products: customerOrderProduct,
         price: price + shipping_fee,
-        payment_status: "pending",
-        delivery_status: "unpaid",
+        payment_status: "unpaid",
+        delivery_status: "pending",
         date: tempDate,
       });
       for (let i = 0; i < products.length; i++) {
@@ -60,13 +83,17 @@ class orderController {
       for (let k = 0; k < cartId.length; k++) {
         await cartModel.findByIdAndDelete(cartId[k]);
       }
+
+      setTimeout(() => {
+        this.paymentCheck(order.id);
+      }, 20000);
       responseReturn(res, 201, {
         message: "Order placed successfully",
         orderId: order.id,
       });
     } catch (error) {
-        console.log(error);
-        responseReturn(res, 500, { error: "Internal server error" });
+      console.log(error);
+      responseReturn(res, 500, { error: "Internal server error" });
     }
   };
 }
