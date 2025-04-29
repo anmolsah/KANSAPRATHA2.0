@@ -33,6 +33,26 @@ export const get_cart_product = createAsyncThunk(
   }
 );
 
+
+export const delete_cart_product = createAsyncThunk(
+  "cart/delete_cart_product",
+  async (cart_id, { rejectWithValue, fulfillWithValue }) => {
+    try {
+      const { data } = await api.delete(
+        `/home/product/delete-cart-product/${cart_id}`
+      );
+
+      console.log(data);
+      return fulfillWithValue(data);
+    } catch (error) {
+      console.log(error.response);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+
+
 export const cartReducer = createSlice({
   name: "cart",
   initialState: {

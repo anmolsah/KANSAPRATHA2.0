@@ -208,7 +208,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 import img1 from "../assets/img1.jpg";
 import { useDispatch, useSelector } from "react-redux";
-import { get_cart_product } from "../store/reducers/cartReducer";
+import { get_cart_product,delete_cart_product } from "../store/reducers/cartReducer";
 
 const Card = () => {
   const dispatch = useDispatch();
@@ -323,7 +323,7 @@ const Card = () => {
                                       +
                                     </button>
                                   </div>
-                                  <button className="px-4 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">
+                                  <button onClick={()=>dispatch(delete_cart_product(item._id))} className="px-4 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">
                                     Delete
                                   </button>
                                 </div>
@@ -386,12 +386,12 @@ const Card = () => {
                   </h2>
                   <div className="space-y-4">
                     <div className="flex justify-between text-gray-600">
-                      <span>2 Items</span>
-                      <span>₹2560</span>
+                      <span>{buy_product_item} Items</span>
+                      <span>₹{price}</span>
                     </div>
                     <div className="flex justify-between text-gray-600">
                       <span>Shipping Fee</span>
-                      <span>₹100</span>
+                      <span>₹{shipping_fee}</span>
                     </div>
                     <div className="flex gap-2">
                       <input
@@ -405,7 +405,7 @@ const Card = () => {
                     </div>
                     <div className="flex justify-between font-bold text-gray-800 pt-4">
                       <span>Total</span>
-                      <span>₹2660</span>
+                      <span>₹{price + shipping_fee}</span>
                     </div>
                     <button
                       onClick={redirect}
