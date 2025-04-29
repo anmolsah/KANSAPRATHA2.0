@@ -208,7 +208,12 @@ import { IoIosArrowForward } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 import img1 from "../assets/img1.jpg";
 import { useDispatch, useSelector } from "react-redux";
-import { get_cart_product,delete_cart_product } from "../store/reducers/cartReducer";
+import {
+  get_cart_product,
+  delete_cart_product,
+  messageClear
+} from "../store/reducers/cartReducer";
+import toast from "react-hot-toast";
 
 const Card = () => {
   const dispatch = useDispatch();
@@ -227,6 +232,7 @@ const Card = () => {
 
   useEffect(() => {
     dispatch(get_cart_product(userInfo.id));
+
   }, []);
   const redirect = () => {
     navigate("/shipping", {
@@ -238,8 +244,16 @@ const Card = () => {
       },
     });
   };
+
+  useEffect(() => {
+    if (successMessage) {
+      toast.success(successMessage);
+      dispatch(messageClear());
+      dispatch(get_cart_product(userInfo.id));
+    }
+  }, [successMessage]);
   return (
-    <div className="bg-gradient-to-br from-indigo-50 to-purple-50min-h-screen">
+    <div className="bg-gradient-to-br from-indigo-50 to-purple-50 min-h-screen">
       <Header />
       <section
         className="h-64 bg-cover bg-no-repeat relative"
@@ -296,7 +310,7 @@ const Card = () => {
                                 />
                                 <div>
                                   <h4 className="font-medium text-gray-800">
-                                   {item.productInfo.name}
+                                    {item.productInfo.name}
                                   </h4>
                                   <p className="text-sm text-gray-600">
                                     Brand: {item.productInfo.brand}
@@ -305,7 +319,13 @@ const Card = () => {
                               </div>
                               <div className="flex flex-col md:items-end gap-4 w-full md:w-auto">
                                 <div className="text-emerald-500 font-bold text-lg">
-                                  ₹{item.productInfo.price - Math.floor((item.productInfo.price * item.productInfo.discount) / 100)}
+                                  ₹
+                                  {item.productInfo.price -
+                                    Math.floor(
+                                      (item.productInfo.price *
+                                        item.productInfo.discount) /
+                                        100
+                                    )}
                                   <span className="text-gray-400 line-through ml-2">
                                     ₹{item.productInfo.price}
                                   </span>
@@ -318,12 +338,19 @@ const Card = () => {
                                     <button className="px-3 py-1 hover:bg-emerald-500 hover:text-white rounded-l-lg transition-colors">
                                       -
                                     </button>
-                                    <span className="px-3 py-1">{item.quantity}</span>
+                                    <span className="px-3 py-1">
+                                      {item.quantity}
+                                    </span>
                                     <button className="px-3 py-1 hover:bg-emerald-500 hover:text-white rounded-r-lg transition-colors">
                                       +
                                     </button>
                                   </div>
-                                  <button onClick={()=>dispatch(delete_cart_product(item._id))} className="px-4 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">
+                                  <button
+                                    onClick={() =>
+                                      dispatch(delete_cart_product(item._id))
+                                    }
+                                    className="px-4 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+                                  >
                                     Delete
                                   </button>
                                 </div>
@@ -354,7 +381,7 @@ const Card = () => {
                               />
                               <div>
                                 <h4 className="font-medium text-gray-800">
-                               {item.products[0].name}
+                                  {item.products[0].name}
                                 </h4>
                                 <p className="text-sm text-gray-600">
                                   Brand: {item.products[0].brand}
@@ -362,7 +389,13 @@ const Card = () => {
                               </div>
                             </div>
                             <div className="text-emerald-500 font-bold text-lg">
-                              ₹{item.products[0].price - Math.floor((item.products[0].price * item.products[0].discount) / 100)}
+                              ₹
+                              {item.products[0].price -
+                                Math.floor(
+                                  (item.products[0].price *
+                                    item.products[0].discount) /
+                                    100
+                                )}
                               <span className="text-gray-400 line-through ml-2">
                                 ₹{item.products[0].price}
                               </span>

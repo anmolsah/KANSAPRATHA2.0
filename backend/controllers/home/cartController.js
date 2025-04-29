@@ -139,14 +139,25 @@ class cartController {
       }
       //console.log(p);
       responseReturn(res, 201, {
-       cart_products:p,
-       price: calculatePrice,
-       cart_product_count,
-       shipping_fee:20 *p.length,
-       outOfStock,
-       buy_product_item
-
+        cart_products: p,
+        price: calculatePrice,
+        cart_product_count,
+        shipping_fee: 20 * p.length,
+        outOfStock,
+        buy_product_item,
       });
+    } catch (error) {
+      console.log(error);
+      responseReturn(res, 500, { error: "Internal server error" });
+    }
+  };
+
+  delete_cart_products = async (req, res) => {
+    const { cart_id } = req.params;
+
+    try {
+      await cartModel.findByIdAndDelete(cart_id);
+      responseReturn(res, 200, { message: "Product deleted from cart" });
     } catch (error) {
       console.log(error);
       responseReturn(res, 500, { error: "Internal server error" });

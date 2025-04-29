@@ -33,7 +33,6 @@ export const get_cart_product = createAsyncThunk(
   }
 );
 
-
 export const delete_cart_product = createAsyncThunk(
   "cart/delete_cart_product",
   async (cart_id, { rejectWithValue, fulfillWithValue }) => {
@@ -42,7 +41,7 @@ export const delete_cart_product = createAsyncThunk(
         `/home/product/delete-cart-product/${cart_id}`
       );
 
-      console.log(data);
+      //console.log(data);
       return fulfillWithValue(data);
     } catch (error) {
       console.log(error.response);
@@ -50,8 +49,6 @@ export const delete_cart_product = createAsyncThunk(
     }
   }
 );
-
-
 
 export const cartReducer = createSlice({
   name: "cart",
@@ -65,7 +62,7 @@ export const cartReducer = createSlice({
     successMessage: "",
     shipping_fee: 0,
     outofstock_products: [],
-    buy_product_item:0
+    buy_product_item: 0,
   },
 
   reducers: {
@@ -91,6 +88,9 @@ export const cartReducer = createSlice({
         state.shipping_fee = payload.shipping_fee;
         state.outofstock_products = payload.outOfStock;
         state.buy_product_item = payload.buy_product_item;
+      })
+      .addCase(delete_cart_product.fulfilled, (state, { payload }) => {
+        state.successMessage = payload.message;
       });
   },
 });
