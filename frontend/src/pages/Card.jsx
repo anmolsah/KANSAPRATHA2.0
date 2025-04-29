@@ -229,9 +229,7 @@ const Card = () => {
     outofstock_products,
   } = useSelector((state) => state.cart);
   const navigate = useNavigate();
-  // const card_products = [1, 2];
-  // const outOfStockProducts = [1, 2];
-
+  
   useEffect(() => {
     dispatch(get_cart_product(userInfo.id));
   }, []);

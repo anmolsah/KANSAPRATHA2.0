@@ -322,13 +322,19 @@ import React, { useState } from "react";
 import Header from "./../components/Header";
 import Footer from "./../components/Footer";
 import { IoIosArrowForward } from "react-icons/io";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import img1 from "../assets/img1.jpg";
+import { useDispatch, useSelector } from "react-redux";
+import { place_order } from "../store/reducers/orderReducer";
 
 const Shipping = () => {
   const {
     state: { products, price, shipping_fee, items },
   } = useLocation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { userInfo } = useSelector((state) => state.auth);
+
   const [res, setRes] = useState(false);
   const [state, setState] = useState({
     name: "",
@@ -350,6 +356,20 @@ const Shipping = () => {
     if (name && address && phone && post && province && city && area) {
       setRes(true);
     }
+  };
+
+  const placeOrder = () => {
+    dispatch(
+      place_order({
+        price,
+        products,
+        shipping_fee,
+        items,
+        shippingInfo: state,
+        userId: userInfo,
+        navigate,
+      })
+    );
   };
   return (
     <div className="bg-gradient-to-br from-indigo-50 to-purple-50 min-h-screen">
@@ -573,7 +593,6 @@ const Shipping = () => {
                                 -{item.productInfo.discount}%
                               </span>
                             </div>
-                            
                           </div>
                         </div>
                       </div>
@@ -603,6 +622,7 @@ const Shipping = () => {
                     <span>₹{price + shipping_fee}</span>
                   </div>
                   <button
+                    onClick={placeOrder}
                     disabled={!res}
                     className={`w-full py-3 rounded-lg transition-colors ${
                       res
