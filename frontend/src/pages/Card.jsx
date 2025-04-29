@@ -211,7 +211,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   get_cart_product,
   delete_cart_product,
-  messageClear
+  messageClear,
+  quantity_inc
 } from "../store/reducers/cartReducer";
 import toast from "react-hot-toast";
 
@@ -252,6 +253,13 @@ const Card = () => {
       dispatch(get_cart_product(userInfo.id));
     }
   }, [successMessage]);
+
+  const inc=(quantity,stock,cart_id)=>{
+    const temp = quantity + 1;
+    if(temp <= stock){
+      dispatch(quantity_inc(cart_id))
+    }
+  }
   return (
     <div className="bg-gradient-to-br from-indigo-50 to-purple-50 min-h-screen">
       <Header />
@@ -341,7 +349,7 @@ const Card = () => {
                                     <span className="px-3 py-1">
                                       {item.quantity}
                                     </span>
-                                    <button className="px-3 py-1 hover:bg-emerald-500 hover:text-white rounded-r-lg transition-colors">
+                                    <button onClick={()=>inc(item.quantity,item.productInfo.stock,item._id)} className="px-3 py-1 hover:bg-emerald-500 hover:text-white rounded-r-lg transition-colors">
                                       +
                                     </button>
                                   </div>
