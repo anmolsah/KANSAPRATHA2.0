@@ -12,6 +12,8 @@ import { get_category } from "./store/reducers/homeReducer";
 import CategoryShop from "./pages/CategoryShop";
 import SearchProducts from "./pages/SearchProducts";
 import Payment from "./pages/Payment";
+import Dashboard from "./pages/Dashboard";
+import ProtectUser from "./utils/ProtectUser";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -31,6 +33,10 @@ const App = () => {
         <Route path="/products?" element={<CategoryShop />} />
         <Route path="/products/search?" element={<SearchProducts />} />
         <Route path="/payment" element={<Payment />} />
+
+        <Route path="/dashboard" element={<ProtectUser />}>
+          <Route path="/dashboard" element={<Dashboard />}></Route>
+        </Route>
       </Routes>
     </BrowserRouter>
   );
