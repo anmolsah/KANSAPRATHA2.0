@@ -14,6 +14,7 @@ import SearchProducts from "./pages/SearchProducts";
 import Payment from "./pages/Payment";
 import Dashboard from "./pages/Dashboard";
 import ProtectUser from "./utils/ProtectUser";
+import Index from "./components/dashboard/Index";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -35,7 +36,9 @@ const App = () => {
         <Route path="/payment" element={<Payment />} />
 
         <Route path="/dashboard" element={<ProtectUser />}>
-          <Route path="/dashboard" element={<Dashboard />}></Route>
+          <Route path="" element={<Dashboard />}>
+            <Route path="" element={<Index />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
