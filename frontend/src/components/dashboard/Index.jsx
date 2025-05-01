@@ -154,12 +154,18 @@
 
 // export default Index;
 
-
-import React from "react";
+import React, { useEffect } from "react";
 import { RiShoppingBag2Fill } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { get_dashboard_index_data } from "../../store/reducers/dashboardReducer";
 
 const Index = () => {
+  const dispatch = useDispatch();
+  const { userInfo } = useSelector((state) => state.auth);
+  useEffect(() => {
+    dispatch(get_dashboard_index_data(userInfo.id));
+  }, []);
   return (
     <div className="p-6 bg-gradient-to-br from-indigo-50 to-purple-50 min-h-screen">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -167,9 +173,9 @@ const Index = () => {
         {[
           { title: "Orders", value: 45 },
           { title: "Pending Orders", value: 25 },
-          { title: "Cancelled Orders", value: 5 }
+          { title: "Cancelled Orders", value: 5 },
         ].map((stat, index) => (
-          <div 
+          <div
             key={index}
             className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200"
           >
@@ -178,7 +184,9 @@ const Index = () => {
                 <RiShoppingBag2Fill className="text-emerald-600 text-xl" />
               </div>
               <div className="flex flex-col">
-                <h3 className="text-2xl font-bold text-gray-800">{stat.value}</h3>
+                <h3 className="text-2xl font-bold text-gray-800">
+                  {stat.value}
+                </h3>
                 <span className="text-gray-600 text-sm">{stat.title}</span>
               </div>
             </div>
@@ -188,13 +196,21 @@ const Index = () => {
 
       {/* Recent Orders Table */}
       <div className="bg-white p-6 rounded-xl shadow-sm mt-6">
-        <h2 className="text-xl font-semibold text-gray-800 mb-4">Recent Orders</h2>
+        <h2 className="text-xl font-semibold text-gray-800 mb-4">
+          Recent Orders
+        </h2>
         <div className="overflow-x-auto rounded-lg border border-gray-200">
           <table className="w-full">
             <thead className="bg-indigo-50">
               <tr>
-                {["Order ID", "Price", "Payment Status", "Order Status", "Actions"].map((header, idx) => (
-                  <th 
+                {[
+                  "Order ID",
+                  "Price",
+                  "Payment Status",
+                  "Order Status",
+                  "Actions",
+                ].map((header, idx) => (
+                  <th
                     key={idx}
                     className="px-6 py-3 text-left text-sm font-semibold text-gray-800"
                   >
@@ -205,9 +221,16 @@ const Index = () => {
             </thead>
             <tbody className="divide-y divide-gray-200">
               {[1, 2].map((row, idx) => (
-                <tr key={idx} className="hover:bg-gray-50 transition-colors duration-150">
-                  <td className="px-6 py-4 text-sm text-gray-800 font-medium">#{4567 + idx}</td>
-                  <td className="px-6 py-4 text-sm text-gray-800">₹{456 * (idx + 1)}</td>
+                <tr
+                  key={idx}
+                  className="hover:bg-gray-50 transition-colors duration-150"
+                >
+                  <td className="px-6 py-4 text-sm text-gray-800 font-medium">
+                    #{4567 + idx}
+                  </td>
+                  <td className="px-6 py-4 text-sm text-gray-800">
+                    ₹{456 * (idx + 1)}
+                  </td>
                   <td className="px-6 py-4">
                     <span className="px-3 py-1 rounded-full text-sm bg-yellow-100 text-yellow-800">
                       Pending
