@@ -163,6 +163,8 @@ import { get_dashboard_index_data } from "../../store/reducers/dashboardReducer"
 const Index = () => {
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.auth);
+  const { recentOrders, totalOrder, pendingOrder, cancelledOrder } =
+    useSelector((state) => state.dashboard);
   useEffect(() => {
     dispatch(get_dashboard_index_data(userInfo.id));
   }, []);
@@ -171,9 +173,9 @@ const Index = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {/* Stat Cards */}
         {[
-          { title: "Orders", value: 45 },
-          { title: "Pending Orders", value: 25 },
-          { title: "Cancelled Orders", value: 5 },
+          { title: "Orders", value: totalOrder },
+          { title: "Pending Orders", value: pendingOrder },
+          { title: "Cancelled Orders", value: cancelledOrder },
         ].map((stat, index) => (
           <div
             key={index}
@@ -220,25 +222,25 @@ const Index = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
-              {[1, 2].map((row, idx) => (
+              {recentOrders.map((row, idx) => (
                 <tr
                   key={idx}
                   className="hover:bg-gray-50 transition-colors duration-150"
                 >
                   <td className="px-6 py-4 text-sm text-gray-800 font-medium">
-                    #{4567 + idx}
+                    #{row._id}
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-800">
-                    ₹{456 * (idx + 1)}
+                    ₹{row.price}
                   </td>
                   <td className="px-6 py-4">
                     <span className="px-3 py-1 rounded-full text-sm bg-yellow-100 text-yellow-800">
-                      Pending
+                      {row.payment_status}
                     </span>
                   </td>
                   <td className="px-6 py-4">
                     <span className="px-3 py-1 rounded-full text-sm bg-blue-100 text-blue-800">
-                      Processing
+                      {row.delivery_status}
                     </span>
                   </td>
                   <td className="px-6 py-4 space-x-2">

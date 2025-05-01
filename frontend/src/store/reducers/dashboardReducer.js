@@ -10,7 +10,7 @@ export const get_dashboard_index_data = createAsyncThunk(
       );
 
       //console.log(data);
-      //return fulfillWithValue(data);
+      return fulfillWithValue(data);
     } catch (error) {
       console.log(error.response);
       return rejectWithValue(error.response.data);
@@ -36,13 +36,17 @@ export const dashboardReducer = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // builder
-    //   .addCase(customer_register.fulfilled, (state, { payload }) => {
-    //     const userInfo = decodeToken(payload.token);
-    //     state.userInfo = userInfo;
-    //     state.successMessage = payload.message;
-    //     state.loader = false;
-    //   })
+    builder.addCase(
+      get_dashboard_index_data.fulfilled,
+      (state, { payload }) => {
+        state.totalOrder = payload.totalOrders;
+        state.pendingOrder = payload.pendingOrders;
+        state.cancelledOrder = payload.cancelledOrders;
+        state.recentOrders = payload.recentOrders;
+        state.successMessage = payload.message;
+        state.loader = false;
+      }
+    );
   },
 });
 
