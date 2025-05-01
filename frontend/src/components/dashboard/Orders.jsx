@@ -1,20 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { get_orders } from "../../store/reducers/orderReducer";
 
 const Orders = () => {
   const [state, setState] = useState("all");
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { orderId } = useParams();
+  
   const { userInfo } = useSelector((state) => state.auth);
+  const { myOrders } = useSelector((state) => state.order);
 
   useEffect(() => {
-    dispatch(get_orders({
-      customerId: userInfo.id,
-      status: state,
-    }));
-  }, [orderId]);
+    dispatch(
+      get_orders({
+        customerId: userInfo.id,
+        status: state,
+      })
+    );
+  }, [state]);
+
+  const redirect = (order) => {
+    let items = 0;
+    for (let i = 0; i < order.length; i++) {
+      items = order.products[i].quantity + items;
+    }
+    navigate("/payment", {
+      state: {
+        price: order.price,
+        items,
+        orderId: order._id,
+      },
+    });
+  };
   return (
     <div className="bg-white p-4 rounded-md">
       <div className="flex justify-between items-center">
@@ -56,42 +74,47 @@ const Orders = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
-              {[1, 2].map((row, idx) => (
+              {myOrders.map((row, idx) => (
                 <tr
                   key={idx}
                   className="hover:bg-gray-50 transition-colors duration-150"
                 >
                   <td className="px-6 py-4 text-sm text-gray-800 font-medium">
-                    #{4567 + idx}
+                    #{row._id}
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-800">
-                    ₹{456 * (idx + 1)}
+                    ₹{row.price}
                   </td>
                   <td className="px-6 py-4">
                     <span className="px-3 py-1 rounded-full text-sm bg-yellow-100 text-yellow-800">
-                      Pending
+                      {row.payment_status}
                     </span>
                   </td>
                   <td className="px-6 py-4">
                     <span className="px-3 py-1 rounded-full text-sm bg-blue-100 text-blue-800">
-                      Processing
+                      {row.delivery_status}
                     </span>
                   </td>
                   <td className="px-6 py-4 space-x-2">
                     <Link
-                      to="#"
+                      to={`/dashboard/order/details/${row._id}`}
                       className="px-4 py-2 text-sm font-medium text-emerald-600 hover:text-emerald-700 
-                            border border-emerald-600 rounded-lg hover:bg-emerald-50 transition-colors"
+                                           border border-emerald-600 rounded-lg hover:bg-emerald-50 transition-colors"
                     >
                       View
                     </Link>
-                    <Link
-                      to="#"
-                      className="px-4 py-2 text-sm font-medium text-white bg-emerald-500 rounded-lg 
-                            hover:bg-emerald-600 transition-colors shadow-sm"
-                    >
-                      Pay Now
-                    </Link>
+
+                    {row.payment_status !== "paid" && (
+                      <span
+                        onClick={() => {
+                          redirect(row);
+                        }}
+                        className="px-4 py-2 text-sm font-medium text-white bg-emerald-500 rounded-lg 
+                                           hover:bg-emerald-600 transition-colors shadow-sm cursor-pointer"
+                      >
+                        Pay Now
+                      </span>
+                    )}
                   </td>
                 </tr>
               ))}
