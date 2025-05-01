@@ -15,6 +15,7 @@ import Payment from "./pages/Payment";
 import Dashboard from "./pages/Dashboard";
 import ProtectUser from "./utils/ProtectUser";
 import Index from "./components/dashboard/Index";
+import Orders from "./components/dashboard/Orders";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ const App = () => {
         <Route path="/dashboard" element={<ProtectUser />}>
           <Route path="" element={<Dashboard />}>
             <Route path="" element={<Index />} />
+            <Route path="my-orders" element={<Orders />} />
           </Route>
         </Route>
       </Routes>

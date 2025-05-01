@@ -50,7 +50,7 @@ const Dashboard = () => {
                   <span className="text-xl">
                     <FaShoppingCart />
                   </span>
-                  <Link to="/dashboard/orders" className="block">
+                  <Link to="/dashboard/my-orders" className="block">
                     My Orders
                   </Link>
                 </li>
