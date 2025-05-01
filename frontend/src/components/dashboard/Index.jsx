@@ -156,11 +156,12 @@
 
 import React, { useEffect } from "react";
 import { RiShoppingBag2Fill } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { get_dashboard_index_data } from "../../store/reducers/dashboardReducer";
 
 const Index = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.auth);
   const { recentOrders, totalOrder, pendingOrder, cancelledOrder } =
@@ -168,6 +169,20 @@ const Index = () => {
   useEffect(() => {
     dispatch(get_dashboard_index_data(userInfo.id));
   }, []);
+
+  const redirect = (order) => {
+    let items = 0;
+    for (let i = 0; i < order.length; i++) {
+      items = order.products[i].quantity + items;
+    }
+    navigate("/payment", {
+      state: {
+        price: order.price,
+        items,
+        orderId: order._id,
+      },
+    });
+  };
   return (
     <div className="p-6 bg-gradient-to-br from-indigo-50 to-purple-50 min-h-screen">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -245,19 +260,24 @@ const Index = () => {
                   </td>
                   <td className="px-6 py-4 space-x-2">
                     <Link
-                      to="#"
+                      to={`/dashboard/order/details/${row._id}`}
                       className="px-4 py-2 text-sm font-medium text-emerald-600 hover:text-emerald-700 
                         border border-emerald-600 rounded-lg hover:bg-emerald-50 transition-colors"
                     >
                       View
                     </Link>
-                    <Link
-                      to="#"
-                      className="px-4 py-2 text-sm font-medium text-white bg-emerald-500 rounded-lg 
+
+                    {row.payment_status !== "paid" && (
+                      <span
+                        onClick={() => {
+                          redirect(row);
+                        }}
+                        className="px-4 py-2 text-sm font-medium text-white bg-emerald-500 rounded-lg 
                         hover:bg-emerald-600 transition-colors shadow-sm"
-                    >
-                      Pay Now
-                    </Link>
+                      >
+                        Pay Now
+                      </span>
+                    )}
                   </td>
                 </tr>
               ))}
