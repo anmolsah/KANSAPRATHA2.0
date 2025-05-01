@@ -3,6 +3,9 @@ const customerOrder = require("../../models/customerOrder");
 const authorOrderModel = require("../../models/authOrder");
 const cartModel = require("../../models/cartModel");
 const { responseReturn } = require("../../utilities/response");
+const {
+  mongo: { ObjectId },
+} = require("mongoose");
 
 class orderController {
   paymentCheck = async (id) => {
@@ -90,6 +93,46 @@ class orderController {
       responseReturn(res, 201, {
         message: "Order placed successfully",
         orderId: order.id,
+      });
+    } catch (error) {
+      console.log(error);
+      responseReturn(res, 500, { error: "Internal server error" });
+    }
+  };
+
+  get_customer_dashboard_data = async (req, res) => {
+    const { userId } = req.params;
+
+    try {
+      const recentOrders = await customerOrder
+        .find({
+          customerId: new ObjectId(userId),
+        })
+        .limit(5);
+      const pendingOrders = await customerOrder
+        .find({
+          customerId: new ObjectId(userId),
+          delivery_status: "pending",
+        })
+        .countDocuments();
+      const totalOrders = await customerOrder
+        .find({
+          customerId: new ObjectId(userId),
+        })
+        .countDocuments();
+
+      const cancelledOrders = await customerOrder
+        .find({
+          customerId: new ObjectId(userId),
+          delivery_status: "cancelled",
+        })
+        .countDocuments();
+
+      responseReturn(res, 200, {
+        recentOrders,
+        pendingOrders,
+        totalOrders,
+        cancelledOrders,
       });
     } catch (error) {
       console.log(error);
