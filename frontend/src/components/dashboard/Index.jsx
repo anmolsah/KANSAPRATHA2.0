@@ -273,7 +273,7 @@ const Index = () => {
                           redirect(row);
                         }}
                         className="px-4 py-2 text-sm font-medium text-white bg-emerald-500 rounded-lg 
-                        hover:bg-emerald-600 transition-colors shadow-sm"
+                        hover:bg-emerald-600 transition-colors shadow-sm cursor-pointer"
                       >
                         Pay Now
                       </span>

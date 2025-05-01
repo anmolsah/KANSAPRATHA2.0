@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import api from "../../api/api";
 
 export const place_order = createAsyncThunk(
-  "cart/place_order",
+  "order/place_order",
   async ({
     price,
     products,
@@ -32,6 +32,23 @@ export const place_order = createAsyncThunk(
       console.log(data);
     } catch (error) {
       console.log(error.response);
+    }
+  }
+);
+
+export const get_orders = createAsyncThunk(
+  "order/get_orders",
+  async ({ customerId, status }, { rejectWithValue, fulfillWithValue }) => {
+    try {
+      const { data } = await api.get(
+        `/home/customer/get-orders/${customerId}/${status}`
+      );
+
+      //console.log(data);
+      return fulfillWithValue(data);
+    } catch (error) {
+      console.log(error.response);
+      return rejectWithValue(error.response.data);
     }
   }
 );

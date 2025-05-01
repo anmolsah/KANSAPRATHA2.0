@@ -139,6 +139,10 @@ class orderController {
       responseReturn(res, 500, { error: "Internal server error" });
     }
   };
+
+  get_orders = async (req, res) => {
+    console.log(req.params);
+  };
 }
 
 module.exports = new orderController();
