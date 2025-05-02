@@ -161,6 +161,14 @@ class orderController {
       responseReturn(res, 500, { error: "Internal server error" });
     }
   };
+  get_orders_details = async(req,res)=>{
+    const { orderId } = req.params;
+    try {
+      
+    } catch (error) {
+      
+    }
+  }
 }
 
 module.exports = new orderController();
