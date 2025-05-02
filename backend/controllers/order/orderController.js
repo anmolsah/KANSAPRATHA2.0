@@ -149,7 +149,7 @@ class orderController {
           customerId: new ObjectId(customerId),
           delivery_status: status,
         });
-      }else{
+      } else {
         orders = await customerOrder.find({
           customerId: new ObjectId(customerId),
         });
@@ -161,14 +161,16 @@ class orderController {
       responseReturn(res, 500, { error: "Internal server error" });
     }
   };
-  get_orders_details = async(req,res)=>{
+  get_orders_details = async (req, res) => {
     const { orderId } = req.params;
     try {
-      
+      const order = await customerOrder.findById(orderId);
+      responseReturn(res, 200, { order });
     } catch (error) {
-      
+      console.log(error);
+      responseReturn(res, 500, { error: "Internal server error" });
     }
-  }
+  };
 }
 
 module.exports = new orderController();
