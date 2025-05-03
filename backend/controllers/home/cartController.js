@@ -3,6 +3,7 @@ const { responseReturn } = require("../../utilities/response");
 const {
   mongo: { ObjectId },
 } = require("mongoose");
+const wishlistModel = require("../../models/wishlistModel");
 
 class cartController {
   add_to_cart = async (req, res) => {
@@ -188,6 +189,24 @@ class cartController {
         quantity: quantity - 1,
       });
       responseReturn(res, 200, { message: "Quantity decreased" });
+    } catch (error) {
+      console.log(error);
+      responseReturn(res, 500, { error: "Internal server error" });
+    }
+  };
+
+  add_wishlist = async (req, res) => {
+    const { slug } = req.body;
+    try {
+      const product = await wishlistModel.findOne({ slug });
+      if (product) {
+        responseReturn(res, 404, {
+          error: "Product already exists in wishlist",
+        });
+      } else {
+        await wishlistModel.create(req.body);
+        responseReturn(res, 201, { message: "Product added to wishlist" });
+      }
     } catch (error) {
       console.log(error);
       responseReturn(res, 500, { error: "Internal server error" });
