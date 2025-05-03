@@ -124,6 +124,15 @@ class homeController {
       responseReturn(res, 500, { error: "Internal Server error" });
     }
   };
+
+  product_details = async(req, res) => {
+    
+    try {
+      
+    } catch (error) {
+      
+    }
+  }
 }
 
 module.exports = new homeController();
