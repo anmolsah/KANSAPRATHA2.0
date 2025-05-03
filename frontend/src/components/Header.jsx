@@ -506,6 +506,14 @@ function Header() {
     }
   };
 
+  const redirect_wishlist_page = () => {
+    if (userInfo) {
+      navigate("/dashboard/my-wishlist");
+    } else {
+      navigate("/login");
+    }
+  };
+
   return (
     <div className="w-full">
       {/* Top Bar */}
@@ -630,7 +638,7 @@ function Header() {
             {/* Actions */}
             <div className="flex items-center space-x-6">
               <div className="hidden lg:flex items-center space-x-4">
-                <button className="relative p-2 text-white hover:text-emerald-400 transition-all duration-300 hover:scale-110">
+                <button  onClick={redirect_wishlist_page} className="relative p-2 text-white hover:text-emerald-400 transition-all duration-300 hover:scale-110">
                   <Heart size={24} />
                   {wishlist_count !== 0 && (
                     <span className="absolute -top-1 -right-1 bg-emerald-400 text-white w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold">
