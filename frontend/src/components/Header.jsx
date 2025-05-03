@@ -476,15 +476,15 @@ function Header() {
   const navigate = useNavigate();
   const { categorys } = useSelector((state) => state.home);
   const { userInfo } = useSelector((state) => state.auth);
-  const { cart_product_count } = useSelector((state) => state.cart);
+  const { cart_product_count, wishlist_count } = useSelector(
+    (state) => state.cart
+  );
 
   const [showSideBar, setShowSideBar] = useState(false);
   const [categoryShow, setCategoryShow] = useState(true);
   const [searchValue, setSearchValue] = useState("");
   const [category, setCategory] = useState("");
   const pathname = "/";
-  const user = false;
-  const wishlist_count = 4;
 
   const navLinks = [
     { path: "/", label: "Home" },
@@ -494,17 +494,17 @@ function Header() {
     { path: "/contact", label: "Contact" },
   ];
 
-  const search = ()=>{
-    navigate(`/products/search?category=${category}&&value=${searchValue}`)
-  }
+  const search = () => {
+    navigate(`/products/search?category=${category}&&value=${searchValue}`);
+  };
 
-  const redirect_cart_page = ()=>{
-    if(userInfo){
-      navigate("/card")
-    }else{
-      navigate("/login")
+  const redirect_cart_page = () => {
+    if (userInfo) {
+      navigate("/card");
+    } else {
+      navigate("/login");
     }
-  }
+  };
 
   return (
     <div className="w-full">
@@ -632,29 +632,38 @@ function Header() {
               <div className="hidden lg:flex items-center space-x-4">
                 <button className="relative p-2 text-white hover:text-emerald-400 transition-all duration-300 hover:scale-110">
                   <Heart size={24} />
-                  <span className="absolute -top-1 -right-1 bg-emerald-400 text-white w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold">
-                    {wishlist_count}
-                  </span>
+                  {wishlist_count !== 0 && (
+                    <span className="absolute -top-1 -right-1 bg-emerald-400 text-white w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold">
+                      {wishlist_count}
+                    </span>
+                  )}
                 </button>
-                <button onClick={redirect_cart_page} className="relative p-2 text-white hover:text-emerald-400 transition-all duration-300 hover:scale-110">
+                <button
+                  onClick={redirect_cart_page}
+                  className="relative p-2 text-white hover:text-emerald-400 transition-all duration-300 hover:scale-110"
+                >
                   <ShoppingCart size={24} />
-                  
-                    {
-                      cart_product_count !== 0 && <span className="absolute -top-1 -right-1 bg-emerald-400 text-white w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold">
-                        {cart_product_count}
-                        </span>
-                    }
-                  
+
+                  {cart_product_count !== 0 && (
+                    <span className="absolute -top-1 -right-1 bg-emerald-400 text-white w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold">
+                      {cart_product_count}
+                    </span>
+                  )}
                 </button>
               </div>
 
               {userInfo ? (
                 <Link className="flex items-center space-x-2 bg-emerald-500 text-white px-4 py-2 rounded-full hover:bg-emerald-600 transition-all duration-300 hover:scale-105 hover:shadow-lg">
                   <User size={18} />
-                  <span className="font-medium hidden sm:inline">{userInfo.name}</span>
+                  <span className="font-medium hidden sm:inline">
+                    {userInfo.name}
+                  </span>
                 </Link>
               ) : (
-                <Link to="/login" className="flex items-center space-x-2 bg-emerald-500 text-white px-4 py-2 rounded-full hover:bg-emerald-600 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                <Link
+                  to="/login"
+                  className="flex items-center space-x-2 bg-emerald-500 text-white px-4 py-2 rounded-full hover:bg-emerald-600 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                >
                   <Lock size={18} />
                   <span className="font-medium hidden sm:inline">Login</span>
                 </Link>
@@ -686,7 +695,10 @@ function Header() {
                     value={searchValue}
                     onChange={(e) => setSearchValue(e.target.value)}
                   />
-                  <button onClick={search} className="px-6 bg-emerald-500 text-white font-medium hover:bg-emerald-600 transition-all duration-300 flex items-center hover:shadow-lg">
+                  <button
+                    onClick={search}
+                    className="px-6 bg-emerald-500 text-white font-medium hover:bg-emerald-600 transition-all duration-300 flex items-center hover:shadow-lg"
+                  >
                     <Search size={20} className="mr-2" />
                     <span className="hidden sm:inline">Search</span>
                   </button>
