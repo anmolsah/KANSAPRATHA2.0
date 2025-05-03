@@ -9,33 +9,32 @@ import { get_wishlist_products } from "../../store/reducers/cartReducer";
 const Wishlist = () => {
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.auth);
-  const { successMessage, errorMessage } = useSelector((state) => state.cart);
+  const { successMessage, wishlist } = useSelector((state) => state.cart);
   useEffect(() => {
     dispatch(get_wishlist_products(userInfo.id));
   }, []);
+
   return (
     <div className="w-full grid grid-cols-4 gap-4 p-4 bg-white">
-      {[1, 2, 3, 4].map((p, i) => (
+      {wishlist.map((p, i) => (
         <div
           key={i}
           className="border group transition-all duration-500 hover:shadow-md hover:-mt-5 bg-white"
         >
           <div className="relative overflow-hidden">
-            <div className="flex justify-center items-center absolute text-white w-[30px] h-[38px] rounded-full bg-red-500 font-semibold text-xs left-2 top-2">
-              12%
-            </div>
+            {p.discount !== 0 && (
+              <div className="flex justify-center items-center absolute text-white w-[30px] h-[38px] rounded-full bg-red-500 font-semibold text-xs left-2 top-2">
+                {p.discount}%
+              </div>
+            )}
 
-            <img
-              className="sm:w-full w-full h-[240px]"
-              src="/images/products/1.jpg"
-              alt=""
-            />
+            <img className="sm:w-full w-full h-[240px]" src={p.image} alt="" />
             <ul className=" flex transition-all duration-700 -bottom-10 justify-center items-center gap-2 absolute w-full group-hover:bottom-3">
               <li className="w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-pink-400 hover:text-white hover:rotate-[720deg] transition-all">
                 <FaRegHeart />
               </li>
               <Link
-                to="/product/details/new"
+                to={`/product/details/${p.slug}`}
                 className="w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-pink-400 hover:text-white hover:rotate-[720deg] transition-all"
               >
                 <FaEye />
@@ -47,11 +46,11 @@ const Wishlist = () => {
           </div>
 
           <div className="py-3 text-slate-600 px-2 ">
-            <h2 className="font-bold">Product Name</h2>
+            <h2 className="font-bold">{p.name}</h2>
             <div className="flex justify-start items-center gap-3">
-              <span className="text-md font-semibold">₹2564</span>
+              <span className="text-md font-semibold">₹{p.price}</span>
               <div className="flex">
-                <Ratings ratings={5} />
+                <Ratings ratings={p.rating} />
               </div>
             </div>
           </div>
