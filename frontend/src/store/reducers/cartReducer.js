@@ -80,6 +80,22 @@ export const quantity_dec = createAsyncThunk(
   }
 );
 
+
+export const add_to_wishlist = createAsyncThunk(
+  "wishlist/add_to_wishlist",
+  async (info, { rejectWithValue, fulfillWithValue }) => {
+    try {
+      const { data } = await api.post("/home/product/add-to-wishlist/",info);
+
+      //console.log(data);
+      return fulfillWithValue(data);
+    } catch (error) {
+      console.log(error.response);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 export const cartReducer = createSlice({
   name: "cart",
   initialState: {
