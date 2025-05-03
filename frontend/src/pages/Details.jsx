@@ -436,7 +436,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "./../components/Header";
 import Footer from "./../components/Footer";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import img1 from "../assets/img1.jpg";
 import Carousel from "react-multi-carousel";
@@ -452,17 +452,33 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { useDispatch, useSelector } from "react-redux";
 import { product_details } from "../store/reducers/homeReducer";
 import toast from "react-hot-toast";
+import { add_to_cart,messageClear } from "../store/reducers/cartReducer";
 
 const Details = () => {
+  const navigate = useNavigate();
   const { slug } = useParams();
   const dispatch = useDispatch();
   const { product, relatedProducts, moreProducts } = useSelector(
     (state) => state.home
   );
+  const { userInfo } = useSelector((state) => state.auth);
+  const { successMessage, errorMessage } = useSelector((state) => state.cart);
 
   useEffect(() => {
     dispatch(product_details(slug));
   }, [slug]);
+
+  useEffect(() => {
+    if (successMessage) {
+      toast.success(successMessage);
+      dispatch(messageClear());
+    }
+    if (errorMessage) {
+      toast.error(errorMessage);
+      dispatch(messageClear());
+    }
+  }, [successMessage, errorMessage]);
+
   const images = [1, 2, 3, 4, 5, 6];
   const [image, setImage] = useState("");
   const discount = 5;
@@ -500,6 +516,7 @@ const Details = () => {
   };
 
   const [quantity, setQuantity] = useState(1);
+
   const inc = () => {
     if (quantity >= product.stock) {
       toast.error("Out of stock");
@@ -511,6 +528,20 @@ const Details = () => {
   const dec = () => {
     if (quantity >= 1) {
       setQuantity(quantity - 1);
+    }
+  };
+
+  const add_cart = () => {
+    if (userInfo) {
+      dispatch(
+        add_to_cart({
+          userId: userInfo.id,
+          quantity,
+          productId: product._id,
+        })
+      );
+    } else {
+      navigate("/login");
     }
   };
 
@@ -577,27 +608,6 @@ const Details = () => {
               />
             </div>
 
-            {/* <Carousel
-              autoPlay
-              infinite
-              transitionDuration={500}
-              responsive={responsive}
-              className="thumbnail-carousel"
-            >
-              {product.images.map((img) => (
-                <div
-                  key={img}
-                  onClick={() => setImage(img)}
-                  className="p-1 cursor-pointer border-2 border-transparent hover:border-emerald-400 rounded-lg transition-all"
-                >
-                  <img
-                    className="h-24 w-full object-cover rounded-md"
-                    src={img}
-                    alt="Thumbnail"
-                  />
-                </div>
-              ))}
-            </Carousel> */}
             {product.images && (
               <Carousel
                 autoPlay={true}
@@ -677,7 +687,10 @@ const Details = () => {
                     </button>
                   </div>
 
-                  <button className="px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full font-semibold transition-all duration-200 hover:scale-[1.02]">
+                  <button
+                    onClick={add_cart}
+                    className="px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full font-semibold transition-all duration-200 hover:scale-[1.02]"
+                  >
                     Add To Cart
                   </button>
 
@@ -705,10 +718,10 @@ const Details = () => {
                 </span>
                 <span
                   className={`text-${
-                    stock ? "emerald-600" : "red-500"
+                    product.stock ? "emerald-600" : "red-500"
                   } font-medium`}
                 >
-                  {stock ? `In Stock (${stock})` : "Out of Stock"}
+                  {product.stock ? `In Stock (${product.stock})` : "Out of Stock"}
                 </span>
               </div>
 
@@ -769,7 +782,7 @@ const Details = () => {
               From Khansapratha
             </h3>
             <div className="space-y-6">
-              {[1, 2, 3].map((p) => (
+              {moreProducts.map((p) => (
                 <Link
                   key={p}
                   className="block group bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow"
@@ -777,22 +790,22 @@ const Details = () => {
                   <div className="relative h-48 rounded-lg overflow-hidden">
                     <img
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                      src={`/images/products/${p}.jpg`}
+                      src={p.images[0]}
                       alt="Related product"
                     />
-                    {discount > 0 && (
+                    {p.discount > 0 && (
                       <div className="absolute top-3 left-3 bg-emerald-500 text-white px-3 py-1 rounded-full text-sm">
-                        -{discount}%
+                        -{p.discount}%
                       </div>
                     )}
                   </div>
                   <div className="pt-4">
-                    <h4 className="text-gray-800 font-medium">Product Name</h4>
+                    <h4 className="text-gray-800 font-medium">{p.name}</h4>
                     <div className="flex items-center justify-between mt-2">
                       <span className="text-emerald-600 font-semibold">
-                        ₹2563
+                        ₹{p.price}
                       </span>
-                      <Ratings ratings={4} />
+                      <Ratings ratings={p.rating} />
                     </div>
                   </div>
                 </Link>
@@ -817,28 +830,28 @@ const Details = () => {
             pagination={{ clickable: true }}
             className="related-swiper"
           >
-            {[1, 2, 3, 4, 5, 6].map((p) => (
+            {relatedProducts.map((p) => (
               <SwiperSlide key={p}>
                 <Link className="block group bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow">
                   <div className="relative h-64 rounded-lg overflow-hidden">
                     <img
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                      src={`/images/products/${p}.jpg`}
+                      src={p.images[0]}
                       alt="Related product"
                     />
-                    {discount > 0 && (
+                    {p.discount > 0 && (
                       <div className="absolute top-3 left-3 bg-emerald-500 text-white px-3 py-1 rounded-full text-sm">
-                        -{discount}%
+                        -{p.discount}%
                       </div>
                     )}
                   </div>
                   <div className="pt-4">
-                    <h4 className="text-gray-800 font-medium">Product Name</h4>
+                    <h4 className="text-gray-800 font-medium">{p.name}</h4>
                     <div className="flex items-center justify-between mt-2">
                       <span className="text-emerald-600 font-semibold">
-                        ₹2563
+                        ₹{p.price}
                       </span>
-                      <Ratings ratings={4} />
+                      <Ratings ratings={p.rating} />
                     </div>
                   </div>
                 </Link>
