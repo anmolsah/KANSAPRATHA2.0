@@ -449,16 +449,19 @@ import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { product_details } from "../store/reducers/homeReducer";
 
 const Details = () => {
-  const {slug} = useParams();
+  const { slug } = useParams();
   const dispatch = useDispatch();
+  const { product, relatedProducts, moreProducts } = useSelector(
+    (state) => state.home
+  );
 
-  useEffect(()=>{
-    dispatch(product_details(slug))
-  },[slug])
+  useEffect(() => {
+    dispatch(product_details(slug));
+  }, [slug]);
   const images = [1, 2, 3, 4, 5, 6];
   const [image, setImage] = useState("");
   const discount = 5;
@@ -537,10 +540,10 @@ const Details = () => {
             </Link>
             <IoIosArrowForward className="mx-2" />
             <Link to="/" className="hover:text-emerald-500 transition-colors">
-              Category
+              {product.category}
             </Link>
             <IoIosArrowForward className="mx-2" />
-            <span className="text-gray-800 font-medium">Product Name</span>
+            <span className="text-gray-800 font-medium"> {product.name}</span>
           </nav>
         </div>
       </section>
@@ -553,11 +556,7 @@ const Details = () => {
             <div className="border-2 border-gray-100 rounded-xl p-4 bg-white shadow-lg">
               <img
                 className="h-[480px] w-full object-contain"
-                src={
-                  image
-                    ? `/images/products/${image}.jpg`
-                    : `/images/products/${images[2]}.jpg`
-                }
+                src={image ? image : product.images?.[0]}
                 alt="Main product"
               />
             </div>
@@ -569,7 +568,7 @@ const Details = () => {
               responsive={responsive}
               className="thumbnail-carousel"
             >
-              {images.map((img) => (
+              {product.images.map((img) => (
                 <div
                   key={img}
                   onClick={() => setImage(img)}
@@ -577,7 +576,7 @@ const Details = () => {
                 >
                   <img
                     className="h-24 w-full object-cover rounded-md"
-                    src={`/images/products/${img}.jpg`}
+                    src={img}
                     alt="Thumbnail"
                   />
                 </div>
@@ -587,7 +586,7 @@ const Details = () => {
 
           {/* Product Info */}
           <div className="space-y-6">
-            <h1 className="text-4xl font-bold text-gray-800">Product Name</h1>
+            <h1 className="text-4xl font-bold text-gray-800">{product.name}</h1>
 
             <div className="flex items-center gap-4">
               <Ratings ratings={4} className="text-2xl" />
@@ -596,31 +595,26 @@ const Details = () => {
 
             <div className="space-y-4">
               <div className="text-3xl font-bold text-gray-800">
-                {discount !== 0 ? (
+                {product.discount !== 0 ? (
                   <>
-                    Price :<h2 className="line-through">₹2536</h2>
+                    Price :<h2 className="line-through">₹{product.price}</h2>
                     <h2>
-                      ₹{2536 - Math.floor((2536 * discount) / 100)}(-{discount}
+                      ₹{product.price - Math.floor((product.price * product.discount) / 100)}(-{product.discount}
                       %)
                     </h2>
                   </>
                 ) : (
-                  <h2>Price : ₹2000</h2>
+                  <h2>Price : ₹{product.price}</h2>
                 )}
               </div>
 
               <p className="text-gray-600 leading-relaxed">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book. It has
-                survived not only five centuries, but also the leap into
-                electronic typesetting, remaining essentially unchanged.
+               {product.description}
               </p>
             </div>
 
             {/* Product Actions */}
-            {stock > 0 && (
+            {product.stock > 0 && (
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
                   <div className="flex items-center bg-gray-100 rounded-full">

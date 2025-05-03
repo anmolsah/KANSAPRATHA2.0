@@ -48,7 +48,13 @@ export const query_products = createAsyncThunk(
   async (query, { fulfillWithValue }) => {
     try {
       const { data } = await api.get(
-        `/home/query-products?category=${query.category}&&rating=${query.rating}&&lowPrice=${query.low}&&highPrice=${query.high}&&sortPrice=${query.sortPrice}&&pageNumber=${query.pageNumber}&&searchValue=${query.searchValue?query.searchValue:''}`
+        `/home/query-products?category=${query.category}&&rating=${
+          query.rating
+        }&&lowPrice=${query.low}&&highPrice=${query.high}&&sortPrice=${
+          query.sortPrice
+        }&&pageNumber=${query.pageNumber}&&searchValue=${
+          query.searchValue ? query.searchValue : ""
+        }`
       );
       //console.log(data);
       return fulfillWithValue(data);
@@ -87,6 +93,9 @@ export const homeReducer = createSlice({
       low: 0,
       high: 100,
     },
+    product: {},
+    relatedProducts: [],
+    moreProducts: [],
   },
 
   reducers: {},
@@ -109,6 +118,11 @@ export const homeReducer = createSlice({
         state.products = payload.products;
         state.totalProduct = payload.totalProduct;
         state.perPage = payload.perPage;
+      })
+      .addCase(product_details.fulfilled, (state, { payload }) => {
+        state.product = payload.product;
+        state.relatedProducts = payload.relatedProducts;
+        state.moreProducts = payload.moreProducts;
       });
   },
 });
