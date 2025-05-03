@@ -212,6 +212,20 @@ class cartController {
       responseReturn(res, 500, { error: "Internal server error" });
     }
   };
+
+  get_wishlist = async (req, res) => {
+    const { userId } = req.params;
+
+    try {
+      const wishlists = await wishlistModel.find({
+        userId,
+      });
+      responseReturn(res, 200, { wishlistCount: wishlists.length, wishlists });
+    } catch (error) {
+      console.log(error);
+      responseReturn(res, 500, { error: "Internal server error" });
+    }
+  };
 }
 
 module.exports = new cartController();

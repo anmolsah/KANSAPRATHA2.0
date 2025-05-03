@@ -653,7 +653,7 @@ function Header() {
               </div>
 
               {userInfo ? (
-                <Link className="flex items-center space-x-2 bg-emerald-500 text-white px-4 py-2 rounded-full hover:bg-emerald-600 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                <Link to="/dashboard" className="flex items-center space-x-2 bg-emerald-500 text-white px-4 py-2 rounded-full hover:bg-emerald-600 transition-all duration-300 hover:scale-105 hover:shadow-lg">
                   <User size={18} />
                   <span className="font-medium hidden sm:inline">
                     {userInfo.name}

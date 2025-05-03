@@ -95,6 +95,21 @@ export const add_to_wishlist = createAsyncThunk(
   }
 );
 
+export const get_wishlist_products = createAsyncThunk(
+  "wishlist/get_wishlist_products",
+  async (userId, { rejectWithValue, fulfillWithValue }) => {
+    try {
+      const { data } = await api.get(`/home/product/get-wishlist-products/${userId}`);
+
+      //console.log(data);
+      return fulfillWithValue(data);
+    } catch (error) {
+      console.log(error.response);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 export const cartReducer = createSlice({
   name: "cart",
   initialState: {
@@ -150,6 +165,10 @@ export const cartReducer = createSlice({
         state.successMessage = payload.message;
         state.wishlist_count =
           state.wishlist_count > 0 ? state.wishlist_count + 1 : 1;
+      })
+      .addCase(get_wishlist_products.fulfilled, (state, { payload }) => {
+        state.wishlist = payload.wishlists;
+        state.wishlist_count = payload.wishlistCount ;
       });
   },
 });
