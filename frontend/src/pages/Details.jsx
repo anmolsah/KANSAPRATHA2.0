@@ -452,7 +452,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { useDispatch, useSelector } from "react-redux";
 import { product_details } from "../store/reducers/homeReducer";
 import toast from "react-hot-toast";
-import { add_to_cart,messageClear } from "../store/reducers/cartReducer";
+import { add_to_cart, messageClear,add_to_wishlist } from "../store/reducers/cartReducer";
 
 const Details = () => {
   const navigate = useNavigate();
@@ -538,6 +538,25 @@ const Details = () => {
           userId: userInfo.id,
           quantity,
           productId: product._id,
+        })
+      );
+    } else {
+      navigate("/login");
+    }
+  };
+
+  const add_wishlist = () => {
+    if (userInfo) {
+      dispatch(
+        add_to_wishlist({
+          userId: userInfo.id,
+          productId: product._id,
+          name: product.name,
+          price: product.price,
+          image: product.images[0],
+          discount: product.discount,
+          rating: product.rating,
+          slug: product.slug,
         })
       );
     } else {
@@ -694,7 +713,10 @@ const Details = () => {
                     Add To Cart
                   </button>
 
-                  <button className="p-4 bg-white border-2 border-gray-200 rounded-full hover:border-emerald-400 hover:text-emerald-600 transition-all">
+                  <button
+                    onClick={add_wishlist}
+                    className="p-4 bg-white border-2 border-gray-200 rounded-full hover:border-emerald-400 hover:text-emerald-600 transition-all"
+                  >
                     <FaHeart className="w-6 h-6" />
                   </button>
                 </div>
@@ -721,7 +743,9 @@ const Details = () => {
                     product.stock ? "emerald-600" : "red-500"
                   } font-medium`}
                 >
-                  {product.stock ? `In Stock (${product.stock})` : "Out of Stock"}
+                  {product.stock
+                    ? `In Stock (${product.stock})`
+                    : "Out of Stock"}
                 </span>
               </div>
 
@@ -768,8 +792,7 @@ const Details = () => {
                   <Reviews />
                 ) : (
                   <p className="text-gray-600 leading-relaxed">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry...
+                    {product.description}
                   </p>
                 )}
               </div>
