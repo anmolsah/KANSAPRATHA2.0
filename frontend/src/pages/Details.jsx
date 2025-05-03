@@ -451,6 +451,7 @@ import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useDispatch, useSelector } from "react-redux";
 import { product_details } from "../store/reducers/homeReducer";
+import toast from "react-hot-toast";
 
 const Details = () => {
   const { slug } = useParams();
@@ -496,6 +497,21 @@ const Details = () => {
       breakpoint: { max: 440, min: 0 },
       items: 1,
     },
+  };
+
+  const [quantity, setQuantity] = useState(1);
+  const inc = () => {
+    if (quantity >= product.stock) {
+      toast.error("Out of stock");
+    } else {
+      setQuantity(quantity + 1);
+    }
+  };
+
+  const dec = () => {
+    if (quantity >= 1) {
+      setQuantity(quantity - 1);
+    }
   };
 
   return (
@@ -561,7 +577,7 @@ const Details = () => {
               />
             </div>
 
-            <Carousel
+            {/* <Carousel
               autoPlay
               infinite
               transitionDuration={500}
@@ -581,7 +597,32 @@ const Details = () => {
                   />
                 </div>
               ))}
-            </Carousel>
+            </Carousel> */}
+            {product.images && (
+              <Carousel
+                autoPlay={true}
+                infinite={true}
+                transitionDuration={500}
+                responsive={responsive}
+                className="thumbnail-carousel"
+              >
+                {product.images.map((img, i) => {
+                  return (
+                    <div
+                      className="p-1 cursor-pointer border-2 border-transparent hover:border-emerald-400 rounded-lg transition-all"
+                      key={i}
+                      onClick={() => setImage(img)}
+                    >
+                      <img
+                        className="h-24 w-full object-cover rounded-md"
+                        src={img}
+                        alt=""
+                      />
+                    </div>
+                  );
+                })}
+              </Carousel>
+            )}
           </div>
 
           {/* Product Info */}
@@ -599,7 +640,10 @@ const Details = () => {
                   <>
                     Price :<h2 className="line-through">₹{product.price}</h2>
                     <h2>
-                      ₹{product.price - Math.floor((product.price * product.discount) / 100)}(-{product.discount}
+                      ₹
+                      {product.price -
+                        Math.floor((product.price * product.discount) / 100)}
+                      (-{product.discount}
                       %)
                     </h2>
                   </>
@@ -609,7 +653,7 @@ const Details = () => {
               </div>
 
               <p className="text-gray-600 leading-relaxed">
-               {product.description}
+                {product.description}
               </p>
             </div>
 
@@ -618,11 +662,17 @@ const Details = () => {
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
                   <div className="flex items-center bg-gray-100 rounded-full">
-                    <button className="px-5 py-3 text-gray-600 hover:text-emerald-600 transition-colors">
+                    <button
+                      onClick={dec}
+                      className="px-5 py-3 text-lg text-gray-600 hover:text-emerald-600 transition-colors font-semibold"
+                    >
                       -
                     </button>
-                    <span className="px-4 text-lg font-medium">2</span>
-                    <button className="px-5 py-3 text-gray-600 hover:text-emerald-600 transition-colors">
+                    <span className="px-4 text-lg font-medium">{quantity}</span>
+                    <button
+                      onClick={inc}
+                      className="px-5 py-3 text-gray-600 hover:text-emerald-600 transition-colors font-semibold"
+                    >
                       +
                     </button>
                   </div>
