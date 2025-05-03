@@ -226,6 +226,17 @@ class cartController {
       responseReturn(res, 500, { error: "Internal server error" });
     }
   };
+
+  remove_wishlist = async (req, res) => {
+    const { wishlistId } = req.params;
+    try {
+      const wishlist = await wishlistModel.findByIdAndDelete(wishlistId);
+      responseReturn(res, 200, { message: "Product removed from wishlist",wishlistId });
+    } catch (error) {
+      console.log(error);
+      responseReturn(res, 500, { error: "Internal server error" });
+    }
+  };
 }
 
 module.exports = new cartController();

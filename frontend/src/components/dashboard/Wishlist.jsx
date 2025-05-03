@@ -4,7 +4,12 @@ import { RiShoppingCartLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import Ratings from "../Ratings";
 import { useDispatch, useSelector } from "react-redux";
-import { get_wishlist_products } from "../../store/reducers/cartReducer";
+import {
+  get_wishlist_products,
+  remove_wishlist,
+  messageClear,
+} from "../../store/reducers/cartReducer";
+import toast from "react-hot-toast";
 
 const Wishlist = () => {
   const dispatch = useDispatch();
@@ -13,6 +18,13 @@ const Wishlist = () => {
   useEffect(() => {
     dispatch(get_wishlist_products(userInfo.id));
   }, []);
+
+  useEffect(() => {
+    if (successMessage) {
+      toast.success(successMessage);
+      dispatch(messageClear());
+    }
+  }, [successMessage]);
 
   return (
     <div className="w-full grid grid-cols-4 gap-4 p-4 bg-white">
@@ -30,7 +42,10 @@ const Wishlist = () => {
 
             <img className="sm:w-full w-full h-[240px]" src={p.image} alt="" />
             <ul className=" flex transition-all duration-700 -bottom-10 justify-center items-center gap-2 absolute w-full group-hover:bottom-3">
-              <li className="w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-pink-400 hover:text-white hover:rotate-[720deg] transition-all">
+              <li
+                onClick={() => dispatch(remove_wishlist(p._id))}
+                className="w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-pink-400 hover:text-white hover:rotate-[720deg] transition-all"
+              >
                 <FaRegHeart />
               </li>
               <Link
