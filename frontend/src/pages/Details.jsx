@@ -452,7 +452,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { useDispatch, useSelector } from "react-redux";
 import { product_details } from "../store/reducers/homeReducer";
 import toast from "react-hot-toast";
-import { add_to_cart, messageClear,add_to_wishlist } from "../store/reducers/cartReducer";
+import {
+  add_to_cart,
+  messageClear,
+  add_to_wishlist,
+} from "../store/reducers/cartReducer";
 
 const Details = () => {
   const navigate = useNavigate();
@@ -562,6 +566,38 @@ const Details = () => {
     } else {
       navigate("/login");
     }
+  };
+
+  const buyNow = () => {
+    let price = 0;
+    if (product.discount !== 0) {
+      price =
+        product.price - Math.floor((product.price * product.discount) / 100);
+    } else {
+      price = product.price;
+    }
+
+    const obj = [
+      {
+        sellerId: product.sellerId,
+        shopName: product.shopName,
+        price: quantity * (price - Math.floor((price * 5) / 100)),
+        products: [
+          {
+            quantity,
+            productInfo: product,
+          },
+        ],
+      },
+    ];
+    navigate("/shipping", {
+      state: {
+        products: obj,
+        price: price * quantity,
+        shipping_fee: 50,
+        items: 1,
+      },
+    });
   };
 
   return (
@@ -722,7 +758,7 @@ const Details = () => {
                 </div>
 
                 <div className="flex gap-4">
-                  <button className="px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full font-semibold transition-all duration-200 hover:scale-[1.02]">
+                  <button onClick={buyNow} className="px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full font-semibold transition-all duration-200 hover:scale-[1.02]">
                     Buy Now
                   </button>
                   <button className="px-8 py-4 bg-indigo-500 hover:bg-indigo-600 text-white rounded-full font-semibold transition-all duration-200 hover:scale-[1.02]">
