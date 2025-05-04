@@ -199,12 +199,18 @@ class homeController {
       });
       responseReturn(res, 200, {
         message: "Review submitted successfully",
-        
       });
     } catch (error) {
       console.log(error.message);
       responseReturn(res, 500, { error: "Internal Server error" });
     }
+  };
+
+  get_reviews = async (req, res) => {
+    const { productId } = req.params;
+    const { pageNumber } = req.query;
+    try {
+    } catch (error) {}
   };
 }
 
