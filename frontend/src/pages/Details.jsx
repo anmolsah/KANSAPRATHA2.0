@@ -720,6 +720,7 @@ const Details = () => {
               <p className="text-gray-600 leading-relaxed">
                 {product.description}
               </p>
+              <p className="text-gray-600 leading-relaxed font-semibold text-xl">ShopName : {product.shopName}</p>
             </div>
 
             {/* Product Actions */}
@@ -838,7 +839,7 @@ const Details = () => {
           {/* Seller Products */}
           <div className="space-y-6">
             <h3 className="text-xl font-bold text-gray-800">
-              From Khansapratha
+              From {product.shopName}
             </h3>
             <div className="space-y-6">
               {moreProducts.map((p) => (
