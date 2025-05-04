@@ -201,7 +201,7 @@ const Reviews = ({ product }) => {
   const [perPage, setPerPage] = useState(10);
   const [pageNumber, setPageNumber] = useState(1);
   const { userInfo } = useSelector((state) => state.auth);
-  const { successMessage } = useSelector((state) => state.home);
+  const { successMessage,reviews,rating_review,totalReview } = useSelector((state) => state.home);
   const [rate, setRate] = useState("");
   const [rev, setRev] = useState("");
 
@@ -219,6 +219,10 @@ const Reviews = ({ product }) => {
   useEffect(() => {
     if (successMessage) {
       toast.success(successMessage);
+      dispatch(get_reviews({
+        productId: product._id,
+        pageNumber
+      }))
       setRate("");
       setRev("");
       dispatch(messageClear())
@@ -252,7 +256,7 @@ const Reviews = ({ product }) => {
 
         {/* Rating Distribution */}
         <div className="flex flex-col gap-2 py-4 flex-1">
-          {[5, 4, 3, 2, 1, 0].map((rating, index) => (
+          {reviews.map((rating, index) => (
             <div
               key={index}
               className="flex flex-col md:flex-row md:items-center gap-3 md:gap-5"
@@ -278,36 +282,33 @@ const Reviews = ({ product }) => {
 
       {/* Reviews List */}
       <h2 className="text-slate-600 text-lg md:text-xl font-bold py-5">
-        Product Reviews (10)
+        Product Reviews ({totalReview})
       </h2>
       <div className="flex flex-col gap-6 pb-10 pt-4">
-        {[1, 2, 3, 4, 5].map((r, i) => (
+        {reviews.map((r, i) => (
           <div key={i} className="flex flex-col gap-2 border-b pb-6">
             <div className="flex flex-col md:flex-row justify-between gap-2">
               <div className="flex gap-1 text-lg">
-                <RatingTemp rating={4} />
+                <RatingTemp rating={r.rating} />
               </div>
-              <span className="text-slate-600 text-sm">22 Apr 2025</span>
+              <span className="text-slate-600 text-sm">{r.date}</span>
             </div>
-            <span className="text-slate-600 text-sm md:text-md">Anmol Sah</span>
+            <span className="text-slate-600 text-sm md:text-md">{r.name}</span>
             <p className="text-slate-600 text-sm leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel
-              libero vitae felis tincidunt luctus. Nam tincidunt, nunc at
-              fermentum tincidunt, leo risus gravida justo, non dignissim ligula
-              odio eu nunc.
+              {r.review}
             </p>
           </div>
         ))}
 
         {/* Pagination */}
         <div className="flex justify-center md:justify-end">
-          <Pagination
+         { totalReview> 5 && <Pagination
             pageNumber={pageNumber}
             setPageNumber={setPageNumber}
-            totalItem={10}
+            totalItem={totalReview}
             perPage={perPage}
-            showItem={3}
-          />
+            showItem={Math.floor(totalReview / 3)}
+          />}
         </div>
       </div>
 
