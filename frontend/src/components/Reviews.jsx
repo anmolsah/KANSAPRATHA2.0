@@ -184,7 +184,7 @@
 
 // export default Reviews;
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Ratings from "./Ratings";
 import RatingTemp from "./RatingTemp";
 import Pagination from "./Pagination";
@@ -193,13 +193,15 @@ import RatingReact from "react-rating";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { CiStar } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
-import { customer_review } from "../store/reducers/homeReducer";
+import { customer_review, messageClear } from "../store/reducers/homeReducer";
+import toast from "react-hot-toast";
 
 const Reviews = ({ product }) => {
   const dispatch = useDispatch();
   const [perPage, setPerPage] = useState(1);
   const [pageNumber, setPageNumber] = useState(10);
   const { userInfo } = useSelector((state) => state.auth);
+  const { successMessage } = useSelector((state) => state.home);
   const [rate, setRate] = useState("");
   const [rev, setRev] = useState("");
 
@@ -213,6 +215,15 @@ const Reviews = ({ product }) => {
     };
     dispatch(customer_review(obj));
   };
+
+  useEffect(() => {
+    if (successMessage) {
+      toast.success(successMessage);
+      setRate("");
+      setRev("");
+      dispatch(messageClear())
+    }
+  }, [successMessage]);
   return (
     <div className="mt-8 px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col md:flex-row gap-6 md:gap-10">
