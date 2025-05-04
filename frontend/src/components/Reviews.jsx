@@ -193,7 +193,12 @@ import RatingReact from "react-rating";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { CiStar } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
-import { customer_review, get_reviews, messageClear } from "../store/reducers/homeReducer";
+import {
+  customer_review,
+  get_reviews,
+  messageClear,
+  product_details,
+} from "../store/reducers/homeReducer";
 import toast from "react-hot-toast";
 
 const Reviews = ({ product }) => {
@@ -201,7 +206,9 @@ const Reviews = ({ product }) => {
   const [perPage, setPerPage] = useState(10);
   const [pageNumber, setPageNumber] = useState(1);
   const { userInfo } = useSelector((state) => state.auth);
-  const { successMessage,reviews,rating_review,totalReview } = useSelector((state) => state.home);
+  const { successMessage, reviews, rating_review, totalReview } = useSelector(
+    (state) => state.home
+  );
   const [rate, setRate] = useState("");
   const [rev, setRev] = useState("");
 
@@ -219,44 +226,51 @@ const Reviews = ({ product }) => {
   useEffect(() => {
     if (successMessage) {
       toast.success(successMessage);
-      dispatch(get_reviews({
-        productId: product._id,
-        pageNumber
-      }))
+      dispatch(
+        get_reviews({
+          productId: product._id,
+          pageNumber,
+        })
+      );
+      dispatch(product_details(product.slug))
       setRate("");
       setRev("");
-      dispatch(messageClear())
+      dispatch(messageClear());
     }
   }, [successMessage]);
 
-  useEffect(()=>{
-    if(product._id){
-      dispatch(get_reviews({
-        productId: product._id,
-        pageNumber
-      }))
+  useEffect(() => {
+    if (product._id) {
+      dispatch(
+        get_reviews({
+          productId: product._id,
+          pageNumber,
+        })
+      );
     }
-  },[product, pageNumber])
+  }, [product, pageNumber]);
   return (
     <div className="mt-8 px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col md:flex-row gap-6 md:gap-10">
         {/* Rating Summary */}
         <div className="flex flex-col gap-2 items-center md:items-start py-4">
           <div>
-            <span className="text-4xl md:text-6xl font-semibold">4.5</span>
+            <span className="text-4xl md:text-6xl font-semibold">
+              {product.rating}
+            </span>
             <span className="text-xl md:text-3xl font-semibold text-slate-600">
               /5
             </span>
           </div>
           <div className="flex text-xl md:text-3xl">
-            <Ratings ratings={4.5} />
+            <Ratings ratings={product.rating} />
           </div>
-          <p className="text-sm text-slate-600">15 Reviews</p>
+          <p className="text-sm text-slate-600">({totalReview}) Reviews</p>
         </div>
 
-        {/* Rating Distribution */}
+        {/* Rating Distribution
         <div className="flex flex-col gap-2 py-4 flex-1">
-          {reviews.map((rating, index) => (
+          {[5, 4, 3, 2, 1].map((rating, index) => (
             <div
               key={index}
               className="flex flex-col md:flex-row md:items-center gap-3 md:gap-5"
@@ -268,15 +282,50 @@ const Reviews = ({ product }) => {
                 <div className="w-full md:w-48 h-3 bg-slate-200 rounded">
                   <div
                     className="h-full bg-yellow-400 rounded"
-                    style={{ width: `${[60, 80, 40, 20, 10, 0][index]}%` }}
-                  ></div>
+                    style={{
+                      width: `${Math.floor(
+                        (100 * (rating_review[0]?.sum || 0)) / totalReview
+                      )}%`,
+                    }}
+                  >{rating_review[0]?.sum}</div>
                 </div>
                 <p className="text-sm text-slate-600 min-w-[30px]">
-                  {[10, 20, 9, 5, 3, 0][index]}
+                {rating_review[0]?.sum}
                 </p>
               </div>
             </div>
           ))}
+        </div> */}
+        <div className="flex flex-col gap-2 py-4 flex-1">
+          {[5, 4, 3, 2, 1].map((rating) => {
+            const matchedRating = rating_review.find(
+              (r) => r.rating === rating
+            );
+            const count = matchedRating ? matchedRating.sum : 0;
+            const percent = totalReview
+              ? Math.floor((count / totalReview) * 100)
+              : 0;
+
+            return (
+              <div
+                key={rating}
+                className="flex flex-col md:flex-row md:items-center gap-3 md:gap-5"
+              >
+                <div className="text-md flex gap-1 w-20 md:w-24">
+                  <RatingTemp rating={rating} />
+                </div>
+                <div className="flex-1 flex items-center gap-3">
+                  <div className="w-full md:w-48 h-3 bg-slate-200 rounded">
+                    <div
+                      className="h-full bg-yellow-400 rounded"
+                      style={{ width: `${percent}%` }}
+                    ></div>
+                  </div>
+                  <p className="text-sm text-slate-600 min-w-[30px]">{count}</p>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -294,21 +343,21 @@ const Reviews = ({ product }) => {
               <span className="text-slate-600 text-sm">{r.date}</span>
             </div>
             <span className="text-slate-600 text-sm md:text-md">{r.name}</span>
-            <p className="text-slate-600 text-sm leading-relaxed">
-              {r.review}
-            </p>
+            <p className="text-slate-600 text-sm leading-relaxed">{r.review}</p>
           </div>
         ))}
 
         {/* Pagination */}
         <div className="flex justify-center md:justify-end">
-         { totalReview> 5 && <Pagination
-            pageNumber={pageNumber}
-            setPageNumber={setPageNumber}
-            totalItem={totalReview}
-            perPage={perPage}
-            showItem={Math.floor(totalReview / 3)}
-          />}
+          {totalReview > 5 && (
+            <Pagination
+              pageNumber={pageNumber}
+              setPageNumber={setPageNumber}
+              totalItem={totalReview}
+              perPage={perPage}
+              showItem={Math.floor(totalReview / 3)}
+            />
+          )}
         </div>
       </div>
 
