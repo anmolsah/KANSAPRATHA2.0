@@ -825,7 +825,7 @@ const Details = () => {
 
               <div className="p-8">
                 {state === "reviews" ? (
-                  <Reviews />
+                  <Reviews product={product} />
                 ) : (
                   <p className="text-gray-600 leading-relaxed">
                     {product.description}

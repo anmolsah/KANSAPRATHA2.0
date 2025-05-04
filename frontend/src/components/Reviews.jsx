@@ -184,7 +184,6 @@
 
 // export default Reviews;
 
-
 import React, { useState } from "react";
 import Ratings from "./Ratings";
 import RatingTemp from "./RatingTemp";
@@ -193,13 +192,27 @@ import { Link } from "react-router-dom";
 import RatingReact from "react-rating";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { CiStar } from "react-icons/ci";
+import { useDispatch, useSelector } from "react-redux";
+import { customer_review } from "../store/reducers/homeReducer";
 
-const Reviews = () => {
+const Reviews = ({ product }) => {
+  const dispatch = useDispatch();
   const [perPage, setPerPage] = useState(1);
   const [pageNumber, setPageNumber] = useState(10);
-  const userInfo = {};
+  const { userInfo } = useSelector((state) => state.auth);
   const [rate, setRate] = useState("");
   const [rev, setRev] = useState("");
+
+  const review_submit = (e) => {
+    e.preventDefault();
+    const obj = {
+      name: userInfo.name,
+      review: rev,
+      rating: rate,
+      productId: product._id,
+    };
+    dispatch(customer_review(obj));
+  };
   return (
     <div className="mt-8 px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col md:flex-row gap-6 md:gap-10">
@@ -207,7 +220,9 @@ const Reviews = () => {
         <div className="flex flex-col gap-2 items-center md:items-start py-4">
           <div>
             <span className="text-4xl md:text-6xl font-semibold">4.5</span>
-            <span className="text-xl md:text-3xl font-semibold text-slate-600">/5</span>
+            <span className="text-xl md:text-3xl font-semibold text-slate-600">
+              /5
+            </span>
           </div>
           <div className="flex text-xl md:text-3xl">
             <Ratings ratings={4.5} />
@@ -218,14 +233,17 @@ const Reviews = () => {
         {/* Rating Distribution */}
         <div className="flex flex-col gap-2 py-4 flex-1">
           {[5, 4, 3, 2, 1, 0].map((rating, index) => (
-            <div key={index} className="flex flex-col md:flex-row md:items-center gap-3 md:gap-5">
+            <div
+              key={index}
+              className="flex flex-col md:flex-row md:items-center gap-3 md:gap-5"
+            >
               <div className="text-md flex gap-1 w-20 md:w-24">
                 <RatingTemp rating={rating} />
               </div>
               <div className="flex-1 flex items-center gap-3">
                 <div className="w-full md:w-48 h-3 bg-slate-200 rounded">
-                  <div 
-                    className="h-full bg-yellow-400 rounded" 
+                  <div
+                    className="h-full bg-yellow-400 rounded"
                     style={{ width: `${[60, 80, 40, 20, 10, 0][index]}%` }}
                   ></div>
                 </div>
@@ -293,8 +311,10 @@ const Reviews = () => {
                 }
               />
             </div>
-            <form className="space-y-4">
+            <form onSubmit={review_submit} className="space-y-4">
               <textarea
+                value={rev}
+                onChange={(e) => setRev(e.target.value)}
                 className="border outline-none p-3 w-full rounded-md text-sm md:text-base"
                 placeholder="Write your review..."
                 cols="30"
