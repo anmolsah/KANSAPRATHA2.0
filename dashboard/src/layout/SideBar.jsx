@@ -126,8 +126,10 @@ const SideBar = ({ showSidebar, setShowSidebar }) => {
 
         <button
           className="text-gray-700 mt-auto hover:bg-gray-200 flex items-center gap-3 p-2 rounded-lg transition"
-          onClick={() => {setShowSidebar(false);dispatch(logout({ navigate, role }))}}
-          
+          onClick={() => {
+            // setShowSidebar(false);
+            dispatch(logout({ navigate, role }));
+          }}
         >
           <span className="text-xl">
             <FiLogOut />
