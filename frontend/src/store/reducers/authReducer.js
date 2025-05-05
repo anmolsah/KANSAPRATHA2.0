@@ -55,6 +55,9 @@ export const authReducer = createSlice({
       state.errorMessage = "";
       state.successMessage = "";
     },
+    user_reset: (state, _) => {
+      state.userInfo = "";
+    },
   },
   extraReducers: (builder) => {
     builder

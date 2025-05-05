@@ -10,10 +10,28 @@ import {
   FaKey,
   FaSignOutAlt,
 } from "react-icons/fa";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import api from "../api/api";
+import { useDispatch } from "react-redux";
+import { user_reset } from "../store/reducers/authReducer";
+import { reset_count } from "../store/reducers/cartReducer";
 
 const Dashboard = () => {
   const [filterShow, setFilterShow] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const logout = async () => {
+    try {
+      const { data } = await api.get("/customer/logout");
+      localStorage.removeItem("customerToken");
+      dispatch(user_reset());
+      dispatch(reset_count())
+      navigate("/login");
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
 
   return (
     <div>
@@ -78,21 +96,22 @@ const Dashboard = () => {
                     Change Password
                   </Link>
                 </li>
-                <li className="flex justify-start items-center gap-2 py-2">
+                <li
+                  onClick={logout}
+                  className="flex justify-start items-center gap-2 py-2"
+                >
                   <span className="text-xl">
                     <FaSignOutAlt />
                   </span>
-                  <Link to="/logout" className="block">
-                    Logout
-                  </Link>
+                  <div className="block">Logout</div>
                 </li>
               </ul>
             </div>
 
             <div className="w-[calc(100%-270px)]">
-                <div className="mx-4">
-                    <Outlet />
-                </div>
+              <div className="mx-4">
+                <Outlet />
+              </div>
             </div>
           </div>
         </div>
@@ -103,7 +122,6 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
 
 // import React, { useState } from "react";
 // import Header from "../components/Header";
@@ -118,6 +136,7 @@ export default Dashboard;
 //   FaSignOutAlt,
 // } from "react-icons/fa";
 // import { Link, Outlet } from "react-router-dom";
+// import api from "./../api/api";
 
 // const Dashboard = () => {
 //   const [filterShow, setFilterShow] = useState(false);
@@ -125,14 +144,14 @@ export default Dashboard;
 //   return (
 //     <div className="min-h-screen flex flex-col bg-gradient-to-br from-indigo-50 to-purple-50">
 //       <Header />
-      
+
 //       <div className="flex-1 pt-5">
 //         {/* Mobile Menu Toggle */}
 //         <div className="lg:hidden fixed top-20 left-4 z-50">
 //           <button
 //             onClick={() => setFilterShow(!filterShow)}
-//             className="p-3 bg-emerald-500 text-white rounded-lg shadow-lg hover:bg-emerald-600 
-//               transform transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 
+//             className="p-3 bg-emerald-500 text-white rounded-lg shadow-lg hover:bg-emerald-600
+//               transform transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2
 //               focus:ring-emerald-500 focus:ring-offset-2"
 //           >
 //             <FaList className="text-xl" />
@@ -158,7 +177,7 @@ export default Dashboard;
 //                   <li key={index}>
 //                     <Link
 //                       to={item.to}
-//                       className="flex items-center gap-3 p-3 rounded-lg hover:bg-emerald-500/20 
+//                       className="flex items-center gap-3 p-3 rounded-lg hover:bg-emerald-500/20
 //                         transition-colors duration-200 hover:text-emerald-400 group"
 //                     >
 //                       <span className="text-xl text-emerald-400 group-hover:text-emerald-300">
@@ -187,4 +206,3 @@ export default Dashboard;
 // };
 
 // export default Dashboard;
-
