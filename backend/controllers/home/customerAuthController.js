@@ -75,6 +75,12 @@ class customerAuthController {
       res.status(500).json({ message: "Internal server error" });
     }
   };
+  customer_logout = async (req, res) => {
+    res.cookie("customerToken", "", {
+      expires: new Date(Date.now()),
+    });
+    responseReturn(res, 200, { message: "Customer logout successfully" });
+  };
 }
 
 module.exports = new customerAuthController();

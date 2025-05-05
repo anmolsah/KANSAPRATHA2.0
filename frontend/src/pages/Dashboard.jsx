@@ -103,7 +103,7 @@ const Dashboard = () => {
                   <span className="text-xl">
                     <FaSignOutAlt />
                   </span>
-                  <div className="block">Logout</div>
+                  <div className="block cursor-pointer">Logout</div>
                 </li>
               </ul>
             </div>

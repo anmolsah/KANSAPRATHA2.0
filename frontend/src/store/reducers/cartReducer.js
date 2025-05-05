@@ -203,5 +203,5 @@ export const cartReducer = createSlice({
   },
 });
 
-export const { messageClear } = cartReducer.actions;
+export const { messageClear,reset_count } = cartReducer.actions;
 export default cartReducer.reducer;
