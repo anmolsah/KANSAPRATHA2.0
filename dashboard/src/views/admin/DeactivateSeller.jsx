@@ -1,13 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Pagination from "../Pagination";
 import { FaEye } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { get_deactive_sellers } from "../../store/reducers/sellerReducer";
 
 const DeactivateSeller = () => {
+  const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
   const [perPage, setPerPage] = useState(5);
   const [show, setShow] = useState(false);
+
+  const { sellers, totalSeller } = useSelector((state) => state.seller);
+
+  useEffect(() => {
+    const obj = {
+      perPage: parseInt(perPage),
+      page: parseInt(currentPage),
+      searchValue,
+    };
+    dispatch(get_deactive_sellers(obj));
+  }, [searchValue, currentPage, perPage]);
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
       <h1 className="text-xl font-semibold mb-2 text-gray-600">
@@ -26,6 +40,8 @@ const DeactivateSeller = () => {
             <option value="20">20</option>
           </select>
           <input
+            onChange={(e) => setSearchValue(e.target.value)}
+            value={searchValue}
             type="text"
             placeholder="Search..."
             className="p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-300"
@@ -45,27 +61,27 @@ const DeactivateSeller = () => {
               </tr>
             </thead>
             <tbody>
-              {[1, 2, 3, 4, 5].map((d, i) => (
+              {sellers.map((d, i) => (
                 <tr key={i} className="border-b hover:bg-gray-50">
-                  <td className="px-6 py-3">{d}</td>
+                  <td className="px-6 py-3">{i+1}</td>
                   <td className="px-6 py-3">
                     <img
                       className="w-[45px] h-[50px]"
-                      src="http://localhost:9000/images/03.jpg"
+                      src={d.image}
                       alt="items"
                     />
                   </td>
-                  <td className="px-6 py-3">Anmol Sah</td>
-                  <td className="px-6 py-3">123Anni@gmail.com</td>
+                  <td className="px-6 py-3">{d.name}</td>
+                  <td className="px-6 py-3">{d.email}</td>
                   <td className="px-6 py-3">
-                    <span>Pending</span>
+                    <span>{d.payment}</span>
                   </td>
                   <td className="px-6 py-3">
-                    <span>Deactive</span>
+                    <span>{d.status}</span>
                   </td>
                   <td className="px-6 py-3 text-blue-600 cursor-pointer">
                     <div className="flex justify-start items-center gap-3">
-                      <Link className="px-3 hover:shadow-lg text-green-600 hover:text-green-800 transition-all">
+                      <Link to={`/admin/dashboard/seller/details/${d._id}`} className="px-3 hover:shadow-lg text-green-600 hover:text-green-800 transition-all">
                         <FaEye />
                       </Link>
                     </div>

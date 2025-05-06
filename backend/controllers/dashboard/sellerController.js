@@ -103,6 +103,55 @@ class sellerController {
       responseReturn(res, 500, { error: "Internal Server Error" });
     }
   };
+
+  get_deactive_sellers = async (req, res) => {
+    let { page, searchValue, perPage } = req.query;
+    page = parseInt(page);
+    perPage = parseInt(perPage);
+    const skipPage = perPage * (page - 1);
+
+    try {
+      if (searchValue) {
+        const sellers = await sellerModel
+          .find({
+            $text: { $search: searchValue },
+            status: "deactive",
+          })
+          .skip(skipPage)
+          .limit(perPage)
+          .sort({ createdAt: -1 });
+        const totalSeller = await sellerModel
+          .find({
+            $text: { $search: searchValue },
+            status: "deactive",
+          })
+          .countDocuments();
+        responseReturn(res, 200, {
+          sellers,
+          totalSeller,
+        });
+      } else {
+        const sellers = await sellerModel
+          .find({
+            status: "deactive",
+          })
+          .skip(skipPage)
+          .limit(perPage)
+          .sort({ createdAt: -1 });
+        const totalSeller = await sellerModel
+          .find({
+            status: "deactive",
+          })
+          .countDocuments();
+        responseReturn(res, 200, {
+          sellers,
+          totalSeller,
+        });
+      }
+    } catch (error) {
+      responseReturn(res, 500, { error: "Internal Server Error" });
+    }
+  };
 }
 
 module.exports = new sellerController();
