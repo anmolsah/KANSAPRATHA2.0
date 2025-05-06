@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Pagination from "../Pagination";
 import { FaEye } from "react-icons/fa";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { get_active_sellers } from "../../store/reducers/sellerReducer";
 
 const Sellers = () => {
@@ -11,6 +11,8 @@ const Sellers = () => {
   const [searchValue, setSearchValue] = useState("");
   const [perPage, setPerPage] = useState(5);
   const [show, setShow] = useState(false);
+
+  const { sellers, totalSeller } = useSelector((state) => state.seller);
 
   useEffect(() => {
     const obj = {
@@ -36,6 +38,8 @@ const Sellers = () => {
             <option value="20">20</option>
           </select>
           <input
+            onChange={(e) => setSearchValue(e.target.value)}
+            value={searchValue}
             type="text"
             placeholder="Search..."
             className="p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-300"
@@ -51,33 +55,33 @@ const Sellers = () => {
                 <th className="px-6 py-3">Shop Name</th>
                 <th className="px-6 py-3">Payment Status</th>
                 <th className="px-6 py-3">Email</th>
-                <th className="px-6 py-3">Division</th>
+                <th className="px-6 py-3">Status</th>
                 <th className="px-6 py-3">District</th>
                 <th className="px-6 py-3">Action</th>
               </tr>
             </thead>
             <tbody>
-              {[1, 2, 3, 4, 5].map((d, i) => (
+              {sellers.map((d, i) => (
                 <tr key={i} className="border-b hover:bg-gray-50">
-                  <td className="px-6 py-3">{d}</td>
+                  <td className="px-6 py-3">{i + 1}</td>
                   <td className="px-6 py-3">
                     <img
                       className="w-[45px] h-[50px]"
-                      src="http://localhost:9000/images/03.jpg"
-                      alt="items"
+                      src={d.image}
+                      alt="seller"
                     />
                   </td>
-                  <td className="px-6 py-3">Anmol Sah</td>
-                  <td className="px-6 py-3">Big Basket</td>
+                  <td className="px-6 py-3">{d.name}</td>
+                  <td className="px-6 py-3">{d.shopInfo?.shopName}</td>
                   <td className="px-6 py-3">
-                    <span>Pending</span>
+                    <span>{d.payment}</span>
                   </td>
-                  <td className="px-6 py-3">123Anni@gmail.com</td>
-                  <td className="px-6 py-3">Kolkata</td>
-                  <td className="px-6 py-3">Sonarpur</td>
+                  <td className="px-6 py-3">{d.email}</td>
+                  <td className="px-6 py-3">{d.status}</td>
+                  <td className="px-6 py-3">{d.shopInfo?.district}</td>
                   <td className="px-6 py-3 text-blue-600 cursor-pointer">
                     <div className="flex justify-start items-center gap-3">
-                      <Link className="px-3 hover:shadow-lg text-green-600 hover:text-green-800 transition-all">
+                      <Link to={`/admin/dashboard/seller/details/${d._id}`} className="px-3 hover:shadow-lg text-green-600 hover:text-green-800 transition-all">
                         <FaEye />
                       </Link>
                     </div>
@@ -87,15 +91,19 @@ const Sellers = () => {
             </tbody>
           </table>
         </div>
-        <div className="w-full flex justify-end mt-4 bottom-4 right-4">
-          <Pagination
-            pageNumber={currentPage}
-            setPageNumber={setCurrentPage}
-            totalItem={50}
-            perPage={perPage}
-            showItem={3}
-          />
-        </div>
+        {totalSeller <= perPage ? (
+          <div className="w-full flex justify-end mt-4 bottom-4 right-4">
+            <Pagination
+              pageNumber={currentPage}
+              setPageNumber={setCurrentPage}
+              totalItem={totalSeller}
+              perPage={perPage}
+              showItem={4}
+            />
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
