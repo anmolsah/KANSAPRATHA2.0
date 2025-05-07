@@ -150,31 +150,48 @@
 
 // export default OrderDetails;
 
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { get_admin_order } from "../../store/reducers/OrderReducer";
+import {
+  admin_order_status_update,
+  get_admin_order,
+} from "../../store/reducers/OrderReducer";
 
 const OrderDetails = () => {
   const { orderId } = useParams();
   const dispatch = useDispatch();
+  const [status, setStatus] = useState("");
 
   const { order } = useSelector((state) => state.order);
 
   useEffect(() => {
     dispatch(get_admin_order(orderId));
   }, [orderId]);
+
+  const status_update = (e) => {
+    dispatch(
+      admin_order_status_update({ orderId, info: { status: e.target.value } })
+    );
+    setStatus(e.target.value);
+  };
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
       <div className="w-full p-6 rounded-lg bg-white shadow-md">
         <div className="flex justify-between items-center p-4 bg-blue-600 text-white rounded-md">
           <h2 className="text-xl font-semibold">Order Details</h2>
-          <select name="" id="" className="px-4 py-2 rounded-md text-gray-800">
-            <option value="">Pending</option>
-            <option value="">Processing</option>
-            <option value="">Warehouse</option>
-            <option value="">Placed</option>
-            <option value="">Cancelled</option>
+          <select
+            onChange={status_update}
+            value={status}
+            name=""
+            id=""
+            className="px-4 py-2 rounded-md text-gray-800"
+          >
+            <option value="pending">Pending</option>
+            <option value="processing">Processing</option>
+            <option value="warehouse">Warehouse</option>
+            <option value="placed">Placed</option>
+            <option value="cancelled">Cancelled</option>
           </select>
         </div>
         <div className="p-4">
@@ -202,9 +219,7 @@ const OrderDetails = () => {
               <span className="block mt-2 text-gray-700 font-semibold">
                 Price: ₹{order.price}
               </span>
-            </div>
 
-            <div className="w-full lg:w-[65%]">
               <div className="bg-white shadow-md p-4 rounded-md">
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">
                   Product Details
@@ -231,31 +246,43 @@ const OrderDetails = () => {
                       </div>
                     </div>
                   ))}
-                {/* <div className="flex justify-between items-center bg-gray-100 p-3 rounded-md mb-2">
-                  <h4 className="text-gray-700 font-medium">Seller 1 Order:</h4>
-                  <span className="text-orange-600 font-semibold">Pending</span>
-                </div> */}
-
-                {/* <div className="flex justify-between items-center bg-gray-100 p-3 rounded-md mb-2 mt-4">
-                  <h4 className="text-gray-700 font-medium">Seller 2 Order:</h4>
-                  <span className="text-orange-600 font-semibold">Pending</span>
-                </div>
-                <div className="flex gap-3 items-center p-3 border-b">
-                  <img
-                    className="w-[45px] h-[45px] rounded-md"
-                    src="/images/05.jpg"
-                    alt="Product"
-                  />
-                  <div>
-                    <h4 className="text-gray-800 font-semibold">
-                      Product Name
-                    </h4>
-                    <p className="text-gray-600 text-sm">
-                      Brand: Wrogan | Quantity: 1
-                    </p>
-                  </div>
-                </div> */}
               </div>
+            </div>
+
+            <div className="w-full lg:w-[65%]">
+              {order?.suborder?.map((o, i) => (
+                <div key={i} className="bg-white shadow-md p-4 rounded-md">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                    Seller Details
+                  </h3>
+                  <div className="flex justify-between items-center bg-gray-100 p-3 rounded-md mb-2">
+                    <h4 className="text-gray-700 font-medium">
+                      Seller {i + 1} Order:
+                    </h4>
+                    <span className="text-orange-600 font-semibold">
+                      {o.delivery_status}
+                    </span>
+                  </div>
+
+                  {o.products?.map((p, i) => (
+                    <div className="flex gap-3 items-center p-3 border-b">
+                      <img
+                        className="w-[45px] h-[45px] rounded-md"
+                        src={p.images[0]}
+                        alt="Product"
+                      />
+                      <div>
+                        <h4 className="text-gray-800 font-semibold">
+                          {p.name}
+                        </h4>
+                        <p className="text-gray-600 text-sm">
+                          Brand: {p.brand} | Quantity: {p.quantity}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ))}
             </div>
           </div>
         </div>
