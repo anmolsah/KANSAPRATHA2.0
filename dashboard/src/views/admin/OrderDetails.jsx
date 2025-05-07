@@ -150,9 +150,18 @@
 
 // export default OrderDetails;
 
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { get_admin_order } from "../../store/reducers/OrderReducer";
 
 const OrderDetails = () => {
+  const { orderId } = useParams();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(get_admin_order(orderId));
+  },[orderId]);
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
       <div className="w-full p-6 rounded-lg bg-white shadow-md">

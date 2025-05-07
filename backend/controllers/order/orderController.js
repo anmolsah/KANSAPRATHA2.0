@@ -217,6 +217,10 @@ class orderController {
       responseReturn(res, 500, { error: "Internal server error" });
     }
   };
+
+  get_admin_order = async (req, res) => {
+    console.log(req.params);
+  };
 }
 
 module.exports = new orderController();
