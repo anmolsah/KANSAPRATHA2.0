@@ -156,14 +156,20 @@ import { useParams } from "react-router-dom";
 import {
   admin_order_status_update,
   get_admin_order,
+  messageClear,
 } from "../../store/reducers/OrderReducer";
+import toast from "react-hot-toast";
 
 const OrderDetails = () => {
   const { orderId } = useParams();
   const dispatch = useDispatch();
   const [status, setStatus] = useState("");
-
-  const { order } = useSelector((state) => state.order);
+  const { order, errorMessage, successMessage } = useSelector(
+    (state) => state.order
+  );
+  useEffect(() => {
+    setStatus(order?.delivery_status);
+  }, [order]);
 
   useEffect(() => {
     dispatch(get_admin_order(orderId));
@@ -175,6 +181,17 @@ const OrderDetails = () => {
     );
     setStatus(e.target.value);
   };
+
+  useEffect(() => {
+    if (successMessage) {
+      toast.success(successMessage);
+      dispatch(messageClear());
+    }
+    if (errorMessage) {
+      toast.success(errorMessage);
+      dispatch(messageClear());
+    }
+  }, [successMessage, errorMessage]);
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
       <div className="w-full p-6 rounded-lg bg-white shadow-md">
