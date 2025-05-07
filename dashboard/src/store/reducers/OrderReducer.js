@@ -25,7 +25,7 @@ export const get_admin_orders = createAsyncThunk(
 
 export const get_admin_order = createAsyncThunk(
   "order/get_admin_order ",
-  async ( orderId , { rejectWithValue, fulfillWithValue }) => {
+  async (orderId, { rejectWithValue, fulfillWithValue }) => {
     try {
       const { data } = await api.get(`/admin/order/${orderId}`, {
         withCredentials: true,
@@ -45,7 +45,7 @@ export const OrderReducer = createSlice({
     successMessage: "",
     errorMessage: "",
     totalOrder: 0,
-    orders: {},
+    order: {},
     myOrders: [],
   },
   reducers: {
@@ -55,10 +55,14 @@ export const OrderReducer = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(get_admin_orders.fulfilled, (state, { payload }) => {
-      state.myOrders = payload.orders;
-      state.totalOrder = payload.totalOrder;
-    });
+    builder
+      .addCase(get_admin_orders.fulfilled, (state, { payload }) => {
+        state.myOrders = payload.orders;
+        state.totalOrder = payload.totalOrder;
+      })
+      .addCase(get_admin_order.fulfilled, (state, { payload }) => {
+        state.order = payload.order;
+      });
   },
 });
 

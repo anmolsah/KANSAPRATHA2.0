@@ -219,7 +219,28 @@ class orderController {
   };
 
   get_admin_order = async (req, res) => {
-    console.log(req.params);
+    const { orderId } = req.params;
+
+    try {
+      const order = await customerOrder.aggregate([
+        {
+          $match: { _id: new ObjectId(orderId) },
+        },
+        {
+          $lookup: {
+            from: "authororders",
+            localField: "_id",
+            foreignField: "orderId",
+            as: "suborder",
+          },
+        },
+      ]);
+
+      responseReturn(res, 200, { order: order[0] });
+    } catch (error) {
+      console.log(error);
+      responseReturn(res, 500, { error: "Internal server error" });
+    }
   };
 }
 

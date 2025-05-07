@@ -151,7 +151,7 @@
 // export default OrderDetails;
 
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { get_admin_order } from "../../store/reducers/OrderReducer";
 
@@ -159,9 +159,11 @@ const OrderDetails = () => {
   const { orderId } = useParams();
   const dispatch = useDispatch();
 
+  const { order } = useSelector((state) => state.order);
+
   useEffect(() => {
     dispatch(get_admin_order(orderId));
-  },[orderId]);
+  }, [orderId]);
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
       <div className="w-full p-6 rounded-lg bg-white shadow-md">
@@ -177,52 +179,64 @@ const OrderDetails = () => {
         </div>
         <div className="p-4">
           <div className="flex gap-2 text-xl text-gray-700">
-            <h2>#3568</h2>
-            <span>3 Jan 2024</span>
+            <h2>#{order._id}</h2>
+            <span>{order.date}</span>
           </div>
           <div className="flex flex-wrap gap-6 mt-4">
             <div className="w-full lg:w-[30%] bg-gray-50 p-4 rounded-md shadow">
               <h3 className="text-lg font-semibold text-gray-800">
                 Deliver To:
               </h3>
-              <p className="text-gray-600">Yash Paswan</p>
+              <p className="text-gray-600">{order.shippingInfo?.name}</p>
               <p className="text-gray-600">
-                House No 123, Devidanga Baazar, Siliguri, West Bengal, 734003
+                {order.shippingInfo?.address}, {order.shippingInfo?.phone},{" "}
+                {order.shippingInfo?.province}, {order.shippingInfo?.city},{" "}
+                {order.shippingInfo?.area}
               </p>
               <div className="mt-3 flex items-center gap-3 text-gray-700">
                 <h4 className="font-medium">Payment Status:</h4>
-                <span className="font-semibold text-green-600">Paid</span>
+                <span className="font-semibold text-green-600">
+                  {order.payment_status}
+                </span>
               </div>
               <span className="block mt-2 text-gray-700 font-semibold">
-                Price: $56
+                Price: ₹{order.price}
               </span>
             </div>
 
             <div className="w-full lg:w-[65%]">
               <div className="bg-white shadow-md p-4 rounded-md">
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                  Seller Details
+                  Product Details
                 </h3>
-                <div className="flex justify-between items-center bg-gray-100 p-3 rounded-md mb-2">
+
+                {order.products &&
+                  order.products.map((p, i) => (
+                    <div
+                      key={i}
+                      className="flex gap-3 items-center p-3 border-b"
+                    >
+                      <img
+                        className="w-[45px] h-[45px] rounded-md"
+                        src={p.images[0]}
+                        alt="Product"
+                      />
+                      <div>
+                        <h4 className="text-gray-800 font-semibold">
+                          {p.name}
+                        </h4>
+                        <p className="text-gray-600 text-sm">
+                          Brand: {p.brand} | Quantity: {p.quantity}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                {/* <div className="flex justify-between items-center bg-gray-100 p-3 rounded-md mb-2">
                   <h4 className="text-gray-700 font-medium">Seller 1 Order:</h4>
                   <span className="text-orange-600 font-semibold">Pending</span>
-                </div>
-                <div className="flex gap-3 items-center p-3 border-b">
-                  <img
-                    className="w-[45px] h-[45px] rounded-md"
-                    src="/images/05.jpg"
-                    alt="Product"
-                  />
-                  <div>
-                    <h4 className="text-gray-800 font-semibold">
-                      Product Name
-                    </h4>
-                    <p className="text-gray-600 text-sm">
-                      Brand: Wrogan | Quantity: 1
-                    </p>
-                  </div>
-                </div>
-                <div className="flex justify-between items-center bg-gray-100 p-3 rounded-md mb-2 mt-4">
+                </div> */}
+
+                {/* <div className="flex justify-between items-center bg-gray-100 p-3 rounded-md mb-2 mt-4">
                   <h4 className="text-gray-700 font-medium">Seller 2 Order:</h4>
                   <span className="text-orange-600 font-semibold">Pending</span>
                 </div>
@@ -240,7 +254,7 @@ const OrderDetails = () => {
                       Brand: Wrogan | Quantity: 1
                     </p>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
