@@ -97,7 +97,7 @@ import React, { useEffect, useState } from "react";
 import { TfiArrowCircleDown } from "react-icons/tfi";
 import { Link } from "react-router-dom";
 import Pagination from "../Pagination";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { get_admin_orders } from "../../store/reducers/OrderReducer";
 
 const Orders = () => {
@@ -106,6 +106,8 @@ const Orders = () => {
   const [searchValue, setSearchValue] = useState("");
   const [perPage, setPerPage] = useState(5);
   const [expandedRow, setExpandedRow] = useState(null);
+
+  const { myOrders, totalOrder } = useSelector((state) => state.order);
 
   const toggleExpand = (index) => {
     setExpandedRow(expandedRow === index ? null : index);
@@ -146,30 +148,36 @@ const Orders = () => {
           <div className="w-full text-sm text-gray-600">
             <div className="grid grid-cols-6 gap-4 bg-gray-100 p-3 rounded-t-lg font-semibold">
               <div className="text-left pl-2">Order ID</div>
-              <div className="text-left">Price</div>
+              <div className="text-left ml-4">Price</div>
               <div className="text-left">Payment Status</div>
               <div className="text-left">Order Status</div>
               <div className="text-left">Actions</div>
               <div className="text-center">Expand</div>
             </div>
 
-            {[1, 2].map((order, index) => (
+            {myOrders.map((order, index) => (
               <React.Fragment key={index}>
                 <div className="grid grid-cols-6 gap-4 border-t border-gray-300 p-3 bg-white hover:bg-gray-50 transition">
-                  <div className="pl-2">#34343</div>
-                  <div className="font-bold text-blue-600">$453</div>
-                  <div className="text-yellow-500 font-medium">Pending</div>
-                  <div className="text-red-500 font-medium">Pending</div>
+                  <div className="pl-2">#{order._id}</div>
+                  <div className="font-bold text-blue-600 ml-4">
+                    ₹{order.price}
+                  </div>
+                  <div className="text-yellow-500 font-medium">
+                    {order.payment_status}
+                  </div>
+                  <div className="text-red-500 font-medium">
+                    {order.delivery_status}
+                  </div>
                   <div>
                     <Link
-                      to="/admin/dashboard/order/details/3"
+                      to={`/admin/dashboard/order/details/${order._id}`}
                       className="text-blue-500 hover:underline"
                     >
                       View
                     </Link>
                   </div>
                   <div
-                    onClick={() => toggleExpand(index)}
+                    onClick={() => toggleExpand(order._id)}
                     className="cursor-pointer text-center"
                   >
                     <TfiArrowCircleDown
@@ -182,16 +190,20 @@ const Orders = () => {
                   </div>
                 </div>
 
-                {expandedRow === index && (
+                {expandedRow === order._id && (
                   <div className="border-t bg-gray-50 p-4 animate-fadeIn">
-                    {[...Array(4)].map((_, i) => (
+                    {order.suborder.map((so, i) => (
                       <div key={i} className="grid grid-cols-6 gap-4 py-2">
-                        <div className="pl-2">#34343</div>
-                        <div className="text-blue-600 font-bold">$345</div>
-                        <div className="text-yellow-500 font-medium">
-                          Pending
+                        <div className="pl-2">#{so._id}</div>
+                        <div className="text-blue-600 font-bold ml-4">
+                          ₹{so.price}
                         </div>
-                        <div className="text-red-500 font-medium">Pending</div>
+                        <div className="text-yellow-500 font-medium">
+                          {so.payment_status}
+                        </div>
+                        <div className="text-red-500 font-medium">
+                          {so.delivery_status}
+                        </div>
                         <div className="col-span-2"></div>
                       </div>
                     ))}
@@ -202,15 +214,19 @@ const Orders = () => {
           </div>
         </div>
 
-        <div className="w-full flex justify-end mt-4 bottom-4 right-4">
-          <Pagination
-            pageNumber={currentPage}
-            setPageNumber={setCurrentPage}
-            totalItem={50}
-            perPage={perPage}
-            showItem={3}
-          />
-        </div>
+        {totalOrder <= perPage ? (
+          ""
+        ) : (
+          <div className="w-full flex justify-end mt-4 bottom-4 right-4">
+            <Pagination
+              pageNumber={currentPage}
+              setPageNumber={setCurrentPage}
+              totalItem={totalOrder}
+              perPage={perPage}
+              showItem={4}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
