@@ -62,7 +62,7 @@ export const admin_order_status_update = createAsyncThunk(
 export const get_seller_orders = createAsyncThunk(
   "order/get_seller_orders ",
   async (
-    { perPage, page, searchValue,sellerId },
+    { perPage, page, searchValue, sellerId },
     { rejectWithValue, fulfillWithValue }
   ) => {
     try {
@@ -110,6 +110,10 @@ export const OrderReducer = createSlice({
       })
       .addCase(admin_order_status_update.fulfilled, (state, { payload }) => {
         state.successMessage = payload.message;
+      })
+      .addCase(get_seller_orders.fulfilled, (state, { payload }) => {
+        state.myOrders = payload.orders;
+        state.totalOrder = payload.totalOrder;
       });
   },
 });
