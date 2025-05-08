@@ -2,6 +2,7 @@ const stripeModel = require("../../models/stripeModel");
 const { responseReturn } = require("../../utilities/response");
 const { v4: uuidv4 } = require("uuid");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const sellerModel = require("../../models/sellerModel");
 
 class paymentController {
   create_stripe_connect_account = async (req, res) => {
@@ -42,6 +43,26 @@ class paymentController {
           code: uid,
         });
         responseReturn(res, 200, { url: accountLink.url });
+      }
+    } catch (error) {
+      console.log(error);
+      responseReturn(res, 500, { error: "Internal server error" });
+    }
+  };
+
+  active_stripe_connect_account = async (req, res) => {
+    const { activeCode } = req.params;
+    const { id } = req;
+
+    try {
+      const userStripeInfo = await stripeModel.findOne({ code: activeCode });
+      if (userStripeInfo) {
+        await sellerModel.findByIdAndUpdate(id, {
+          payment: "active",
+        });
+        responseReturn(res, 200, { message: "Payment Active" });
+      } else {
+        responseReturn(res, 200, { message: "Payment Active Failed" });
       }
     } catch (error) {
       console.log(error);
