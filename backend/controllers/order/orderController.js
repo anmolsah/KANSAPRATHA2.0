@@ -259,6 +259,12 @@ class orderController {
       responseReturn(res, 500, { error: "Internal server error" });
     }
   };
+
+  get_seller_orders = async (req, res) => {
+    const { sellerId } = req.params;
+    let { page, searchValue, perPage } = req.query;
+    
+  };
 }
 
 module.exports = new orderController();
