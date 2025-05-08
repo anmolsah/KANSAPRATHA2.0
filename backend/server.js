@@ -24,6 +24,7 @@ app.use("/api/home", require("./routes/home/homeRoutes"));
 app.use("/api", require("./routes/home/customerAuthRoutes"));
 app.use("/api", require("./routes/home/cartRoutes"));
 app.use("/api", require("./routes/order/orderRoutes"));
+app.use("/api", require("./routes/paymentRoutes"));
 //const port = process.env.PORT || 9999;
 const port = 9999;
 dbConnect();

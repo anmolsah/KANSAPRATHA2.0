@@ -255,6 +255,7 @@ import {
   profile_info_add
 } from "../../store/reducers/authReducer.js";
 import toast from "react-hot-toast";
+import { create_stripe_connect_account } from "../../store/reducers/sellerReducer.js";
 
 const Profile = () => {
   const [state, setState] = useState({
@@ -269,7 +270,7 @@ const Profile = () => {
     (state) => state.auth
   );
 
-  const status = "active";
+  
 
   useEffect(() => {
     if (successMessage) {
@@ -376,13 +377,13 @@ const Profile = () => {
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="font-medium">Payment Account:</span>
-                    {status === "active" ? (
+                    {userInfo.payment === "active" ? (
                       <span className="bg-yellow-100 text-yellow-700 text-xs font-medium px-3 py-1 rounded-full">
                         {userInfo.payment}
                       </span>
                     ) : (
-                      <span className="bg-green-100 text-green-700 text-xs font-medium px-3 py-1 rounded-full">
-                        Active
+                      <span onClick={()=>dispatch(create_stripe_connect_account())} className="bg-green-100 text-green-700 text-xs font-medium px-3 py-1 rounded-full cursor-pointer">
+                        Click Active
                       </span>
                     )}
                   </div>

@@ -58,7 +58,6 @@ export const seller_status_update = createAsyncThunk(
   }
 );
 
-
 export const get_active_sellers = createAsyncThunk(
   "seller/get_active_sellers",
   async (
@@ -73,7 +72,6 @@ export const get_active_sellers = createAsyncThunk(
         }
       );
 
-      
       return fulfillWithValue(data);
     } catch (error) {
       //console.log(error.response.data);
@@ -81,7 +79,6 @@ export const get_active_sellers = createAsyncThunk(
     }
   }
 );
-
 
 export const get_deactive_sellers = createAsyncThunk(
   "seller/get_deactive_sellers",
@@ -97,11 +94,29 @@ export const get_deactive_sellers = createAsyncThunk(
         }
       );
 
-      
       return fulfillWithValue(data);
     } catch (error) {
       //console.log(error.response.data);
       return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const create_stripe_connect_account = createAsyncThunk(
+  "seller/create_stripe_connect_account",
+  async () => {
+    try {
+      const { data } = await api.get(
+        `/payment/create-stripe-connect-account`,
+        {
+          withCredentials: true,
+        }
+      );
+
+      
+    } catch (error) {
+      //console.log(error.response.data);
+     
     }
   }
 );
@@ -137,12 +152,10 @@ export const sellerReducer = createSlice({
       .addCase(get_active_sellers.fulfilled, (state, { payload }) => {
         state.sellers = payload.sellers;
         state.totalSeller = payload.totalSeller;
-      
       })
       .addCase(get_deactive_sellers.fulfilled, (state, { payload }) => {
         state.sellers = payload.sellers;
         state.totalSeller = payload.totalSeller;
-      
       });
   },
 });
