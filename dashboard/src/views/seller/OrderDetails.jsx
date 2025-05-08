@@ -1,29 +1,63 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { get_seller_order } from "../../store/reducers/OrderReducer";
+import {
+  get_seller_order,
+  seller_order_status_update,
+  messageClear
+} from "../../store/reducers/OrderReducer";
+import toast from "react-hot-toast";
 
 const OrderDetails = () => {
   const { orderId } = useParams();
   const dispatch = useDispatch();
+  const [status, setStatus] = useState("");
   const { order, errorMessage, successMessage } = useSelector(
     (state) => state.order
   );
 
   useEffect(() => {
+    setStatus(order?.delivery_status);
+  }, [order]);
+
+  useEffect(() => {
     dispatch(get_seller_order(orderId));
   }, [orderId]);
+
+  const status_update = (e) => {
+    dispatch(
+      seller_order_status_update({ orderId, info: { status: e.target.value } })
+    );
+    setStatus(e.target.value);
+  };
+
+  useEffect(() => {
+    if (successMessage) {
+      toast.success(successMessage);
+      dispatch(messageClear());
+    }
+    if (errorMessage) {
+      toast.success(errorMessage);
+      dispatch(messageClear());
+    }
+  }, [successMessage, errorMessage]);
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
       <div className="w-full p-6 rounded-lg bg-white shadow-md">
         <div className="flex justify-between items-center p-4 bg-blue-600 text-white rounded-md">
           <h2 className="text-xl font-semibold">Order Details</h2>
-          <select name="" id="" className="px-4 py-2 rounded-md text-gray-800">
-            <option value="">Pending</option>
-            <option value="">Processing</option>
-            <option value="">Warehouse</option>
-            <option value="">Placed</option>
-            <option value="">Cancelled</option>
+          <select
+            onChange={status_update}
+            value={status}
+            name=""
+            id=""
+            className="px-4 py-2 rounded-md text-gray-800"
+          >
+            <option value="pending">Pending</option>
+            <option value="processing">Processing</option>
+            <option value="warehouse">Warehouse</option>
+            <option value="placed">Placed</option>
+            <option value="cancelled">Cancelled</option>
           </select>
         </div>
         <div className="p-4">
