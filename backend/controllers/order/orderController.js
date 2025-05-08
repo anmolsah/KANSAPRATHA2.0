@@ -291,6 +291,18 @@ class orderController {
       responseReturn(res, 500, { error: "Internal server error" });
     }
   };
+
+  get_seller_order = async (req, res) => {
+    const { orderId } = req.params;
+
+    try {
+      const order = await authorOrderModel.findById(orderId);
+      responseReturn(res, 200, { order });
+    } catch (error) {
+      console.log(error);
+      responseReturn(res, 500, { error: "Internal server error" });
+    }
+  };
 }
 
 module.exports = new orderController();
