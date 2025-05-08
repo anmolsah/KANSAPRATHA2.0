@@ -64,6 +64,7 @@ import { getNav } from "../navigation";
 import { FiLogOut } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../store/reducers/authReducer";
+import logo from "../assets/logo01.png"
 
 const SideBar = ({ showSidebar, setShowSidebar }) => {
   const dispatch = useDispatch();
@@ -96,7 +97,7 @@ const SideBar = ({ showSidebar, setShowSidebar }) => {
         <div className="flex items-center justify-center py-4">
           <Link to="/" onClick={() => setShowSidebar(false)}>
             <img
-              src="/logo01.png"
+              src={logo}
               alt="Admin Logo"
               className="w-52 h-auto object-contain"
             />

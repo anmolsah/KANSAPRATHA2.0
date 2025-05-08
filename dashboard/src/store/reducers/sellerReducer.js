@@ -106,17 +106,33 @@ export const create_stripe_connect_account = createAsyncThunk(
   "seller/create_stripe_connect_account",
   async () => {
     try {
-      const { data } = await api.get(
-        `/payment/create-stripe-connect-account`,
+      const {
+        data: { url },
+      } = await api.get(`/payment/create-stripe-connect-account`, {
+        withCredentials: true,
+      });
+      window.location.href = url;
+    } catch (error) {
+      //console.log(error.response.data);
+    }
+  }
+);
+
+export const active_stripe_connect_account = createAsyncThunk(
+  "seller/active_stripe_connect_account",
+  async (activeCode, { rejectWithValue, fulfillWithValue }) => {
+    try {
+      const { data } = await api.put(
+        `/payment/active-stripe-connect-account/${activeCode}`,
+        {},
         {
           withCredentials: true,
         }
       );
-
-      
+      return fulfillWithValue(data);
     } catch (error) {
+      return rejectWithValue(error.response.data);
       //console.log(error.response.data);
-     
     }
   }
 );
