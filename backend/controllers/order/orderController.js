@@ -6,6 +6,7 @@ const { responseReturn } = require("../../utilities/response");
 const {
   mongo: { ObjectId },
 } = require("mongoose");
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 class orderController {
   paymentCheck = async (id) => {
@@ -317,6 +318,24 @@ class orderController {
       });
     } catch (error) {
       console.log(error);
+      responseReturn(res, 500, { error: "Internal server error" });
+    }
+  };
+
+  create_payment = async (req, res) => {
+    const { price } = req.body;
+    try {
+      const payment = await stripe.paymentIntents.create({
+        amount: price * 100,
+        currency: "USD",
+        automatic_payment_methods: {
+          enabled: true,
+        },
+      });
+
+      responseReturn(res, 200, { clientSecret: payment.client_secret });
+    } catch (error) {
+      console.log(error.message);
       responseReturn(res, 500, { error: "Internal server error" });
     }
   };
