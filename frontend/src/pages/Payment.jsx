@@ -140,7 +140,7 @@ const Payment = () => {
                   </button>
                 </div>
 
-                {paymentMethod === "stripe" && <Stripe />}
+                {paymentMethod === "stripe" && <Stripe orderId={orderId} price={price} />}
 
                 {paymentMethod === "cod" && (
                   <div className="bg-gray-50 p-6 rounded-lg">
