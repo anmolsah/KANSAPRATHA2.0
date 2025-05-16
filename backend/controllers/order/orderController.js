@@ -339,6 +339,11 @@ class orderController {
       responseReturn(res, 500, { error: "Internal server error" });
     }
   };
+
+  order_confirm = async (req, res) => {
+    const { orderId } = req.params;
+    console.log(orderId);
+  };
 }
 
 module.exports = new orderController();
