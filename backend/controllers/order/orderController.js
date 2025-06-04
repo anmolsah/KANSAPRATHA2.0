@@ -7,6 +7,7 @@ const {
   mongo: { ObjectId },
 } = require("mongoose");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+import myShopWallet from "../../models/myShopWallet";
 
 class orderController {
   paymentCheck = async (id) => {
@@ -342,7 +343,9 @@ class orderController {
 
   order_confirm = async (req, res) => {
     const { orderId } = req.params;
-    console.log(orderId);
+
+    try {
+    } catch (error) {}
   };
 }
 
