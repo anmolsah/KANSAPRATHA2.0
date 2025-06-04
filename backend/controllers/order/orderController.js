@@ -7,7 +7,8 @@ const {
   mongo: { ObjectId },
 } = require("mongoose");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-import myShopWallet from "../../models/myShopWallet";
+const myShopWallet = require("../../models/myShopWallet");
+const sellerWallet = require("../../models/sellerWallet");
 
 class orderController {
   paymentCheck = async (id) => {
@@ -345,6 +346,24 @@ class orderController {
     const { orderId } = req.params;
 
     try {
+      await customerOrder.findByIdAndUpdate(orderId, {
+        payment_status: "paid",
+      });
+      await authorOrderModel.updateMany(
+        { orderId: new ObjectId(orderId) },
+        {
+          payment_status: "paid",
+          delivery_status: "pending",
+        }
+      );
+
+      const customerOrder = await customerOrder.findById(orderId);
+      const authOrder = await authorOrderModel.find({
+        orderId: new ObjectId(orderId),
+      });
+
+      const time = moment(Date.now()).format("l");
+      const splitTime = time.split("/");
     } catch (error) {}
   };
 }
