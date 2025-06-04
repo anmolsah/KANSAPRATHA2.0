@@ -357,14 +357,35 @@ class orderController {
         }
       );
 
-      const customerOrder = await customerOrder.findById(orderId);
+      const cuOrder = await customerOrder.findById(orderId);
       const authOrder = await authorOrderModel.find({
         orderId: new ObjectId(orderId),
       });
 
       const time = moment(Date.now()).format("l");
       const splitTime = time.split("/");
-    } catch (error) {}
+
+      await myShopWallet.create({
+        amount: cuOrder.price,
+        month: splitTime[0],
+        year: splitTime[2],
+      });
+
+      for (let i = 0; i < authOrder.length; i++) {
+        await sellerWallet.create({
+          sellerId: authOrder[i].sellerId.toString(),
+          amount: authOrder[i].price,
+          month: splitTime[0],
+          year: splitTime[2],
+        });
+      }
+      responseReturn(res, 200, {
+        message: "Order confirmed successfully",
+      });
+    } catch (error) {
+      console.log(error);
+      responseReturn(res, 500, { error: "Internal server error" });
+    }
   };
 }
 
