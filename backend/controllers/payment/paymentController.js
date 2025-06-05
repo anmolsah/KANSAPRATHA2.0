@@ -3,6 +3,9 @@ const { responseReturn } = require("../../utilities/response");
 const { v4: uuidv4 } = require("uuid");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const sellerModel = require("../../models/sellerModel");
+const withdrawModel = require("../../models/withdrawRequest");
+const sellerWallet = require("../../models/stripeModel");
+
 
 class paymentController {
   create_stripe_connect_account = async (req, res) => {
@@ -68,6 +71,14 @@ class paymentController {
       console.log(error);
       responseReturn(res, 500, { error: "Internal server error" });
     }
+  };
+
+  get_seller_payment_details = async (req, res) => {
+    const { sellerId } = req.params;
+
+    try {
+      const payments = await sellerWallet.find({ sellerId });
+    } catch (error) {}
   };
 }
 
