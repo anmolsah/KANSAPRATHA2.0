@@ -40,11 +40,18 @@ export const PaymentReducer = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // builder
-    //   .addCase(get_seller_request.fulfilled, (state, { payload }) => {
-    //     state.sellers = payload.sellers;
-    //     state.totalSeller = payload.totalSeller;
-    //   })
+    builder.addCase(
+      get_seller_payment_details.fulfilled,
+      (state, { payload }) => {
+        state.pendingWithdraw = payload.pendingWithdraw;
+        state.successWithdraw = payload.successWithdraw;
+        state.totalAmount = payload.totalAmount;
+        state.availableAmount = payload.availableAmount;
+        state.withdrawAmount = payload.withdrawAmount;
+        state.pendingAmount = payload.pendingAmount;
+        //state.pendingAmount = payload.availableAmount;
+      }
+    );
   },
 });
 

@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require("uuid");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const sellerModel = require("../../models/sellerModel");
 const withdrawModel = require("../../models/withdrawRequest");
-const sellerWallet = require("../../models/stripeModel");
+const sellerWallet = require("../../models/sellerWallet");
 
 class paymentController {
   create_stripe_connect_account = async (req, res) => {
@@ -118,7 +118,7 @@ class paymentController {
       const pendingAmount = this.sumAmount(pendingWithdraw);
       const withdrawAmount = this.sumAmount(successWithdraw);
       const totalAmount = this.sumAmount(payments);
-      const availableAmount = 0;
+      let availableAmount = 0;
       if (totalAmount > 0) {
         availableAmount = totalAmount - (pendingAmount + withdrawAmount);
       }

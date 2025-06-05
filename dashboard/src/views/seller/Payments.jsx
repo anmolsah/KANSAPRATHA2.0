@@ -14,6 +14,17 @@ const outerElementType = forwardRef((props, ref) => (
 const Payments = () => {
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.auth);
+  const {
+    successMessage,
+    errorMessage,
+    loader,
+    pendingWithdraw,
+    successWithdraw,
+    totalAmount,
+    withdrawAmount,
+    pendingAmount,
+    availableAmount,
+  } = useSelector((state) => state.payment);
   const Row = ({ index, style }) => {
     return (
       <div style={style} className="flex text-sm font-mono">
@@ -29,34 +40,34 @@ const Payments = () => {
     );
   };
 
+  useEffect(() => {
+    dispatch(get_seller_payment_details(userInfo._id));
+  }, []);
 
-  useEffect(()=>{
-    dispatch(get_seller_payment_details(userInfo._id))
-  },[])
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
       <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {[
           {
-            value: "₹40036",
+            value: totalAmount,
             label: "Total Sales",
             icon: <BsCurrencyRupee />,
             color: "from-blue-500 to-blue-700",
           },
           {
-            value: "₹10050",
+            value: availableAmount,
             label: "Available Amount",
             icon: <BsCurrencyRupee />,
             color: "from-green-500 to-green-700",
           },
           {
-            value: "₹10000",
+            value: withdrawAmount,
             label: "Withdrawal Amount",
             icon: <BsCurrencyRupee />,
             color: "from-yellow-500 to-yellow-700",
           },
           {
-            value: "₹0",
+            value: pendingAmount,
             label: "Pending Amount",
             icon: <BsCurrencyRupee />,
             color: "from-red-500 to-red-700",
@@ -67,85 +78,14 @@ const Payments = () => {
             className={`flex justify-between items-center bg-gradient-to-r ${item.color} text-white rounded-lg p-6 shadow-lg hover:shadow-2xl transition`}
           >
             <div className="flex flex-col">
-              <h2 className="text-2xl font-bold">{item.value}</h2>
+              <h2 className="text-2xl font-bold">₹{item.value}</h2>
               <span className="text-md font-normal">{item.label}</span>
             </div>
             <div className="text-4xl opacity-80">{item.icon}</div>
           </div>
         ))}
       </div>
-      {/* <div className="w-full grid grid-cols-1 md:grid-cols-2  gap-4 pb-4">
-        <div className="bg-[add some color] text-[add some color] rounded-md p-5">
-          <h2 className="text-lg font-normal mb-2">Send Request</h2>
-          <div className="pt-5 mb-4">
-            <form>
-              <div className="flex gap-3 flex-wrap">
-                <input
-                  min="0"
-                  type="number"
-                  name="amount"
-                  className="p-2 md:w-[75%] border border-gray-300 rounded-md focus:ring focus:ring-blue-300"
-                  placeholder="Enter Amount"
-                />
-                <button className="px-6 bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition-all">
-                  Submit
-                </button>
-              </div>
-            </form>
-          </div>
-          <div className="">
-            <h2 className="text-lg font-normal pb-2">Pending Request</h2>
 
-            <div className="w-full overflow-x-auto">
-              <div className="flex bg-gray-200 uppercase text-sm min-w-[340px] font-semibold rounded-lg text-gray-700">
-                <div className="w-[20%] p-3">No</div>
-                <div className="w-[20%] p-3">Amount</div>
-                <div className="w-[20%] p-3">Status</div>
-                <div className="w-[20%] p-3">Date</div>
-              </div>
-              {
-                <List
-                  style={{ minWidth: "340px" }}
-                  className="List"
-                  height={390}
-                  itemCount={100}
-                  itemSize={35}
-                  outerElementType={outerElementType}
-                >
-                  {Row}
-                </List>
-              }
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-[add some color] text-[add some color] rounded-md p-5">
-          <div className="">
-            <h2 className="text-lg font-normal pb-2">Success Withdrawal</h2>
-
-            <div className="w-full overflow-x-auto">
-              <div className="flex bg-gray-200 uppercase text-sm min-w-[340px] font-semibold rounded-lg text-gray-700">
-                <div className="w-[20%] p-3">No</div>
-                <div className="w-[20%] p-3">Amount</div>
-                <div className="w-[20%] p-3">Status</div>
-                <div className="w-[20%] p-3">Date</div>
-              </div>
-              {
-                <List
-                  style={{ minWidth: "340px" }}
-                  className="List"
-                  height={390}
-                  itemCount={100}
-                  itemSize={35}
-                  outerElementType={outerElementType}
-                >
-                  {Row}
-                </List>
-              }
-            </div>
-          </div>
-        </div>
-      </div> */}
       <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 pb-4">
         <div className="bg-white shadow-lg rounded-lg p-6">
           <h2 className="text-xl font-semibold text-gray-800 mb-4">
