@@ -1,6 +1,8 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useEffect } from "react";
 import { BsCurrencyRupee } from "react-icons/bs";
 import { FixedSizeList as List } from "react-window";
+import { useDispatch, useSelector } from "react-redux";
+import { get_seller_payment_details } from "../../store/reducers/PaymentReducer";
 
 function handleOnWheel({ deltaY }) {
   console.log("handleOnWheel", deltaY);
@@ -10,6 +12,8 @@ const outerElementType = forwardRef((props, ref) => (
 ));
 
 const Payments = () => {
+  const dispatch = useDispatch();
+  const { userInfo } = useSelector((state) => state.auth);
   const Row = ({ index, style }) => {
     return (
       <div style={style} className="flex text-sm font-mono">
@@ -24,6 +28,11 @@ const Payments = () => {
       </div>
     );
   };
+
+
+  useEffect(()=>{
+    dispatch(get_seller_payment_details(userInfo._id))
+  },[])
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">
       <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
