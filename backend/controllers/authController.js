@@ -10,7 +10,8 @@ const cloudinary = require("cloudinary").v2;
 class AuthControllers {
   admin_login = async (req, res) => {
     const { email, password } = req.body;
-    //console.log("Received login request:", email);
+    // console.log("Received login request:", email);
+    // console.log("Received login request:", req.body);
 
     try {
       const admin = await adminModel.findOne({ email }).select("+password");
