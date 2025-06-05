@@ -6,7 +6,6 @@ const sellerModel = require("../../models/sellerModel");
 const withdrawModel = require("../../models/withdrawRequest");
 const sellerWallet = require("../../models/stripeModel");
 
-
 class paymentController {
   create_stripe_connect_account = async (req, res) => {
     const { id } = req;
@@ -73,12 +72,68 @@ class paymentController {
     }
   };
 
+  sumAmount = (data) => {
+    let sum = 0;
+    for (let i = 0; i < data.length; i++) {
+      sum += data[i].amount;
+    }
+    return sum;
+  };
+
   get_seller_payment_details = async (req, res) => {
     const { sellerId } = req.params;
 
     try {
       const payments = await sellerWallet.find({ sellerId });
-    } catch (error) {}
+      const pendingWithdraw = await withdrawModel.find({
+        $and: [
+          {
+            sellerId: {
+              $eq: sellerId,
+            },
+          },
+          {
+            status: {
+              $eq: "pending",
+            },
+          },
+        ],
+      });
+
+      const successWithdraw = await withdrawModel.find({
+        $and: [
+          {
+            sellerId: {
+              $eq: sellerId,
+            },
+          },
+          {
+            status: {
+              $eq: "success",
+            },
+          },
+        ],
+      });
+
+      const pendingAmount = this.sumAmount(pendingWithdraw);
+      const withdrawAmount = this.sumAmount(successWithdraw);
+      const totalAmount = this.sumAmount(payments);
+      const availableAmount = 0;
+      if (totalAmount > 0) {
+        availableAmount = totalAmount - (pendingAmount + withdrawAmount);
+      }
+      responseReturn(res, 200, {
+        pendingWithdraw,
+        successWithdraw,
+        totalAmount,
+        withdrawAmount,
+        pendingAmount,
+        availableAmount,
+      });
+    } catch (error) {
+      console.log(error);
+      responseReturn(res, 500, { error: "Internal server error" });
+    }
   };
 }
 
