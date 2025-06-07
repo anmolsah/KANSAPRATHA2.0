@@ -508,19 +508,19 @@ const AdminDashboard = () => {
               </tr>
             </thead>
             <tbody>
-              {Array(3)
-                .fill()
-                .map((_, i) => (
-                  <tr key={i} className="border-b hover:bg-gray-50">
-                    <td className="px-6 py-3">#343434</td>
-                    <td className="px-6 py-3">$456</td>
-                    <td className="px-6 py-3">Pending</td>
-                    <td className="px-6 py-3">Pending</td>
-                    <td className="px-6 py-3 text-blue-600 cursor-pointer">
-                      <Link>View</Link>
-                    </td>
-                  </tr>
-                ))}
+              {recentOrder.map((d, i) => (
+                <tr key={i} className="border-b hover:bg-gray-50">
+                  <td className="px-6 py-3">#{d._id}</td>
+                  <td className="px-6 py-3">₹{d.price}</td>
+                  <td className="px-6 py-3">{d.payment_status}</td>
+                  <td className="px-6 py-3">{d.delivery_status}</td>
+                  <td className="px-6 py-3 text-blue-600 cursor-pointer">
+                    <Link to={`/admin/dashboard/order/details/${d._id}`}>
+                      View
+                    </Link>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
