@@ -321,15 +321,16 @@ import { FaUser, FaShoppingCart } from "react-icons/fa";
 import { MdProductionQuantityLimits } from "react-icons/md";
 import Chart from "react-apexcharts";
 import { Link } from "react-router-dom";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import { get_admin_dashboard_data } from "../../store/reducers/dashboardReducer";
 
 const AdminDashboard = () => {
-
   const dispatch = useDispatch();
-  useEffect(()=>{
-    dispatch(get_admin_dashboard_data())
-  },[])
+  const { totaleSale, totalOrder, totalProduct, totalSeller, recentOrder } =
+    useSelector((state) => state.dashboard);
+  useEffect(() => {
+    dispatch(get_admin_dashboard_data());
+  }, []);
   const state = {
     series: [
       {
@@ -407,25 +408,25 @@ const AdminDashboard = () => {
         {/* Dashboard Cards */}
         {[
           {
-            value: "$3436",
+            value: "₹" + totaleSale,
             label: "Total Sales",
             icon: <BsCurrencyRupee />,
             color: "from-blue-500 to-blue-700",
           },
           {
-            value: "30",
+            value: totalProduct,
             label: "Products",
             icon: <MdProductionQuantityLimits />,
             color: "from-green-500 to-green-700",
           },
           {
-            value: "100",
+            value: totalSeller,
             label: "Sellers",
             icon: <FaUser />,
             color: "from-yellow-500 to-yellow-700",
           },
           {
-            value: "4352",
+            value: totalOrder,
             label: "Orders",
             icon: <FaShoppingCart />,
             color: "from-red-500 to-red-700",
@@ -516,7 +517,7 @@ const AdminDashboard = () => {
                     <td className="px-6 py-3">Pending</td>
                     <td className="px-6 py-3">Pending</td>
                     <td className="px-6 py-3 text-blue-600 cursor-pointer">
-                     <Link>View</Link>
+                      <Link>View</Link>
                     </td>
                   </tr>
                 ))}

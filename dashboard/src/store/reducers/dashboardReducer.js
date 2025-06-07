@@ -33,12 +33,16 @@ export const dashboardReducer = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // builder.addCase(seller_login.fulfilled, (state, { payload }) => {
-    //   state.loader = false;
-    //   state.successMessage = payload.message;
-    //   state.token = payload.token;
-    //   state.role = returnRole(payload.token);
-    // });
+    builder.addCase(
+      get_admin_dashboard_data.fulfilled,
+      (state, { payload }) => {
+        state.totaleSale = payload.totalSale;
+        state.totalOrder = payload.totalOrder;
+        state.totalProduct = payload.totalProduct;
+        state.totalSeller = payload.totalSeller;
+        state.recentOrder = payload.recentOrders;
+      }
+    );
   },
 });
 
