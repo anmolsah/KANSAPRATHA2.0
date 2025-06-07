@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   get_seller_payment_details,
   send_withdraw_request,
+  messageClear,
 } from "../../store/reducers/PaymentReducer";
 import { toast } from "react-hot-toast";
 
@@ -58,6 +59,18 @@ const Payments = () => {
   useEffect(() => {
     dispatch(get_seller_payment_details(userInfo._id));
   }, []);
+
+  useEffect(() => {
+    if (errorMessage) {
+      toast.error(successMessage);
+      dispatch(messageClear());
+    }
+
+    if (successMessage) {
+      toast.success(successMessage);
+      dispatch(messageClear());
+    }
+  }, [successMessage, errorMessage]);
 
   return (
     <div className="px-4 md:px-8 py-8 bg-gray-100 min-h-screen lg:ml-[235px] transition-all">

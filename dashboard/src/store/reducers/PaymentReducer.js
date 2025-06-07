@@ -56,18 +56,30 @@ export const PaymentReducer = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(
-      get_seller_payment_details.fulfilled,
-      (state, { payload }) => {
+    builder
+      .addCase(get_seller_payment_details.fulfilled, (state, { payload }) => {
         state.pendingWithdraw = payload.pendingWithdraw;
         state.successWithdraw = payload.successWithdraw;
         state.totalAmount = payload.totalAmount;
         state.availableAmount = payload.availableAmount;
         state.withdrawAmount = payload.withdrawAmount;
-        state.pendingAmount = payload.pendingAmount;
-        //state.pendingAmount = payload.availableAmount;
-      }
-    );
+         state.pendingAmount = payload.pendingAmount;
+        // state.pendingAmount = payload.availableAmount;
+      })
+      .addCase(send_withdraw_request.pending, (state, { payload }) => {
+        state.loader = true;
+      })
+      .addCase(send_withdraw_request.rejected, (state, { payload }) => {
+        state.loader = false;
+        state.errorMessage = payload.error || "Failed to send withdraw request";
+      })
+      .addCase(send_withdraw_request.fulfilled, (state, { payload }) => {
+        state.loader = true;
+        state.successMessage = payload.message;
+        state.pendingWithdraw = [...state.pendingWithdraw, payload.withdraw];
+        state.availableAmount = state.availableAmount - payload.withdraw.amount;
+        state.pendingWithdraw = payload.withdraw.amount;
+      });
   },
 });
 

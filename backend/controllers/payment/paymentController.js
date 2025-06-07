@@ -135,6 +135,25 @@ class paymentController {
       responseReturn(res, 500, { error: "Internal server error" });
     }
   };
+
+  withdraw_request = async (req, res) => {
+    const { amount, sellerId } = req.body;
+
+    try {
+      const withdraw = await withdrawModel.create({
+        sellerId,
+        amount: parseInt(amount),
+      });
+
+      responseReturn(res, 200, {
+        withdraw,
+        message: "Withdraw request sent successfully",
+      });
+    } catch (error) {
+      console.log(error);
+      responseReturn(res, 500, { error: "Internal server error" });
+    }
+  };
 }
 
 module.exports = new paymentController();
