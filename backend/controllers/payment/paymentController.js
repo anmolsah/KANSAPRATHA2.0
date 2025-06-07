@@ -5,6 +5,9 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const sellerModel = require("../../models/sellerModel");
 const withdrawModel = require("../../models/withdrawRequest");
 const sellerWallet = require("../../models/sellerWallet");
+const {
+  mongo: { ObjectId },
+} = require("mongoose");
 
 class paymentController {
   create_stripe_connect_account = async (req, res) => {
@@ -169,10 +172,27 @@ class paymentController {
 
   payment_request_confirm = async (req, res) => {
     const { paymentId } = req.body;
-    console.log(paymentId);
 
     try {
-    } catch (error) {}
+      const payment = await withdrawModel.findById(paymentId);
+      const { stripeId } = await stripeModel.findOne({
+        sellerId: new ObjectId(payment.sellerId),
+      });
+
+      await stripe.transfers.create({
+        amount: payment.amount * 100, // Convert to cents
+        currency: "inr",
+        destination: stripeId,
+      });
+      await withdrawModel.findByIdAndUpdate(paymentId, { status: "success" });
+      responseReturn(res, 200, {
+        payment,
+        message: "Payment request confirmed",
+      });
+    } catch (error) {
+      console.log(error);
+      responseReturn(res, 500, { error: "Internal server error" });
+    }
   };
 }
 

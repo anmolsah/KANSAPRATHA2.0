@@ -67,7 +67,7 @@ const Payments = () => {
 
   useEffect(() => {
     if (errorMessage) {
-      toast.error(successMessage);
+      toast.error(errorMessage);
       dispatch(messageClear());
     }
 

@@ -52,14 +52,17 @@ export const get_payment_request = createAsyncThunk(
   }
 );
 
-
 export const confirm_payment_request = createAsyncThunk(
   "payment/confirm_payment_request",
   async (paymentId, { rejectWithValue, fulfillWithValue }) => {
     try {
-      const { data } = await api.post(`/payment/request-confirm`, {paymentId}, {
-        withCredentials: true,
-      });
+      const { data } = await api.post(
+        `/payment/request-confirm`,
+        { paymentId },
+        {
+          withCredentials: true,
+        }
+      );
 
       return fulfillWithValue(data);
     } catch (error) {
@@ -115,7 +118,21 @@ export const PaymentReducer = createSlice({
       })
       .addCase(get_payment_request.fulfilled, (state, { payload }) => {
         state.pendingWithdraw = payload.withdrawRequest;
-        
+      })
+      .addCase(confirm_payment_request.pending, (state, { payload }) => {
+        state.loader = true;
+      })
+      .addCase(confirm_payment_request.rejected, (state, { payload }) => {
+        state.loader = false;
+        state.errorMessage = payload.error || "Failed to send withdraw request";;
+      })
+      .addCase(confirm_payment_request.fulfilled, (state, { payload }) => {
+        const temp = state.pendingWithdraw.filter(
+          (r) => r._id !== payload.payment._id
+        );
+        state.loader = false;
+        state.successMessage = payload.message;
+        state.pendingWithdraw = temp;
       });
   },
 });
