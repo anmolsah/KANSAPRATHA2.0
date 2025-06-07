@@ -1,8 +1,12 @@
-import React, { forwardRef, useEffect } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import { BsCurrencyRupee } from "react-icons/bs";
 import { FixedSizeList as List } from "react-window";
 import { useDispatch, useSelector } from "react-redux";
-import { get_seller_payment_details } from "../../store/reducers/PaymentReducer";
+import {
+import { toast } from 'react-hot-toast';
+  get_seller_payment_details,
+  send_withdraw_request,
+} from "../../store/reducers/PaymentReducer";
 
 function handleOnWheel({ deltaY }) {
   console.log("handleOnWheel", deltaY);
@@ -25,6 +29,17 @@ const Payments = () => {
     pendingAmount,
     availableAmount,
   } = useSelector((state) => state.payment);
+  const [amount, setAmount] = useState(0);
+
+  const sendRequest = (e) => {
+    e.preventDefault();
+    if (availableAmount - amount > 10) {
+      dispatch(send_withdraw_request({ amount, sellerId: userInfo._id }));
+      setAmount(0);
+    }else{
+      toast.error("Insufficient balance to withdraw");
+    }
+  };
   const Row = ({ index, style }) => {
     return (
       <div style={style} className="flex text-sm font-mono">
@@ -92,17 +107,22 @@ const Payments = () => {
             Send Request
           </h2>
           <div className="pt-4 mb-6">
-            <form>
+            <form onSubmit={sendRequest}>
               <div className="flex gap-4 flex-wrap">
                 <input
+                  onChange={(e) => setAmount(e.target.value)}
+                  value={amount}
                   min="0"
                   type="number"
                   name="amount"
                   className="p-3 md:w-[70%] border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                   placeholder="Enter Amount"
                 />
-                <button className="px-8 bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition-all">
-                  Submit
+                <button
+                  disabled={loader}
+                  className="px-8 bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition-all"
+                >
+                  {loader ? "Processing..." : "Submit"}
                 </button>
               </div>
             </form>
