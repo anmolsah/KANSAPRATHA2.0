@@ -1,5 +1,6 @@
 import authReducer from "./reducers/authReducer";
 import categoryReducer from "./reducers/categoryReducer";
+import dashboardReducer from "./reducers/dashboardReducer";
 import OrderReducer from "./reducers/OrderReducer";
 import PaymentReducer from "./reducers/PaymentReducer";
 import productReducer from "./reducers/productReducer";
@@ -12,6 +13,7 @@ const rootReducer = {
   seller: sellerReducer,
   order: OrderReducer,
   payment: PaymentReducer,
+  dashboard: dashboardReducer,
 };
 
 export default rootReducer;
