@@ -166,6 +166,14 @@ class paymentController {
       responseReturn(res, 500, { error: "Internal server error" });
     }
   };
+
+  payment_request_confirm = async (req, res) => {
+    const { paymentId } = req.body;
+    console.log(paymentId);
+
+    try {
+    } catch (error) {}
+  };
 }
 
 module.exports = new paymentController();
