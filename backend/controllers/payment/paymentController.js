@@ -181,7 +181,7 @@ class paymentController {
 
       await stripe.transfers.create({
         amount: payment.amount * 100, // Convert to cents
-        currency: "inr",
+        currency: "usd",
         destination: stripeId,
       });
       await withdrawModel.findByIdAndUpdate(paymentId, { status: "success" });
