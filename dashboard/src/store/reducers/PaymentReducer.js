@@ -24,7 +24,7 @@ export const send_withdraw_request = createAsyncThunk(
   "payment/send_withdraw_request",
   async (info, { rejectWithValue, fulfillWithValue }) => {
     try {
-      const { data } = await api.get(`/payment/withdraw-request`, info, {
+      const { data } = await api.post(`/payment/withdraw-request`, info, {
         withCredentials: true,
       });
 
