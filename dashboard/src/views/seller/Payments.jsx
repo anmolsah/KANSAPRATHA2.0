@@ -8,6 +8,7 @@ import {
   messageClear,
 } from "../../store/reducers/PaymentReducer";
 import { toast } from "react-hot-toast";
+import moment from "moment";
 
 function handleOnWheel({ deltaY }) {
   console.log("handleOnWheel", deltaY);
@@ -45,13 +46,17 @@ const Payments = () => {
     return (
       <div style={style} className="flex text-sm font-mono">
         <div className="w-[25%] pl-4 p-2 whitespace-normal">{index + 1}</div>
-        <div className="w-[25%] pl-1 p-2 whitespace-normal">₹3586</div>
+        <div className="w-[25%] pl-1 p-2 whitespace-normal">
+          ₹{pendingWithdraw[index]?.amount}
+        </div>
         <div className="w-[25%] p-2 pl-1 whitespace-normal">
           <span className="py-1 px-2 text-sm bg-yellow-100 text-yellow-800 rounded-full">
-            Pending
+            {pendingWithdraw[index]?.status}
           </span>
         </div>
-        <div className="w-[25%] p-2 whitespace-normal">25 Dec 2024</div>
+        <div className="w-[25%] p-2 whitespace-normal">
+          {moment(pendingWithdraw[index]?.createdAt).format("LL")}
+        </div>
       </div>
     );
   };
@@ -149,13 +154,13 @@ const Payments = () => {
                 <div className="w-[20%]  p-3">No</div>
                 <div className="w-[20%] p-3">Amount</div>
                 <div className="w-[20%] p-2 pl-14">Status</div>
-                <div className="w-[20%] p-3 placeholder-gray-200">Date</div>
+                <div className="w-[20%] p-2 pl-24 placeholder-gray-200">Date</div>
               </div>
               <List
                 style={{ minWidth: "340px" }}
                 className="List"
                 height={390}
-                itemCount={100}
+                itemCount={pendingWithdraw.length}
                 itemSize={35}
                 outerElementType={outerElementType}
               >
