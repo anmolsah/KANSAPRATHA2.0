@@ -1,5 +1,7 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { FixedSizeList as List } from "react-window";
+import { get_payment_request } from "../../store/reducers/PaymentReducer";
 
 function handleOnWheel({ deltaY }) {
   console.log("handleOnWheel", deltaY);
@@ -9,6 +11,14 @@ const outerElementType = forwardRef((props, ref) => (
 ));
 
 const PaymentRequest = () => {
+  const dispatch = useDispatch();
+  const { successMessage, errorMessage } = useSelector(
+    (state) => state.payment
+  );
+
+  useEffect(() => {
+    dispatch(get_payment_request());
+  },[]);
   const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const Row = ({ index, style }) => {
     return (
