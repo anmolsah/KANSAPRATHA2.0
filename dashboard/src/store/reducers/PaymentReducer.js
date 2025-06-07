@@ -63,7 +63,7 @@ export const PaymentReducer = createSlice({
         state.totalAmount = payload.totalAmount;
         state.availableAmount = payload.availableAmount;
         state.withdrawAmount = payload.withdrawAmount;
-         state.pendingAmount = payload.pendingAmount;
+        state.pendingAmount = payload.pendingAmount;
         // state.pendingAmount = payload.availableAmount;
       })
       .addCase(send_withdraw_request.pending, (state, { payload }) => {
@@ -74,7 +74,7 @@ export const PaymentReducer = createSlice({
         state.errorMessage = payload.error || "Failed to send withdraw request";
       })
       .addCase(send_withdraw_request.fulfilled, (state, { payload }) => {
-        state.loader = true;
+        state.loader = false;
         state.successMessage = payload.message;
         state.pendingWithdraw = [...state.pendingWithdraw, payload.withdraw];
         state.availableAmount = state.availableAmount - payload.withdraw.amount;
