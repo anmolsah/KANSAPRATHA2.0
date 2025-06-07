@@ -3,10 +3,10 @@ import { BsCurrencyRupee } from "react-icons/bs";
 import { FixedSizeList as List } from "react-window";
 import { useDispatch, useSelector } from "react-redux";
 import {
-import { toast } from 'react-hot-toast';
   get_seller_payment_details,
   send_withdraw_request,
 } from "../../store/reducers/PaymentReducer";
+import { toast } from "react-hot-toast";
 
 function handleOnWheel({ deltaY }) {
   console.log("handleOnWheel", deltaY);
@@ -36,7 +36,7 @@ const Payments = () => {
     if (availableAmount - amount > 10) {
       dispatch(send_withdraw_request({ amount, sellerId: userInfo._id }));
       setAmount(0);
-    }else{
+    } else {
       toast.error("Insufficient balance to withdraw");
     }
   };
