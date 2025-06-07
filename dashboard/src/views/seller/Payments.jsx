@@ -61,6 +61,28 @@ const Payments = () => {
     );
   };
 
+
+
+
+    const Rows = ({ index, style }) => {
+    return (
+      <div style={style} className="flex text-sm font-mono">
+        <div className="w-[25%] pl-4 p-2 whitespace-normal">{index + 1}</div>
+        <div className="w-[25%] pl-1 p-2 whitespace-normal">
+          ₹{successWithdraw[index]?.amount}
+        </div>
+        <div className="w-[25%] p-2 pl-1 whitespace-normal">
+          <span className="py-1 px-2 text-sm bg-yellow-100 text-yellow-800 rounded-full">
+            {successWithdraw[index]?.status}
+          </span>
+        </div>
+        <div className="w-[25%] p-2 whitespace-normal">
+          {moment(successWithdraw[index]?.createdAt).format("LL")}
+        </div>
+      </div>
+    );
+  };
+
   useEffect(() => {
     dispatch(get_seller_payment_details(userInfo._id));
   }, []);
@@ -185,11 +207,11 @@ const Payments = () => {
               style={{ minWidth: "340px" }}
               className="List"
               height={390}
-              itemCount={100}
+              itemCount={successWithdraw.length}
               itemSize={35}
               outerElementType={outerElementType}
             >
-              {Row}
+              {Rows}
             </List>
           </div>
         </div>
