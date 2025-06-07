@@ -2,6 +2,7 @@ import React, { forwardRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FixedSizeList as List } from "react-window";
 import { get_payment_request } from "../../store/reducers/PaymentReducer";
+import moment from "moment";
 
 function handleOnWheel({ deltaY }) {
   console.log("handleOnWheel", deltaY);
@@ -12,23 +13,29 @@ const outerElementType = forwardRef((props, ref) => (
 
 const PaymentRequest = () => {
   const dispatch = useDispatch();
-  const { successMessage, errorMessage } = useSelector(
+  const { successMessage, errorMessage, pendingWithdraw } = useSelector(
     (state) => state.payment
   );
 
   useEffect(() => {
     dispatch(get_payment_request());
-  },[]);
-  const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  }, []);
+
   const Row = ({ index, style }) => {
     return (
       <div style={style} className="flex text-sm font-mono">
         <div className="w-[25%] p-2 whitespace-normal">{index + 1}</div>
-        <div className="w-[25%] p-2 whitespace-normal">$3586</div>
         <div className="w-[25%] p-2 whitespace-normal">
-          <span className="py-1 px-2 text-sm">Pending</span>
+          ₹{pendingWithdraw[index]?.amount}
         </div>
-        <div className="w-[25%] p-2 whitespace-normal">25 Dec 2024</div>
+        <div className="w-[25%] p-2 whitespace-normal">
+          <span className="py-1 px-2 text-sm">
+            {pendingWithdraw[index]?.status}
+          </span>
+        </div>
+        <div className="w-[25%] p-2 whitespace-normal">
+          {moment(pendingWithdraw[index]?.createdAt).format("LL")}
+        </div>
         <div className="w-[25%] p-2 whitespace-normal">
           <button className="bg-indigo-500 shadow-lg hover:shadow-indigo-600/50 px-3 py-[2px] cursor-pointer text-white rounded-sm text-sm">
             Confirm
@@ -58,7 +65,7 @@ const PaymentRequest = () => {
                 style={{ minWidth: "340px" }}
                 className="List"
                 height={390}
-                itemCount={100}
+                itemCount={pendingWithdraw.length}
                 itemSize={35}
                 outerElementType={outerElementType}
               >
