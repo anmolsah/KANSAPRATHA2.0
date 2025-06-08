@@ -66,21 +66,38 @@ class dashboardController {
           sellerId: new ObjectId(id),
         })
         .countDocuments();
-      const totalPendingOrder = await authorOrderModel.find({
-        $and: [
-          {
-            sellerId: {
-              $eq: new ObjectId(id),
+      const totalPendingOrder = await authorOrderModel
+        .find({
+          $and: [
+            {
+              sellerId: {
+                $eq: new ObjectId(id),
+              },
             },
-          },
-          {
-            delivery_status: {
-              $eq: "pending",
+            {
+              delivery_status: {
+                $eq: "pending",
+              },
             },
-          },
-        ],
-      }).countDocuments();
-    } catch (error) {}
+          ],
+        })
+        .countDocuments();
+      const recentOrders = await authorOrderModel
+        .find({
+          sellerId: new ObjectId(id),
+        })
+        .limit(5);
+      responseReturn(res, 200, {
+        totalProduct,
+        totalOrder,
+        totalPendingOrder,
+        recentOrders,
+        totalSale: totalSale.length > 0 ? totalSale[0].totalAmount : 0,
+      });
+    } catch (error) {
+      console.log(error);
+      responseReturn(res, 500, { error: "Internal server error" });
+    }
   };
 }
 
