@@ -66,6 +66,20 @@ class dashboardController {
           sellerId: new ObjectId(id),
         })
         .countDocuments();
+      const totalPendingOrder = await authorOrderModel.find({
+        $and: [
+          {
+            sellerId: {
+              $eq: new ObjectId(id),
+            },
+          },
+          {
+            delivery_status: {
+              $eq: "pending",
+            },
+          },
+        ],
+      }).countDocuments();
     } catch (error) {}
   };
 }
