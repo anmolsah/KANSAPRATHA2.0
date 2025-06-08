@@ -7,14 +7,18 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { get_seller_dashboard_data } from "../../store/reducers/dashboardReducer";
 const SellerDashboard = () => {
-
   const dispatch = useDispatch();
-    const { totaleSale, totalOrder, totalProduct, totalSeller, recentOrder } =
-      useSelector((state) => state.dashboard);
+  const {
+    totaleSale,
+    totalOrder,
+    totalProduct,
+    totalPendingOrder,
+    recentOrder,
+  } = useSelector((state) => state.dashboard);
 
-    useEffect(() => {
-      dispatch(get_seller_dashboard_data());
-    }, []);
+  useEffect(() => {
+    dispatch(get_seller_dashboard_data());
+  }, []);
 
   const state = {
     series: [
@@ -92,25 +96,25 @@ const SellerDashboard = () => {
       <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {[
           {
-            value: "$3436",
+            value: "₹" + totaleSale,
             label: "Total Sales",
             icon: <BsCurrencyRupee />,
             color: "from-blue-500 to-blue-700",
           },
           {
-            value: "30",
+            value: totalProduct,
             label: "Products",
             icon: <MdProductionQuantityLimits />,
             color: "from-green-500 to-green-700",
           },
           {
-            value: "100",
+            value: totalOrder,
             label: "Orders",
             icon: <FaShoppingCart />,
             color: "from-yellow-500 to-yellow-700",
           },
           {
-            value: "4",
+            value: totalPendingOrder,
             label: "Pending orders",
             icon: <FaShoppingCart />,
             color: "from-red-500 to-red-700",
@@ -192,19 +196,19 @@ const SellerDashboard = () => {
               </tr>
             </thead>
             <tbody>
-              {Array(3)
-                .fill()
-                .map((_, i) => (
-                  <tr key={i} className="border-b hover:bg-gray-50">
-                    <td className="px-6 py-3">#343434</td>
-                    <td className="px-6 py-3">$456</td>
-                    <td className="px-6 py-3">Pending</td>
-                    <td className="px-6 py-3">Pending</td>
-                    <td className="px-6 py-3 text-blue-600 cursor-pointer">
-                      <Link>View</Link>
-                    </td>
-                  </tr>
-                ))}
+              {recentOrder.map((d, i) => (
+                <tr key={i} className="border-b hover:bg-gray-50">
+                  <td className="px-6 py-3">#{d._id}</td>
+                  <td className="px-6 py-3">₹{d.price}</td>
+                  <td className="px-6 py-3">{d.payment_status}</td>
+                  <td className="px-6 py-3">{d.delivery_status}</td>
+                  <td className="px-6 py-3 text-blue-600 cursor-pointer">
+                    <Link to={`/seller/dashboard/order-details/${d._id}`}>
+                      View
+                    </Link>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
