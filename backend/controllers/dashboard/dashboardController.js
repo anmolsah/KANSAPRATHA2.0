@@ -3,6 +3,11 @@ const myShopWallet = require("../../models/myShopWallet");
 const productModel = require("../../models/productModel");
 const customerOrder = require("../../models/customerOrder");
 const sellerModel = require("../../models/sellerModel");
+const sellerWallet = require("../../models/sellerWallet");
+const {
+  mongo: { ObjectId },
+} = require("mongoose");
+const authorOrderModel = require("../../models/authOrder");
 
 class dashboardController {
   get_admin_dashboard_data = async (req, res) => {
@@ -32,6 +37,36 @@ class dashboardController {
       console.log(error);
       responseReturn(res, 500, { error: "Internal server error" });
     }
+  };
+
+  get_seller_dashboard_data = async (req, res) => {
+    const { id } = req;
+    try {
+      const totalSale = await sellerWallet.aggregate([
+        {
+          $match: {
+            sellerId: {
+              $eq: id,
+            },
+          },
+        },
+        {
+          $group: {
+            _id: null,
+            totalAmount: { $sum: "$amount" },
+          },
+        },
+      ]);
+
+      const totalProduct = await productModel
+        .find({ sellerId: new ObjectId(id) })
+        .countDocuments();
+      const totalOrder = await authorOrderModel
+        .find({
+          sellerId: new ObjectId(id),
+        })
+        .countDocuments();
+    } catch (error) {}
   };
 }
 

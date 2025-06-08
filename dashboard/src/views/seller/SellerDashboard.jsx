@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BsCurrencyRupee } from "react-icons/bs";
 import { FaUser, FaShoppingCart } from "react-icons/fa";
 import { MdProductionQuantityLimits } from "react-icons/md";
 import Chart from "react-apexcharts";
 import { Link } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
+import { get_seller_dashboard_data } from "../../store/reducers/dashboardReducer";
 const SellerDashboard = () => {
+
+  const dispatch = useDispatch();
+    const { totaleSale, totalOrder, totalProduct, totalSeller, recentOrder } =
+      useSelector((state) => state.dashboard);
+
+    useEffect(() => {
+      dispatch(get_seller_dashboard_data());
+    }, []);
+
   const state = {
     series: [
       {
