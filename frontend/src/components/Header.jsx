@@ -451,8 +451,7 @@
 
 // export default Header;
 
-import React from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Mail,
   Phone,
@@ -469,10 +468,14 @@ import {
   Search,
   X,
 } from "lucide-react";
-import { useSelector } from "react-redux";
+
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { get_cart_product } from "../store/reducers/cartReducer";
+import { get_wishlist_products } from "./../store/reducers/cartReducer";
 
 function Header() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { categorys } = useSelector((state) => state.home);
   const { userInfo } = useSelector((state) => state.auth);
@@ -513,6 +516,13 @@ function Header() {
       navigate("/login");
     }
   };
+
+  useEffect(() => {
+    if (userInfo) {
+      dispatch(get_cart_product(userInfo.id));
+      dispatch(get_wishlist_products(userInfo.id));
+    }
+  }, [userInfo]);
 
   return (
     <div className="w-full">
@@ -638,7 +648,10 @@ function Header() {
             {/* Actions */}
             <div className="flex items-center space-x-6">
               <div className="hidden lg:flex items-center space-x-4">
-                <button  onClick={redirect_wishlist_page} className="relative p-2 text-white hover:text-emerald-400 transition-all duration-300 hover:scale-110">
+                <button
+                  onClick={redirect_wishlist_page}
+                  className="relative p-2 text-white hover:text-emerald-400 transition-all duration-300 hover:scale-110"
+                >
                   <Heart size={24} />
                   {wishlist_count !== 0 && (
                     <span className="absolute -top-1 -right-1 bg-emerald-400 text-white w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold">
@@ -661,7 +674,10 @@ function Header() {
               </div>
 
               {userInfo ? (
-                <Link to="/dashboard" className="flex items-center space-x-2 bg-emerald-500 text-white px-4 py-2 rounded-full hover:bg-emerald-600 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                <Link
+                  to="/dashboard"
+                  className="flex items-center space-x-2 bg-emerald-500 text-white px-4 py-2 rounded-full hover:bg-emerald-600 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                >
                   <User size={18} />
                   <span className="font-medium hidden sm:inline">
                     {userInfo.name}

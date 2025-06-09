@@ -90,6 +90,7 @@ import {
   messageClear,
 } from "../../store/reducers/cartReducer";
 import toast from "react-hot-toast";
+import { MdDelete } from "react-icons/md";
 
 const Wishlist = () => {
   const dispatch = useDispatch();
@@ -137,7 +138,7 @@ const Wishlist = () => {
                   onClick={() => dispatch(remove_wishlist(p._id))}
                   className="p-2 rounded-full bg-white text-emerald-600 hover:bg-emerald-400 hover:text-white transition-all duration-300 shadow-md hover:shadow-lg"
                 >
-                  <FaRegHeart className="text-lg" />
+                  <MdDelete className="text-lg" />
                 </button>
                 <Link
                   to={`/product/details/${p.slug}`}
