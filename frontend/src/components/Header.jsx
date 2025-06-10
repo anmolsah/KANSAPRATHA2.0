@@ -765,13 +765,27 @@ function Header() {
               </nav>
 
               <div className="mt-8 space-y-4">
-                <button className="flex items-center space-x-2 text-gray-600 hover:text-emerald-600 transition-colors duration-300">
+                <button
+                  onClick={redirect_wishlist_page}
+                  className="flex items-center space-x-2 text-gray-600 hover:text-emerald-600 transition-colors duration-300"
+                >
                   <Heart size={20} />
-                  <span>Wishlist ({wishlist_count})</span>
+                  {wishlist_count !== 0 && (
+                    <span className="absolute -top-1 -right-1 bg-emerald-400 text-white w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold">
+                      {wishlist_count}
+                    </span>
+                  )}
                 </button>
-                <button className="flex items-center space-x-2 text-gray-600 hover:text-emerald-600 transition-colors duration-300">
+                <button
+                  onClick={redirect_cart_page}
+                  className="flex items-center space-x-2 text-gray-600 hover:text-emerald-600 transition-colors duration-300"
+                >
                   <ShoppingCart size={20} />
-                  <span>Cart ({wishlist_count})</span>
+                  {cart_product_count !== 0 && (
+                    <span className="absolute -top-1 -right-1 bg-emerald-400 text-white w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold">
+                      {cart_product_count}
+                    </span>
+                  )}
                 </button>
               </div>
 

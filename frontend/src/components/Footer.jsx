@@ -113,13 +113,18 @@
 
 // export default Footer;
 
-
-
 import React from "react";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { FaCartShopping, FaHeart } from "react-icons/fa6";
 
 const Footer = () => {
+  const navigate = useNavigate();
+  const { userInfo } = useSelector((state) => state.auth);
+  const { cart_product_count, wishlist_count } = useSelector(
+    (state) => state.cart
+  ); 
   return (
     <footer className="bg-gradient-to-r from-indigo-600 to-purple-600">
       <div className="max-w-7xl mx-auto px-4 py-16 border-b border-gray-200/20">
@@ -127,9 +132,15 @@ const Footer = () => {
           {/* Company Info */}
           <div className="md:col-span-1">
             <div className="flex flex-col gap-4">
-              <img src="/logo01.png" alt="logo" className="w-48 h-10 object-contain" />
+              <img
+                src="/logo01.png"
+                alt="logo"
+                className="w-48 h-10 object-contain"
+              />
               <ul className="flex flex-col gap-2 text-gray-50">
-                <li className="text-sm">2nd Floor Bangalore, Karnataka - 560001 India</li>
+                <li className="text-sm">
+                  2nd Floor Bangalore, Karnataka - 560001 India
+                </li>
                 <li className="text-sm">Phone: 8569746565</li>
                 <li className="text-sm">Email: support@gmail.com</li>
               </ul>
@@ -140,19 +151,37 @@ const Footer = () => {
           <div className="md:col-span-1">
             <div className="flex justify-center md:justify-start">
               <div>
-                <h2 className="font-bold text-lg text-gray-800 mb-4">Useful Links</h2>
+                <h2 className="font-bold text-lg text-gray-800 mb-4">
+                  Useful Links
+                </h2>
                 <div className="flex gap-12">
                   <ul className="flex flex-col gap-3 text-gray-50 text-sm">
-                    {['About Us', 'Our Shop', 'Delivery', 'Privacy', 'Blogs'].map((link) => (
+                    {[
+                      "About Us",
+                      "Our Shop",
+                      "Delivery",
+                      "Privacy",
+                      "Blogs",
+                    ].map((link) => (
                       <li key={link}>
-                        <Link className="hover:text-emerald-400 transition-colors">{link}</Link>
+                        <Link className="hover:text-emerald-400 transition-colors">
+                          {link}
+                        </Link>
                       </li>
                     ))}
                   </ul>
                   <ul className="flex flex-col gap-3 text-gray-50 text-sm">
-                    {['Services', 'Profile', 'Information', 'Policy', 'Contact'].map((link) => (
+                    {[
+                      "Services",
+                      "Profile",
+                      "Information",
+                      "Policy",
+                      "Contact",
+                    ].map((link) => (
                       <li key={link}>
-                        <Link className="hover:text-emerald-400 transition-colors">{link}</Link>
+                        <Link className="hover:text-emerald-400 transition-colors">
+                          {link}
+                        </Link>
                       </li>
                     ))}
                   </ul>
@@ -164,7 +193,9 @@ const Footer = () => {
           {/* Newsletter */}
           <div className="md:col-span-1">
             <div className="flex flex-col gap-5">
-              <h2 className="font-bold text-lg text-gray-800 mb-2">Join our Shop</h2>
+              <h2 className="font-bold text-lg text-gray-800 mb-2">
+                Join our Shop
+              </h2>
               <span className="text-gray-50 text-sm">
                 Get Email updates about our latest shop and special offers
               </span>
@@ -202,6 +233,17 @@ const Footer = () => {
           </span>
         </div>
       </div>
+
+
+      {/* <div className="hidden fixed-[50px] h-[110px] bottom-3 right-2 bg-white rounded-full p-2">
+        <div className="w-full h-full flex gap-3 flex-col justify-center items-center">
+          <div className="relative flex justify-center items-center cursor-pointer w-[35px] h-[35px] rounded-full bg-white hover:bg-green-400 transition-colors">
+            <span>
+              <FaCartShopping />
+            </span>
+          </div>
+        </div>
+      </div> */}
     </footer>
   );
 };
