@@ -258,7 +258,7 @@ const Index = () => {
                       {row.delivery_status}
                     </span>
                   </td>
-                  <td className="px-6 py-4 space-x-2">
+                  <td className="px-6 py-4 space-y-2">
                     <Link
                       to={`/dashboard/order/details/${row._id}`}
                       className="px-4 py-2 text-sm font-medium text-emerald-600 hover:text-emerald-700 
