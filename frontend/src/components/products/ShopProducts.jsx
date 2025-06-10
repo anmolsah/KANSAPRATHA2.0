@@ -117,7 +117,7 @@ const ShopProducts = ({ styles, products }) => {
               </span>
               <div className="flex items-center gap-2">
                 <Ratings ratings={p.rating} />
-                {/* <span className="text-gray-500 text-sm">(24 reviews)</span> */}
+                
               </div>
             </div>
             {styles === "list" && (
