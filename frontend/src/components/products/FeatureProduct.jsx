@@ -48,7 +48,7 @@
 //       discount:pro.discount,
 //       rating:pro.rating,
 //       slug:pro.slug,
-      
+
 //     }))
 //   }
 //   return (
@@ -116,14 +116,17 @@
 
 // export default FeatureProduct;
 
-
 import React, { useEffect } from "react";
 import { FaRegHeart, FaEye } from "react-icons/fa";
 import { RiShoppingCartLine } from "react-icons/ri";
 import Ratings from "../Ratings";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { add_to_cart, add_to_wishlist, messageClear } from "../../store/reducers/cartReducer";
+import {
+  add_to_cart,
+  add_to_wishlist,
+  messageClear,
+} from "../../store/reducers/cartReducer";
 import toast from "react-hot-toast";
 
 const FeatureProduct = ({ products }) => {
@@ -157,8 +160,29 @@ const FeatureProduct = ({ products }) => {
     }
   }, [successMessage, errorMessage]);
 
+  // const add_wishlist = (pro) => {
+  //   console.log("Adding to wishlist:", userInfo);
+  //   dispatch(
+  //     add_to_wishlist({
+  //       userId: userInfo?.id,
+  //       productId: pro._id,
+  //       name: pro.name,
+  //       price: pro.price,
+  //       image: pro.images[0],
+  //       discount: pro.discount,
+  //       rating: pro.rating,
+  //       slug: pro.slug,
+  //     })
+  //   );
+  // };
+
   const add_wishlist = (pro) => {
-    dispatch(add_to_wishlist({
+    if (!userInfo?.id) {
+      toast.error("Please login first");
+      return navigate("/login");
+    }
+
+    const wishlistData = {
       userId: userInfo.id,
       productId: pro._id,
       name: pro.name,
@@ -167,8 +191,12 @@ const FeatureProduct = ({ products }) => {
       discount: pro.discount,
       rating: pro.rating,
       slug: pro.slug,
-    }))
-  }
+    };
+
+    //console.log("Sending to backend:", wishlistData);
+
+    dispatch(add_to_wishlist(wishlistData));
+  };
 
   return (
     <div className="w-full md:w-[85%] flex flex-wrap mx-auto px-2 sm:px-0">
@@ -199,7 +227,10 @@ const FeatureProduct = ({ products }) => {
                 alt=""
               />
               <ul className="flex transition-all duration-700 -bottom-8 sm:-bottom-10 justify-center items-center gap-1 sm:gap-2 absolute w-full group-hover:bottom-2 sm:group-hover:bottom-3">
-                <li onClick={() => add_wishlist(p)} className="w-[30px] h-[30px] sm:w-[38px] sm:h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-pink-400 hover:text-white hover:rotate-[720deg] transition-all">
+                <li
+                  onClick={() => add_wishlist(p)}
+                  className="w-[30px] h-[30px] sm:w-[38px] sm:h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-pink-400 hover:text-white hover:rotate-[720deg] transition-all"
+                >
                   <FaRegHeart />
                 </li>
                 <Link
@@ -220,7 +251,9 @@ const FeatureProduct = ({ products }) => {
             <div className="py-2 sm:py-3 text-slate-600 px-2">
               <h2 className="font-bold text-sm sm:text-base">{p.name}</h2>
               <div className="flex justify-start items-center gap-2 sm:gap-3">
-                <span className="text-sm sm:text-md font-semibold">₹{p.price}</span>
+                <span className="text-sm sm:text-md font-semibold">
+                  ₹{p.price}
+                </span>
                 <div className="flex">
                   <Ratings ratings={p.rating} />
                 </div>

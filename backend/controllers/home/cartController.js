@@ -197,6 +197,7 @@ class cartController {
 
   add_wishlist = async (req, res) => {
     const { slug } = req.body;
+    //console.log(req.body);
     try {
       const product = await wishlistModel.findOne({ slug });
       if (product) {
@@ -231,7 +232,10 @@ class cartController {
     const { wishlistId } = req.params;
     try {
       const wishlist = await wishlistModel.findByIdAndDelete(wishlistId);
-      responseReturn(res, 200, { message: "Product removed from wishlist",wishlistId });
+      responseReturn(res, 200, {
+        message: "Product removed from wishlist",
+        wishlistId,
+      });
     } catch (error) {
       console.log(error);
       responseReturn(res, 500, { error: "Internal server error" });
