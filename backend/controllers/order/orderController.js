@@ -92,7 +92,7 @@ class orderController {
 
       setTimeout(() => {
         this.paymentCheck(order.id);
-      }, 20000);
+      }, 5 * 60 * 1000);
       responseReturn(res, 201, {
         message: "Order placed successfully",
         orderId: order.id,
