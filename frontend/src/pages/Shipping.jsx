@@ -477,7 +477,7 @@ const Shipping = () => {
                           htmlFor="province"
                           className="text-gray-600 text-sm"
                         >
-                          Province
+                          State
                         </label>
                         <input
                           onChange={inputHandle}
