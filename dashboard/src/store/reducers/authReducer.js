@@ -164,8 +164,10 @@ export const authReducer = createSlice({
         state.loader = true;
       })
       .addCase(admin_login.rejected, (state, { payload }) => {
+        console.log("Rejected payload:", payload);
         state.loader = false;
-        state.errorMessage = payload.error;
+        // state.errorMessage = payload.error;
+        state.errorMessage = payload?.error || payload?.message || "Something went wrong.";
       })
       .addCase(admin_login.fulfilled, (state, { payload }) => {
         state.loader = false;

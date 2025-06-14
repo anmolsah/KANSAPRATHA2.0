@@ -486,7 +486,7 @@ const Shipping = () => {
                           id="province"
                           value={state.province}
                           className="w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-400 focus:border-transparent"
-                          placeholder="Enter Province"
+                          placeholder="Enter State"
                         />
                       </div>
                       <div className="space-y-1">
