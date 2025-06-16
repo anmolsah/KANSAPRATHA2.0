@@ -1,3 +1,5 @@
+
+
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -5,8 +7,8 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Categorys = () => {
-
   const { categorys } = useSelector((state) => state.home);
+
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -20,25 +22,14 @@ const Categorys = () => {
       breakpoint: { max: 1024, min: 464 },
       items: 4,
     },
-    mdtablet: {
-      breakpoint: { max: 991, min: 464 },
-      items: 4,
-    },
     mobile: {
       breakpoint: { max: 464, min: 0 },
-      items: 3,
-    },
-    smmobile: {
-      breakpoint: { max: 640, min: 0 },
       items: 2,
     },
-    xsmobile: {
-      breakpoint: { max: 440, min: 0 },
-      items: 1,
-    },
   };
+
   return (
-    <div className="w-[87%] mx-auto relative ">
+    <div className="w-[87%] mx-auto relative">
       <div className="w-full">
         <div className="text-center flex justify-center items-center flex-col text-3xl text-slate-600 font-bold relative pb-[35px]">
           <h2>Categories</h2>
@@ -51,17 +42,14 @@ const Categorys = () => {
         arrows={true}
         transitionDuration={500}
         responsive={responsive}
+        itemClass="px-0"
       >
         {categorys.map((c, i) => (
-          <Link className="h-[185px] border block" key={i} to={`/products?category=${c.name}`}>
-            <div className="w-ful h-full relative p-3">
-              <img src={c.image} alt="" />
-              <div className="absolute bottom-6 w-full mx-auto left-0 flex items-center justify-center">
-                <span className="py-[2px] px-6 bg-[#33303305d] text-white">
-                  {c.name}
-                </span>
-              </div>
+          <Link key={i} to={`/products?category=${c.name}`} className="flex flex-col items-center space-y-2">
+            <div className="w-[150px] h-[150px] rounded-full overflow-hidden border border-gray-300 shadow-md ">
+              <img src={c.image} alt={c.name} className="w-full h-full object-cover" />
             </div>
+            <span className="text-md text-gray-700 font-medium text-center">{c.name}</span>
           </Link>
         ))}
       </Carousel>
