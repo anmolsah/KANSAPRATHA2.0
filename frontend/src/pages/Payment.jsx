@@ -3,6 +3,7 @@ import Header from "./../components/Header";
 import Footer from "./../components/Footer";
 import { useLocation } from "react-router-dom";
 import Stripe from "./../components/Stripe";
+import api from "../api/api";
 
 const Payment = () => {
   const {
@@ -59,6 +60,18 @@ const Payment = () => {
                 {paymentMethod === "cod" && (
                   <div className="bg-gray-50 p-6 rounded-lg">
                     <button
+                      onClick={async () => {
+                        try {
+                          const { data } = await api.post("/order/cod-payment", {
+                            orderId,
+                            paymentMethod: "cod"
+                          });
+                          window.location.href = `/order/confirm?order_id=${orderId}&payment_method=cod`;
+                        } catch (error) {
+                          console.error("COD payment failed:", error);
+                          alert("Payment failed. Please try again.");
+                        }
+                      }}
                       className="w-full bg-emerald-500 text-white py-3 px-6 rounded-lg font-semibold
                         hover:bg-emerald-600 transform transition-all duration-200 hover:scale-[1.02]
                         focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 shadow-md"

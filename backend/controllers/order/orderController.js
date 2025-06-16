@@ -342,6 +342,26 @@ class orderController {
     }
   };
 
+  cod_payment = async (req, res) => {
+    const { orderId } = req.body;
+    try {
+      await customerOrder.findByIdAndUpdate(orderId, {
+        payment_status: "paid",
+      });
+      await authorOrderModel.updateMany(
+        { orderId: new ObjectId(orderId) },
+        {
+          payment_status: "paid",
+          delivery_status: "pending",
+        }
+      );
+      responseReturn(res, 200, { message: "COD payment confirmed successfully" });
+    } catch (error) {
+      console.log(error);
+      responseReturn(res, 500, { error: "Internal server error" });
+    }
+  };
+
   order_confirm = async (req, res) => {
     const { orderId } = req.params;
 

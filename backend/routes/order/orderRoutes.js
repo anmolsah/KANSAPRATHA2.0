@@ -9,6 +9,8 @@ router.get("/home/customer/get-orders/:customerId/:status", orderController.get_
 router.get("/home/customer/get-orders-details/:orderId", orderController.get_orders_details);
 router.post("/order/create-payment", orderController.create_payment);
 router.get("/order/confirm/:orderId", orderController.order_confirm);
+router.post("/order/cod-payment", orderController.cod_payment);
+
 
 
 

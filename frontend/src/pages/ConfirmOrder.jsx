@@ -16,6 +16,7 @@ const ConfirmOrder = () => {
   const [loader, setLoader] = useState(false);
   const [stripe, setStripe] = useState("");
   const [message, setMessage] = useState("");
+  const [isCOD, setIsCOD] = useState(false);
 
   useEffect(() => {
     if (!stripe) {
@@ -51,7 +52,13 @@ const ConfirmOrder = () => {
   };
 
   useEffect(() => {
-    get_load();
+    const paymentMethod = new URLSearchParams(window.location.search).get('payment_method');
+    if (paymentMethod === 'cod') {
+      setIsCOD(true);
+      setMessage('succeeded');
+    } else {
+      get_load();
+    }
   }, []);
 
   const update_payment = async () => {
@@ -67,15 +74,27 @@ const ConfirmOrder = () => {
     }
   };
 
-  useEffect(()=>{
-    if(message === "succeeded"){
+  useEffect(() => {
+    if (message === "succeeded") {
       update_payment();
     }
-  },[message])
+  }, [message]);
 
   return (
     <div className="w-screen h-screen flex justify-center items-center flex-col gap-4">
-      {message === "failed" || message === "processing" ? (
+      {isCOD ? (
+        <>
+          <img src={success} alt="" />
+          <h2 className="text-2xl font-bold text-green-600">Order Placed Successfully!</h2>
+          <p className="text-gray-600">Your order will be delivered via Cash on Delivery</p>
+          <Link
+            className="px-5 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors"
+            to="/dashboard"
+          >
+            Go to Dashboard
+          </Link>
+        </>
+      ) : message === "failed" || message === "processing" ? (
         <>
           <img src={error} alt="" />
           <Link
