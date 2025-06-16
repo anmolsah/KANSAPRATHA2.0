@@ -5,17 +5,6 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Categorys = () => {
-  // const categories = [
-  //   "Cookware & Kitchenware",
-  //   "Drinkware",
-  //   "Tableware & Dinnerware",
-  //   "Home Decor",
-  //   "Gifting",
-  //   "Brass Products",
-  //   "Copper Products",
-  //   "Best Sellers",
-  //   "New Arrivals",
-  // ];
 
   const { categorys } = useSelector((state) => state.home);
   const responsive = {
