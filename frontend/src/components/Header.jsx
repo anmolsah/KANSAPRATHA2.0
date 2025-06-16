@@ -74,7 +74,7 @@ function Header() {
   return (
     <div className="w-full">
       {/* Top Bar */}
-      <div className="bg-indigo-950 text-white py-2 hidden md:block">
+      <div className="bg-[# ] text-white py-2 hidden md:block">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-6">
@@ -86,7 +86,7 @@ function Header() {
                   size={16}
                   className="text-emerald-400 group-hover:scale-110 transition-transform duration-300"
                 />
-                <span className="text-sm">support@techstore.com</span>
+                <span className="text-sm">kansapratha@gmail.com</span>
               </a>
               <a
                 href="tel:+1234567890"
@@ -96,7 +96,7 @@ function Header() {
                   size={16}
                   className="text-emerald-400 group-hover:scale-110 transition-transform duration-300"
                 />
-                <span className="text-sm">+1 (234) 567-890</span>
+                <span className="text-sm">9836565761</span>
               </a>
             </div>
 
@@ -152,7 +152,8 @@ function Header() {
       </div>
 
       {/* Main Header */}
-      <div className="bg-gradient-to-r from-indigo-600 to-purple-600">
+      {/* <div className="bg-gradient-to-r from-indigo-600 to-purple-600"> */}
+      <div className="bg-[#8b2614]">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
@@ -223,7 +224,7 @@ function Header() {
               {userInfo ? (
                 <Link
                   to="/dashboard"
-                  className="flex items-center space-x-2 bg-emerald-500 text-white px-4 py-2 rounded-full hover:bg-emerald-600 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                  className="flex items-center space-x-2 bg-yellow-500 text-white px-4 py-2 rounded-full hover:bg-yellow-600 transition-all duration-300 hover:scale-105 hover:shadow-lg"
                 >
                   <User size={18} />
                   <span className="font-medium hidden sm:inline">
