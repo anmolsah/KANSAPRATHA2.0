@@ -38,11 +38,11 @@ const Banner = () => {
           arrowButtonClass="custom-arrow"
           renderDotsOutside={true}
         >
-          {[1, 2, 3].map((img, i) => (
+          {[1, 2, 3, 4, 5, 6].map((img, i) => (
             <Link key={i} to="#" className="block group">
               <img
                 className="w-full h-[300px] md:h-[400px] lg:h-[600px] object-cover object-center transition-transform duration-500 group-hover:scale-105"
-                src={`/images/banners/${img}.png`}
+                src={`/images/banners/${img}.jpg`}
                 alt="banner"
               />
             </Link>
