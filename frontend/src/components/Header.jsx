@@ -15,6 +15,7 @@ import {
   Search,
   X,
 } from "lucide-react";
+import { FaFacebookF, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -44,6 +45,20 @@ function Header() {
     { path: "/contact", label: "Contact" },
   ];
 
+  const socialLinks = [
+    {
+      icon: FaLinkedin,
+      url: "https://www.linkedin.com/in/anmol-sah-551083238/",
+    },
+    {
+      icon: FaTwitter,
+      url: "https://x.com/home",
+    },
+    {
+      icon: FaGithub,
+      url: "https://github.com/anmolsah",
+    },
+  ];
   const search = () => {
     navigate(`/products/search?category=${category}&&value=${searchValue}`);
   };
@@ -101,18 +116,15 @@ function Header() {
 
             <div className="flex items-center space-x-6">
               <div className="flex items-center space-x-4">
-                {[
-                  { Icon: Facebook, href: "#" },
-                  { Icon: Twitter, href: "#" },
-                  { Icon: Linkedin, href: "#" },
-                  { Icon: Github, href: "#" },
-                ].map(({ Icon, href }, idx) => (
+                {socialLinks.map(({ icon: Icon, url }, index) => (
                   <a
-                    key={idx}
-                    href={href}
-                    className="hover:text-yellow-400 transition-all duration-300 hover:scale-110"
+                    key={index}
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 bg-white/10 rounded-full text-gray-50 hover:bg-yellow-500 transition-colors"
                   >
-                    <Icon size={18} />
+                    <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
                   </a>
                 ))}
               </div>
@@ -189,7 +201,6 @@ function Header() {
               ))}
             </nav>
 
-            
             <div className="flex items-center space-x-6">
               <div className="hidden lg:flex items-center space-x-4">
                 <button
@@ -239,7 +250,6 @@ function Header() {
             </div>
           </div>
 
-    
           <div className="pb-6">
             <div className="flex">
               <div className="w-full max-w-3xl mx-auto">
@@ -277,7 +287,6 @@ function Header() {
         </div>
       </div>
 
-      
       {showSideBar && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 lg:hidden">
           <div className="fixed inset-y-0 right-0 w-64 bg-white shadow-lg transform transition-transform duration-300">
