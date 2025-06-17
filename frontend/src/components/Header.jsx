@@ -73,28 +73,27 @@ function Header() {
 
   return (
     <div className="w-full">
-      {/* Top Bar */}
-      <div className="bg-[# ] text-white py-2 hidden md:block">
+      <div className="bg-[#571307] text-white py-2 hidden md:block">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-6">
               <a
                 href="mailto:support@techstore.com"
-                className="flex items-center space-x-2 hover:text-emerald-400 transition-all duration-300 group"
+                className="flex items-center space-x-2 hover:text-yellow-400 transition-all duration-300 group"
               >
                 <Mail
                   size={16}
-                  className="text-emerald-400 group-hover:scale-110 transition-transform duration-300"
+                  className="text-yellow-400 group-hover:scale-110 transition-transform duration-300"
                 />
                 <span className="text-sm">kansapratha@gmail.com</span>
               </a>
               <a
                 href="tel:+1234567890"
-                className="flex items-center space-x-2 hover:text-emerald-400 transition-all duration-300 group"
+                className="flex items-center space-x-2 hover:text-yellow-400 transition-all duration-300 group"
               >
                 <Phone
                   size={16}
-                  className="text-emerald-400 group-hover:scale-110 transition-transform duration-300"
+                  className="text-yellow-400 group-hover:scale-110 transition-transform duration-300"
                 />
                 <span className="text-sm">9836565761</span>
               </a>
@@ -111,7 +110,7 @@ function Header() {
                   <a
                     key={idx}
                     href={href}
-                    className="hover:text-emerald-400 transition-all duration-300 hover:scale-110"
+                    className="hover:text-yellow-400 transition-all duration-300 hover:scale-110"
                   >
                     <Icon size={18} />
                   </a>
@@ -119,7 +118,7 @@ function Header() {
               </div>
 
               <div className="relative group">
-                <button className="flex items-center space-x-2 bg-emerald-500 text-white px-3 py-1 rounded-full hover:bg-emerald-600 transition-all duration-300 group-hover:ring-2 group-hover:ring-emerald-300">
+                <button className="flex items-center space-x-2 bg-yellow-500 text-white px-3 py-1 rounded-full hover:bg-yellow-600 transition-all duration-300 group-hover:ring-2 group-hover:ring-yellow-300">
                   <img
                     src="images/india.png"
                     alt="English"
@@ -137,7 +136,7 @@ function Header() {
                         <a
                           key={idx}
                           href="#"
-                          className="block px-4 py-2 text-gray-800 hover:bg-emerald-50 hover:text-emerald-600 transition-colors duration-300"
+                          className="block px-4 py-2 text-gray-800 hover:bg-yellow-50 hover:yellow-yellow-600 transition-colors duration-300"
                         >
                           {lang}
                         </a>
@@ -151,12 +150,10 @@ function Header() {
         </div>
       </div>
 
-      {/* Main Header */}
       {/* <div className="bg-gradient-to-r from-indigo-600 to-purple-600"> */}
       <div className="bg-[#8b2614]">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-20">
-            {/* Logo */}
             <div className="flex items-center">
               <a
                 href="/"
@@ -176,7 +173,6 @@ function Header() {
               </button>
             </div>
 
-            {/* Navigation */}
             <nav className="hidden lg:flex items-center space-x-8">
               {navLinks.map(({ path, label }) => (
                 <a
@@ -184,8 +180,8 @@ function Header() {
                   href={path}
                   className={`text-sm font-medium ${
                     pathname === path
-                      ? "text-emerald-400"
-                      : "text-white hover:text-emerald-400"
+                      ? "text-yellow-400"
+                      : "text-white hover:text-yellow-400"
                   } transition-all duration-300 hover:scale-105`}
                 >
                   {label}
@@ -193,28 +189,28 @@ function Header() {
               ))}
             </nav>
 
-            {/* Actions */}
+            
             <div className="flex items-center space-x-6">
               <div className="hidden lg:flex items-center space-x-4">
                 <button
                   onClick={redirect_wishlist_page}
-                  className="relative p-2 text-white hover:text-emerald-400 transition-all duration-300 hover:scale-110"
+                  className="relative p-2 text-white hover:text-yellow-400 transition-all duration-300 hover:scale-110"
                 >
                   <Heart size={24} />
                   {wishlist_count !== 0 && (
-                    <span className="absolute -top-1 -right-1 bg-emerald-400 text-white w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold">
+                    <span className="absolute -top-1 -right-1 bg-yellow-400 text-white w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold">
                       {wishlist_count}
                     </span>
                   )}
                 </button>
                 <button
                   onClick={redirect_cart_page}
-                  className="relative p-2 text-white hover:text-emerald-400 transition-all duration-300 hover:scale-110"
+                  className="relative p-2 text-white hover:text-yellow-400 transition-all duration-300 hover:scale-110"
                 >
                   <ShoppingCart size={24} />
 
                   {cart_product_count !== 0 && (
-                    <span className="absolute -top-1 -right-1 bg-emerald-400 text-white w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold">
+                    <span className="absolute -top-1 -right-1 bg-yellow-400 text-white w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold">
                       {cart_product_count}
                     </span>
                   )}
@@ -234,7 +230,7 @@ function Header() {
               ) : (
                 <Link
                   to="/login"
-                  className="flex items-center space-x-2 bg-emerald-500 text-white px-4 py-2 rounded-full hover:bg-emerald-600 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                  className="flex items-center space-x-2 bg-yellow-500 text-white px-4 py-2 rounded-full hover:bg-emerald-600 transition-all duration-300 hover:scale-105 hover:shadow-lg"
                 >
                   <Lock size={18} />
                   <span className="font-medium hidden sm:inline">Login</span>
@@ -243,7 +239,7 @@ function Header() {
             </div>
           </div>
 
-          {/* Search Bar */}
+    
           <div className="pb-6">
             <div className="flex">
               <div className="w-full max-w-3xl mx-auto">
@@ -281,7 +277,7 @@ function Header() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      
       {showSideBar && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 lg:hidden">
           <div className="fixed inset-y-0 right-0 w-64 bg-white shadow-lg transform transition-transform duration-300">
