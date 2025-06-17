@@ -43,7 +43,9 @@ const Footer = () => {
                   West Bengal - 734009, India
                 </li>
                 <li className="text-xs sm:text-sm">Phone: 9836565761</li>
-                <li className="text-xs sm:text-sm">Email: kansapratha@gmail.com</li>
+                <li className="text-xs sm:text-sm">
+                  Email: kansapratha@gmail.com
+                </li>
               </ul>
             </div>
           </div>
@@ -54,32 +56,50 @@ const Footer = () => {
               <h2 className="font-bold text-lg text-white mb-2">Quick Links</h2>
               <ul className="grid grid-cols-2 gap-3 text-gray-50">
                 <li>
-                  <Link to="/" className="text-xs sm:text-sm hover:text-emerald-300 transition-colors">
+                  <Link
+                    to="/"
+                    className="text-xs sm:text-sm hover:text-emerald-300 transition-colors"
+                  >
                     Home
                   </Link>
                 </li>
                 <li>
-                  <Link to="/shops" className="text-xs sm:text-sm hover:text-yellow-300 transition-colors">
+                  <Link
+                    to="/shops"
+                    className="text-xs sm:text-sm hover:text-yellow-300 transition-colors"
+                  >
                     Shop
                   </Link>
                 </li>
                 <li>
-                  <Link to="/about" className="text-xs sm:text-sm hover:text-yellow-300 transition-colors">
+                  <Link
+                    to="/about"
+                    className="text-xs sm:text-sm hover:text-yellow-300 transition-colors"
+                  >
                     About Us
                   </Link>
                 </li>
                 <li>
-                  <Link to="/contact" className="text-xs sm:text-sm hover:text-yellow-300 transition-colors">
+                  <Link
+                    to="/contact"
+                    className="text-xs sm:text-sm hover:text-yellow-300 transition-colors"
+                  >
                     Contact
                   </Link>
                 </li>
                 <li>
-                  <Link to="/privacy-policy" className="text-xs sm:text-sm hover:text-yellow-300 transition-colors">
+                  <Link
+                    to="/privacy-policy"
+                    className="text-xs sm:text-sm hover:text-yellow-300 transition-colors"
+                  >
                     Privacy Policy
                   </Link>
                 </li>
                 <li>
-                  <Link to="/terms" className="text-xs sm:text-sm hover:text-yellow-300 transition-colors">
+                  <Link
+                    to="/blog"
+                    className="text-xs sm:text-sm hover:text-yellow-300 transition-colors"
+                  >
                     Terms
                   </Link>
                 </li>
