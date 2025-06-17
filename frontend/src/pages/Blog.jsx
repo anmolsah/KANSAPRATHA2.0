@@ -38,6 +38,28 @@ export default function Blog() {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <div className="flex justify-start items-center mb-8">
+        <Link
+          to="/"
+          className="flex items-center text-gray-600 hover:text-gray-900"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 mr-2"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+          Back to Home
+        </Link>
+      </div>
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold mb-4">Kansa Pratha Blog</h1>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
