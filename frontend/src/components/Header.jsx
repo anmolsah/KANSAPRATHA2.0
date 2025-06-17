@@ -230,7 +230,7 @@ function Header() {
               ) : (
                 <Link
                   to="/login"
-                  className="flex items-center space-x-2 bg-yellow-500 text-white px-4 py-2 rounded-full hover:bg-emerald-600 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                  className="flex items-center space-x-2 bg-yellow-500 text-white px-4 py-2 rounded-full hover:bg-yellow-600 transition-all duration-300 hover:scale-105 hover:shadow-lg"
                 >
                   <Lock size={18} />
                   <span className="font-medium hidden sm:inline">Login</span>
@@ -300,7 +300,7 @@ function Header() {
                     className={`block py-2 ${
                       pathname === path
                         ? "text-emerald-600"
-                        : "text-gray-600 hover:text-emerald-600"
+                        : "text-gray-600 hover:text-yellow-600"
                     } transition-colors duration-300`}
                   >
                     {label}
@@ -311,22 +311,22 @@ function Header() {
               <div className="mt-8 space-y-4">
                 <button
                   onClick={redirect_wishlist_page}
-                  className="flex items-center space-x-2 text-gray-600 hover:text-emerald-600 transition-colors duration-300"
+                  className="flex items-center space-x-2 text-gray-600 hover:text-yellow-600 transition-colors duration-300"
                 >
                   <Heart size={20} />
                   {wishlist_count !== 0 && (
-                    <span className="absolute -top-1 -right-1 bg-emerald-400 text-white w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold">
+                    <span className="absolute -top-1 -right-1 bg-yellow-400 text-white w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold">
                       {wishlist_count}
                     </span>
                   )}
                 </button>
                 <button
                   onClick={redirect_cart_page}
-                  className="flex items-center space-x-2 text-gray-600 hover:text-emerald-600 transition-colors duration-300"
+                  className="flex items-center space-x-2 text-gray-600 hover:text-yellow-600 transition-colors duration-300"
                 >
                   <ShoppingCart size={20} />
                   {cart_product_count !== 0 && (
-                    <span className="absolute -top-1 -right-1 bg-emerald-400 text-white w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold">
+                    <span className="absolute -top-1 -right-1 bg-yellow-400 text-white w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold">
                       {cart_product_count}
                     </span>
                   )}
@@ -338,14 +338,14 @@ function Header() {
                   href="tel:+1234567890"
                   className="flex items-center space-x-2 text-gray-600"
                 >
-                  <Phone size={16} className="text-emerald-500" />
+                  <Phone size={16} className="text-yellow-500" />
                   <span>+1 (234) 567-890</span>
                 </a>
                 <a
                   href="mailto:support@techstore.com"
                   className="flex items-center space-x-2 text-gray-600"
                 >
-                  <Mail size={16} className="text-emerald-500" />
+                  <Mail size={16} className="text-yellow-500" />
                   <span>support@techstore.com</span>
                 </a>
               </div>
@@ -355,7 +355,7 @@ function Header() {
                   <a
                     key={idx}
                     href="#"
-                    className="text-gray-600 hover:text-emerald-600 transition-colors duration-300"
+                    className="text-gray-600 hover:text-yellow-600 transition-colors duration-300"
                   >
                     <Icon size={20} />
                   </a>

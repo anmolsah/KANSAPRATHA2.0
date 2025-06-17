@@ -186,7 +186,7 @@ const Details = () => {
               <div className="flex items-center text-gray-200">
                 <Link
                   to="/"
-                  className="hover:text-emerald-400 transition-colors"
+                  className="hover:text-yellow-400 transition-colors"
                 >
                   Home
                 </Link>
@@ -202,11 +202,11 @@ const Details = () => {
       <section className="bg-gray-50 py-4 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4">
           <nav className="flex items-center text-gray-600 text-sm">
-            <Link to="/" className="hover:text-emerald-500 transition-colors">
+            <Link to="/" className="hover:text-yellow-500 transition-colors">
               Home
             </Link>
             <IoIosArrowForward className="mx-2" />
-            <Link to="/" className="hover:text-emerald-500 transition-colors">
+            <Link to="/" className="hover:text-yellow-500 transition-colors">
               {product.category}
             </Link>
             <IoIosArrowForward className="mx-2" />
@@ -239,7 +239,7 @@ const Details = () => {
                 {product.images.map((img, i) => {
                   return (
                     <div
-                      className="p-1 cursor-pointer border-2 border-transparent hover:border-emerald-400 rounded-lg transition-all"
+                      className="p-1 cursor-pointer border-2 border-transparent hover:border-yellow-400 rounded-lg transition-all"
                       key={i}
                       onClick={() => setImage(img)}
                     >
@@ -261,7 +261,7 @@ const Details = () => {
 
             <div className="flex items-center gap-4">
               <Ratings ratings={4} className="text-2xl" />
-              <span className="text-emerald-600 font-medium">(24 reviews)</span>
+              <span className="text-yellow-600 font-medium">(24 reviews)</span>
             </div>
 
             <div className="space-y-4">
@@ -295,14 +295,14 @@ const Details = () => {
                   <div className="flex items-center bg-gray-100 rounded-full">
                     <button
                       onClick={dec}
-                      className="px-5 py-3 text-lg text-gray-600 hover:text-emerald-600 transition-colors font-semibold"
+                      className="px-5 py-3 text-lg text-gray-600 hover:text-yellow-600 transition-colors font-semibold"
                     >
                       -
                     </button>
                     <span className="px-4 text-lg font-medium">{quantity}</span>
                     <button
                       onClick={inc}
-                      className="px-5 py-3 text-gray-600 hover:text-emerald-600 transition-colors font-semibold"
+                      className="px-5 py-3 text-gray-600 hover:text-yellow-600 transition-colors font-semibold"
                     >
                       +
                     </button>
@@ -310,24 +310,24 @@ const Details = () => {
 
                   <button
                     onClick={add_cart}
-                    className="px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full font-semibold transition-all duration-200 hover:scale-[1.02]"
+                    className="px-8 py-4 bg-yellow-500 hover:bg-yellow-600 text-white rounded-full font-semibold transition-all duration-200 hover:scale-[1.02]"
                   >
                     Add To Cart
                   </button>
 
                   <button
                     onClick={add_wishlist}
-                    className="p-4 bg-white border-2 border-gray-200 rounded-full hover:border-emerald-400 hover:text-emerald-600 transition-all"
+                    className="p-4 bg-white border-2 border-gray-200 rounded-full hover:border-yellow-400 hover:text-yellow-600 transition-all"
                   >
                     <FaHeart className="w-6 h-6" />
                   </button>
                 </div>
 
                 <div className="flex gap-4">
-                  <button onClick={buyNow} className="px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full font-semibold transition-all duration-200 hover:scale-[1.02]">
+                  <button onClick={buyNow} className="px-8 py-4 bg-yellow-500 hover:bg-yellow-600 text-white rounded-full font-semibold transition-all duration-200 hover:scale-[1.02]">
                     Buy Now
                   </button>
-                  <button className="px-8 py-4 bg-indigo-500 hover:bg-indigo-600 text-white rounded-full font-semibold transition-all duration-200 hover:scale-[1.02]">
+                  <button className="px-8 py-4 bg-yellow-800 hover:bg-yellow-900 text-white rounded-full font-semibold transition-all duration-200 hover:scale-[1.02]">
                     Chat Seller
                   </button>
                 </div>
@@ -342,7 +342,7 @@ const Details = () => {
                 </span>
                 <span
                   className={`text-${
-                    product.stock ? "emerald-600" : "red-500"
+                    product.stock ? "yellow-600" : "red-500"
                   } font-medium`}
                 >
                   {product.stock
@@ -358,7 +358,7 @@ const Details = () => {
                     <a
                       key={i}
                       href="#"
-                      className="p-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full transition-all duration-200 hover:scale-110"
+                      className="p-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-full transition-all duration-200 hover:scale-110"
                     >
                       <Icon className="w-5 h-5" />
                     </a>
@@ -380,7 +380,7 @@ const Details = () => {
                     onClick={() => setState(tab)}
                     className={`px-8 py-4 font-semibold capitalize transition-colors ${
                       state === tab
-                        ? "bg-emerald-500 text-white"
+                        ? "bg-yellow-500 text-white"
                         : "text-gray-600 hover:bg-gray-50"
                     }`}
                   >
@@ -419,7 +419,7 @@ const Details = () => {
                       alt="Related product"
                     />
                     {p.discount > 0 && (
-                      <div className="absolute top-3 left-3 bg-emerald-500 text-white px-3 py-1 rounded-full text-sm">
+                      <div className="absolute top-3 left-3 bg-red-500 text-white px-3 py-1 rounded-full text-sm">
                         -{p.discount}%
                       </div>
                     )}
@@ -427,7 +427,7 @@ const Details = () => {
                   <div className="pt-4">
                     <h4 className="text-gray-800 font-medium">{p.name}</h4>
                     <div className="flex items-center justify-between mt-2">
-                      <span className="text-emerald-600 font-semibold">
+                      <span className="text-yellow-600 font-semibold">
                         ₹{p.price}
                       </span>
                       <Ratings ratings={p.rating} />
@@ -465,7 +465,7 @@ const Details = () => {
                       alt="Related product"
                     />
                     {p.discount > 0 && (
-                      <div className="absolute top-3 left-3 bg-emerald-500 text-white px-3 py-1 rounded-full text-sm">
+                      <div className="absolute top-3 left-3 bg-red-500 text-white px-3 py-1 rounded-full text-sm">
                         -{p.discount}%
                       </div>
                     )}
@@ -473,7 +473,7 @@ const Details = () => {
                   <div className="pt-4">
                     <h4 className="text-gray-800 font-medium">{p.name}</h4>
                     <div className="flex items-center justify-between mt-2">
-                      <span className="text-emerald-600 font-semibold">
+                      <span className="text-yellow-600 font-semibold">
                         ₹{p.price}
                       </span>
                       <Ratings ratings={p.rating} />

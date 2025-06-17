@@ -35,7 +35,7 @@ const ShopProducts = ({ styles, products }) => {
               {[FaRegHeart, FaEye, RiShoppingCartLine].map((Icon, index) => (
                 <button
                   key={index}
-                  className="p-3 bg-white/90 text-gray-600 rounded-full shadow-md hover:bg-emerald-500 hover:text-white transition-colors duration-200"
+                  className="p-3 bg-white/90 text-gray-600 rounded-full shadow-md hover:bg-yellow-500 hover:text-white transition-colors duration-200"
                 >
                   <Icon className="w-5 h-5" />
                 </button>
@@ -50,7 +50,7 @@ const ShopProducts = ({ styles, products }) => {
           >
             <h2 className="text-lg font-semibold text-gray-800">{p.name}</h2>
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
-              <span className="text-emerald-500 font-bold text-lg">
+              <span className="text-yellow-900 font-bold text-lg">
                 ₹{p.price}
               </span>
               <div className="flex items-center gap-2">

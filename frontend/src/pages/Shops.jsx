@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "./../components/Header";
 import Footer from "./../components/Footer";
 import img1 from "../assets/img1.jpg";
+import img2 from "../assets/banner11.png";
 import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import { Range } from "react-range";
@@ -242,7 +243,7 @@ const Shops = () => {
                         ))}
                       </div>
                     ))}
-                 <button className="px-4 py-2 bg-yellow-500 text-white rounded-md shadow hover:bg-yellow-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-400" onClick={resetRating}>
+                 <button className="px-4 py-2 bg-yellow-800 text-white rounded-md shadow hover:bg-yellow-900 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-400" onClick={resetRating}>
                       Reset
                     </button>
                   </div>
