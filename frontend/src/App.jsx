@@ -23,6 +23,7 @@ import ConfirmOrder from "./pages/ConfirmOrder";
 import Blog from "./pages/Blog";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import AllBlogPosts from "./components/AllBlogPosts";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -46,6 +47,7 @@ const App = () => {
 
         <Route path="/blog" element={<ProtectUser />}>
           <Route path="" element={<Blog />} />
+          <Route path="blog/all" element={<AllBlogPosts />} />
         </Route>
         <Route path="/about" element={<ProtectUser />}>
           <Route path="" element={<About />} />

@@ -79,7 +79,7 @@ const Login = () => {
                     id="email"
                     placeholder="Enter your email"
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-colors"
                   />
                 </div>
 
@@ -98,15 +98,15 @@ const Login = () => {
                     id="password"
                     placeholder="Enter your password"
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-colors"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full bg-emerald-500 text-white py-3 px-4 rounded-lg font-semibold 
-                    hover:bg-emerald-600 transform transition-all duration-200 hover:scale-105 
-                    focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 shadow-md"
+                  className="w-full bg-yellow-500 text-white py-3 px-4 rounded-lg font-semibold 
+                    hover:bg-yellow-600 transform transition-all duration-200 hover:scale-105 
+                    focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 shadow-md"
                 >
                   Login Now
                 </button>
@@ -127,8 +127,8 @@ const Login = () => {
                 <div className="mt-6 grid grid-cols-2 gap-4">
                   <button
                     className="flex items-center justify-center gap-2 w-full p-3 border border-gray-300 rounded-lg 
-                      hover:border-emerald-500 hover:text-emerald-600 transform transition-all duration-200 
-                      hover:scale-105 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                      hover:border-yellow-500 hover:text-yellow-600 transform transition-all duration-200 
+                      hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yellow-500"
                   >
                     <FaFacebookF className="text-[#1877F2]" />
                     <span className="text-sm font-medium">Facebook</span>
@@ -136,8 +136,8 @@ const Login = () => {
 
                   <button
                     className="flex items-center justify-center gap-2 w-full p-3 border border-gray-300 rounded-lg 
-                      hover:border-emerald-500 hover:text-emerald-600 transform transition-all duration-200 
-                      hover:scale-105 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                      hover:border-yellow-500 hover:text-yellow-600 transform transition-all duration-200 
+                      hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yellow-500"
                   >
                     <FaGoogle className="text-[#EA4335]" />
                     <span className="text-sm font-medium">Google</span>
@@ -148,7 +148,7 @@ const Login = () => {
                   Don't have an account?{" "}
                   <Link
                     to="/register"
-                    className="font-semibold text-emerald-600 hover:text-emerald-700 transition-colors"
+                    className="font-semibold text-yellow-600 hover:text-yellow-700 transition-colors"
                   >
                     Sign up
                   </Link>
