@@ -102,7 +102,7 @@ const Index = () => {
                       {row.delivery_status}
                     </span>
                   </td>
-                  <td className="px-6 py-4 space-y-2">
+                  {/* <td className="px-6 py-4 space-y-2">
                     <Link
                       to={`/dashboard/order/details/${row._id}`}
                       className="px-4 py-2 text-sm font-medium text-yellow-600 hover:text-yellow-700 
@@ -122,6 +122,29 @@ const Index = () => {
                         Pay Now
                       </span>
                     )}
+                  </td> */}
+                  <td className="px-6 py-4">
+                    <div className="flex flex-wrap gap-2">
+                      <Link
+                        to={`/dashboard/order/details/${row._id}`}
+                        className="px-4 py-2 text-sm font-medium text-yellow-600 hover:text-yellow-700 
+        border border-yellow-600 rounded-lg hover:bg-yellow-50 transition-colors"
+                      >
+                        View
+                      </Link>
+
+                      {row.payment_status !== "paid" && (
+                        <span
+                          onClick={() => {
+                            redirect(row);
+                          }}
+                          className="px-4 py-2 text-sm font-medium text-white bg-yellow-500 rounded-lg 
+          hover:bg-yellow-600 transition-colors shadow-sm cursor-pointer"
+                        >
+                          Pay Now
+                        </span>
+                      )}
+                    </div>
                   </td>
                 </tr>
               ))}

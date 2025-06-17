@@ -74,7 +74,7 @@ const FeatureProduct = ({ products }) => {
         </div>
       </div>
 
-      <div className="w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+      <div className="w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 rounded-md">
         {products.map((p, i) => (
           <div
             key={i}
