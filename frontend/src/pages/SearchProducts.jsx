@@ -19,10 +19,9 @@ import {
 } from "../store/reducers/homeReducer";
 
 const SearchProducts = () => {
-
-    let [searchParams, setSearchParams] = useSearchParams();
-    const category = searchParams.get("category");
-    const searchValue = searchParams.get("value");
+  let [searchParams, setSearchParams] = useSearchParams();
+  const category = searchParams.get("category");
+  const searchValue = searchParams.get("value");
 
   const dispatch = useDispatch();
   const {
@@ -53,21 +52,18 @@ const SearchProducts = () => {
     values: [priceRange.low, priceRange.high],
   });
 
-  
   const [sortPrice, setSortPrice] = useState("");
-
-  
 
   useEffect(() => {
     dispatch(
       query_products({
-        low: state.values[0] || '',
-        high: state.values[1] || '',
+        low: state.values[0] || "",
+        high: state.values[1] || "",
         category,
         rating,
         sortPrice,
         pageNumber,
-        searchValue
+        searchValue,
       })
     );
   }, [
@@ -77,7 +73,7 @@ const SearchProducts = () => {
     rating,
     sortPrice,
     pageNumber,
-    searchValue
+    searchValue,
   ]);
 
   const resetRating = () => {
@@ -113,7 +109,7 @@ const SearchProducts = () => {
               <div className="flex items-center text-gray-200">
                 <Link
                   to="/"
-                  className="hover:text-emerald-400 transition-colors"
+                  className="hover:text-yellow-400 transition-colors"
                 >
                   Home
                 </Link>
@@ -130,23 +126,19 @@ const SearchProducts = () => {
           <div className={`md:hidden ${!filter ? "mb-6" : "mb-0"}`}>
             <button
               onClick={() => setFilter(!filter)}
-              className="w-full py-3 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors"
+              className="w-full py-3 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-colors"
             >
               Filter Products
             </button>
           </div>
 
           <div className="flex flex-wrap gap-8">
-            {/* Filters Sidebar */}
             <div
               className={`w-full md:w-3/12 ${
                 filter ? "md:block" : "hidden"
               } transition-all duration-300`}
             >
               <div className="bg-white rounded-lg p-6 shadow-md">
-                
-               
-
                 <div className="my-8">
                   <h2 className="text-2xl font-bold mb-4 text-gray-800">
                     Price
@@ -190,7 +182,7 @@ const SearchProducts = () => {
                       renderThumb={({ props }) => (
                         <div
                           {...props}
-                          className="h-5 w-5 bg-emerald-500 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                          className="h-5 w-5 bg-yellow-500 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-emerald-400"
                         />
                       )}
                     />
@@ -211,7 +203,7 @@ const SearchProducts = () => {
                       <div
                         key={stars}
                         onClick={() => setRating(stars)}
-                        className="flex items-center gap-1 cursor-pointer text-emerald-400 hover:text-emerald-500"
+                        className="flex items-center gap-1 cursor-pointer text-yellow-400 hover:text-yellow-500"
                       >
                         {[...Array(5)].map((_, i) => (
                           <span key={i}>
@@ -224,7 +216,10 @@ const SearchProducts = () => {
                         ))}
                       </div>
                     ))}
-                 <button className="px-4 py-2 bg-emerald-500 text-white rounded-md shadow hover:bg-emerald-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-emerald-400" onClick={resetRating}>
+                    <button
+                      className="px-4 py-2 bg-yellow-500 text-white rounded-md shadow hover:bg-yellow-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                      onClick={resetRating}
+                    >
                       Reset
                     </button>
                   </div>
@@ -257,7 +252,7 @@ const SearchProducts = () => {
                         onClick={() => setStyles("grid")}
                         className={`p-2 rounded-lg ${
                           styles === "grid"
-                            ? "bg-emerald-500 text-white"
+                            ? "bg-yellow-500 text-white"
                             : "text-gray-600 hover:bg-gray-100"
                         }`}
                       >
@@ -267,7 +262,7 @@ const SearchProducts = () => {
                         onClick={() => setStyles("list")}
                         className={`p-2 rounded-lg ${
                           styles === "list"
-                            ? "bg-emerald-500 text-white"
+                            ? "bg-yellow-500 text-white"
                             : "text-gray-600 hover:bg-gray-100"
                         }`}
                       >
@@ -301,6 +296,3 @@ const SearchProducts = () => {
 };
 
 export default SearchProducts;
-
-
-

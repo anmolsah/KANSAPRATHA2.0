@@ -259,13 +259,13 @@ function Header() {
                   <input
                     type="text"
                     placeholder="Search for products..."
-                    className="flex-1 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                    className="flex-1 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
                     value={searchValue}
                     onChange={(e) => setSearchValue(e.target.value)}
                   />
                   <button
                     onClick={search}
-                    className="px-6 bg-emerald-500 text-white font-medium hover:bg-emerald-600 transition-all duration-300 flex items-center hover:shadow-lg"
+                    className="px-6 bg-yellow-500 text-white font-medium hover:bg-yellow-600 transition-all duration-300 flex items-center hover:shadow-lg"
                   >
                     <Search size={20} className="mr-2" />
                     <span className="hidden sm:inline">Search</span>
