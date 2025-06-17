@@ -70,7 +70,7 @@ const FeatureProduct = ({ products }) => {
       <div className="w-full">
         <div className="text-center flex justify-center items-center flex-col text-2xl sm:text-3xl md:text-4xl text-slate-600 font-bold relative pb-[30px] md:pb-[45px]">
           <h2>Feature Products</h2>
-          <div className="w-[80px] sm:w-[100px] h-[2px] bg-[#059473] mt-3 sm:mt-4"></div>
+          <div className="w-[80px] sm:w-[100px] h-[2px] bg-yellow-700 mt-3 sm:mt-4"></div>
         </div>
       </div>
 
@@ -96,19 +96,19 @@ const FeatureProduct = ({ products }) => {
               <ul className="flex transition-all duration-700 -bottom-8 sm:-bottom-10 justify-center items-center gap-1 sm:gap-2 absolute w-full group-hover:bottom-2 sm:group-hover:bottom-3">
                 <li
                   onClick={() => add_wishlist(p)}
-                  className="w-[30px] h-[30px] sm:w-[38px] sm:h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-pink-400 hover:text-white hover:rotate-[720deg] transition-all"
+                  className="w-[30px] h-[30px] sm:w-[38px] sm:h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-yellow-400 hover:text-white hover:rotate-[720deg] transition-all"
                 >
                   <FaRegHeart />
                 </li>
                 <Link
                   to={`/product/details/${p.slug}`}
-                  className="w-[30px] h-[30px] sm:w-[38px] sm:h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-pink-400 hover:text-white hover:rotate-[720deg] transition-all"
+                  className="w-[30px] h-[30px] sm:w-[38px] sm:h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-yellow-400 hover:text-white hover:rotate-[720deg] transition-all"
                 >
                   <FaEye />
                 </Link>
                 <li
                   onClick={() => add_cart(p._id)}
-                  className="w-[30px] h-[30px] sm:w-[38px] sm:h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-pink-400 hover:text-white hover:rotate-[720deg] transition-all"
+                  className="w-[30px] h-[30px] sm:w-[38px] sm:h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-yellow-400 hover:text-white hover:rotate-[720deg] transition-all"
                 >
                   <RiShoppingCartLine />
                 </li>

@@ -54,14 +54,14 @@ const Banner = () => {
       <style>
         {`
           .custom-arrow {
-            background-color: #34d399 !important;
+            background-color: #edc932 !important;
             padding: 12px !important;
             border-radius: 50% !important;
             transition: all 0.3s !important;
           }
           
           .custom-arrow:hover {
-            background-color: #059669 !important;
+            background-color: #fbd42e !important;
           }
           
           .custom-arrow::before {
@@ -70,12 +70,12 @@ const Banner = () => {
           }
           
           .custom-dot-list li button {
-            border: 2px solid #34d399 !important;
+            border: 2px solid #fbd42e !important;
             background: transparent !important;
           }
           
           .custom-dot-list li.react-multi-carousel-dot--active button {
-            background: #34d399 !important;
+            background: #fbd42e !important;
           }
         `}
       </style>
