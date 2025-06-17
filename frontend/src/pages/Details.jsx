@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "./../components/Header";
 import Footer from "./../components/Footer";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import img12 from "../assets/banner001.jpg";
 import { IoIosArrowForward } from "react-icons/io";
 import img1 from "../assets/img1.jpg";
 import Carousel from "react-multi-carousel";
@@ -173,7 +174,7 @@ const Details = () => {
       <section
         className="h-64 bg-cover bg-no-repeat relative"
         style={{
-          backgroundImage: `url(${img1})`,
+          backgroundImage: `url(${img12})`,
           backgroundPosition: "center",
         }}
       >

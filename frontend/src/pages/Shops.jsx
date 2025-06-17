@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "./../components/Header";
 import Footer from "./../components/Footer";
 import img1 from "../assets/img1.jpg";
-import img2 from "../assets/banner11.png";
+import img12 from "../assets/banner001.jpg";
 import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import { Range } from "react-range";
@@ -99,7 +99,7 @@ const Shops = () => {
       <section
         className="h-64 bg-cover bg-no-repeat relative"
         style={{
-          backgroundImage: `url(${img1})`,
+          backgroundImage: `url(${img12})`,
           backgroundPosition: "center",
         }}
       >

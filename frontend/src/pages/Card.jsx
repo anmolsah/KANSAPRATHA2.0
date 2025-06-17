@@ -3,6 +3,7 @@ import Header from "./../components/Header";
 import Footer from "./../components/Footer";
 import { IoIosArrowForward } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
+import img12 from "../assets/banner001.jpg";
 import img1 from "../assets/img1.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -68,7 +69,7 @@ const Card = () => {
       <section
         className="h-64 bg-cover bg-no-repeat relative"
         style={{
-          backgroundImage: `url(${img1})`,
+          backgroundImage: `url(${img12})`,
           backgroundPosition: "center",
         }}
       >

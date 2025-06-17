@@ -9,6 +9,7 @@ import img8 from "./blog5.jpg";
 import img9 from "./logo00.png";
 import img10 from "./photo1.jpg";
 import img11 from "./photo2.jpg";
+import img12 from "./banner001.jpg"
 
 export const assets = {
   img1,
@@ -22,4 +23,5 @@ export const assets = {
   img9,
   img10,
   img11,
+  img12
 };
