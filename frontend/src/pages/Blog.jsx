@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { allPosts } from "../components/AllBlogPosts";
+import img3 from "../assets/blog.jpg";
+import img4 from "../assets/blog3.jpg";
+import img5 from "../assets/blog1.jpg";
 export default function Blog() {
   const blogPosts = [
     {
@@ -10,8 +13,7 @@ export default function Blog() {
         "Discover the traditional techniques behind our beautiful brass utensils.",
       date: "May 15, 2023",
       category: "Craftsmanship",
-      image:
-        "https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80",
+      image: img3,
     },
     {
       id: 2,
@@ -20,8 +22,7 @@ export default function Blog() {
         "Learn how to maintain your brassware to keep it shining for generations.",
       date: "April 28, 2023",
       category: "Maintenance",
-      image:
-        "https://images.unsplash.com/photo-1584735422182-1e42f4b93aee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+      image: img4,
     },
     {
       id: 3,
@@ -54,7 +55,7 @@ export default function Blog() {
               <img
                 src={post.image}
                 alt={post.title}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
             </div>
             <div className="p-6">

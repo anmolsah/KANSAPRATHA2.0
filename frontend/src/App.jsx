@@ -47,7 +47,7 @@ const App = () => {
 
         <Route path="/blog" element={<ProtectUser />}>
           <Route path="" element={<Blog />} />
-          <Route path="blog/all" element={<AllBlogPosts />} />
+          <Route path="all" element={<AllBlogPosts />} />
         </Route>
         <Route path="/about" element={<ProtectUser />}>
           <Route path="" element={<About />} />
