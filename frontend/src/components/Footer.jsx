@@ -100,7 +100,7 @@ const Footer = () => {
                     to="/blog"
                     className="text-xs sm:text-sm hover:text-yellow-300 transition-colors"
                   >
-                    Terms
+                    Blogs
                   </Link>
                 </li>
               </ul>
