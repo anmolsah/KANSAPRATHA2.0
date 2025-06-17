@@ -18,7 +18,6 @@ const Payment = () => {
       <section className="flex-1 bg-gradient-to-br from-indigo-50 to-purple-50  py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col lg:flex-row gap-6">
-            {/* Payment Methods Section */}
             <div className="w-full lg:w-7/12">
               <div className="bg-white rounded-xl shadow-xl p-6">
                 <div className="grid grid-cols-2 gap-4 mb-8">
@@ -26,8 +25,8 @@ const Payment = () => {
                     onClick={() => setPaymentMethod("stripe")}
                     className={`p-6 rounded-lg border-2 flex flex-col items-center justify-center transition-all ${
                       paymentMethod === "stripe"
-                        ? "border-emerald-500 bg-emerald-50"
-                        : "border-gray-300 hover:border-emerald-300 hover:bg-indigo-50"
+                        ? "border-yellow-500 bg-yellow-50"
+                        : "border-gray-300 hover:border-yellow-300 hover:bg-indigo-50"
                     }`}
                   >
                     <img
@@ -42,8 +41,8 @@ const Payment = () => {
                     onClick={() => setPaymentMethod("cod")}
                     className={`p-6 rounded-lg border-2 flex flex-col items-center justify-center transition-all ${
                       paymentMethod === "cod"
-                        ? "border-emerald-500 bg-emerald-50"
-                        : "border-gray-300 hover:border-emerald-300 hover:bg-indigo-50"
+                        ? "border-yellow-500 bg-yellow-50"
+                        : "border-gray-300 hover:border-yellow-300 hover:bg-indigo-50"
                     }`}
                   >
                     <img
@@ -55,26 +54,31 @@ const Payment = () => {
                   </button>
                 </div>
 
-                {paymentMethod === "stripe" && <Stripe orderId={orderId} price={price} />}
+                {paymentMethod === "stripe" && (
+                  <Stripe orderId={orderId} price={price} />
+                )}
 
                 {paymentMethod === "cod" && (
                   <div className="bg-gray-50 p-6 rounded-lg">
                     <button
                       onClick={async () => {
                         try {
-                          const { data } = await api.post("/order/cod-payment", {
-                            orderId,
-                            paymentMethod: "cod"
-                          });
+                          const { data } = await api.post(
+                            "/order/cod-payment",
+                            {
+                              orderId,
+                              paymentMethod: "cod",
+                            }
+                          );
                           window.location.href = `/order/confirm?order_id=${orderId}&payment_method=cod`;
                         } catch (error) {
                           console.error("COD payment failed:", error);
                           alert("Payment failed. Please try again.");
                         }
                       }}
-                      className="w-full bg-emerald-500 text-white py-3 px-6 rounded-lg font-semibold
-                        hover:bg-emerald-600 transform transition-all duration-200 hover:scale-[1.02]
-                        focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 shadow-md"
+                      className="w-full bg-yellow-500 text-white py-3 px-6 rounded-lg font-semibold
+                        hover:bg-yellow-600 transform transition-all duration-200 hover:scale-[1.02]
+                        focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 shadow-md"
                     >
                       Confirm Order
                     </button>
@@ -83,7 +87,6 @@ const Payment = () => {
               </div>
             </div>
 
-            {/* Order Summary Section */}
             <div className="w-full lg:w-5/12">
               <div className="bg-white rounded-xl shadow-xl p-6 h-fit">
                 <h3 className="text-2xl font-bold text-gray-800 mb-6">
@@ -100,7 +103,7 @@ const Payment = () => {
                     <span className="font-semibold text-gray-800">
                       Total Amount
                     </span>
-                    <span className="text-xl font-bold text-emerald-600">
+                    <span className="text-xl font-bold text-yellow-600">
                       ₹{price}
                     </span>
                   </div>

@@ -46,7 +46,7 @@ const Reviews = ({ product }) => {
           pageNumber,
         })
       );
-      dispatch(product_details(product.slug))
+      dispatch(product_details(product.slug));
       setRate("");
       setRev("");
       dispatch(messageClear());
@@ -66,7 +66,6 @@ const Reviews = ({ product }) => {
   return (
     <div className="mt-8 px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col md:flex-row gap-6 md:gap-10">
-        {/* Rating Summary */}
         <div className="flex flex-col gap-2 items-center md:items-start py-4">
           <div>
             <span className="text-4xl md:text-6xl font-semibold">
@@ -82,34 +81,6 @@ const Reviews = ({ product }) => {
           <p className="text-sm text-slate-600">({totalReview}) Reviews</p>
         </div>
 
-        {/* Rating Distribution
-        <div className="flex flex-col gap-2 py-4 flex-1">
-          {[5, 4, 3, 2, 1].map((rating, index) => (
-            <div
-              key={index}
-              className="flex flex-col md:flex-row md:items-center gap-3 md:gap-5"
-            >
-              <div className="text-md flex gap-1 w-20 md:w-24">
-                <RatingTemp rating={rating} />
-              </div>
-              <div className="flex-1 flex items-center gap-3">
-                <div className="w-full md:w-48 h-3 bg-slate-200 rounded">
-                  <div
-                    className="h-full bg-yellow-400 rounded"
-                    style={{
-                      width: `${Math.floor(
-                        (100 * (rating_review[0]?.sum || 0)) / totalReview
-                      )}%`,
-                    }}
-                  >{rating_review[0]?.sum}</div>
-                </div>
-                <p className="text-sm text-slate-600 min-w-[30px]">
-                {rating_review[0]?.sum}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div> */}
         <div className="flex flex-col gap-2 py-4 flex-1">
           {[5, 4, 3, 2, 1].map((rating) => {
             const matchedRating = rating_review.find(
@@ -143,7 +114,6 @@ const Reviews = ({ product }) => {
         </div>
       </div>
 
-      {/* Reviews List */}
       <h2 className="text-slate-600 text-lg md:text-xl font-bold py-5">
         Product Reviews ({totalReview})
       </h2>
@@ -161,7 +131,6 @@ const Reviews = ({ product }) => {
           </div>
         ))}
 
-        {/* Pagination */}
         <div className="flex justify-center md:justify-end">
           {totalReview > 5 && (
             <Pagination
@@ -175,7 +144,6 @@ const Reviews = ({ product }) => {
         </div>
       </div>
 
-      {/* Review Form */}
       <div className="pb-10">
         {userInfo ? (
           <div className="flex flex-col gap-4 max-w-2xl mx-auto">
@@ -206,7 +174,7 @@ const Reviews = ({ product }) => {
                 required
               ></textarea>
               <div className="flex justify-end">
-                <button className="py-2 px-6 bg-green-600 text-white rounded-md w-full md:w-auto">
+                <button className="py-2 px-6 bg-yellow-600 text-white rounded-md w-full md:w-auto">
                   Submit Review
                 </button>
               </div>
@@ -216,7 +184,7 @@ const Reviews = ({ product }) => {
           <div className="text-center">
             <Link
               to="/login"
-              className="inline-block py-2 px-6 bg-green-500 text-white rounded-md text-sm md:text-base"
+              className="inline-block py-2 px-6 bg-yellow-500 text-white rounded-md text-sm md:text-base"
             >
               Login to Write a Review
             </Link>

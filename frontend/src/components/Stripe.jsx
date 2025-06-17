@@ -40,7 +40,7 @@ const Stripe = ({ orderId, price }) => {
       ) : (
         <button
           onClick={create_payment}
-          className="px-10 py-[6px] rounded-sm hover:shadow-green-500/20 hover:shadow-lg bg-green-500 text-white"
+          className="px-10 py-[6px] rounded-sm hover:shadow-green-500/20 hover:shadow-lg bg-yellow-500 text-white"
         >
           Start Payment
         </button>

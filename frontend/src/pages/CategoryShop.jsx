@@ -111,7 +111,7 @@ const CategoryShop = () => {
               <div className="flex items-center text-gray-200">
                 <Link
                   to="/"
-                  className="hover:text-emerald-400 transition-colors"
+                  className="hover:text-yellow-400 transition-colors"
                 >
                   Home
                 </Link>
@@ -128,7 +128,7 @@ const CategoryShop = () => {
           <div className={`md:hidden ${!filter ? "mb-6" : "mb-0"}`}>
             <button
               onClick={() => setFilter(!filter)}
-              className="w-full py-3 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors"
+              className="w-full py-3 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-colors"
             >
               Filter Products
             </button>
@@ -188,7 +188,7 @@ const CategoryShop = () => {
                       renderThumb={({ props }) => (
                         <div
                           {...props}
-                          className="h-5 w-5 bg-emerald-500 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                          className="h-5 w-5 bg-yellow-500 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"
                         />
                       )}
                     />
@@ -209,7 +209,7 @@ const CategoryShop = () => {
                       <div
                         key={stars}
                         onClick={() => setRating(stars)}
-                        className="flex items-center gap-1 cursor-pointer text-emerald-400 hover:text-emerald-500"
+                        className="flex items-center gap-1 cursor-pointer text-yellow-400 hover:text-yellow-500"
                       >
                         {[...Array(5)].map((_, i) => (
                           <span key={i}>
@@ -222,7 +222,7 @@ const CategoryShop = () => {
                         ))}
                       </div>
                     ))}
-                 <button className="px-4 py-2 bg-emerald-500 text-white rounded-md shadow hover:bg-emerald-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-emerald-400" onClick={resetRating}>
+                 <button className="px-4 py-2 bg-yellow-500 text-white rounded-md shadow hover:bg-yellow-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-400" onClick={resetRating}>
                       Reset
                     </button>
                   </div>
@@ -244,7 +244,7 @@ const CategoryShop = () => {
                   <div className="flex items-center gap-4">
                     <select
                       onChange={(e) => setSortPrice(e.target.value)}
-                      className="bg-gray-50 border border-gray-300 text-gray-600 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-400"
+                      className="bg-gray-50 border border-gray-300 text-gray-600 rounded-lg px-4 py-2 focus:ring-2 focus:ring-yellow-400"
                     >
                       <option value="">Sort By</option>
                       <option value="low-to-high">Low to High Price</option>
@@ -255,7 +255,7 @@ const CategoryShop = () => {
                         onClick={() => setStyles("grid")}
                         className={`p-2 rounded-lg ${
                           styles === "grid"
-                            ? "bg-emerald-500 text-white"
+                            ? "bg-yellow-500 text-white"
                             : "text-gray-600 hover:bg-gray-100"
                         }`}
                       >
@@ -265,7 +265,7 @@ const CategoryShop = () => {
                         onClick={() => setStyles("list")}
                         className={`p-2 rounded-lg ${
                           styles === "list"
-                            ? "bg-emerald-500 text-white"
+                            ? "bg-yellow-500 text-white"
                             : "text-gray-600 hover:bg-gray-100"
                         }`}
                       >
