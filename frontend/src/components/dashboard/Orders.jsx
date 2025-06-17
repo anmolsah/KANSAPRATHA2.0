@@ -98,8 +98,8 @@ const Orders = () => {
                   <td className="px-6 py-4 space-x-2">
                     <Link
                       to={`/dashboard/order/details/${row._id}`}
-                      className="px-4 py-2 text-sm font-medium text-emerald-600 hover:text-emerald-700 
-                                           border border-emerald-600 rounded-lg hover:bg-emerald-50 transition-colors"
+                      className="px-4 py-2 text-sm font-medium text-yellow-600 hover:text-yellow-700 
+                                           border border-yellow-600 rounded-lg hover:bg-yellow-50 transition-colors"
                     >
                       View
                     </Link>
@@ -109,8 +109,8 @@ const Orders = () => {
                         onClick={() => {
                           redirect(row);
                         }}
-                        className="px-4 py-2 text-sm font-medium text-white bg-emerald-500 rounded-lg 
-                                           hover:bg-emerald-600 transition-colors shadow-sm cursor-pointer"
+                        className="px-4 py-2 text-sm font-medium text-white bg-yellow-500 rounded-lg 
+                                           hover:bg-yellow-600 transition-colors shadow-sm cursor-pointer"
                       >
                         Pay Now
                       </span>

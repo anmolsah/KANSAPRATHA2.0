@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -30,6 +31,28 @@ export default function Contact() {
 
   return (
     <div className="bg-gradient-to-br from-yellow-50 to-white py-16 px-4 sm:px-6 lg:px-16">
+      <div className="flex justify-start items-center mb-8">
+        <Link
+          to="/"
+          className="flex items-center text-gray-600 hover:text-gray-900"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 mr-2"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+          Back to Home
+        </Link>
+      </div>
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-yellow-800 mb-4">
           Contact Us
@@ -47,7 +70,7 @@ export default function Contact() {
           <div className="space-y-6 text-gray-700">
             <div className="flex items-start space-x-4">
               <div className="p-3 bg-yellow-100 rounded-full text-yellow-700">
-                +91 8250676762
+                📧
               </div>
               <div>
                 <h3 className="font-semibold">Email</h3>
@@ -61,7 +84,7 @@ export default function Contact() {
               </div>
               <div>
                 <h3 className="font-semibold">Phone</h3>
-                <p>+</p>
+                <p> +91 8250676762 </p>
               </div>
             </div>
 

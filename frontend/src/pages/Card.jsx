@@ -79,7 +79,7 @@ const Card = () => {
               <div className="flex items-center text-gray-200">
                 <Link
                   to="/"
-                  className="hover:text-emerald-400 transition-colors"
+                  className="hover:text-yellow-400 transition-colors"
                 >
                   Home
                 </Link>
@@ -97,7 +97,7 @@ const Card = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               <div className="lg:col-span-2 space-y-6">
                 <div className="bg-white rounded-xl shadow-md p-6">
-                  <h2 className="text-lg font-semibold text-emerald-500 mb-4">
+                  <h2 className="text-lg font-semibold text-yellow-500 mb-4">
                     Stock Products ({cart_products.length})
                   </h2>
                   {cart_products.map((p, i) => (
@@ -128,7 +128,7 @@ const Card = () => {
                                 </div>
                               </div>
                               <div className="flex flex-col md:items-end gap-4 w-full md:w-auto">
-                                <div className="text-emerald-500 font-bold text-lg">
+                                <div className="text-yellow-500 font-bold text-lg">
                                   ₹
                                   {item.productInfo.price -
                                     Math.floor(
@@ -139,7 +139,7 @@ const Card = () => {
                                   <span className="text-gray-400 line-through ml-2">
                                     ₹{item.productInfo.price}
                                   </span>
-                                  <span className="text-emerald-400 text-sm ml-2">
+                                  <span className="text-yellow-400 text-sm ml-2">
                                     -{item.productInfo.discount}%
                                   </span>
                                 </div>
@@ -153,7 +153,7 @@ const Card = () => {
                                           item._id
                                         )
                                       }
-                                      className="px-3 py-1 hover:bg-emerald-500 hover:text-white rounded-l-lg transition-colors"
+                                      className="px-3 py-1 hover:bg-yellow-500 hover:text-white rounded-l-lg transition-colors"
                                     >
                                       -
                                     </button>
@@ -168,7 +168,7 @@ const Card = () => {
                                           item._id
                                         )
                                       }
-                                      className="px-3 py-1 hover:bg-emerald-500 hover:text-white rounded-r-lg transition-colors"
+                                      className="px-3 py-1 hover:bg-yellow-500 hover:text-white rounded-r-lg transition-colors"
                                     >
                                       +
                                     </button>
@@ -194,7 +194,7 @@ const Card = () => {
                 {/* Out of Stock Products */}
                 {outofstock_products.length > 0 && (
                   <div className="bg-white rounded-xl shadow-md p-6">
-                    <h2 className="text-lg font-semibold text-emerald-500 mb-4">
+                    <h2 className="text-lg font-semibold text-yellow-500 mb-4">
                       Out Of Stock ({outofstock_products.length})
                     </h2>
                     <div className="bg-gray-50 rounded-lg p-4">
@@ -216,7 +216,7 @@ const Card = () => {
                                 </p>
                               </div>
                             </div>
-                            <div className="text-emerald-500 font-bold text-lg">
+                            <div className="text-yellow-500 font-bold text-lg">
                               ₹
                               {item.products[0].price -
                                 Math.floor(
@@ -227,7 +227,7 @@ const Card = () => {
                               <span className="text-gray-400 line-through ml-2">
                                 ₹{item.products[0].price}
                               </span>
-                              <span className="text-emerald-400 text-sm ml-2">
+                              <span className="text-yellow-400 text-sm ml-2">
                                 -{item.products[0].discount}%
                               </span>
                             </div>
@@ -257,10 +257,10 @@ const Card = () => {
                     <div className="flex gap-2">
                       <input
                         type="text"
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-400 focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
                         placeholder="Discount Coupon"
                       />
-                      <button className="px-4 py-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors">
+                      <button className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-colors">
                         Apply
                       </button>
                     </div>
@@ -270,7 +270,7 @@ const Card = () => {
                     </div>
                     <button
                       onClick={redirect}
-                      className="w-full py-3 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors"
+                      className="w-full py-3 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-colors"
                     >
                       Proceed to Checkout
                     </button>
@@ -282,7 +282,7 @@ const Card = () => {
             <div className="text-center py-16">
               <Link
                 to="/shops"
-                className="px-8 py-3 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors"
+                className="px-8 py-3 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-colors"
               >
                 Shop Now
               </Link>

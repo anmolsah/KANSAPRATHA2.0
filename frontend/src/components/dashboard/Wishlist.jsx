@@ -36,10 +36,10 @@ const Wishlist = () => {
             key={i}
             className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 group overflow-hidden"
           >
-            {/* Product Image Section */}
+            
             <div className="relative overflow-hidden">
               {p.discount !== 0 && (
-                <div className="absolute left-2 top-2 bg-emerald-500 text-white px-3 py-1 rounded-lg text-sm font-semibold z-10">
+                <div className="absolute left-2 top-2 bg-yellow-500 text-white px-3 py-1 rounded-lg text-sm font-semibold z-10">
                   {p.discount}% OFF
                 </div>
               )}
@@ -52,32 +52,31 @@ const Wishlist = () => {
                 />
               </div>
 
-              {/* Action Buttons */}
               <div className="absolute inset-x-0 bottom-0 bg-white/90 backdrop-blur-sm translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex justify-center gap-3 p-3">
                 <button
                   onClick={() => dispatch(remove_wishlist(p._id))}
-                  className="p-2 rounded-full bg-white text-emerald-600 hover:bg-emerald-400 hover:text-white transition-all duration-300 shadow-md hover:shadow-lg"
+                  className="p-2 rounded-full bg-white text-yellow-600 hover:bg-yellow-400 hover:text-white transition-all duration-300 shadow-md hover:shadow-lg"
                 >
                   <MdDelete className="text-lg" />
                 </button>
                 <Link
                   to={`/product/details/${p.slug}`}
-                  className="p-2 rounded-full bg-white text-emerald-600 hover:bg-emerald-400 hover:text-white transition-all duration-300 shadow-md hover:shadow-lg"
+                  className="p-2 rounded-full bg-white text-yellow-600 hover:bg-yellow-400 hover:text-white transition-all duration-300 shadow-md hover:shadow-lg"
                 >
                   <FaEye className="text-lg" />
                 </Link>
-                <button className="p-2 rounded-full bg-white text-emerald-600 hover:bg-emerald-400 hover:text-white transition-all duration-300 shadow-md hover:shadow-lg">
+                <button className="p-2 rounded-full bg-white text-yellow-600 hover:bg-yellow-400 hover:text-white transition-all duration-300 shadow-md hover:shadow-lg">
                   <RiShoppingCartLine className="text-lg" />
                 </button>
               </div>
             </div>
 
-            {/* Product Details */}
+            
             <div className="p-4 space-y-2">
               <h2 className="text-gray-800 font-semibold truncate">{p.name}</h2>
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-2">
-                  <span className="text-emerald-600 font-bold text-lg">
+                  <span className="text-yellow-600 font-bold text-lg">
                     ₹{p.price}
                   </span>
                   {p.discount !== 0 && (

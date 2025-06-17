@@ -39,13 +39,13 @@ const OrderDetails = () => {
                 <br />
                 {myOrder.shippingInfo?.city} {myOrder.shippingInfo?.area}
               </p>
-              <span className="inline-block mt-2 bg-emerald-100 text-emerald-800 text-xs px-2.5 py-1 rounded-full">
+              <span className="inline-block mt-2 bg-yellow-100 text-yellow-800 text-xs px-2.5 py-1 rounded-full">
                 Home Delivery
               </span>
             </div>
             <p className="text-sm text-gray-600">
               Contact Email:{" "}
-              <span className="text-emerald-600">{userInfo.email}</span>
+              <span className="text-yellow-600">{userInfo.email}</span>
             </p>
           </div>
 
@@ -56,7 +56,7 @@ const OrderDetails = () => {
               </h3>
               <div className="flex justify-between items-center mb-2">
                 <span className="text-gray-600">Total Price:</span>
-                <span className="font-semibold text-emerald-600">
+                <span className="font-semibold text-yellow-600">
                   ₹{myOrder.price}
                 </span>
               </div>
@@ -65,7 +65,7 @@ const OrderDetails = () => {
                 <span
                   className={`px-3 py-1 rounded-full text-sm ${
                     myOrder.payment_status === "paid"
-                      ? "bg-emerald-100 text-emerald-800"
+                      ? "bg-yellow-100 text-yellow-800"
                       : "bg-red-100 text-red-800"
                   }`}
                 >
@@ -77,7 +77,7 @@ const OrderDetails = () => {
                 <span
                   className={`px-3 py-1 rounded-full text-sm ${
                     myOrder.delivery_status === "delivered"
-                      ? "bg-emerald-100 text-emerald-800"
+                      ? "bg-yellow-100 text-yellow-800"
                       : "bg-amber-100 text-amber-800"
                   }`}
                 >
@@ -120,7 +120,7 @@ const OrderDetails = () => {
                   <p className="text-sm text-gray-400 line-through">
                     ₹{p.price}
                   </p>
-                  <span className="text-xs bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full">
+                  <span className="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">
                     {p.discount}% off
                   </span>
                 </div>
