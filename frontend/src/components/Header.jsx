@@ -143,7 +143,7 @@ function Header() {
                 </button>
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 transform group-hover:translate-y-0 translate-y-2">
                   <div className="py-2">
-                    {["English", "Spanish", "French", "German"].map(
+                    {["English", "Hindi", "Bengali", "Nepali"].map(
                       (lang, idx) => (
                         <a
                           key={idx}
