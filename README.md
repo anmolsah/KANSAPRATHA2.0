@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./dashboard/public/kansapratha_logo.svg" alt="KansaPratha Logo" width="400">
+  <img src="./dashboard/public/kansapratha_logo.svg" alt="KansaPratha Logo" width="800">
 </div>
 
 # KansaPratha 
@@ -190,7 +190,7 @@ Copyright (c) 2024<div align="center">
   <img src="./dashboard/public/kansapratha_logo.svg" alt="KansaPratha Logo" width="400">
 </div>
 
-# KansaPratha 2.0
+# KansaPratha
 
 Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
 
