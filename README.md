@@ -1,8 +1,7 @@
 <div align="center">
-  <img src="./dashboard/public/kansapratha_logo.svg" alt="KansaPratha Logo" width="800">
+  <img src="./dashboard/public/kansapratha_logo.svg" alt="KansaPratha Logo" width="1600">
 </div>
 
-# KansaPratha 
 
 ## Description
 
