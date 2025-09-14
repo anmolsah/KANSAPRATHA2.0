@@ -1,4 +1,8 @@
-# KansaPratha 2.0
+<div align="center">
+  <img src="./dashboard/public/kansapratha_logo.svg" alt="KansaPratha Logo" width="400">
+</div>
+
+# KansaPratha 
 
 ## Description
 
@@ -182,7 +186,11 @@ kansaPratha2.0/
 
 ISC License
 
-Copyright (c) 2024 KansaPratha 2.0
+Copyright (c) 2024<div align="center">
+  <img src="./dashboard/public/kansapratha_logo.svg" alt="KansaPratha Logo" width="400">
+</div>
+
+# KansaPratha 2.0
 
 Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
 
