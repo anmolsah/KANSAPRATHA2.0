@@ -3,6 +3,19 @@
 </div>
 
 
+## Website Preview
+
+<div align="center">
+  <img src="./frontend/public/k1.jpg" alt="KansaPratha Website Preview 1" width="800">
+  <img src="./frontend/public/k2.jpg" alt="KansaPratha Website Preview 2" width="800">
+  <img src="./frontend/public/k3.jpg" alt="KansaPratha Website Preview 3" width="800">
+  <img src="./frontend/public/k4.jpg" alt="KansaPratha Website Preview 4" width="800">
+  <img src="./frontend/public/k5.jpg" alt="KansaPratha Website Preview 5" width="800">
+  <img src="./frontend/public/k6.jpg" alt="KansaPratha Website Preview 6" width="800">
+  <img src="./frontend/public/k7.jpg" alt="KansaPratha Website Preview 7" width="800">
+  <img src="./frontend/public/k8.jpg" alt="KansaPratha Website Preview 8" width="800">
+</div>
+
 ## Description
 
 KansaPratha is a comprehensive multi-vendor e-commerce platform built with modern web technologies. The platform enables multiple sellers to manage their products and orders while providing customers with a seamless shopping experience. It features a complete ecosystem with customer-facing frontend, seller/admin dashboard, and a robust backend API.
