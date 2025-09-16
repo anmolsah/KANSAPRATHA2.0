@@ -198,7 +198,7 @@ kansaPratha2.0/
 
 ISC License
 
-Copyright (c) 2024<div align="center">
+Copyright (c) 2025<div align="center">
   <img src="./dashboard/public/kansapratha_logo.svg" alt="KansaPratha Logo" width="400">
 </div>
 
