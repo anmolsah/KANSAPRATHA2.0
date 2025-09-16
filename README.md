@@ -3,6 +3,12 @@
 </div>
 
 
+
+
+## Description
+
+KansaPratha is a comprehensive multi-vendor e-commerce platform built with modern web technologies. The platform enables multiple sellers to manage their products and orders while providing customers with a seamless shopping experience. It features a complete ecosystem with customer-facing frontend, seller/admin dashboard, and a robust backend API.
+
 ## Website Preview
 
 <div align="center">
@@ -15,10 +21,6 @@
   <img src="./frontend/public/k7.jpg" alt="KansaPratha Website Preview 7" width="800">
   <img src="./frontend/public/k8.jpg" alt="KansaPratha Website Preview 8" width="800">
 </div>
-
-## Description
-
-KansaPratha is a comprehensive multi-vendor e-commerce platform built with modern web technologies. The platform enables multiple sellers to manage their products and orders while providing customers with a seamless shopping experience. It features a complete ecosystem with customer-facing frontend, seller/admin dashboard, and a robust backend API.
 
 ### Key Features
 
