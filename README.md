@@ -73,7 +73,7 @@ KansaPratha is a comprehensive multi-vendor e-commerce platform built with moder
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone git@github.com:anmolsah/KANSAPRATHA2.0.git
    cd kansaPratha2.0
    ```
 
