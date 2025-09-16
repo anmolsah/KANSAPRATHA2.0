@@ -5,7 +5,7 @@
 
 ## Description
 
-KansaPratha 2.0 is a comprehensive multi-vendor e-commerce platform built with modern web technologies. The platform enables multiple sellers to manage their products and orders while providing customers with a seamless shopping experience. It features a complete ecosystem with customer-facing frontend, seller/admin dashboard, and a robust backend API.
+KansaPratha is a comprehensive multi-vendor e-commerce platform built with modern web technologies. The platform enables multiple sellers to manage their products and orders while providing customers with a seamless shopping experience. It features a complete ecosystem with customer-facing frontend, seller/admin dashboard, and a robust backend API.
 
 ### Key Features
 
