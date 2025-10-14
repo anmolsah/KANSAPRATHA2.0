@@ -32,7 +32,6 @@ router.get(
   paymentController.get_payment_request
 );
 
-
 router.post(
   "/payment/request-confirm",
   authMiddleware,

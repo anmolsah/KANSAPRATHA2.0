@@ -266,23 +266,26 @@ class homeController {
         },
       ];
 
-      for(let i=0;i<rating_review.length;i++){
-        for(let j=0;j<getRating.length;j++){
-          if(rating_review[i].rating === getRating[j]._id){
+      for (let i = 0; i < rating_review.length; i++) {
+        for (let j = 0; j < getRating.length; j++) {
+          if (rating_review[i].rating === getRating[j]._id) {
             rating_review[i].sum = getRating[j].count;
             break;
           }
         }
-
       }
 
       const getAll = await reviewModel.find({
-        productId
-      })
-
-      const reviews = await reviewModel.find({
         productId,
-      }).skip(skipPage).limit(limit).sort({ createdAt: -1 });
+      });
+
+      const reviews = await reviewModel
+        .find({
+          productId,
+        })
+        .skip(skipPage)
+        .limit(limit)
+        .sort({ createdAt: -1 });
       responseReturn(res, 200, {
         reviews,
         rating_review,

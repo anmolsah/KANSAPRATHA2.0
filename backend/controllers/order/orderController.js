@@ -355,7 +355,9 @@ class orderController {
           delivery_status: "pending",
         }
       );
-      responseReturn(res, 200, { message: "COD payment confirmed successfully" });
+      responseReturn(res, 200, {
+        message: "COD payment confirmed successfully",
+      });
     } catch (error) {
       console.log(error);
       responseReturn(res, 500, { error: "Internal server error" });
